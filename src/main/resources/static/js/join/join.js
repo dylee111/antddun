@@ -1,6 +1,15 @@
+/*!
+* Start Bootstrap - Blog Home v5.0.6 (https://startbootstrap.com/template/blog-home)
+* Copyright 2013-2021 Start Bootstrap
+* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-blog-home/blob/master/LICENSE)
+*/
+// This file is intentionally blank
+// Use this file to add JavaScript to your project
     $(document).ready(function() {
 
-//      초기화
+        var tmp = $(".startTime option:selected").val();
+
+        <!--초기화-->
         const id = $("#username");
         const pwd = $("#password");
         const rePwd = $("#rePassword");
@@ -8,7 +17,6 @@
         const lastName = $("#lastName");
         const phoneNum = $("#phoneNum");
 
-        const name = $("#firstName");
         const result = $(".nameCheckResult");
         const pwdResult = $(".pwdCheckResult");
         const idResult = $(".idCheckResult");
@@ -17,8 +25,7 @@
 
         const pwdReg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*=-])(?=.*[0-9]).{8,15}$/;
 
-
-//        <!--blur 이벤트 / 유효성-->
+        // blur 이벤트 / 유효성
 
         pwd.blur(function(e) {
             const pwdResult = $(".pwdCheckResult");
@@ -57,28 +64,53 @@
             }
         });
 
-        name.onblur = function(e) {
-            if(name.val().length > 3) {
-                mobileResult.html("3글자를 초과할 수 없습니다.");
+        firstName.blur(function(e) {
+            if(firstName.val().length > 3) {
+                nameResult.html("3글자를 초과할 수 없습니다.");
+                nameResult.css("font-size","8px")
+                nameResult.css("color","red")
+                return false;
+            } else if(firstName.val().length == 0) {
+                nameResult.html("이름을 입력해주세요.");
+                nameResult.css("font-size","8px")
+                nameResult.css("color","red")
+                return false;
+            } else if(firstName.val().length > 0 && firstName.val().length <= 2) {
+                nameResult.html( "");
+                return true;
+            }
+        });
+
+        lastName.blur(function(e) {
+           if(lastName.val().length == 0) {
+                nameResult.html("이름을 입력해주세요.");
+                nameResult.css("font-size","8px")
+                nameResult.css("color","red")
+                return false;
+           } else if(lastName.val().length > 0) {
+                nameResult.html( "");
+                return true;
+           }
+        });
+
+        phoneNum.blur(function() {
+            if(phoneNum.val().length == 0) {
+                mobileResult.html("연락처를 입력해주세요요.");
                 mobileResult.css("font-size","8px")
                 mobileResult.css("color","red")
                 return false;
-            } else if(name.val().length == 0) {
+            } else if(phoneNum.val().length == 0) {
                 mobileResult.html("이름을 입력해주세요.");
                 mobileResult.css("font-size","8px")
                 mobileResult.css("color","red")
                 return false;
-            } else if(name.val().length > 0 && name.val().length <= 2) {
-                mobileResult.html( "");
-                return true;
             }
+        });
 
-        }
-
-//        <!--option 태그 추가-->
+        // option 태그 추가
 
         for(var i = 1; i < 50; i++) {
-            $(".experience").append("<option value="+i+" name='experience'>"+i+"</option>");
+            $(".experience").append("<option value="+i+" name='experience'>"+i+"년차"+"</option>");
         }
 
         for(var i = 0; i <= 47; i++) {
@@ -94,8 +126,9 @@
                 var min = ":30";
             }
 
-//<!--            $(".startTime").append("<option value="+hour+min">"+hour+min+"</option>");-->
-            $(".startTime").append("<option>" + ((hour >= 10) ? hour : ("0"+hour)) + min +"</option>" );
+            // $(".startTime").append("<option value="+hour+min">"+hour+min+"</option>");
+            $(".startTime").append("<option value="
+            + ((hour >= 10) ? hour : ('0'+hour)) + min + ">" + ((hour >= 10) ? hour : ("0"+hour)) + min + "</option>" );
         }
 
         for(var i = 47; i >= 0; i--) {
@@ -111,41 +144,61 @@
                 var min = ":30";
             }
 
-            $(".endTime").append("<option>" + ((hour >= 10) ? hour : ("0"+hour)) + min +"</option>" );
+            $(".endTime").append("<option value="
+            + ((hour >= 10) ? hour : ('0'+hour)) + min+ ">" + ((hour >= 10) ? hour : ("0"+hour)) + min +"</option>" );
         }
 
-//        <!--아이디 / 연락처 / 추천인 중복체크-->
+        // 아이디 | 연락처 | 추천인 중복체크
 
 
-       id.blur(function() {
+       $("#username").blur(function() {
 
-            if(id.val().length == 0) {
-                idResult.html("아이디를 입력해주세요.");
+            const regEmail = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+
+            if(!regEmail.test(id.val())) {
+                idResult.html("이메일 형식으로 아이디를 입력해주세요");
                 idResult.css("font-size","8px")
                 idResult.css("color","red")
                 id.focus();
                 return false;
             }
-            idDuplicateCheck();
+
+//            if(id.val().length == 0) {
+//                idResult.html("아이디를 입력해주세요.");
+//                idResult.css("font-size","8px")
+//                idResult.css("color","red")
+//                id.focus();
+//                return false;
+//            }
+
+            $.ajax({
+                url: "/antddun/idCheck",
+                type: "POST",
+                dataType: "JSON",
+                data: {"email" : $("#username").val()},
+                success: function(data) {
+                    if(data == 1) {
+                        idResult.html("중복된 아이디입니다.");
+                        idResult.css("font-size","8px")
+                        idResult.css("color","red")
+                        return false;
+                    } else if(data == 0) {
+                        idResult.html("사용 가능한 아이디입니다.");
+                        idResult.css("font-size","8px")
+                        idResult.css("color","blue")
+                        return true;
+                    }
+                }
+            }) // ajax end.
         }); // btnCheck event end.
 
         $("#btnPhone").click(function() {
-            if($("#phoneNum").val() == "") {
-                mobileResult.html("연락처를 입력해주세요.")
-                mobileResult.css("font-size","8px")
-                mobileResult.css("color","red")
-                phoneNum.focus();
-                return false;
-            }
-
             $.ajax({
                 url: "/antddun/phoneNumCheck",
                 type: "POST",
                 dataType: "JSON",
-                contentType: 'application/json',
-                data: {"phoneNum" : $("#phoneNum").val()},
+                data: {"phoneNum" : $("#phoneNum").val()+""},
                 success: function(data) {
-                    console.log(data);
                     if(data == 1) {
                         alert("전화번호 중복");
                     } else if(data == 0) {
@@ -155,17 +208,16 @@
             }) // ajax end.
         }); // phoneAuthBtn event end.
 
-//        <!--유효성 검사-->
+        // submit 유효성 검사
 
         $(".btnJoin").click(function() {
-            idDuplicateCheck();
-
             if(id.val() == "") {
-                idResult.innerHTML = "아이디를 입력해주세요.";
-                idResult.style.color = "red";
+                idResult.html("아이디를 입력해주세요.");
+                idResult.css("font-size","8px")
+                idResult.css("color","red")
                 id.focus();
                 return false;
-            } else if(idCheckResult.value == "중복된 아이디입니다.") {
+            } else if(idResult.value == "중복된 아이디입니다.") {
                 id.focus();
                 return;
             }
@@ -219,35 +271,8 @@
                 phoneNum.focus();
                 return false;
             }
+//            alert($('.startTime').val());
             $("#frm").submit();
         });
 
-        function onlyNum(e) {
-            if(event.keyCode < 48 || event.keyCode > 57) { event.returnValue = false;}
-        }
-
-        function idDuplicateCheck() {
-            $.ajax({
-                url: "/antddun/idCheck",
-                type: "POST",
-                dataType: "JSON",
-                contentType: 'application/json',
-                data: {"email" : id.val()},
-                success: function(data) {
-                    console.log(data);
-                    if(data == 1) {
-                        idResult.innerHTML = "중복된 아이디입니다.";
-                        idResult.style.color = "red";
-                        idResult.style.fontSize = "8px";
-                        id.focus();
-                        return;
-                    } else if(data == 0) {
-                        idResult.innerHTML = "사용 가능한 아이디입니다.";
-                        idResult.style.color = "blue";
-                        idResult.style.fontSize = "8px";
-                    }
-                }
-            }) // ajax end.
-        } // idDuplicateCheck() end
-
-    });
+    }); // join

@@ -52,7 +52,4 @@ public class Member {
     @CreationTimestamp
     private Timestamp createDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private MemberWishList wishList;
-
 }

@@ -2,6 +2,7 @@ package com.ds.antddun.config;
 
 
 import com.ds.antddun.config.oauth.PrincipalOauth2UserService;
+import com.ds.antddun.service.MemberLoginFailHandler;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 @Configuration
 @Log4j2
@@ -40,7 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/member/login")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/antddun")
+                .failureHandler(failureHandler())
+                .defaultSuccessUrl("/")
                 .failureUrl("/member/login?error")
                 .permitAll()
                 .and()// ↓ ↓ 소셜 로그인
@@ -50,8 +53,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .userService(principalOauth2UserService); //후처리
         http.logout();
 
-
     }
 
+
+    @Bean
+    public AuthenticationFailureHandler failureHandler() {
+        return new MemberLoginFailHandler();
+    }
 }
 
