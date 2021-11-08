@@ -1,7 +1,11 @@
 package com.ds.antddun.config.oauth.provider;
 
+import lombok.extern.log4j.Log4j2;
+
+import java.util.Arrays;
 import java.util.Map;
 
+@Log4j2
 public class FacebookUserInfo implements OAuth2UserInfo{
 
     private Map<String, Object> attributes; // getAttributes()
@@ -11,10 +15,9 @@ public class FacebookUserInfo implements OAuth2UserInfo{
         this.attributes = attributes;
 
     }
-
     @Override
-    public Long getProviderId() {
-        return (Long) attributes.get("id");
+    public String getProviderId() {
+        return(String) attributes.get("id");
     }
 
     @Override
@@ -32,26 +35,30 @@ public class FacebookUserInfo implements OAuth2UserInfo{
         return (String) attributes.get("name");
     }
 
-
-
+    //이름/ given_name
     @Override
     public String getFirstName() {
-        String firstName = (String) attributes.get("name");
-        if (firstName.length() < 4) {
-            return firstName.substring(1,2);
+        String str = (String) attributes.get("name");
+        String firstName;
+        if (str.length() < 4) {
+            firstName = str.substring(1);
         }  else {
-            return firstName.substring(2);
+            firstName = str.substring(2);
         }
+        return firstName;
     }
 
+    // 성/family_name
     @Override
     public String getLastName() {
-        String lastName = (String) attributes.get("name");
-        if (lastName.length() < 4) {
-            return lastName.substring(0,0);
+        String str = (String) attributes.get("name");
+        String lastName;
+        if (str.length() < 4) {
+            lastName = str.substring(0,1);
         }  else {
-            return lastName.substring(0,1);
+            lastName = str.substring(0,2);
         }
+        return lastName;
     }
 }
 

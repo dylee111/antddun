@@ -6,15 +6,14 @@ public class GoogleUserInfo implements OAuth2UserInfo{
 
     private Map<String, Object> attributes; // getAttributes()
 
-                            //여기서 받음
+    //여기서 받음
     public GoogleUserInfo(Map<String, Object> attributes) {
         this.attributes = attributes;
 
     }
-
     @Override
-    public Long getProviderId() {
-        return (Long) attributes.get("sub");
+    public String getProviderId() {
+        return (String) attributes.get("sub");
     }
 
     @Override
@@ -32,13 +31,14 @@ public class GoogleUserInfo implements OAuth2UserInfo{
         return (String) attributes.get("name");
     }
 
+
     @Override
     public String getFirstName() {
-        return (String) attributes.get("firstName");
+        return (String) attributes.get("given_name");
     }
 
     @Override
     public String getLastName() {
-        return (String) attributes.get("lastName");
+        return (String) attributes.get("family_name");
     }
 }
