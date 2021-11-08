@@ -1,7 +1,7 @@
 package com.ds.antddun.config.oauth.provider;
 
 public interface OAuth2UserInfo {
-    Long getProviderId();
+    String getProviderId();
     String getProvider();
     String getEmail();
     String getName();
