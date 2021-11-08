@@ -17,8 +17,8 @@ public class MemberWishList {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "WISH_SEQ_GEN")
     private Long wno;
 
-    private String wishListOne;
-    private String wishListTwo;
-    private String wishListThree;
+    private String wishList;
 
+    @ManyToOne
+    private Member member;
 }

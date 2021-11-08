@@ -33,7 +33,7 @@ public class Member {
     @Column(nullable = false)
     private String lastName;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String phoneNum;
 
     private boolean fromSocial; 
@@ -51,8 +51,5 @@ public class Member {
 
     @CreationTimestamp
     private Timestamp createDate;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private MemberWishList wishList;
 
 }

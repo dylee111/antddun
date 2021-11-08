@@ -92,9 +92,9 @@ public class JoinController {
         return "/member/joinAgree";
     }
 
-    @PostMapping(value = "/joinPage", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String join(@RequestBody MemberDTO memberDTO,
-                       @RequestBody JobListDTO jobListDTO,
+    @PostMapping(value = "/joinPage")
+    public String join(MemberDTO memberDTO,
+                       JobListDTO jobListDTO,
                        String username,
                        String phoneNum,
                        HttpSession httpSession) throws Exception {
@@ -102,7 +102,7 @@ public class JoinController {
         int idDuplicateCheck = memberService.idCheck(username);
         int mobileDuplicateCheck = memberService.mobileCheck(phoneNum);
 
-        httpSession.setAttribute("JOIN_USER", memberService.welcomeMsg(memberDTO.getMno()));
+//        httpSession.setAttribute("JOIN_USER", memberService.welcomeMsg(memberDTO.getMno()));
 
         log.info("ID>>>>>>>>>>>>>>>>>>>>>>>>" + idDuplicateCheck);
         log.info("MOBILE>>>>>>>>>>>>>>>>>>>>>>>>" + mobileDuplicateCheck);
@@ -119,11 +119,17 @@ public class JoinController {
 
     // select가 필요 -> 어떤 식으로 mno를 받아오지???ㅏ
 
-    @GetMapping(value="/joinWelcome", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String welcomeMsg(@ModelAttribute("JOIN_USER") MemberDTO memberDTO, Model model) {
-//        Long result = memberDTO.getMno();
-        log.info("MNO >>>>>>>>" + memberDTO.getMno());
-        model.addAttribute("JOIN_USER", memberService.welcomeMsg(memberDTO.getMno()));
+    @GetMapping("/joinWelcome")
+    public String welcomeMsg(@RequestParam("firstName") String firstName,
+                             @RequestParam("experience") int experience,
+                             Model model) {
+
+        model.addAttribute("firstName", firstName);
+        model.addAttribute("experience", experience);
+
+        log.info("FIRSTNAME>>>>>>>>>>>>>>>>>>>>"+firstName);
+        log.info("EXPERIENCE>>>>>>>>>>>>>>>>>>>>"+experience);
+
         return "/member/welcome";
     }
 }

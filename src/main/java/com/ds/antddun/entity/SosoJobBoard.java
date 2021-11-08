@@ -26,6 +26,7 @@ public class SosoJobBoard extends BaseEntity {
 
     @ColumnDefault("0")
     private int cnt;
+    private int ddun;
 
     private String category;
 
