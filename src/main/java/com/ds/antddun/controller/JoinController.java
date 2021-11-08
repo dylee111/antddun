@@ -29,28 +29,6 @@ public class JoinController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @GetMapping({"", "/"})
-    public String index() {
-        return "/index";
-    }
-
-    @GetMapping("/user")
-    public @ResponseBody
-    String user() {
-        return "user";
-    }
-
-    @GetMapping("/admin")
-    public @ResponseBody
-    String admin() {
-        return "admin";
-    }
-
-    @GetMapping("/manager")
-    public @ResponseBody
-    String manager() {
-        return "manager";
-    }
 
     @ResponseBody
     @PostMapping("/idCheck")
