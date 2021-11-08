@@ -1,0 +1,38 @@
+package com.ds.antddun.repository;
+
+import com.ds.antddun.dto.MemberDTO;
+import com.ds.antddun.entity.Member;
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface MemberRepository extends JpaRepository<Member, Long> {
+
+//    @EntityGraph(attributePaths = {"roleSet"}, type = EntityGraph.EntityGraphType.LOAD)
+    // 회원 가진 권한을 모두 확인해야 하기 때문에 LOAD(Default -> EAGER)로 정의
+    @Query("SELECT m " +
+            " FROM Member m " +
+            " WHERE m.fromSocial=:social AND m.username=:username ")
+    Optional<Member> findByEmail(String username, Boolean social);
+
+    @Query("SELECT count(m) FROM Member m WHERE m.username=:username ")
+    int idCheck(String username) throws Exception;
+
+    @Query("SELECT count(m) FROM Member m WHERE m.phoneNum=:phoneNum ")
+    int phoneNumCheck(String phoneNum) throws Exception;
+
+    @Query("SELECT count(m) FROM Member m WHERE m.username=:username ")
+    int recommendUserCheck(String username);
+
+    @Query("SELECT m, j " +
+            " FROM Member m, JobList j " +
+            " WHERE m.job=j.jno " +
+            " AND m.mno=:mno ")
+    List<Member> welcomeMsg(Long mno);
+
+    @Query("select m from Member m where username =:username ")
+    Member findByUsername(String username);
+}

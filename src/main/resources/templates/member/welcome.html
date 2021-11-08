@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/basicJoin :: setContent(~{this::content})}">
+    <th:block th:fragment="content">
+
+        <head>
+            <meta charset="UTF-8">
+            <title>Title</title>
+        </head>
+
+        <body>
+        <div>
+
+            <section class="card mg_bottom">
+                <div class="join_container">
+                    <div id="title">개미는 뚠뚠</div>
+                    <tr th:each="member : ${member}">
+                        <th>[[${member.job}]]</th>
+                        <th>[[${member.experience}]]</th>
+                        <th>[[${member.firstName}]]</th>
+                    </tr>
+
+                </div>
+            </section>
+        </body>
+
+
+    </th:block>
+</th:block>
+</html>
