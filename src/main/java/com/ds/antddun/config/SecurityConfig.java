@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login")
 //                .failureHandler(failureHandler())
                 .defaultSuccessUrl("/")
-                .failureUrl("/member/login?error")
+                .failureUrl("/login?error")
                 .permitAll()
                 .and()// ↓ ↓ 소셜 로그인
                 .oauth2Login()
