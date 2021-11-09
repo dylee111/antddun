@@ -6,16 +6,16 @@
     <title>개미는 뚠뚠</title>
     <link rel="icon" type="image/x-icon" th:href="@{assets/favicon.ico}" />
 
-    <link th:href="@{css/styles.css}" rel="stylesheet" />
-    <link th:href="@{css/main.css}" rel="stylesheet">
-    <link th:href="@{css/slick.css}" rel="stylesheet">
+    <link th:href="@{css/main/styles.css}" rel="stylesheet" />
+    <link th:href="@{css/main/main.css}" rel="stylesheet">
+    <link th:href="@{css/main/slick.css}" rel="stylesheet">
     <link th:href="@{css/slotmachine.css}" rel="stylesheet">
 
     <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
     <script type="text/javascript" th:src="@{http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js}"></script>
 
-    <script th:src="@{js/jquery.easing.1.3.js}" type="text/javascript" charset="utf-8"></script>
-    <script th:src="@{js/jquery.jSlots.min.js}" type="text/javascript" charset="utf-8"></script>
+    <script th:src="@{js/main/jquery.easing.1.3.js}" type="text/javascript" charset="utf-8"></script>
+    <script th:src="@{js/main/jquery.jSlots.min.js}" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 <div>
@@ -34,13 +34,13 @@
         <!--페이지 상단 공통 : logo & nav-->
         <nav class="navbar navbar-expand-md navbar-light bg-primary">
             <div class="container">
-                <a id="logo" class="navbar-brand" th:href="@{/antddun}">개미는 뚠뚠</a>
+                <a id="logo" class="navbar-brand" th:href="@{#}">개미는 뚠뚠</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mb-lg-0">
-                        <li><a class="nav-link nav_li" th:href="@{/antddun/soso}">소소한JOB</a></li>
-                        <li><a class="nav-link nav_li" th:href="@{/antddun/qna}">QnA</a></li>
-                        <li><a class="nav-link nav_li" th:href="@{/antddun/jayu}">자유게시판</a></li>
+                        <li><a class="nav-link nav_li" th:href="@{/sosojob/main}">소소한JOB</a></li>
+                        <li><a class="nav-link nav_li" th:href="@{/QnA/list}">QnA</a></li>
+                        <li><a class="nav-link nav_li" th:href="@{/jayu/list}">자유게시판</a></li>
                     </ul>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                             <a th:href="@{#}" class="a_white">로그인</a>
                         </button>
                         <button class="button btn_regist">
-                            <a th:href="@{antddun/register}" class="a_white">회원가입</a>
+                            <a th:href="@{/joinPage}" class="a_white">회원가입</a>
                         </button>
                     </div>
 
@@ -163,35 +163,35 @@
                                     <div class="column small-11 small-centered">
                                         <section class="visual" th:src="@{assets/sosojob_cate/it.jpeg}">
                                             <div class="slick-card">
-                                                <a th:href="@{antddun/soso/it}">IT</a>
+                                                <a th:href="@{/sosojob/it}">IT</a>
                                                 <img class="cate-thumbnail" th:src="@{assets/sosojob_cate/it.jpeg}"/>
                                             </div>
                                             <div class="slick-card">
-                                                <a th:href="@{antddun/soso/design}">디자인·설계</a>
+                                                <a th:href="@{/sosojob/design}">디자인·설계</a>
                                                 <img class="cate-thumbnail" th:src="@{assets/sosojob_cate/design.jpeg}"/>
                                             </div>
                                             <div class="slick-card">
-                                                <a th:href="@{antddun/soso/media}">미디어</a>
+                                                <a th:href="@{/sosojob/media}">미디어</a>
                                                 <img class="cate-thumbnail" th:src="@{assets/sosojob_cate/media.jpeg}"/>
                                             </div>
                                             <div class="slick-card">
-                                                <a th:href="@{antddun/soso/translate}">번역</a>
+                                                <a th:href="@{/sosojob/translate}">번역</a>
                                                 <img class="cate-thumbnail" th:src="@{assets/sosojob_cate/translate.png}"/>
                                             </div>
                                             <div class="slick-card">
-                                                <a th:href="@{antddun/soso/document}">문서작업</a>
+                                                <a th:href="@{/sosojob/document}">문서작업</a>
                                                 <img class="cate-thumbnail" th:src="@{assets/sosojob_cate/document.jpeg}"/>
                                             </div>
                                             <div class="slick-card">
-                                                <a th:href="@{antddun/soso/marketing}">마케팅</a>
+                                                <a th:href="@{/sosojob/marketing}">마케팅</a>
                                                 <img class="cate-thumbnail" th:src="@{assets/sosojob_cate/marketing.jpeg}"/>
                                             </div>
                                             <div class="slick-card">
-                                                <a th:href="@{antddun/soso/work}">취업·이직</a>
+                                                <a th:href="@{/sosojob/work}">취업·이직</a>
                                                 <img class="cate-thumbnail" th:src="@{assets/sosojob_cate/resume.jpeg}"/>
                                             </div>
                                             <div class="slick-card">
-                                                <a th:href="@{antddun/soso/edu}">실무교육</a>
+                                                <a th:href="@{/sosojob/edu}">실무교육</a>
                                                 <img class="cate-thumbnail" th:src="@{assets/sosojob_cate/workshop.jpeg}"/>
                                             </div>
                                         </section>
@@ -204,7 +204,7 @@
                     <section class="card margin_bottom2">
                         <div class="card-header">
                             <h3 class="boardlist">QnA</h3>
-                            <span class="more"><a th:href="@{/antddun/qna}">더보기</a></span>
+                            <span class="more"><a th:href="@{/QnA/list}">더보기</a></span>
                         </div>
                         <div class="card-body">
                             <table class="table" style="table-layout: fixed">
@@ -226,7 +226,7 @@
                     <section class="card margin_bottom2">
                         <div class="card-header">
                             <h3 class="boardlist">내일이면 사라져요!</h3>
-                            <span class="more"><a th:href="@{/antddun/qna}">더보기</a></span>
+                            <span class="more"><a th:href="@{/jayu/peong}">더보기</a></span>
                         </div>
                         <div class="card-body">
                             <table class="table" style="table-layout: fixed">
@@ -249,7 +249,7 @@
                     <section class="card margin_bottom2">
                         <div class="card-header">
                             <h3 class="boardlist">자유 게시판</h3>
-                            <span class="more"><a th:href="@{/antddun/qna}">더보기</a></span>
+                            <span class="more"><a th:href="@{/jayu/List}">더보기</a></span>
                         </div>
                         <div class="card-body">
                             <table class="table" style="table-layout: fixed">
@@ -380,11 +380,22 @@
                 var width = $(window).width();
 
                 if (width > 991){
-                  $('.slotRun1').jSlots({spinner: '.playNormal1'});
+                    $('.slotRun1').jSlots({spinner: '.playNormal1'});
                 } else {
-                  $('.slotRun2').jSlots({spinner: '.playNormal2'});
+                    $('.slotRun2').jSlots({spinner: '.playNormal2'});
                 }
             });
+
+            $(window).resize(function() {
+                var width = $(window).width();
+
+                if (width > 991){
+                    $('.slotRun1').jSlots({spinner: '.playNormal1'});
+                } else {
+                    $('.slotRun2').jSlots({spinner: '.playNormal2'});
+                }
+            });
+
             </script>
 </body>
 </html>
