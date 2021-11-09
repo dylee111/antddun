@@ -6,7 +6,7 @@ $(document).ready(function() {
     minHeight : null,
     maxHeight : null,
     toolbar : toolbar,
-    placeholder: '&#8251;개미는 뚠뚠의 취지와 관련 없는 인신공격 및 허위사실 유포 글은 통보없이 즉시 삭제 처리 될 수 있습니다.',
+    placeholder: '개미는 뚠뚠은 여러분과 함께 생각과 의견을 존중하고 나누기 위해 만들어진 곳입니다.<br> 성숙한 직장인 인터넷 문화를 만들어 나갈 수 있도록 도움 부탁드려요!<br><br> &#8251;개미는 뚠뚠의 취지와 관련 없는 인신공격 및 허위사실 유포 글은 통보없이 즉시 삭제 처리 될 수 있습니다.',
 
     toolbar: [
          // 스타일 설정
@@ -26,9 +26,11 @@ $(document).ready(function() {
          // 그림, 동영상, 링크, 수평선
          ['insert',['picture','video','link','hr']],
          // 코드보기, 확대해서보기, 도움말
-         ['view', ['codeview','fullscreen', 'help']]
+         ['view', ['codeview', 'help']]
     ],
     fontNames: ['맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체','Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
     styleTags: ['p','h1','h2','h3','h4','h5','h6']
   });
 });
+
+
