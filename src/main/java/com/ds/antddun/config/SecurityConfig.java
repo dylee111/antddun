@@ -44,8 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/member/login")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/antddun")
-//                .failureHandler(failureHandler())
+
                 .failureUrl("/login?error")
                 .permitAll()
                 .and()// ↓ ↓ 소셜 로그인
@@ -56,9 +55,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.rememberMe().tokenValiditySeconds(60 * 60 * 24 * 7).userDetailsService(principalDetailsService);
         http.logout();
     }
-/*    @Bean
-    public AuthenticationFailureHandler failureHandler() {
-        return new MemberLoginFailHandler();
-    }*/
+
 
 }
