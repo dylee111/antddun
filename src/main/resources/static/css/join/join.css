@@ -15,7 +15,16 @@
         text-align: center;
    }*/
 
-   .join_container { margin: 0 auto}
+   .join_container {
+        width: 100%;
+        margin-top: -4rem;
+        margin-bottom: 1rem;
+   }
+
+   .join_div {
+        margin: 0 auto;
+        width: 400px;
+   }
 
    #title {
         font-family: 'Jua', sans-serif;
