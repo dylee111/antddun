@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Log4j2
-@RequestMapping("/member")
+//@RequestMapping("/member")
 public class QnaBoardController {
 
     @Autowired
     private JobListService jobListService;
 
-    @GetMapping("/QnA/list")
+    @GetMapping("/qna/list")
     public String list(Model model) {
 
         model.addAttribute("jobList", jobListService.getList());
 
-        return "qna/test";
+        return "/qna/list";
     }
 }
