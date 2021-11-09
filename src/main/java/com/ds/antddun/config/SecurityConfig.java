@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/member/login")
                 .loginProcessingUrl("/login")
-                .failureHandler(failureHandler())
+//                .failureHandler(failureHandler())
                 .defaultSuccessUrl("/")
                 .failureUrl("/member/login?error")
                 .permitAll()
@@ -56,9 +56,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-    @Bean
-    public AuthenticationFailureHandler failureHandler() {
-        return new MemberLoginFailHandler();
-    }
+//    @Bean
+//    public AuthenticationFailureHandler failureHandler() {
+//        return new MemberLoginFailHandler();
+//    }
 }
 
