@@ -36,7 +36,6 @@
   margin-left: calc(-0.5 * var(--bs-gutter-x));
 }
 
-
 .card-title{
     margin-bottom: 0.5rem;
 }
@@ -50,6 +49,29 @@
 .attach-img > a > img{
 }
 
+.leftSection {
+    float: left;
+    padding: 10px;
+    width: 60%;
+}
+
+.rightSection {
+    float: right;
+    padding: 10px;
+    width: 40%;
+    text-align:right;
+}
+
+.rightSection.regDate{
+    height: 70px;
+    line-height:70px;
+    padding: 10px;
+    text-align:right
+}
+
+.boardInfo {
+    padding-bottom: 0.3rem;
+}
 
 
 .card-img,
@@ -57,10 +79,6 @@
 .card-img-bottom {
     margin-top: 50px;
     text-align:center;
-}
-
-.qnaCardList {
-  margin-bottom: 1rem !important;
 }
 
 .qnaCardList > a {
@@ -199,4 +217,5 @@ boardInfo{
   border-top-right-radius: 0.2rem;
   border-bottom-right-radius: 0.2rem;
 }
+
 
