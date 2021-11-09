@@ -3,6 +3,7 @@ package com.ds.antddun.config.oauth;
 import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.config.oauth.provider.FacebookUserInfo;
 import com.ds.antddun.config.oauth.provider.GoogleUserInfo;
+import com.ds.antddun.config.oauth.provider.NaverUserInfo;
 import com.ds.antddun.config.oauth.provider.OAuth2UserInfo;
 import com.ds.antddun.entity.AntMemberRoleSet;
 import com.ds.antddun.entity.Member;
@@ -15,6 +16,8 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 //여기서 후처리가됨
 @Service
@@ -37,6 +40,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         OAuth2User oAuth2User = super.loadUser(userRequest);
         log.info("getAttribute:" + oAuth2User.getAttributes());
 
+// =================== 각 소셜 로그인에 따른 aoAuth2UserInfo ===================
         OAuth2UserInfo oAuth2UserInfo = null;
         if (userRequest.getClientRegistration().getRegistrationId().equals("google")) {
             log.info("구글 로그인 요청");
@@ -44,8 +48,11 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         } else if (userRequest.getClientRegistration().getRegistrationId().equals("facebook")) {
             log.info("페이스북 로그인 요청");
             oAuth2UserInfo = new FacebookUserInfo(oAuth2User.getAttributes());
-        } else {
-            log.info("우리는 구글과 페이스북만 지원해요");
+        } else if (userRequest.getClientRegistration().getRegistrationId().equals("naver")) {
+            log.info("네이버 로그인 요청");
+            oAuth2UserInfo = new NaverUserInfo((Map)oAuth2User.getAttributes().get("response"));
+        }else {
+            log.info("구글, 네이버, 페이스북만 로그인 가능!");
         }
 
 // =================== 강제 회원가입 ===================
@@ -67,6 +74,9 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         //권한
         AntMemberRoleSet role = AntMemberRoleSet.USER;
 
+        //폰번호(naver만 가능)
+        String mobile = oAuth2UserInfo.getMobile();
+
         Member memberEntity = memberRepository.findByUsername(username);
         if (memberEntity == null) {
             log.info("최초 소셜 로그인");
@@ -77,6 +87,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
                     .lastName(lastname)
                     .role(role)
                     .fromSocial(true)
+                    .phoneNum(mobile)
                     .build();
             memberRepository.save(memberEntity);
         } else {
