@@ -1,0 +1,47 @@
+article {
+    max-width: 235px;
+    max-height: 280px;
+}
+
+.title {
+    font-size: 0.8rem;
+    margin-left: 10px;
+    height: 40px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.content-container {
+    width: 235px;
+    border: 1px solid black;
+}
+
+.img.coin {
+    display: inline;
+}
+
+.img.heart {
+    display: inline;
+}
+
+.ddun-box {
+    float: right;
+    margin-right: 10px;
+}
+.star-box {
+    float: right;
+    margin-right: 10px;
+}
+
+.tag_c {
+    margin: 3px 3px 5px 5px;
+    font-size: 10px;
+    padding-top: 4px;
+    border-radius: 5px;
+    height: 20px;
+    width: 65px;
+    color: #919191;
+    border: 2px solid #e0e0e0;
+    text-align: center;
+    line-height: 8px;
+}

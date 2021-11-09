@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+    <th:block th:fragment="content">
+        <!--페이지 수정 부분 시작-->
+
+        <!-- 페이지 css/ js 추가 -->
+        <link rel="stylesheet" th:href="@{/css/board/board.css}">
+        <script th:src="@{/js/board/board.js}"></script>
+
+        <!-- summernote css/ js -->
+        <link rel="stylesheet" th:href="@{/css/board/summernote/summernote-lite.css}">
+        <script th:src="@{/js/board/summernote/summernote-lite.js}"></script>
+
+        <!-- summernote 한글 적용 -->
+        <script th:src=" @{https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js}"></script>
+
+        <!-- 본문 시작 -->
+        <div class="content">
+            <form th:action="@{/board/register}" th:method="post" modelAttribute="member">
+
+                <!--카테고리-->
+                <div class="form-group">
+                    <ol class="category">
+                        <li>소곤소곤</li>
+                        <li>이직</li>
+                        <li>연애</li>
+                        <li>JOB담</li>
+                        <li>결혼·육아</li>
+                        <li>취미</li>
+                        <li>재테크</li>
+                        <li>뷰티·패션</li>
+                        <li>스포츠·게임</li>
+                    </ol>
+                </div>
+
+                <!--펑예-->
+                <input type="radio" name="peong" id="peong" value="true" checked> <label for="peong">💣 펑예</label>
+                <!--제목-->
+                <div class="form-group">
+                    <input type="text" class="form-control" name="title" required
+                           placeholder="제목을 입력해주세요">
+                </div>
+
+                <!--내용-->
+                <div class="form-group">
+                    <textarea id="summernote" name="content" required></textarea>
+                </div>
+
+                <!--뚠-->
+                <div class="form-group">
+                    <img th:src="@{/assets/coins.png}" width="25rem"><label id="ddun"> 뚠</label>
+                    <input type="text" class="form-control ddun" name="ddun"
+                           placeholder="뚠을 입력하세요">
+                </div>
+
+                <!--작성자-->
+                <div class="form-group">
+                    <input type="text" class="form-control" name="writer"
+                           readonly>
+                </div>
+
+                <!--작성완료 버튼-->
+            </form>
+                <button type="button" class="btn btn-primary">등록</button>
+        </div>
+        <script>
+            $(document).ready(function() {
+
+                const
+
+                .ajax({
+                    url:
+                    methods:
+                    data:
+                    dataType:
+
+                })
+
+            });
+
+        </script>
+        <!-- 본문 끝 -->
+        <!--페이지 수정 부분 끝-->
+    </th:block>
+</th:block>
