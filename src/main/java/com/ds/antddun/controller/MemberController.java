@@ -21,7 +21,6 @@ public class MemberController {
     public String wallet() {
         return "/member/mypage";
     }
-
 //    @PutMapping("member/updateMember")
 //    public
 }
