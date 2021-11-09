@@ -4,9 +4,8 @@
     <th:block th:fragment="content">
 
         <!--페이지 수정 부분 시작-->
-
         <!-- 페이지 css/ js 추가 -->
-        <link th:href="@{/css/qna/qnaStyles.css}" rel="stylesheet" />
+        <link th:href="@{/css/board/qna/qnaStyles.css}" rel="stylesheet" />
 
         <!-- 본문 시작 -->
         <div class="subNav-body">
@@ -22,9 +21,8 @@
         <div class="card qnaCardList">
 
             <div class="post-body attach-img-pre">
-                <!--   첫 번째 영역 -->
-                <div style="float: left; padding: 10px; width: 60%;">
 
+                <div class="leftSection">
                     <!-- 카테고리, 뚠 -->
                     <span class="smallCategory">100</span>
                     <!-- 제목 + 글 -->
@@ -39,8 +37,8 @@
                     </div>
 
                 </div>
-                <!--   두 번째 영역 -->
-                <div style="float: right; padding: 10px; width: 40%; text-align:right;">
+
+                <div class="rightSection">
                     <a href="#post">
                         <img class="imgTest" style="display:inline-block;
                     background:lightgray; width:10rem; height:10rem;" src="" alt="">
@@ -51,23 +49,21 @@
             <!-- 사용자 정보   -->
             <div class="boardInfo">
                 <!--   세 번째 영역 -->
-                <div style="float: left;  padding: 10px; width: 60%;">
+                <div class="leftSection">
 
                     <a href="#post" class="nickName">개발팀 5년차 박개미</a><br>
 
                     <div class="wrapInfo">
-                        <a class="views" href="#post"><img src="assets/views.png" width="24px;"> 160</a>
-                        <a class="like"><img src="assets/heart.png" width="20px;"> 52</a>
-                        <a class="cmt" href="#post"><img src="assets/cmt.png" width="19"> 2</a>
+                        <a class="views" href="#post"><img th:src="/assets/views.png" width="24px;"> 160</a>
+                        <a class="like"><img th:src="/assets/heart.png" width="20px;"> 52</a>
+                        <a class="cmt" href="#post"><img th:src="/assets/cmt.png" width="19"> 2</a>
                     </div>
 
                 </div>
 
                 <!--   네 번째 영역 -->
-                <div style="float: right;height: 60px; line-height:60px; padding: 10px; width: 40%; text-align:right;">
-
+                <div class="rightSection">
                     <a href="#post" class="regDate"> 2021-11-02 </a>
-
                 </div>
 
             </div>
@@ -113,9 +109,9 @@
                     <a href="#post" class="nickName">개발팀 5년차 박개미</a><br>
 
                     <div class="wrapInfo">
-                        <a class="views" href="#post"><img src="assets/views.png" width="24px;"> 160</a>
-                        <a class="like"><img src="assets/heart.png" width="20px;"> 52</a>
-                        <a class="cmt" href="#post"><img src="assets/cmt.png" width="19"> 2</a>
+                        <a class="views" href="#post"><img th:src="@{/assets/views.png}" width="24px;"> 160</a>
+                        <a class="like"><img th:src="@{/assets/heart.png}" width="20px;"> 52</a>
+                        <a class="cmt" href="#post"><img th:src="@{/assets/cmt.png}" width="19"> 2</a>
                     </div>
 
                 </div>
