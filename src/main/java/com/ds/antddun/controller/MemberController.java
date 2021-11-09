@@ -17,6 +17,11 @@ public class MemberController {
         return "/member/login";
     }
 
+    @GetMapping("/member/mypage")
+    public String wallet() {
+        return "/member/wallet";
+    }
+
 //    @PutMapping("member/updateMember")
 //    public
 }
