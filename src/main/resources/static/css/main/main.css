@@ -371,21 +371,3 @@ strong.impact {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
-
-/*Table Category Tag Style*/
-.peong {
-    width: 22px;
-    line-height:1.8;
-}
-
-.tag_b {
-    font-size: 13px;
-    padding-top: 4px;
-    border-radius: 5px;
-    height: 28px;
-    width: 73px;
-    color: #919191;
-    border: 2px solid #e0e0e0;
-    text-align: center;
-}

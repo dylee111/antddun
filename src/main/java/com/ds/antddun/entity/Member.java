@@ -41,7 +41,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private AntMemberRoleSet role;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private JobList job;
     private int experience;
 

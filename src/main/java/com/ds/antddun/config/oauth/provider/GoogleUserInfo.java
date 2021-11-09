@@ -26,11 +26,6 @@ public class GoogleUserInfo implements OAuth2UserInfo{
         return (String) attributes.get("email");
     }
 
-    @Override
-    public String getName() {
-        return (String) attributes.get("name");
-    }
-
 
     @Override
     public String getFirstName() {
@@ -40,5 +35,10 @@ public class GoogleUserInfo implements OAuth2UserInfo{
     @Override
     public String getLastName() {
         return (String) attributes.get("family_name");
+    }
+
+    @Override
+    public String getMobile() {
+        return null;
     }
 }

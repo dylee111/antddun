@@ -42,23 +42,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/member/login")
+                .loginPage("/login")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/antddun")
-//                .failureHandler(failureHandler())
                 .failureUrl("/login?error")
                 .permitAll()
                 .and()// ↓ ↓ 소셜 로그인
                 .oauth2Login()
-                .loginPage("/member/login")
+                .loginPage("/login")
                 .userInfoEndpoint()
                 .userService(principalOauth2UserService);
         http.rememberMe().tokenValiditySeconds(60 * 60 * 24 * 7).userDetailsService(principalDetailsService);
         http.logout();
     }
-/*    @Bean
-    public AuthenticationFailureHandler failureHandler() {
-        return new MemberLoginFailHandler();
-    }*/
+
 
 }
