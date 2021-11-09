@@ -19,7 +19,7 @@ public class SosoBoardDTO {
     private String title;
     private String content;
     private String category;
-
+    private Long mno; // username
     private int ddun;
 
     private double avg;
