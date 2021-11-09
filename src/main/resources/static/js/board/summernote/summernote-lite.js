@@ -10235,11 +10235,7 @@ var ModalUI_ModalUI = /*#__PURE__*/function () {
       this.$backdrop.appendTo(document.body).show();
       this.$modal.addClass('open').show();
       this.$modal.trigger('note.modal.show');
-      //this.$modal.off('click', '.close').on('click', '.close', this.hide.bind(this));
-      this.$modal.on('click', function (event) {
-          event.preventDefault();
-          _this.hide();
-      });
+      this.$modal.off('click', '.close').on('click', '.close', this.hide.bind(this));
       this.$modal.on('keydown', function (event) {
         if (event.which === 27) {
           event.preventDefault();

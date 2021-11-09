@@ -5,15 +5,17 @@ import lombok.extern.log4j.Log4j2;
 import java.util.Map;
 
 @Log4j2
-public class FacebookUserInfo implements OAuth2UserInfo{
+public class NaverUserInfo implements OAuth2UserInfo{
+
 
     private Map<String, Object> attributes; // getAttributes()
 
-    //여기서 받음
-    public FacebookUserInfo(Map<String, Object> attributes) {
-        this.attributes = attributes;
 
+    //{id=1234, email=danbi@com, mobile=1234, name=박단비}
+    public NaverUserInfo(Map<String, Object> attributes) {
+        this.attributes = attributes;
     }
+
     @Override
     public String getProviderId() {
         return(String) attributes.get("id");
@@ -21,7 +23,7 @@ public class FacebookUserInfo implements OAuth2UserInfo{
 
     @Override
     public String getProvider() {
-        return "facebook";
+        return "naver";
     }
 
     @Override
@@ -40,6 +42,7 @@ public class FacebookUserInfo implements OAuth2UserInfo{
         }  else {
             firstName = str.substring(2);
         }
+        log.info(">>>>>>>>",firstName);
         return firstName;
     }
 
@@ -53,12 +56,18 @@ public class FacebookUserInfo implements OAuth2UserInfo{
         }  else {
             lastName = str.substring(0,2);
         }
+        log.info(">>>>>>>>",lastName);
         return lastName;
     }
 
+
     @Override
     public String getMobile() {
-        return null;
+        String mobile = (String) attributes.get("mobile");
+        String match = "[^\uAC00-\uD7A30-9a-zA-Z]";
+        mobile = mobile.replaceAll(match, "");
+        return mobile;
     }
+
 }
 

@@ -1,8 +1,8 @@
 package com.ds.antddun.config;
 
 
+import com.ds.antddun.config.auth.PrincipalDetailsService;
 import com.ds.antddun.config.oauth.PrincipalOauth2UserService;
-import com.ds.antddun.service.MemberLoginFailHandler;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 @Configuration
 @Log4j2
@@ -23,6 +22,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private PrincipalOauth2UserService principalOauth2UserService;
+
+    @Autowired
+    private PrincipalDetailsService principalDetailsService;
 
     @Bean // 스프링 빈을 생성
     PasswordEncoder passwordEncoder() {
@@ -36,29 +38,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/user/**").authenticated()
                 .antMatchers("/manager/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
-                .antMatchers("/admin/**").hasRole("MANAGER")
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/member/login")
+                .loginPage("/login")
                 .loginProcessingUrl("/login")
-//                .failureHandler(failureHandler())
-                .defaultSuccessUrl("/")
                 .failureUrl("/login?error")
                 .permitAll()
                 .and()// ↓ ↓ 소셜 로그인
                 .oauth2Login()
-                .loginPage("/member/login")
+                .loginPage("/login")
                 .userInfoEndpoint()
-                .userService(principalOauth2UserService); //후처리
+                .userService(principalOauth2UserService);
+        http.rememberMe().tokenValiditySeconds(60 * 60 * 24 * 7).userDetailsService(principalDetailsService);
         http.logout();
-
     }
 
 
-//    @Bean
-//    public AuthenticationFailureHandler failureHandler() {
-//        return new MemberLoginFailHandler();
-//    }
 }
-

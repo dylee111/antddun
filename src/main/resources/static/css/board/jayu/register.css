@@ -1,0 +1,117 @@
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ELAND_Choice_M';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/ELAND_Choice_M.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+/* form 스타일 */
+.form-group{
+    margin: 5px 0;
+    font-family: 'ELAND_Choice_M';
+}
+.form-control{
+     font-family: 'ELAND_Choice_M';
+     font-size: 16px;
+}
+
+/* 옵션 좌우 간격 */
+.option{
+    display:inline-block;
+    width: 10rem;
+    margin: 5px 0;
+}
+
+/* 카테고리 */
+select.category {
+    marin: 10px 20rem;
+    height: 28px;
+    width: 120px;
+    color: #919191;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+ 	font-size: 16px;
+ 	font-weight: bold;
+ 	text-align:center;
+ 	cursor: pointer;
+}
+option{
+    font-family: 'ELAND_Choice_M';
+    font-size: 16px;
+}
+
+/* 펑예 스위치 */
+.peong{
+    width: 60px;
+    font-size: 16px;
+    font-family: 'ELAND_Choice_M';
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 55px;
+    height: 25px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius:20px;
+    background-color: #ccc;
+    box-shadow: inset 1px 5px 1px #999;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 3px;
+    background-color: #fff;
+    -webkit-transition: .5s;
+    transition: .4s;
+    border-radius:20px;
+}
+.switch input:checked + .slider {
+    background-color: #f9c64f;
+    box-shadow: inset 1px 5px 1px #E3AE56;
+}
+.switch input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* 뚠 style */
+.ddun{
+ 	width: 20px;
+ 	margin: 5px 0;
+ 	font-size: 16px;
+ 	font-family: 'ELAND_Choice_M';
+}
+input.ddun{
+width: 100px;
+display: inline-block;
+}
+
+/* 등록 버튼 */
+.btn-primary{
+    float :right;
+    font-family: 'ELAND_Choice_M';
+}

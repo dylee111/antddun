@@ -1,0 +1,35 @@
+/* 기본 글꼴과 크기 설정 */
+.note-editable {
+     font-family: 맑은 고딕;
+     font-size: 12px!important;
+}
+.note-placeholder {
+     font-family: 맑은 고딕;
+     font-size: 12px;
+}
+
+/* 토글 중복 수정 */
+.dropdown-toggle::after {
+    display: none;
+}
+
+/* 모달 수정 */
+.note-modal-footer{
+    height: 50px;
+}
+.note-form-label{
+    text-align: left;
+}
+label{
+    text-align:left;
+}
+
+/* palette 수정 */
+.note-dropdown-menu{
+    padding: 0 0 0 10px;
+}
+
+/* 링크 첨부 모달 수정*/
+label{
+    text-align:left;
+}
