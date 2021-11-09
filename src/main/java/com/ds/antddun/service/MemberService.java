@@ -21,7 +21,6 @@ public interface MemberService {
 
     List<Member> welcomeMsg(Long mno);
 
-
     default Member dtoToEntity(MemberDTO memberDTO) {
         Member member = Member.builder()
                 .mno(memberDTO.getMno())
@@ -45,7 +44,7 @@ public interface MemberService {
                 .firstName(member.getFirstName())
                 .lastName(member.getLastName())
                 .phoneNum(member.getPhoneNum())
-                .experience(Integer.parseInt(member.getPhoneNum()))
+                .experience(member.getExperience())
 //                .recommendUser(member.getRecommendUser())
                 .salary(member.getSalary())
                 .build();

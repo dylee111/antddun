@@ -30,6 +30,6 @@ public class SosoJobBoard extends BaseEntity {
 
     private String category;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Member member;
 }
