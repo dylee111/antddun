@@ -5,77 +5,78 @@
         <!--페이지 수정 부분 시작-->
 
         <!-- 페이지 css/ js 추가 -->
-        <link rel="stylesheet" th:href="@{/css/board/board.css}">
-        <script th:src="@{/js/board/board.js}"></script>
+        <link rel="stylesheet" th:href="@{/css/board/jayu/register.css}">
 
         <!-- summernote css/ js -->
         <link rel="stylesheet" th:href="@{/css/board/summernote/summernote-lite.css}">
+        <link rel="stylesheet" th:href="@{/css/board/summernote/custom.css}">
         <script th:src="@{/js/board/summernote/summernote-lite.js}"></script>
+        <script th:src="@{/js/board/summernote/custom.js}"></script>
+
 
         <!-- summernote 한글 적용 -->
         <script th:src=" @{https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js}"></script>
 
         <!-- 본문 시작 -->
         <div class="content">
-            <form th:action="@{/board/register}" th:method="post" modelAttribute="member">
+            <form th:action="@{/member/sosojob/confirm}" th:method="post">
 
                 <!--카테고리-->
-                <div class="form-group">
-                    <ol class="category">
-                        <li>소곤소곤</li>
-                        <li>이직</li>
-                        <li>연애</li>
-                        <li>JOB담</li>
-                        <li>결혼·육아</li>
-                        <li>취미</li>
-                        <li>재테크</li>
-                        <li>뷰티·패션</li>
-                        <li>스포츠·게임</li>
-                    </ol>
+                <div class="option">
+                    <select class="category" name="category">
+<!--                        <option value="1" selected>소곤소곤</option>-->
+<!--                        <option value="2">이직</option>-->
+<!--                        <option value="3">JOB담</option>-->
+<!--                        <option value="4">연애</option>-->
+<!--                        <option value="5">결혼·육아</option>-->
+<!--                        <option value="6">재테크</option>-->
+<!--                        <option value="7">취미</option>-->
+<!--                        <option value="8">뷰티·패션</option>-->
+<!--                        <option value="9">스포츠·게임</option>-->
+                    </select>
                 </div>
 
-                <!--펑예-->
-                <input type="radio" name="peong" id="peong" value="true" checked> <label for="peong">💣 펑예</label>
                 <!--제목-->
                 <div class="form-group">
-                    <input type="text" class="form-control" name="title" required
-                           placeholder="제목을 입력해주세요">
+                    <input type="text" id="title" class="form-control" name="title" required placeholder="제목을 입력해주세요">
+
                 </div>
 
                 <!--내용-->
                 <div class="form-group">
-                    <textarea id="summernote" name="content" required></textarea>
+                    <textarea id="summernote" class="content"  name="content" ></textarea>
+
                 </div>
 
                 <!--뚠-->
                 <div class="form-group">
-                    <img th:src="@{/assets/coins.png}" width="25rem"><label id="ddun"> 뚠</label>
+
+                    <img th:src="@{/assets/coins.png}" width="25rem">
                     <input type="text" class="form-control ddun" name="ddun"
-                           placeholder="뚠을 입력하세요">
+                           onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+                           placeholder="150"> <label class="ddun"> 뚠</label>
+
                 </div>
 
                 <!--작성자-->
                 <div class="form-group">
-                    <input type="text" class="form-control" name="writer"
-                           readonly>
+
+                    <input type="text" class="form-control" name="writer" readonly>
                 </div>
 
                 <!--작성완료 버튼-->
+                <button type="submit" class="btn btn-save btn-primary">등록</button>
             </form>
-                <button type="button" class="btn btn-primary">등록</button>
+
         </div>
         <script>
             $(document).ready(function() {
 
-                const
+                const categoryArr = ["IT","디자인·설계","미디어","번역","문서작업","마케팅","취업·이직","실무교육"];
 
-                .ajax({
-                    url:
-                    methods:
-                    data:
-                    dataType:
-
-                })
+                for(var i = 1; i < categoryArr.length; i++){
+                    $(".category").append("<option value="+categoryArr[i]+">" + categoryArr[i] + "</option>");
+                }
 
             });
 

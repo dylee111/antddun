@@ -24,17 +24,19 @@ public class SosoJobServiceImpl implements SosoJobService {
     private SosoBoardRepository sosoBoardRepository;
 
     @Override
-    public Long register(SosoBoardDTO sosoBoardDTO) {
+    public Long register(SosoBoardDTO sosoBoardDTO, Member member) {
 
-        log.info(sosoBoardDTO);
-
+        log.info("SOSODTO"+sosoBoardDTO);
         SosoJobBoard sosoJobBoard = dtoToEntity(sosoBoardDTO);
 
-        log.info(sosoJobBoard);
+        log.info("SOSOBOARD"+sosoJobBoard);
 
+        sosoJobBoard.setMember(member);
         sosoBoardRepository.save(sosoJobBoard);
-
+        log.info("SOSOBOARD222"+sosoJobBoard);
         return sosoJobBoard.getSosoNo();
+
+
     }
 
     @Override
