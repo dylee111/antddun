@@ -4,11 +4,6 @@
     width: 100%
 }
 
-.slick-loading .slick-list
-{
-    background: #fff url('./ajax-loader.gif') center center no-repeat;
-}
-
 .slick-card {
     font-family: ELAND_Choice_M;
     font-weight: bold;
@@ -26,6 +21,10 @@
     height:160px;
     object-fit:cover;
 }
+
+.js .slider-single > div:nth-child(1n+2) { display: none }
+.js .slider-single.slick-initialized > div:nth-child(1n+2) { display: block }
+
 
 /* Slick-Slide Arrows */
 .slick-prev,
