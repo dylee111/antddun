@@ -7,31 +7,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
     <link th:href="@{/css/login/login.css}" rel="stylesheet"/>
+    <script th:src="@{/js/login/login.js}"></script>
 
     <title>Log-in</title>
 
-    <script>
-    window.onload = function() {
-      document.getElementById('btnSubmit').onclick = function() {
-        username = document.getElementById('username').value;
-        password = document.getElementById('password').value;
-
-        if (username == undefined || username == '') {
-          alert('아이디를 확인해주세요');
-          document.getElementById('username').focus();
-          return;
-        }
-        if (password == undefined || password == '') {
-          alert('비밀번호를 확인해주세요');
-          document.getElementById('password').focus();
-          return;
-        }
-        document.frm.submit();
-      }
-    }
-
-
-    </script>
 </head>
 
 <body>
@@ -42,7 +21,7 @@
     <form name="frm" th:action="@{/login}"  style="position:absolute" class="loginBox"  method="post"> <!-- 시큐리티가 낚아챔! (config) -->
         <fieldset>
             <header>
-                <h2><a th:href="@{/}">개미는 뚠뚠</a></h2>
+                <h2><a th:href="@{/}" style="color:black;">개미는 뚠뚠</a></h2>
             </header>
 
             <div class="input-box">
@@ -63,7 +42,7 @@
             <button id="btnSubmit" class="btn" type="button" name="button">로그인</button>
 
             <div class="social">
-                <a th:href="@{/oauth2/authorization/google}">Google 로그인</a>
+                <a th:href="@{/oauth2/authorization/google}">Google 로그인</a><br>
                 <a th:href="@{/oauth2/authorization/facebook}">facebook</a>
             </div>
 
@@ -71,7 +50,7 @@
                 <ul class="find">
                     <li><a href="#">비밀번호 찾기</a></li>
                     <li><a href="#">아이디 찾기</a></li>
-                    <li><a th:href="@{/joinPage}">회원가입</a></li>
+                    <li><a th:href="@{/joinAgree}">회원가입</a></li>
                 </ul>
             </div>
 
