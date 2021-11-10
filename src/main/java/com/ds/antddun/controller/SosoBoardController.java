@@ -1,6 +1,5 @@
 package com.ds.antddun.controller;
 
-
 import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.SosoBoardDTO;
 import com.ds.antddun.entity.SosoJobBoard;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

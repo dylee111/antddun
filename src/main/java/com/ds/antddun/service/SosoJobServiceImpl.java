@@ -35,8 +35,6 @@ public class SosoJobServiceImpl implements SosoJobService {
         sosoBoardRepository.save(sosoJobBoard);
         log.info("SOSOBOARD222"+sosoJobBoard);
         return sosoJobBoard.getSosoNo();
-
-
     }
 
     @Override
