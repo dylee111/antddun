@@ -1,6 +1,5 @@
 package com.ds.antddun.controller;
 
-
 import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.SosoBoardDTO;
 import com.ds.antddun.entity.SosoJobBoard;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
 
 @Controller
 @Log4j2

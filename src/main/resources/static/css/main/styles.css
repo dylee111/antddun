@@ -3014,9 +3014,7 @@ textarea.form-control-lg {
   background-color: #5D4B1D;
   border-color: #5D4B1D;
 }
-.btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.25rem  rgba(253, 193, 13, 0.5);
-}
+
 .btn-primary:disabled, .btn-primary.disabled {
   color: #fff;
   background-color: #5D4B1D;
@@ -7450,6 +7448,7 @@ textarea.form-control-lg {
 .py-5 {
   padding-top: 2rem !important;
   padding-bottom: 2rem !important;
+  margin-top: 3rem !important;
 }
 
 .pt-0 {
