@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,9 +28,7 @@ public class SosoBoardController {
 
     @GetMapping("/sosojob/main")
     public String mainRead(SosoJobBoard sosoJobBoard, Model model) {
-
 //        model.addAttribute("soso", )
-
         return "sosojob/sosojobMain";
     }
 
@@ -47,4 +47,5 @@ public class SosoBoardController {
 
         return "sosojob/sosojobMain";
     }
+
 }
