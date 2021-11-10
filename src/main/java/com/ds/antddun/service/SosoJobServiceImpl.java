@@ -36,6 +36,7 @@ public class SosoJobServiceImpl implements SosoJobService {
         log.info("SOSOBOARD222"+sosoJobBoard);
         return sosoJobBoard.getSosoNo();
 
+
     }
 
     @Override
