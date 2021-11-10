@@ -17,6 +17,7 @@ class SosoJobServiceImplTest {
     @Autowired
     private SosoJobService sosoJobService;
 
+
 //    @Test
 //    void register() {
 //
@@ -34,6 +35,7 @@ class SosoJobServiceImplTest {
 ////            System.out.println(sosoJobService.register(sosoBoardDTO));
 //        });
 //    }
+
 
 //    @Test
 //    public void testRead() {

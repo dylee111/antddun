@@ -1,5 +1,6 @@
 package com.ds.antddun.controller;
 
+
 import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.SosoBoardDTO;
 import com.ds.antddun.entity.SosoJobBoard;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -28,6 +30,7 @@ public class SosoBoardController {
     public String mainRead(SosoJobBoard sosoJobBoard, Model model) {
 
 //        model.addAttribute("soso", )
+
         return "sosojob/sosojobMain";
     }
 
@@ -43,6 +46,15 @@ public class SosoBoardController {
         log.info("REGISTER11111>>>>>>>>>>>"+sosoBoardDTO+"////"+principal.getMember());
         sosoJobService.register(sosoBoardDTO, principal.getMember());
         log.info("REGISTER22222>>>>>>>>>>>"+sosoBoardDTO+"////"+principal.getMember());
+
         return "sosojob/sosojobMain";
     }
+
+    @GetMapping("/sosoJob/register")
+    public String register(SosoBoardDTO sosoBoardDTO, HttpSession httpSession, HttpServletRequest request) {
+        httpSession = request.getSession();
+        log.info("httpSession >>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + httpSession.getId());
+        return "/sosojob/register";
+    }
+
 }
