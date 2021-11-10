@@ -23,7 +23,7 @@
         const nameResult = $(".nameCheckResult");
         const mobileResult = $(".mobileCheckResult");
 
-        const pwdReg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*=-])(?=.*[0-9]).{8,15}$/;
+        const pwdReg = /^(?=.*[a-zA-Z])(?=.*[~!@#$%^&*=-])(?=.*[0-9]).{8,15}$/;
 
         // blur 이벤트 / 유효성
 

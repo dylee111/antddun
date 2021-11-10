@@ -20,6 +20,7 @@ public class SosoBoardDTO {
     private String content;
     private String category;
     private Long mno; // username
+    private String firstName;
     private int ddun;
 
     private double avg;
@@ -30,15 +31,4 @@ public class SosoBoardDTO {
     private LocalDateTime regDate;
     private LocalDateTime modDate;
 
-    public SosoBoardDTO(String title, String content, String category, int ddun, double avg,
-                        List<UploadImageDTO> imageDTOList, LocalDateTime regDate, LocalDateTime modDate) {
-        this.title = title;
-        this.content = content;
-        this.category = category;
-        this.ddun = ddun;
-        this.avg = avg;
-        this.imageDTOList = imageDTOList;
-        this.regDate = regDate;
-        this.modDate = modDate;
-    }
 }

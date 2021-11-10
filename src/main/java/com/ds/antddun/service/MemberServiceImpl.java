@@ -115,10 +115,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<Member> welcomeMsg(Long mno) {
+    public Member welcomeMsg(Long mno) {
 
 //        Member member = Member.builder().mno(mno).build();
-        List<Member> result = memberRepository.welcomeMsg(mno);
+        Member result = memberRepository.welcomeMsg(mno);
+//        List<Member> result = memberRepository.welcomeMsg(mno);
 
         return result;
     }
