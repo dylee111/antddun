@@ -57,7 +57,7 @@ class MemberServiceTest {
     @Test
     void readMember() {
 
-        List<Member> result = memberRepository.welcomeMsg(1L);
+        Member result = memberRepository.welcomeMsg(1L);
         System.out.println(result);
 
     }

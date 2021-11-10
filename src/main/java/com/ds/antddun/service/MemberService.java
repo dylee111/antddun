@@ -2,12 +2,14 @@ package com.ds.antddun.service;
 
 import com.ds.antddun.dto.JobListDTO;
 import com.ds.antddun.dto.MemberDTO;
+import com.ds.antddun.entity.JobList;
 import com.ds.antddun.entity.Member;
 
 import java.util.Date;
 import java.util.List;
 
 public interface MemberService {
+    public List<Member> getList();
 
     Long join(MemberDTO memberDTO, JobListDTO jobListDTO);
 
@@ -19,7 +21,7 @@ public interface MemberService {
 
     Date convertDate(String startTime, String endTime);
 
-    List<Member> welcomeMsg(Long mno);
+    Member welcomeMsg(Long mno);
 
     default Member dtoToEntity(MemberDTO memberDTO) {
         Member member = Member.builder()

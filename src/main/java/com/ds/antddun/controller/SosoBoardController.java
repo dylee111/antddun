@@ -47,12 +47,4 @@ public class SosoBoardController {
 
         return "sosojob/sosojobMain";
     }
-
-    @GetMapping("/sosoJob/register")
-    public String register(SosoBoardDTO sosoBoardDTO, HttpSession httpSession, HttpServletRequest request) {
-        httpSession = request.getSession();
-        log.info("httpSession >>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + httpSession.getId());
-        return "/sosojob/register";
-    }
-
 }

@@ -30,6 +30,11 @@ public class MemberServiceImpl implements MemberService {
     private PasswordEncoder passwordEncoder;
 
     @Override
+    public List<Member> getList() {
+        return null;
+    }
+
+    @Override
     public Long join(MemberDTO memberDTO, JobListDTO jobListDTO) {
 
         memberDTO.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
@@ -115,10 +120,10 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<Member> welcomeMsg(Long mno) {
+    public Member welcomeMsg(Long mno) {
 
 //        Member member = Member.builder().mno(mno).build();
-        List<Member> result = memberRepository.welcomeMsg(mno);
+        Member result = memberRepository.welcomeMsg(mno);
 
         return result;
     }

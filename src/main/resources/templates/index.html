@@ -72,9 +72,9 @@
                                     <img th:src="@{assets/user_img/1.png}" class="user_img"/>
                                 </div>
                                 <div class="user_item user_id">
-                                    <span class="bold">개발 </span>
-                                    <span class="bold">N년차 </span>
-                                    <span class="bold">김개미</span><br>
+                                    <span class="bold"><span th:text="@{job.jno}"></span> </span>
+                                    <span class="bold"><span th:text="@{member.experience}"></span>년차 </span>
+                                    <span class="bold"><span th:text="@{member.firstName}"></span>개미</span><br>
                                     <span><a th:href="@{/member/mypage}" class="gray my_info">내정보</a></span>
                                     <button class="btn_logout"><a th:href="@{/}" class="a_white">로그아웃</a></button>
                                 </div>
@@ -372,8 +372,13 @@
 <!-- Core theme JS-->
 <script th:src="@{js/scripts.js}"></script>
 
-<script>
+<script th:inline="javascript">
             <!--Login JS-->
+<!--            function test() {-->
+<!--                let id = [[${mno}]];-->
+<!--                console.log(id);-->
+<!--            }-->
+
             $('.btn_login').on('click', function(){
                 $('#unlogin').hide();
                 $('.wish').show();
