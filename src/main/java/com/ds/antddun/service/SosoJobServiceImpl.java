@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
@@ -23,20 +24,18 @@ public class SosoJobServiceImpl implements SosoJobService {
     @Autowired
     private SosoBoardRepository sosoBoardRepository;
 
+    /*
+    * method : register
+    * */
     @Override
     public Long register(SosoBoardDTO sosoBoardDTO, Member member) {
 
-        log.info("SOSODTO"+sosoBoardDTO);
         SosoJobBoard sosoJobBoard = dtoToEntity(sosoBoardDTO);
 
-        log.info("SOSOBOARD"+sosoJobBoard);
-
-        sosoJobBoard.setMember(member);
+        sosoJobBoard.setMember(member); // Controller에서 PrincipalDetails 클래스에서 member 객체를 받아서 인증받은 유저를 매개변수로 받음.
         sosoBoardRepository.save(sosoJobBoard);
-        log.info("SOSOBOARD222"+sosoJobBoard);
+
         return sosoJobBoard.getSosoNo();
-
-
     }
 
     @Override
@@ -50,23 +49,29 @@ public class SosoJobServiceImpl implements SosoJobService {
     }
 
     @Override
-    public PageResultDTO<SosoBoardDTO, SosoJobBoard> getList(PageRequestDTO requestDTO, Member member) {
-        Pageable pageable = requestDTO.getPageable(Sort.by("sosoNo"));
+    public PageResultDTO<SosoBoardDTO, SosoJobBoard> getList(PageRequestDTO requestDTO) {
+//        Pageable pageable = requestDTO.getPageable(Sort.by("sosoNo"));
+//
+//        Page<SosoJobBoard> result = sosoBoardRepository.findAll(pageable);
+//
+//        Function<SosoJobBoard, SosoBoardDTO> fn = (entity -> entityToDTO(entity)
 
-        Page<SosoJobBoard> result = sosoBoardRepository.findAll(pageable);
+        return null;
 
-        Function<SosoJobBoard, SosoBoardDTO> fn = (entity -> entityToDTO(entity, member));
-
-        return new PageResultDTO<>(result, fn);
     }
 
     @Override
-    public List<SosoBoardDTO> getListByCategory(SosoJobBoard sosoJobBoard) {
+    public List<SosoBoardDTO> getListByCategory(String category) {
 
-//        SosoBoardDTO dto = entityToDTO(sosoJobBoard);
-//
-//        List<SosoBoardDTO> result = sosoBoardRepository.getListByCategory(category);
+        List<SosoJobBoard> sosoJobBoardList = sosoBoardRepository.findAll();
+        List<SosoBoardDTO> boardDTOList = new ArrayList<>();
 
-        return null;
+
+
+        List<SosoBoardDTO> result = sosoBoardRepository.getListByCategory(category);
+
+        log.info(">>"+result);
+        return result;
     }
+
 }

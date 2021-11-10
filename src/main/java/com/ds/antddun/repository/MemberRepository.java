@@ -31,7 +31,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
             " FROM Member m, JobList j " +
             " WHERE m.job=j.jno " +
             " AND m.mno=:mno ")
-    List<Member> welcomeMsg(Long mno);
+    Member welcomeMsg(Long mno);
 
     @Query("select m from Member m where username =:username ")
     Member findByUsername(String username);

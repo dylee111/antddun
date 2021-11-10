@@ -48,9 +48,9 @@
                 <!--뚠-->
                 <div class="form-group">
                     <img th:src="@{/assets/coins.png}" width="25rem">
-                    <input type="text" class="form-control ddun" name="ddun"
+                    <input type="text" id="ddun" class="form-control ddun" name="ddun"
                            onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-                           placeholder="150"> <label class="ddun"> 뚠</label>
+                           placeholder="150" required> <label class="ddun"> 뚠</label>
                 </div>
 
                 <!--작성자-->
@@ -65,10 +65,32 @@
         <script>
             $(document).ready(function() {
 
+                const title = $("#title");
+                const content = $(".content");
+                const ddun = $("#ddun");
+
                 const categoryArr = ["IT","디자인·설계","미디어","번역","문서작업","마케팅","취업·이직","실무교육"];
 
-                for(var i = 1; i < categoryArr.length; i++){
+                for(var i = 0; i < categoryArr.length; i++){
                     $(".category").append("<option value="+categoryArr[i]+">" + categoryArr[i] + "</option>");
+                }
+            });
+
+            $(".btn-save").click(function() {
+                if(title.val() == "" ) {
+                    alert("제목을 입력해주세요");
+                    title.focus();
+                    return;
+                }
+                if(content.val() == "" ) {
+                    alert("제목을 입력해주세요");
+                    content.focus();
+                    return;
+                }
+                if(ddun.val() == "" ) {
+                    alert("제목을 입력해주세요");
+                    ddun.focus();
+                    return;
                 }
             });
 

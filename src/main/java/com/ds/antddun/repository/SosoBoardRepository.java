@@ -8,6 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface SosoBoardRepository extends JpaRepository<SosoJobBoard, Long> {
-    @Query("SELECT sjb FROM SosoJobBoard sjb WHERE sjb.category=:category")
+//    @Query(value = "SELECT sjb, m FROM SosoJobBoard sjb, Member m WHERE sjb.member=m.mno and sjb.category=:category")
+    @Query(value = "SELECT sjb FROM SosoJobBoard sjb WHERE sjb.category=:category")
     List<SosoBoardDTO> getListByCategory(String category);
+
+
 }
