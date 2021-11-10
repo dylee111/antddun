@@ -2,278 +2,88 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
   <th:block th:fragment="content">
-    <script th:src="@{/js/join/join.js}"></script>
-    <!--페이지 수정 부분 시작-->
     <!-- 페이지 css/ js 추가 -->
-    <style>
-      ul, li {
-        list-style: none;
-        padding: 0px;
-      }
-      .mypage_nav {
-        overflow: hidden;
-      }
+    <link th:href="@{/css/member/mypage.css}" rel="stylesheet" />
+    <script th:src="@{/js/join/join.js}"></script>
+    <script th:src="@{/js/member/mypage.js}"></script>
 
-      .mypage_nav li {
-        display: inline-block;
-        float: left;
-        width: 100px;
-        height: 50px;
-        line-height: 48px;
-        cursor:pointer;
-
-        font-family: 'ELAND_Choice_M';
-        font-size: 1rem;
-        font-weight: bold;
-        text-align:center;
-        border-bottom: 3px solid #ededed;
-        margin: 0 10px 20px 0;
-      }
-
-      #my_page, #money_page {
-        width: 100%;
-        height: 100%;
-        margin: 15px 0;
-      }
-
-      .mypage_title {
-        font-family: 'ELAND_Choice_M';
-        font-size: 1.5rem;
-      }
-
-      .mypage_subtitle {
-        font-family: 'ELAND_Choice_M';
-        font-size: 1.3rem;
-      }
-
-      .center {
-        text-align: center;
-      }
-
-      .my_margin {
-        margin-bottom: 40px;
-      }
-
-      .my_margin2 {
-        margin-bottom: 20px;
-      }
-
-      .money_title {
-        width: 5rem;
-        height: 35px;
-        line-height: 33px;
-        text-align: center;
-      }
-
-      .money_input {
-        width: 13rem;
-        height: 35px;
-        border-radius: 5px;
-        border: 1px solid rgb(220,220,220);
-      }
-
-      .wish_table {
-        width: 100%;
-        text-align: center;
-      }
-
-      .wish_table tr td{
-        border: 1px solid rgb(220,220,220);
-        padding: 7px 5px;
-        font-family: 'ELAND_Choice_M';
-        font-size: 15px;
-      }
-
-      .input_pd {
-        width: 90%;
-        height: 25px;
-        border: none;
-        font-size: 15px;
-      }
-
-      .input_cost {
-        width: 90%;
-        height: 25px;
-        border: none;
-        text-align: center;
-        font-size: 15px;
-      }
-
-      .input_per {
-        width: 70%;
-        height: 25px;
-        border: none;
-        text-align: center;
-        font-size: 15px;
-      }
-
-      .save_btn {
-        border: none;
-        height: 35px;
-        width: 15%;
-        border-radius: 5px;
-        font-family: 'ELAND_Choice_M';
-        font-size: 1rem;
-        color: white;
-        font-weight: bold;
-        background: #f9c64f;
-        float: right;
-        margin-top: 10px;
-        cursor:pointer;
-      }
-
-      .charge_btn {
-        border: none;
-        height: 35px;
-        width: 15%;
-        border-radius: 5px;
-        font-family: 'ELAND_Choice_M';
-        font-size: 1rem;
-        color: white;
-        font-weight: bold;
-        background: #f9c64f;
-        float: right;
-        margin-bottom: 10px;
-        cursor:pointer;
-      }
-
-      .my_ddun {
-        display: inline-block;
-        width: 25%;
-        height: 60px;
-      }
-    </style>
-
-    <script>
-        $('#my_tab').on('click', function(){
-            $('#my_tab').css("border-bottom", '3px solid #F9C74F');
-            $('#my_page').show();
-            $('#money_page').hide();
-        });
-
-        $('#money_tab').on('click', function(){
-            $('#money_tab').css("border-bottom", '3px solid #F9C74F');
-            $('#money_page').show();
-            $('#my_page').hide();
-        });
-    </script>
     <!-- 본문 시작 -->
     <div class="content">
-      <nav class="mypage_nav margin_bottom">
-        <ul id="tabs">
-          <li><a th:href="@{#}" id="my_tab">회원 정보</a></li>
-          <li><a th:href="@{#}" id="money_tab">내 돈 정보</a></li>
-        </ul>
-      </nav>
+      <div style="margin-left: 6%;">
+        <nav class="mypage_nav">
+          <ul id="tabs">
+            <li><a id="my_tab">회원 정보</a></li>
+            <li><a id="money_tab">내 돈 정보</a></li>
+          </ul>
+        </nav>
+      </div>
 
       <div id="my_wrap">
+
         <div id="my_page" style="display:none;">
-          <div id="user_data" class="margin_bottom">
+          <div id="user_data">
             <h2 class="mypage_title">회원 정보</h2>
             <hr class="my_margin">
 
             <form method="POST" class="center my_margin" id="frm">
-              <div>
-                <div class="reg_label">
-                  <label for="username" class="money_title">아이디</label>
-                  <span class="money_input idCheckResult"></span>
-                </div>
-                <br>
-                <div class="input-box">
-                  <input type="email" id="username" name="username" placeholder="이메일(아이디)" required autofocus>
-                </div>
-                <!--            <button type="button" id="btnIdCheck" class="btn btnDupliCheck">중복 확인</button>-->
-              </div>
-
-              <div>
-                <div class="reg_label">
-                  <label for="password">비밀번호</label>
-                  <span class="resultBox pwdCheckResult"></span>
-                </div>
-                <br>
-                <div class="input-box">
-                  <input type="password" class="pass" id="password" name="password"
-                         placeholder="비밀번호(영문, 숫자, 특수문자 조합 8~15자)">
+                <div class="input_box">
+                  <input type="email" class="input_info" id="username" name="username" placeholder="이메일(아이디)" readonly/>
                 </div>
 
-                <div class="reg_label">
-                  <label for="rePassword">비밀번호 재확인</label>
-                  <span class="resultBox rePwdCheckResult"></span>
+                <span class="resultBox pwdCheckResult"></span>
+                <div class="input_box">
+                  <input type="password" class="input_info pass" name="password" placeholder="비밀번호(영문, 숫자, 특수문자 조합 8~15자)"/>
                 </div>
-                <br>
-                <div class="input-box">
-                  <input type="password"  class="pass" id="rePassword" name=""
+
+                <span class="resultBox rePwdCheckResult"></span>
+                <div class="input_box">
+                  <input type="password"  class="input_info pass" id="rePassword" name=""
                          placeholder="비밀번호 재확인">
                 </div>
-              </div>
 
-              <div>
-                <div class="reg_label">
-                  <label for="phoneNum">전화번호</label>
-                  <span class="resultBox mobileCheckResult"></span>
-                </div>
-                <br>
-                <div id="phone-box">
-                  <div class="phoneNum-box">
-                    <input type="text" name="phoneNum" id="phoneNum" placeholder="- 없이 입력" maxlength="11"
+                <span class="resultBox mobileCheckResult"></span>
+                <div>
+                  <div id="input_box">
+                    <input type="text" class="input_info" name="phoneNum" id="phoneNum" placeholder="휴대폰 번호 (숫자로만)" maxlength="11"
                            onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
                   </div>
                   <button type="button" id="btnPhone" class="phoneAuthBtn a_white">인증</button>
                 </div>
-              </div>
 
-              <div>
-                <select class="job" name="jno">
-                  <option th:each="dto : ${jobList}" th:value="${dto.jno}" name="jno">[[${dto.job}]]</option>
-                </select>
-                <select class="experience" name="experience"></select>
-              </div>
-
-              <h4 class="margin_top">선택사항</h4>
-              <hr>
-              <div>
-                <div class="reg_label">
-                  <label for="salary">연봉</label>
-                  <span class="resultBox salaryCheckResult"></span>
+                <div>
+                  <select class="job" name="jno">
+                    <option th:each="dto : ${jobList}" th:value="${dto.jno}" name="jno">[[${dto.job}]]</option>
+                  </select>
+                  <select class="experience" name="experience"></select>
                 </div>
-                <br>
-                <div class="input-box">
+
+                <span class="resultBox salaryCheckResult"></span>
+                <div class="input_box">
                   <input type="text" id="salary" name="salary" placeholder="연봉"
                          onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                   <div class="tooltip">ⓘ
                     <span class="tooltiptext">연봉</span>
                   </div>
                 </div>
-              </div>
 
-              <div class="reg_label">
                 <label for="salary">근무시간</label>
-                <span class="resultBox salaryCheckResult"></span>
-              </div>
-              <br>
-              <select class="startTime" name="startTime"></select>
-              <select class="endTime" name="endTime"></select><br>
+                <div>
+                  <select class="startTime" name="startTime"></select>
+                  <select class="endTime" name="endTime"></select><br>
+                </div>
 
-              <div class="reg_label">
-                <label for="salary">추천인</label>
-                <span class="resultBox recUserCheckResult"></span>
-              </div>
-              <br>
-              <div class="input-box">
-                <input type="text" id="recommendUser" name="" placeholder="추천인">
-                <div class="tooltip">ⓘ<span class="tooltiptext">추천인</span></div>
-              </div>
               <button type="submit" class="button a_white">수정하기</button>
             </form>
           </div>
+        </div>
 
-      </div>
         <div id="money_page">
-          <div id="user_wallet" class="margin_bottom">
+          <div id="user_wallet" style="margin-bottom: 70px;">
             <h2 class="mypage_title">내 돈 정보</h2>
+            <button class="save_btn">저장</button>
             <hr class="my_margin">
 
-            <div class="center my_margin">
+            <div class="center">
               <div class="my_margin">
                 <span class="money_title">실수령액</span>
                 <input type="text" class="money_input" name="earn" readonly />
@@ -298,21 +108,21 @@
                   </thead>
                   <tbody>
                   <tr>
-                    <td><input type="radio"/></td>
+                    <td><input type="radio" name="main_wish"/></td>
                     <td><input class="input_pd" placeholder="상품명을 입력하세요."></td>
                     <td><input class="input_cost" placeholder="ex) 50000"></td>
                     <td><input class="input_per" placeholder="ex) 10">%</td>
                     <td>D-4</td>
                   </tr>
                   <tr>
-                    <td><input type="radio"/></td>
+                    <td><input type="radio" name="main_wish"/></td>
                     <td><input class="input_pd"></td>
                     <td><input class="input_cost"></td>
                     <td><input class="input_per">%</td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><input type="radio"/></td>
+                    <td><input type="radio" name="main_wish"/></td>
                     <td><input class="input_pd"></td>
                     <td><input class="input_cost"></td>
                     <td><input class="input_per">%</td>
@@ -320,31 +130,29 @@
                   </tr>
                   </tbody>
                 </table>
-
-                <button class="save_btn">저장</button>
               </div>
             </div>
           </div>
 
           <div id="user_ddun">
             <h2 class="mypage_title">내 뚠 정보</h2>
+            <button class="charge_btn">충전</button>
             <hr class="my_margin">
 
             <div class="center my_margin">
               <div>
-                <div class="my_ddun">
-                  <span>이번 달 적입 뚠</span>
-                  <span><strong>540</strong>뚠</span>
+                <div class="my_ddun_wrap">
+                  <span class="my_ddun">이번 달 적립</span>
+                  <span class="my_ddun"><strong>540</strong>뚠</span>
                 </div>
-                <div class="my_ddun">
-                  <span>보유 뚠</span>
-                  <span><strong>10,000</strong>뚠</span>
+                <div class="my_ddun_wrap">
+                  <span class="my_ddun">보유 뚠</span>
+                  <span class="my_ddun"><strong>10,000</strong>뚠</span>
                 </div>
               </div>
 
               <div>
-                <h4 class="mypage_subtitle margin_top">뚠 사용 내역</h4>
-                <button class="charge_btn">충전</button>
+                <h4 class="mypage_subtitle">뚠 사용 내역</h4>
                 <table class="wish_table margin_top">
                   <thead>
                   <tr>
