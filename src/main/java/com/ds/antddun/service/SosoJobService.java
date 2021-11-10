@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface SosoJobService {
 
-    Long register(SosoBoardDTO sosoBoardDTO);
+    Long register(SosoBoardDTO sosoBoardDTO, Member member);
 
     void modify();
 
