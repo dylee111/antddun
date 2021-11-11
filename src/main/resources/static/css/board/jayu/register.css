@@ -98,12 +98,6 @@ option{
     transform: translateX(26px);
 }
 
-/* 뚠 style */
-.ddun{
-width: 60px;
-display: inline-block;
-}
-
 /* 등록 버튼 */
 .btn-primary{
     float :right;
