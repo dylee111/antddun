@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class JayuBoardDTO {
 
-    private Long Jno;
+    private Long jayuNo;
     private String title;
     private String content;
     private String category;

@@ -16,7 +16,7 @@ public interface JayuBoardService {
 
     default JayuBoardDTO entityToDTO(JayuBoard jayuBoard) {
         JayuBoardDTO jayuBoardDTO = JayuBoardDTO.builder()
-                .Jno(jayuBoard.getJno())
+                .jayuNo(jayuBoard.getJayuNo())
                 .title(jayuBoard.getTitle())
                 .content(jayuBoard.getContent())
                 .category(jayuBoard.getCategory())
@@ -29,7 +29,7 @@ public interface JayuBoardService {
     default JayuBoard dtoToEntity(JayuBoardDTO jayuBoardDTO) {
         MemberDTO memberDTO = new MemberDTO();
         JayuBoard jayuBoard = JayuBoard.builder()
-                .Jno(jayuBoardDTO.getJno())
+                .jayuNo(jayuBoardDTO.getJayuNo())
                 .title(jayuBoardDTO.getTitle())
                 .content(jayuBoardDTO.getContent())
                 .category(jayuBoardDTO.getCategory())
