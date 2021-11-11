@@ -1,5 +1,6 @@
 package com.ds.antddun.dto;
 
+import com.ds.antddun.entity.JobList;
 import com.ds.antddun.entity.QnaBoard;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,6 +25,9 @@ public class QnaBoardDTO {
     private int ddun;
     private int cnt;
 
+    private String job;
+    private int experience;
+
     private double avg;
 
     @Builder.Default
@@ -44,7 +48,7 @@ public class QnaBoardDTO {
         return build;
     }
 
-    public QnaBoardDTO(Long qnaNo, String title, String content, String category, String writer, Long mno, int ddun, int cnt, double avg, List<UploadImageDTO> imageDTOList, LocalDateTime regDate, LocalDateTime modDate) {
+    public QnaBoardDTO(Long qnaNo, String title, String content, String category, String writer, Long mno, int ddun, int cnt, String job, int experience, double avg, List<UploadImageDTO> imageDTOList, LocalDateTime regDate, LocalDateTime modDate) {
         this.qnaNo = qnaNo;
         this.title = title;
         this.content = content;
@@ -53,6 +57,8 @@ public class QnaBoardDTO {
         this.mno = mno;
         this.ddun = ddun;
         this.cnt = cnt;
+        this.job = job;
+        this.experience = experience;
         this.avg = avg;
         this.imageDTOList = imageDTOList;
         this.regDate = regDate;

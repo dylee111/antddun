@@ -14,3 +14,18 @@ $(document).ready(function() {
         $('#my_page').hide();
     });
 });
+
+
+// 실수령 계산기
+$(document).ready(function() {
+    var earn = parseInt($('#earn').text());
+    var monthly = (earn * 10000 / 12) - (earn * 10000  * 0.009);
+    var result = monthly.toLocaleString();
+    var result2 = "회원정보에서 '연봉'을 입력하세요."
+
+    if(result == "NaN") {
+        return $('#earn_month').val(result2);
+    } else {
+        return $('#earn_month').val(result);
+    }
+});
