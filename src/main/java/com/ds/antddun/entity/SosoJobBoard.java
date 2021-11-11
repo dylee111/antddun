@@ -24,14 +24,12 @@ public class SosoJobBoard extends BaseEntity {
     @Column(nullable = false)
     private String content;
 
-    @ColumnDefault("0")
     private int cnt;
     private int ddun;
 
-    private String category;
-
+    @ManyToOne(fetch = FetchType.LAZY) // 영속성 (CasacadeType.ALL 제거 : 영속성을 제거하여 Member 엔티티가 중복으로 저장되는 현상 X)
+    private SosoCategory category;
 
     @ManyToOne(fetch = FetchType.LAZY) // 영속성 (CasacadeType.ALL 제거 : 영속성을 제거하여 Member 엔티티가 중복으로 저장되는 현상 X)
-
     private Member member;
 }

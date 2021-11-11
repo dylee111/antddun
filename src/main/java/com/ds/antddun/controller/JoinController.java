@@ -58,7 +58,7 @@ public class JoinController {
     }
 
     @GetMapping("/joinPage")
-    public String joinPage(Model model, JobListDTO jobListDTO) {
+    public String joinPage(Model model) {
 
         model.addAttribute("jobList", jobListService.getList());
         log.info("LIST>>>>>" + jobListService.getList());

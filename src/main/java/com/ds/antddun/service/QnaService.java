@@ -4,6 +4,8 @@ import com.ds.antddun.dto.*;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.QnaBoard;
 import com.ds.antddun.entity.UploadImage;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,6 +13,8 @@ import java.util.stream.Collectors;
 public interface QnaService {
 
     List<QnaBoardDTO> getBoardList();
+
+    Page<QnaBoard> getList(Pageable pageable);
 
     Long register(QnaBoardDTO qnaBoardDTO, Member member);
 
@@ -20,7 +24,7 @@ public interface QnaService {
 
     List<QnaBoardDTO> getListByCategory(QnaBoard qnaBoard);
 
-    PageResultDTO<QnaBoardDTO, QnaBoard> getList(PageRequestDTO requestDTO, Member member);
+/*    PageResultDTO<QnaBoardDTO, QnaBoard> getList(PageRequestDTO requestDTO);*/
 
     default QnaBoardDTO entityToDTO(QnaBoard qnaBoard ,Member member, List<UploadImage> uploadImageList, Long cnt) {
 

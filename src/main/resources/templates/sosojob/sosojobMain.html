@@ -15,25 +15,26 @@
     <style>
 
     </style>
-        <div class="main-container">
-            <section class="card mg_bottom">
+        <div class="main-container" >
+            <section class="card mg_bottom" >
                 <div class="card-header">
-                    <h3 class="boardlist">소소한JOB 카테고리</h3>
+                    <h3 class="boardlist" >소소한JOB 카테고리</h3>
+                    <span class="more"><a th:href="@{/jayu/peong}">더보기</a></span>
                 </div>
-                <div class="card-body">
+                <div class="card-body" >
                     <div id="page">
                         <div class="row">
-                            <div class="column small-11 small-centered">
+                            <div class="column small-11 small-centered" >
                                 <section class="visual" th:src="@{/assets/sosojob_cate/it.jpeg}">
-                                    <div class="slick-card">
-                                        <article>
+                                    <div class="slick-card" th:each="category : ${category}">
+                                        <article >
                                             <img class="cate-thumbnail" th:src="@{https://dummyimage.com/230x160/000/fff}"/>
                                             <div clss="content-container">
-                                                <div><span class="tag_c" th:name="@{#}">카테고리</span></div>
-                                                <div class="title"><span >홈페이지 제작해 드립니다.</span></div>
+                                                <div><span class="tag_c" th:text="${category.category.sosoCateName}" th:name="@{#}">카테고리</span></div>
+                                                <div class="title"><span th:text="${category.title}">홈페이지 제작해 드립니다.</span></div>
                                                 <div class="ddun-box">
                                                     <span><img class="img coin" th:src="@{/assets/coins.png}" width="12">
-                                                        <span class="price">10,000</span><span>뚠</span></span>
+                                                        <span class="price" th:text="${category.ddun}">10,000</span><span>뚠</span></span>
                                                 </div>
 
                                                 <div class="star-box">
@@ -43,63 +44,64 @@
                                         </article>
                                     </div>
 
-                                    <div class="slick-card">
-                                        <article>
-                                            <img class="cate-thumbnail" th:src="@{https://dummyimage.com/230x160/000/fff}"/>
-                                            <div clss="content-container">
-                                                <div>
-                                                    <span class="tag_c" th:name="@{#}">카테고리</span>
-                                                </div>
-                                                <div class="title">
-                                                    <span >홈페이지 제작해 드립니다.홈페이지 제작해 드립니다.</span>
-                                                </div>
-                                                <div class="ddun-box">
-                                                    <img class="img coin" th:src="@{/assets/coins.png}" width="12">
-                                                        <span class="price">10,000</span><span>뚠</span>
-                                                </div>
-                                                <div class="star-box">
-                                                    <img style="img heart" th:src="@{/assets/heart.png}" width="12">
-                                                    <span>5.0</span><span>작성자</span>
-                                                </div>
-                                            </div>
-                                        </article>
-                                    </div>
-                                    <div class="slick-card">
-                                        <img class="cate-thumbnail"
-                                             src="https://dummyimage.com/150x150/000/fff"/>
-                                    </div>
-                                    <div class="slick-card">
-                                        <img class="cate-thumbnail"
-                                             src="https://dummyimage.com/150x150/000/fff"/>
-                                    </div>
-                                    <div class="slick-card">
-                                        <img class="cate-thumbnail"
-                                             src="https://dummyimage.com/150x150/000/fff"/>
-                                    </div>
-                                    <div class="slick-card">
-                                        <img class="cate-thumbnail"
-                                             src="https://dummyimage.com/150x150/000/fff"/>
-                                    </div>
-                                    <div class="slick-card">
-                                        <img class="cate-thumbnail"
-                                             src="https://dummyimage.com/150x150/000/fff"/>
-                                    </div>
-                                    <div class="slick-card">
-                                        <img class="cate-thumbnail"
-                                             src="https://dummyimage.com/150x150/000/fff"/>
-                                    </div>
-                                    </article></section>
+<!--                                    <div class="slick-card">-->
+<!--                                        <article>-->
+<!--                                            <img class="cate-thumbnail" th:src="@{https://dummyimage.com/230x160/000/fff}"/>-->
+<!--                                            <div clss="content-container">-->
+<!--                                                <div>-->
+<!--                                                    <span class="tag_c" th:name="@{#}">카테고리</span>-->
+<!--                                                </div>-->
+<!--                                                <div class="title">-->
+<!--                                                    <span >홈페이지 제작해 드립니다.홈페이지 제작해 드립니다.</span>-->
+<!--                                                </div>-->
+<!--                                                <div class="ddun-box">-->
+<!--                                                    <img class="img coin" th:src="@{/assets/coins.png}" width="12">-->
+<!--                                                        <span class="price">10,000</span><span>뚠</span>-->
+<!--                                                </div>-->
+<!--                                                <div class="star-box">-->
+<!--                                                    <img style="img heart" th:src="@{/assets/heart.png}" width="12">-->
+<!--                                                    <span>5.0</span><span>작성자</span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </article>-->
+<!--                                    </div>-->
+<!--                                    <div class="slick-card">-->
+<!--                                        <img class="cate-thumbnail"-->
+<!--                                             src="https://dummyimage.com/150x150/000/fff"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="slick-card">-->
+<!--                                        <img class="cate-thumbnail"-->
+<!--                                             src="https://dummyimage.com/150x150/000/fff"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="slick-card">-->
+<!--                                        <img class="cate-thumbnail"-->
+<!--                                             src="https://dummyimage.com/150x150/000/fff"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="slick-card">-->
+<!--                                        <img class="cate-thumbnail"-->
+<!--                                             src="https://dummyimage.com/150x150/000/fff"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="slick-card">-->
+<!--                                        <img class="cate-thumbnail"-->
+<!--                                             src="https://dummyimage.com/150x150/000/fff"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="slick-card">-->
+<!--                                        <img class="cate-thumbnail"-->
+<!--                                             src="https://dummyimage.com/150x150/000/fff"/>-->
+<!--                                    </div>-->
+                                    </article>
+                                </section>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <div sec:authentication property="name"></div>
             <div th:each="soso : ${soso}" >
-                <span>[[${soso.experience}]]"년차"</span>
-                <span>[[${soso.firstName}]]"개미"</span>
-                <span>[[${soso.job}]]</span>
+                <span>[[${soso.experience}]]년차</span>
+                <span>[[${soso.firstName}]]개미</span>
+                <span>[[${soso.job.job}]]</span>
             </div>
+
         </div>
         <script>
             <!--WishList CLose JS-->
@@ -137,13 +139,10 @@
               }
             });
 
-
-
-
-
         </script>
 
         <!-- 본문 끝 -->
         <!--페이지 수정 부분 끝-->
     </th:block>
 </th:block>
+
