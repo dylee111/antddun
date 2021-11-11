@@ -78,12 +78,47 @@
   }
 
   .input_info {
-    width: 90%;
+    width: 100%;
     height: 100%;
     border: none;
     padding: 0 20px;
     font-size: 0.9rem;
     border-radius: 5px;
+  }
+
+  .select_wrap {
+    margin: 0 auto;
+    width: 17rem;
+    display: flex;
+  }
+
+  .select_box {
+    margin: 0 auto;
+    width: 8.5rem;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid rgb(220,220,220);
+  }
+
+  .mb_wrap {
+    margin: 0 auto;
+    width: 17rem;
+    display: flex;
+  }
+
+  .input_mb {
+    margin: 0 auto;
+    width: 12rem;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid rgb(220,220,220);
+  }
+
+  .mypage_btn {
+    width: 4.5rem;
+    border: none;
+    border-radius: 5px;
+    background: #ffc107;
   }
 
   .money_input {
