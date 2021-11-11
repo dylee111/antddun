@@ -23,16 +23,8 @@
 
                 <!--카테고리-->
                 <div class="option">
-                    <select class="category" name="category">
-<!--                        <option value="1" selected>소곤소곤</option>-->
-<!--                        <option value="2">이직</option>-->
-<!--                        <option value="3">JOB담</option>-->
-<!--                        <option value="4">연애</option>-->
-<!--                        <option value="5">결혼·육아</option>-->
-<!--                        <option value="6">재테크</option>-->
-<!--                        <option value="7">취미</option>-->
-<!--                        <option value="8">뷰티·패션</option>-->
-<!--                        <option value="9">스포츠·게임</option>-->
+                    <select class="category" name="cateNo">
+                        <option th:each="category : ${category}" th:value="${category.cateNo}">[[${category.sosoCateName}]]</option>
                     </select>
                 </div>
 
@@ -70,19 +62,19 @@
             </form>
         </div>
         <script>
-            $(document).ready(function() {
+<!--            $(document).ready(function() {-->
 
 
-                const title = $("#title");
-                const content = $(".content");
-                const ddun = $("#ddun");
+<!--                const title = $("#title");-->
+<!--                const content = $(".content");-->
+<!--                const ddun = $("#ddun");-->
 
-                const categoryArr = ["IT","디자인·설계","미디어","번역","문서작업","마케팅","취업·이직","실무교육"];
+<!--                const categoryArr = ["IT","디자인·설계","미디어","번역","문서작업","마케팅","취업·이직","실무교육"];-->
 
-                for(var i = 0; i < categoryArr.length; i++){
-                    $(".category").append("<option value="+categoryArr[i]+">" + categoryArr[i] + "</option>");
-                }
-            });
+<!--                for(var i = 0; i < categoryArr.length; i++){-->
+<!--                    $(".category").append("<option value="+categoryArr[i]+">" + categoryArr[i] + "</option>");-->
+<!--                }-->
+<!--            });-->
 
 
         </script>
