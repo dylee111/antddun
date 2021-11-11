@@ -1,6 +1,7 @@
 package com.ds.antddun.controller;
 
 import com.ds.antddun.config.auth.PrincipalDetails;
+import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.dto.QnaBoardDTO;
 import com.ds.antddun.entity.QnaBoard;
 import com.ds.antddun.service.JobListService;
@@ -38,16 +39,18 @@ public class QnaBoardController {
     }*/
 
     @GetMapping("/qna/list")
-    public String list(QnaBoard qnaBoard, Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+    public String list(QnaBoard qnaBoard, Model model, @AuthenticationPrincipal PrincipalDetails principal) {
         List<QnaBoardDTO> boardDTOList = qnaService.getBoardList();
-        model.addAttribute("postList", boardDTOList);
-        model.addAttribute("info", principalDetails.getMember());
-        log.info("ghgh",principalDetails.getMember().getFirstName());
-        log.info(principalDetails.getMember().getJob());
-        log.info(principalDetails.getMember().getExperience());
-
+        if (principal != null) {
+            model.addAttribute("postList", boardDTOList);
+            model.addAttribute("info", principal.getMember());
+            log.info("LASTNAME >>>>>" + principal.getMember().getLastName());
+            log.info(principal.getMember().getJob());
+            log.info(principal.getMember().getExperience());
+        }
         return "/qna/list";
     }
+
 
 
 

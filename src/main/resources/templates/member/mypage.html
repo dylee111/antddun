@@ -27,39 +27,41 @@
 
             <form method="POST" class="center my_margin" id="frm">
                 <div class="input_box">
-                  <input type="email" class="input_info" id="username" name="username" placeholder="이메일(아이디)" readonly/>
+                  <input type="email" class="input_info margin_bottom" id="username" name="username" placeholder="이메일(아이디)" disabled/>
                 </div>
+                <span class="resultBox"></span>
 
+              <div class="input_box">
+                  <input type="password" class="input_info pass" name="password" placeholder="비밀번호(영문,숫자,특수문자 8~15자)"/>
+                </div>
                 <span class="resultBox pwdCheckResult"></span>
-                <div class="input_box">
-                  <input type="password" class="input_info pass" name="password" placeholder="비밀번호(영문, 숫자, 특수문자 조합 8~15자)"/>
-                </div>
 
-                <span class="resultBox rePwdCheckResult"></span>
                 <div class="input_box">
                   <input type="password"  class="input_info pass" id="rePassword" name=""
                          placeholder="비밀번호 재확인">
                 </div>
+                <span class="resultBox rePwdCheckResult"></span>
 
-                <span class="resultBox mobileCheckResult"></span>
-                <div>
-                  <div id="input_box">
+                <div class="mb_wrap">
+                  <div class="input_mb">
                     <input type="text" class="input_info" name="phoneNum" id="phoneNum" placeholder="휴대폰 번호 (숫자로만)" maxlength="11"
                            onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
                   </div>
-                  <button type="button" id="btnPhone" class="phoneAuthBtn a_white">인증</button>
+                  <button type="button" id="btnPhone" class="mypage_btn phoneAuthBtn a_white"
+                          style="margin-left: 5px;">인증</button>
                 </div>
+                <span class="resultBox mobileCheckResult"></span>
 
-                <div>
-                  <select class="job" name="jno">
+                <div class="select_wrap">
+                  <select class="job select_box" style="margin-right: 5px;" name="jno">
                     <option th:each="dto : ${jobList}" th:value="${dto.jno}" name="jno">[[${dto.job}]]</option>
                   </select>
-                  <select class="experience" name="experience"></select>
+                  <select class="experience select_box" name="experience"></select>
                 </div>
+                <span class="resultBox"></span>
 
-                <span class="resultBox salaryCheckResult"></span>
-                <div class="input_box">
-                  <input type="text" id="salary" name="salary" placeholder="연봉"
+              <div class="input_box">
+                  <input type="text" class="input_info" id="salary" name="salary" placeholder="연봉"
                          onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                   <div class="tooltip">ⓘ
                     <span class="tooltiptext">연봉</span>
@@ -67,12 +69,12 @@
                 </div>
 
                 <label for="salary">근무시간</label>
-                <div>
-                  <select class="startTime" name="startTime"></select>
-                  <select class="endTime" name="endTime"></select><br>
+                <div class="select_wrap">
+                  <select class="startTime select_box" name="startTime"></select>
+                  <select class="endTime select_box" name="endTime"></select><br>
                 </div>
 
-              <button type="submit" class="button a_white">수정하기</button>
+              <button type="submit" class="mypage_btn btn-primary a_white">수정하기</button>
             </form>
           </div>
         </div>
