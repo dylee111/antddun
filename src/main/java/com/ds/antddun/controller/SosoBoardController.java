@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @Controller
 @Log4j2
@@ -25,26 +25,27 @@ public class SosoBoardController {
     private SosoJobService sosoJobService;
 
     @GetMapping("/sosojob/main")
-    public String mainRead(SosoJobBoard sosoJobBoard, Model model) {
+    public String mainRead(SosoJobBoard sosoJobBoard, Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+//        log.info(">>>>"+sosoJobService.getListByCategory("IT"));
+        log.info("FIRSTNAME >>>>>" + principalDetails.getMember().getFirstName());
 
-//        model.addAttribute("soso", )
+        model.addAttribute("soso", principalDetails.getMember());
 
         return "sosojob/sosojobMain";
     }
 
-    @GetMapping("/sosoJob/register")
-    public String register(SosoBoardDTO sosoBoardDTO, HttpSession httpSession, HttpServletRequest request) {
-        httpSession = request.getSession();
-        log.info("httpSession >>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + httpSession.getId());
+    @GetMapping("/sosojob/register")
+    public String register(SosoBoardDTO sosoBoardDTO) {
+
         return "/sosojob/register";
     }
 
     @PostMapping("/sosojob/confirm")
     public String register(SosoBoardDTO sosoBoardDTO, @AuthenticationPrincipal PrincipalDetails principal) {
-        log.info("REGISTER11111>>>>>>>>>>>"+sosoBoardDTO+"////"+principal.getMember());
-        sosoJobService.register(sosoBoardDTO, principal.getMember());
-        log.info("REGISTER22222>>>>>>>>>>>"+sosoBoardDTO+"////"+principal.getMember());
 
-        return "sosojob/sosojobMain";
+
+        sosoJobService.register(sosoBoardDTO, principal.getMember());
+
+        return "/sosojob/sosojobMain";
     }
 }

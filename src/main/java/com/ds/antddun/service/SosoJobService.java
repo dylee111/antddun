@@ -6,7 +6,6 @@ import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.dto.SosoBoardDTO;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.SosoJobBoard;
-import com.ds.antddun.entity.UploadImage;
 
 import java.util.List;
 
@@ -18,11 +17,11 @@ public interface SosoJobService {
 
     void delete();
 
-    List<SosoBoardDTO> getListByCategory(SosoJobBoard sosoJobBoard);
+    List<SosoBoardDTO> getListByCategory(String category);
 
-    PageResultDTO<SosoBoardDTO, SosoJobBoard> getList(PageRequestDTO requestDTO, Member member);
+    PageResultDTO<SosoBoardDTO, SosoJobBoard> getList(PageRequestDTO requestDTO);
 
-    default SosoBoardDTO entityToDTO(SosoJobBoard sosoJobBoard ,Member member/*List<UploadImage> uploadImageList*//*, Double avg*/) {
+    default SosoBoardDTO entityToDTO(SosoJobBoard sosoJobBoard) {
 
         SosoBoardDTO sosoBoardDTO = SosoBoardDTO.builder()
                 .sosoNo(sosoJobBoard.getSosoNo())
@@ -30,7 +29,8 @@ public interface SosoJobService {
                 .content(sosoJobBoard.getContent())
                 .category(sosoJobBoard.getCategory())
                 .regDate(sosoJobBoard.getRegDate())
-                .mno(member.getMno())
+                .mno(sosoJobBoard.getMember().getMno())
+                .firstName(sosoJobBoard.getMember().getFirstName())
                 .modDate(sosoJobBoard.getModDate())
                 .ddun(sosoJobBoard.getDdun())
                 .build();

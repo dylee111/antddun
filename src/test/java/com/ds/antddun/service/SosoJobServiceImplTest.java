@@ -51,6 +51,18 @@ class SosoJobServiceImplTest {
 
 //    @Test
 //    void getListByCategoryTest() {
-//        System.out.println(sosoJobService.getListByCategory("IT"));
+//
+////        SosoJobBoard sosoJobBoard = SosoJobBoard.builder().category("IT").build();
+//
+//        System.out.println(sosoJobService.);
 //    }
+
+    @Test
+    void getList() {
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder().page(1).size(10).build();
+
+        PageResultDTO<SosoBoardDTO, SosoJobBoard> resultDTO = sosoJobService.getList(pageRequestDTO);
+    }
+
+
 }
