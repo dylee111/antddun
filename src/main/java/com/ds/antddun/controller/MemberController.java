@@ -33,11 +33,10 @@ public class MemberController {
 //    @PutMapping("member/updateMember")
 //    public
 
-    @RequestMapping({""})
+    @GetMapping("")
     public String main (Model model, MemberDTO memberDTO, @AuthenticationPrincipal PrincipalDetails principal) {
         if(principal != null) {
-            Member member = principal.getMember();
-            log.info(">>>>>>>>>>>>" + member);
+            model.addAttribute("member", principal.getMember());
         }
         return "index";
     }
