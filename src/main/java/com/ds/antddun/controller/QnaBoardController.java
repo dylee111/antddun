@@ -36,15 +36,22 @@ public class QnaBoardController {
     private QnaService qnaService;
 
 
+//    //리스트로 값을 보냄
+//    @GetMapping("/qna/list")
+//    public String list(Model model) {
+//        //직무 카테고리를 보냄
+//        List<JobList> jobListDTOList = jobListService.getList();
+//        model.addAttribute("jobList", jobListDTOList);
+//        //게시글 데이터를 보냄
+//        List<QnaBoardDTO> boardDTOList = qnaService.getBoardList();
+//        model.addAttribute("postList", boardDTOList);
+//        return "/qna/list";
+//    }
+
     //리스트로 값을 보냄
     @GetMapping("/qna/list")
-    public String list(Model model) {
-        //직무 카테고리를 보냄
-        List<JobList> jobListDTOList = jobListService.getList();
-        model.addAttribute("jobList", jobListDTOList);
-        //게시글 데이터를 보냄
-        List<QnaBoardDTO> boardDTOList = qnaService.getBoardList();
-        model.addAttribute("postList", boardDTOList);
+    public String lists(Model model, @PageableDefault(size = 6, sort = "regDate", direction = Sort.Direction.DESC) Pageable pageable) {
+        model.addAttribute("postList", qnaService.getList(pageable));
         return "/qna/list";
     }
 
