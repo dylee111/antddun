@@ -76,13 +76,16 @@
                 </div>
 
                 <h6 class="mypage_sub">근무시간</h6>
-                <div class="select_wrap">
-                  <select class="startTime select_box" style="margin-right: 5px;" name="startTime" th:each="member: ${member}">
-                    <option selected="selected" name="startTime">[[${member.startTime}]]</option>
-                  </select>
-                  <select class="endTime select_box" name="endTime" th:each="member: ${member}">
-                    <option selected="selected" name="endTime">[[${member.endTime}]]</option>
-                  </select><br>
+                <div class="select_wrap" th:each="member: ${member}">
+                  <input type="time" class="startTime select_box" style="margin-right: 5px;" name="startTime"
+                         th:attr="value=${member.startTime}"/>
+                  <input type="time" class="endTime select_box" name="endTime" th:attr="value=${member.endTime}"/>
+<!--                  <select class="startTime select_box" style="margin-right: 5px;" name="startTime" th:each="member: ${member}">-->
+<!--                    <option selected="selected" name="startTime">[[${member.startTime}]]</option>-->
+<!--                  </select>-->
+<!--                  <select class="endTime select_box" name="endTime" th:each="member: ${member}">-->
+<!--                    <option selected="selected" name="endTime">[[${member.endTime}]]</option>-->
+<!--                  </select><br>-->
                 </div>
               </div>
               <button type="submit" class="submit_btn a_white">수정하기</button>

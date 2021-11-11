@@ -46,9 +46,31 @@
         border-radius: 5px;
    }
 
+   .input-time {
+        display: inline-block;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        width: 197px;
+        border: 1px solid rgb(220,220,220);
+        height: 50px;
+        padding: 0;
+        line-height: 48px;
+        border-radius: 5px;
+   }
+
    input {
         border: none;
         width: 330px;
+        height: 43px;
+        vertical-align: middle;
+        padding-right: 10px;
+        padding-left: 20px;
+        border-radius: 5px;
+   }
+
+   .time {
+        border: none;
+        width: 185px;
         height: 43px;
         vertical-align: middle;
         padding-right: 10px;
