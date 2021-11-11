@@ -3,6 +3,7 @@
 /* list css */
 .card.qnaCardList {
     margin-bottom: 1rem;
+    height: 16rem;
 }
 
 .smallCategory {
@@ -66,7 +67,10 @@
     height: 70px;
     line-height:70px;
     padding: 10px;
-    text-align:right
+    text-align:right;
+    padding-top: 20px;
+    padding-bottom: 0px;
+    margin-bottom: -10px;
 }
 
 .boardInfo {
@@ -140,6 +144,7 @@ boardInfo{
 }
 
 .regDate {
+  line-height: 70px;
   --bs-text-opacity: 1;
   color: #6c757d !important;
   text-decoration:none;
@@ -217,5 +222,3 @@ boardInfo{
   border-top-right-radius: 0.2rem;
   border-bottom-right-radius: 0.2rem;
 }
-
-
