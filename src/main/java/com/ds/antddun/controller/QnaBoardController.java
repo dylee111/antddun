@@ -1,13 +1,16 @@
 package com.ds.antddun.controller;
 
 import com.ds.antddun.config.auth.PrincipalDetails;
-import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.dto.QnaBoardDTO;
-import com.ds.antddun.entity.QnaBoard;
+import com.ds.antddun.entity.JobList;
 import com.ds.antddun.service.JobListService;
 import com.ds.antddun.service.QnaService;
 import lombok.extern.log4j.Log4j2;
+import net.bytebuddy.TypeCache;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,41 +35,40 @@ public class QnaBoardController {
     @Autowired
     private QnaService qnaService;
 
-/*    @GetMapping("/qna/list")
-    public String list(Model model) {
-        model.addAttribute("jobList", jobListService.getList());
-        return "/qna/list";
-    }*/
 
+    //리스트로 값을 보냄
     @GetMapping("/qna/list")
-    public String list(QnaBoard qnaBoard, Model model, @AuthenticationPrincipal PrincipalDetails principal) {
+    public String list(Model model) {
+        //직무 카테고리를 보냄
+        List<JobList> jobListDTOList = jobListService.getList();
+        model.addAttribute("jobList", jobListDTOList);
+        //게시글 데이터를 보냄
         List<QnaBoardDTO> boardDTOList = qnaService.getBoardList();
-        if (principal != null) {
-            model.addAttribute("postList", boardDTOList);
-            model.addAttribute("info", principal.getMember());
-            log.info("LASTNAME >>>>>" + principal.getMember().getLastName());
-            log.info(principal.getMember().getJob());
-            log.info(principal.getMember().getExperience());
-        }
+        model.addAttribute("postList", boardDTOList);
         return "/qna/list";
     }
 
 
-
-
+    //권한 확인
     @GetMapping("/qna/register")
     public String register(QnaBoardDTO qnaBoardDTO, HttpSession httpSession, HttpServletRequest request) {
         httpSession = request.getSession();
-        log.info("httpSession >>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + httpSession.getId());
+        log.info("httpSession>>>>>>" + httpSession.getId());
         return "/qna/register";
     }
 
+    //글 등록
     @PostMapping("/qna/confirm")
     public String register(QnaBoardDTO qnaBoardDTO, @AuthenticationPrincipal PrincipalDetails principal) {
-        log.info("REGISTER11111>>>>>>>>>>>"+qnaBoardDTO+"////"+principal.getMember());
         qnaService.register(qnaBoardDTO, principal.getMember());
-        log.info("REGISTER22222>>>>>>>>>>>"+qnaBoardDTO+"////"+principal.getMember());
+        log.info("REGISTER>>>>>>"+qnaBoardDTO+"/"+principal.getMember());
         return "/qna/list";
+    }
+
+    //게시판 조회
+    @GetMapping("/qna/read")
+    public String read(){
+        return "board/view";
     }
 
 

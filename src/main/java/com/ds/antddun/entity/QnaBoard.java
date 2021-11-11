@@ -23,15 +23,13 @@ public class QnaBoard extends BaseEntity {
     @Column(nullable = false)
     private String title;
 
-    @Column
-    private String author;
-
     @Column(nullable = false)
     private String content;
 
     @ColumnDefault("0")
     private int cnt;
     private int ddun;
+
 
     private String category;
 
