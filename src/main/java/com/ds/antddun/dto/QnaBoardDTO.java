@@ -19,7 +19,7 @@ public class QnaBoardDTO {
     private String title;
     private String content;
     private String category;
-    private String author;
+    private String writer;
     private Long mno; // username
     private int ddun;
     private int cnt;
@@ -35,7 +35,6 @@ public class QnaBoardDTO {
     public QnaBoard toEntity(){
         QnaBoard build = QnaBoard.builder()
                 .qnaNo(qnaNo)
-                .author(author)
                 .title(title)
                 .content(content)
                 .cnt(cnt)
@@ -45,12 +44,12 @@ public class QnaBoardDTO {
         return build;
     }
 
-    public QnaBoardDTO(Long qnaNo, String title, String content, String category, String author, Long mno, int ddun, int cnt, double avg, List<UploadImageDTO> imageDTOList, LocalDateTime regDate, LocalDateTime modDate) {
+    public QnaBoardDTO(Long qnaNo, String title, String content, String category, String writer, Long mno, int ddun, int cnt, double avg, List<UploadImageDTO> imageDTOList, LocalDateTime regDate, LocalDateTime modDate) {
         this.qnaNo = qnaNo;
         this.title = title;
         this.content = content;
         this.category = category;
-        this.author = author;
+        this.writer = writer;
         this.mno = mno;
         this.ddun = ddun;
         this.cnt = cnt;

@@ -1,5 +1,6 @@
 package com.ds.antddun.service;
 
+import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.dto.PageRequestDTO;
 import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.dto.QnaBoardDTO;
@@ -58,7 +59,7 @@ public class QnaServiceImpl implements QnaService {
         for (QnaBoard board : boardList) {
             QnaBoardDTO boardDTO = QnaBoardDTO.builder()
                     .qnaNo(board.getQnaNo())
-                    .author(board.getAuthor())
+                    .writer(member.getLastName() + "개미")
                     .title(board.getTitle())
                     .content(board.getContent())
                     .category(board.getCategory())
@@ -81,7 +82,7 @@ public class QnaServiceImpl implements QnaService {
         for (QnaBoard board : boardList) {
             QnaBoardDTO boardDTO = QnaBoardDTO.builder()
                     .qnaNo(board.getQnaNo())
-                    .author(board.getAuthor())
+                    .writer(board.getMember().getLastName() +"개미")
                     .title(board.getTitle())
                     .content(board.getContent())
                     .category(board.getCategory())
@@ -91,7 +92,6 @@ public class QnaServiceImpl implements QnaService {
                     .cnt(board.getCnt())
                     .build();
             boardDTOList.add(boardDTO);
-
         }
         return boardDTOList;
     }
