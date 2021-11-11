@@ -43,9 +43,9 @@ public class SosoBoardController {
     @PostMapping("/sosojob/confirm")
     public String register(SosoBoardDTO sosoBoardDTO, @AuthenticationPrincipal PrincipalDetails principal) {
 
+
         sosoJobService.register(sosoBoardDTO, principal.getMember());
 
         return "/sosojob/sosojobMain";
     }
-
 }

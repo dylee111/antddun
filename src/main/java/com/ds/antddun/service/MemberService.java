@@ -2,12 +2,14 @@ package com.ds.antddun.service;
 
 import com.ds.antddun.dto.JobListDTO;
 import com.ds.antddun.dto.MemberDTO;
+import com.ds.antddun.entity.JobList;
 import com.ds.antddun.entity.Member;
 
 import java.util.Date;
 import java.util.List;
 
 public interface MemberService {
+    public List<Member> getList();
 
     Long join(MemberDTO memberDTO, JobListDTO jobListDTO);
 
