@@ -72,11 +72,11 @@
                                     <img th:src="@{assets/user_img/1.png}" class="user_img"/>
                                 </div>
                                 <div class="user_item user_id" th:each="member: ${member}">
-                                    <span class="bold"><span>[[${member.job}]]</span> </span>
+                                    <span class="bold"><span>[[${member.job.job}]]</span> </span>
                                     <span class="bold"><span>[[${member.experience}]]</span>년차 </span>
-                                    <span class="bold"><span>[[${member.firstName}]]</span>개미</span><br>
+                                    <span class="bold"><span>[[${member.lastName}]]</span>개미</span><br>
                                     <span><a th:href="@{/member/mypage}" class="gray my_info">내정보</a></span>
-                                    <button class="btn_logout"><a th:href="@{/}" class="a_white">로그아웃</a></button>
+                                    <button class="btn_logout"><a th:href="@{/logout}" class="a_white">로그아웃</a></button>
                                 </div>
                             </div>
                             <div id="user_nav">

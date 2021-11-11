@@ -166,30 +166,35 @@
 
     /* TOOL TIP*/
 
-   .tooltip {
+   .alert_tip {
         position: relative;
         display: inline-block;
-
+        color: rgb(220,220,220);
+        font-size: 1.3rem;
+        font-weith: 400;
+        z-index: 1080;
+        margin-left: 30px;
+        line-height: 2.2;
    }
 
-   .tooltip .tooltiptext {
+   .tooltiptext {
         visibility: hidden;
-        width: 120px;
-        background-color: rgb(241,196,15);
+        width: 50px;
+        background-color: rgb(220,220,220);
         color: #fff;
         text-align: center;
         border-radius: 6px;
         padding: 5px 0;
         font-weight: bold;
-
+        font-size: 0.8rem;
         position: absolute;
         z-index: 1;
-        top: -5px;
-        left: 300%;
-        margin-left: -60%;
+        left: 15
+        0%;
    }
 
-   .tooltip .tooltiptext::after {
+   .alert_tip .tooltiptext::after {
+        visibility: hidden;
         content: "";
         position: absolute;
         top: 50%;
@@ -197,10 +202,11 @@
         margin-top: -5px;
         border-width: 5px;
         border-style: solid;
-        border-color: transparent rgb(241,196,15) transparent transparent;
+        border-color: transparent rgb(220,220,220) transparent transparent;
    }
 
-   .tooltip:hover .tooltiptext { visibility: visible; }
+   .alert_tip:hover .tooltiptext { visibility: visible; }
+   .alert_tip:hover .tooltiptext::after { visibility: visible; }
 
    #recommendUser #salary { width: 100px; }
 
