@@ -7,37 +7,23 @@
         <!-- 페이지 css/ js 추가 -->
         <link th:href="@{/css/board/qna/qnaStyles.css}" rel="stylesheet" />
 
+
         <!-- 본문 시작 -->
         <div class="subNav-body">
             <nav class="nav nav-underline" aria-label="Secondary navigation">
                 <a th:each="jobList : ${jobList}" class="subNav" href="#">[[${jobList.job}]]</a>
-                <a class="subNav" href="#">통번역</a>
-                <a class="subNav" href="#">개발</a>
-                <a class="subNav" href="#">무역</a>
             </nav>
         </div>
 
         <!-- 게시물 -->
         <div class="card qnaCardList" th:each="post : ${postList}">
 
-            <tr class="text-center" >
-                <td>
-                        <span ></span>
-                </td>
-                <td>
-                    <span ></span>
-                </td>
-                <td>
-                    <span ></span>
-                </td>
-            </tr>
-
-
             <div class="post-body attach-img-pre">
 
                 <div class="leftSection">
                     <!-- 카테고리, 뚠 -->
-                    <span class="smallCategory">100</span>
+                    <span class="smallDdun" th:text="${post.ddun}"></span>
+                    <span class="smallCategory" th:text="${post.category}"></span>
                     <!-- 제목 + 글 -->
                     <div class="post-content">
                         <h3><a href="#post" th:text="${post.title}"></a></h3>
@@ -51,7 +37,9 @@
                 <div class="rightSection">
                     <a href="#post">
                         <img class="imgTest" style="display:inline-block;
-                    background:lightgray; width:10rem; height:10rem;" src="" alt="">
+                    background:lightgray; width:8rem; height:8rem;" src="" alt="">
+             <!--           <img th:if="${dto.imageDTOList.size() > 0 && dto.imageDTOList[0].path != null}"
+                             th:src="|/display?fileName=${dto.imageDTOList[0].getThumbnailURL()}|">-->
                     </a>
                 </div>
             </div>
@@ -61,27 +49,23 @@
                 <!--   세 번째 영역 -->
                 <div class="leftSection">
 
-                    <a href="#post" class="nickName">개발팀 5년차 박개미</a><br>
+                    <a href="#post" class="nickName">[[${post.job}]] [[${post.experience}]]년차 [[${post.writer}]]</a><br>
                     <div class="wrapInfo">
-                        <a class="views" href="#post"><img th:src="@{/assets/eye.png}" width="24px;"> 160</a>
-                        <a class="like"><img th:src="@{/assets/heart.png}" width="20px;"> 52</a>
-                        <a class="cmt" href="#post"><img th:src="@{/assets/messenger.png}" width="19"> 2</a>
+                        <a class="views" href="#post"><img th:src="@{/assets/eye.png}" width="24px;"> [[${post.cnt}]]</a>
+                        <a class="like"><img th:src="@{/assets/heart.png}" width="20px;"> [[${post.cnt}]]</a>
+                        <a class="cmt" href="#post"><img th:src="@{/assets/messenger.png}" width="19"> [[${post.cnt}]]</a>
                     </div>
 
                 </div>
 
                 <!--   네 번째 영역 -->
                 <div class="rightSection">
-                    <a href="#post" class="regDate" th:text="${#temporals.format(post.regDate, 'yyyy-MM-dd')}"> 2021-11-02 </a>
+                    <a href="#post" class="regDate" th:text="${#temporals.format(post.regDate, 'yy-MM-dd')}"></a>
                 </div>
 
             </div>
 
         </div> <!-- cardList end -->
-
-
-
-
 
 
         <!-- Pagination-->

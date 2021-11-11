@@ -4,14 +4,20 @@
 .card.qnaCardList {
     margin-bottom: 1rem;
     height: 16rem;
+    padding: 20px;
 }
 
-.smallCategory {
+.smallDdun {
     background: orange !important;
     color: white !important;
     border-radius:4px !important;
     padding: 0px 5px 0px 5px !important;
-
+}
+.smallCategory {
+    background: gray !important;
+    color: white !important;
+    border-radius:4px !important;
+    padding: 0px 5px 0px 5px !important;
 }
 
 .subNav {
@@ -21,6 +27,7 @@
     margin-right: 20px;
     text-decoration:none;
     line-height:5rem;
+    text-overflow: ellipsis;
 }
 
 .subNav-body {
@@ -58,10 +65,14 @@
 
 .rightSection {
     float: right;
-    padding: 10px;
+    padding: px;
     width: 40%;
     text-align:right;
+    padding: margin-top:10px;
+    margin-top: 10px;
 }
+
+.rightSection {}
 
 .rightSection.regDate{
     height: 70px;

@@ -20,7 +20,7 @@ public interface QnaService {
 
     List<QnaBoardDTO> getListByCategory(QnaBoard qnaBoard);
 
-    PageResultDTO<QnaBoardDTO, QnaBoard> getList(PageRequestDTO requestDTO, Member member);
+/*    PageResultDTO<QnaBoardDTO, QnaBoard> getList(PageRequestDTO requestDTO);*/
 
     default QnaBoardDTO entityToDTO(QnaBoard qnaBoard ,Member member, List<UploadImage> uploadImageList, Long cnt) {
 
