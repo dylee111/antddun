@@ -3,35 +3,26 @@
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
     <th:block th:fragment="content">
         <!--페이지 수정 부분 시작-->
-
         <!-- 페이지 css/ js 추가 -->
         <link rel="stylesheet" th:href="@{/css/board/jayu/register.css}">
+        <script th:src="@{/js/board/jayu/register.js}"></script>
 
         <!-- summernote css/ js -->
-        <link rel="stylesheet" th:href="@{/css/board/summernote/summernote-lite.css}">
-        <link rel="stylesheet" th:href="@{/css/board/summernote/custom.css}">
-        <script th:src="@{/js/board/summernote/summernote-lite.js}"></script>
         <script th:src="@{/js/board/summernote/custom.js}"></script>
+        <script th:src="@{/js/board/summernote/summernote-lite.js}"></script>
+        <link rel="stylesheet" th:href="@{/css/board/summernote/custom.css}">
+        <link rel="stylesheet" th:href="@{/css/board/summernote/summernote-lite.css}">
 
         <!-- summernote 한글 적용 -->
         <script th:src=" @{https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js}"></script>
 
         <!-- 본문 시작 -->
         <div class="content">
-            <form th:action="@{/member/jayu/register}" th:method="post">
+            <form th:action="@{/member/jayu/confirm}" th:method="post">
 
                 <!--카테고리-->
                 <div class="option">
-                    <select class="category" name="jayu-category">
-                        <option value="1" selected>소곤소곤</option>
-                        <option value="2">이직</option>
-                        <option value="3">JOB담</option>
-                        <option value="4">연애</option>
-                        <option value="5">결혼·육아</option>
-                        <option value="6">재테크</option>
-                        <option value="7">취미</option>
-                        <option value="8">뷰티·패션</option>
-                        <option value="9">스포츠·게임</option>
+                    <select class="category" name="category">
                     </select>
                 </div>
 
@@ -52,15 +43,7 @@
 
                 <!--내용-->
                 <div class="form-group">
-                    <textarea id="summernote" name="summernote"></textarea>
-                </div>
-
-                <!--뚠-->
-                <div class="form-group">
-                    <img th:src="@{/assets/coins.png}" width="25rem">
-                    <input type="text" class="form-control ddun" name="ddun"
-                           onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-                           placeholder="150"> <label class="ddun"> 뚠</label>
+                    <textarea id="summernote" name="content" required></textarea>
                 </div>
 
                 <!--작성자-->

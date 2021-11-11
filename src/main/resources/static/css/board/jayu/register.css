@@ -1,11 +1,11 @@
-@font-face {
+@font-face{
     font-family: 'yg-jalnan';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-style: normal;
 }
-@font-face {
+@font-face{
     font-family: 'ELAND_Choice_M';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/ELAND_Choice_M.woff') format('woff');
     font-weight: normal;
@@ -29,7 +29,7 @@
 }
 
 /* 카테고리 */
-select.category {
+.category {
     marin: 10px 20rem;
     height: 28px;
     width: 120px;
@@ -96,18 +96,6 @@ option{
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
-}
-
-/* 뚠 style */
-.ddun{
- 	width: 20px;
- 	margin: 5px 0;
- 	font-size: 16px;
- 	font-family: 'ELAND_Choice_M';
-}
-input.ddun{
-width: 100px;
-display: inline-block;
 }
 
 /* 등록 버튼 */

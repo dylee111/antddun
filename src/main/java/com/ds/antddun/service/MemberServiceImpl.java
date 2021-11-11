@@ -125,6 +125,9 @@ public class MemberServiceImpl implements MemberService {
 //        Member member = Member.builder().mno(mno).build();
         Member result = memberRepository.welcomeMsg(mno);
 
+//        List<Member> result = memberRepository.welcomeMsg(mno);
+
+
         return result;
     }
 }
