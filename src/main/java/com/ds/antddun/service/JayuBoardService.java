@@ -14,7 +14,7 @@ public interface JayuBoardService {
     Long register(JayuBoardDTO jayuBoardDTO, Member member);
 //    List<JayuBoardDTO> getListByCategory(JayuBoard jayuBoard);
 
-    default JayuBoardDTO entityToDTO(JayuBoard jayuBoard, Member member) {
+    default JayuBoardDTO entityToDTO(JayuBoard jayuBoard) {
         JayuBoardDTO jayuBoardDTO = JayuBoardDTO.builder()
                 .Jno(jayuBoard.getJno())
                 .title(jayuBoard.getTitle())
@@ -22,7 +22,7 @@ public interface JayuBoardService {
                 .category(jayuBoard.getCategory())
                 .regDate(jayuBoard.getRegDate())
                 .modDate(jayuBoard.getModDate())
-                .mno(member.getMno())
+                .mno(jayuBoard.getMember().getMno())
                 .build();
         return jayuBoardDTO;
     }
