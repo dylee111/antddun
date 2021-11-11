@@ -17,7 +17,8 @@ public interface SosoJobService {
 
     void delete();
 
-    List<SosoBoardDTO> getListByCategory(String category);
+    // String 말고 Category로 받아와야 함.
+    List<SosoJobBoard> getListByCategory(String category);
 
     PageResultDTO<SosoBoardDTO, SosoJobBoard> getList(PageRequestDTO requestDTO);
 
@@ -27,7 +28,7 @@ public interface SosoJobService {
                 .sosoNo(sosoJobBoard.getSosoNo())
                 .title(sosoJobBoard.getTitle())
                 .content(sosoJobBoard.getContent())
-                .category(sosoJobBoard.getCategory())
+                .category(sosoJobBoard.getCategory().getSosoCateName())
                 .regDate(sosoJobBoard.getRegDate())
                 .mno(sosoJobBoard.getMember().getMno())
                 .firstName(sosoJobBoard.getMember().getFirstName())
@@ -55,7 +56,7 @@ public interface SosoJobService {
 
         SosoJobBoard sosoJobBoard = SosoJobBoard.builder()
                 .sosoNo(sosoBoardDTO.getSosoNo())
-                .category(sosoBoardDTO.getCategory())
+//                .category(sosoBoardDTO.getCategory())
                 .title(sosoBoardDTO.getTitle())
                 .content(sosoBoardDTO.getContent())
                 .ddun(sosoBoardDTO.getDdun())

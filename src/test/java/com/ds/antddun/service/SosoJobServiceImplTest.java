@@ -49,13 +49,12 @@ class SosoJobServiceImplTest {
 //        }
 //    }
 
-//    @Test
-//    void getListByCategoryTest() {
-//
-////        SosoJobBoard sosoJobBoard = SosoJobBoard.builder().category("IT").build();
-//
-//        System.out.println(sosoJobService.);
-//    }
+    @Test
+    void getListByCategoryTest() {
+
+
+        System.out.println(sosoJobService.getListByCategory("IT"));
+    }
 
     @Test
     void getList() {

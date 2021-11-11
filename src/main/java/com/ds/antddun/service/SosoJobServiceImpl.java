@@ -61,16 +61,11 @@ public class SosoJobServiceImpl implements SosoJobService {
     }
 
     @Override
-    public List<SosoBoardDTO> getListByCategory(String category) {
+    public List<SosoJobBoard> getListByCategory(String category) {
 
-        List<SosoJobBoard> sosoJobBoardList = sosoBoardRepository.findAll();
-        List<SosoBoardDTO> boardDTOList = new ArrayList<>();
-
+        List<SosoJobBoard> result = sosoBoardRepository.getListByCategory(category);
 
 
-        List<SosoBoardDTO> result = sosoBoardRepository.getListByCategory(category);
-
-        log.info(">>"+result);
         return result;
     }
 
