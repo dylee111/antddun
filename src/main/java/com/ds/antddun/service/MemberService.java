@@ -19,7 +19,7 @@ public interface MemberService {
 
     Date convertDate(String startTime, String endTime);
 
-    List<Member> welcomeMsg(Long mno);
+    Member welcomeMsg(Long mno);
 
     default Member dtoToEntity(MemberDTO memberDTO) {
         Member member = Member.builder()
