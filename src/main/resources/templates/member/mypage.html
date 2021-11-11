@@ -26,13 +26,14 @@
             <hr class="my_margin">
 
             <form method="POST" class="center my_margin" id="frm">
+              <div th:each="member: ${member}">
                 <div class="input_box">
-                  <input type="email" class="input_info margin_bottom" id="username" name="username" placeholder="이메일(아이디)" disabled/>
+                  <input type="email" class="input_info margin_bottom" id="username" name="username" th:attr="placeholder=${member.username}" disabled/>
                 </div>
                 <span class="resultBox"></span>
 
-              <div class="input_box">
-                  <input type="password" class="input_info pass" name="password" placeholder="비밀번호(영문,숫자,특수문자 8~15자)"/>
+                <div class="input_box">
+                  <input type="password" class="input_info pass" id="password" name="password" placeholder="비밀번호(영문,숫자,특수문자 8~15자)"/>
                 </div>
                 <span class="resultBox pwdCheckResult"></span>
 
@@ -44,37 +45,50 @@
 
                 <div class="mb_wrap">
                   <div class="input_mb">
-                    <input type="text" class="input_info" name="phoneNum" id="phoneNum" placeholder="휴대폰 번호 (숫자로만)" maxlength="11"
+                    <input type="text" class="input_info" name="phoneNum" id="phoneNum" th:attr="placeholder=${member.phoneNum}" maxlength="11"
                            onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
                   </div>
                   <button type="button" id="btnPhone" class="mypage_btn phoneAuthBtn a_white"
                           style="margin-left: 5px;">인증</button>
                 </div>
-                <span class="resultBox mobileCheckResult"></span>
+                <span class="resultBox"></span>
 
                 <div class="select_wrap">
-                  <select class="job select_box" style="margin-right: 5px;" name="jno">
-                    <option th:each="dto : ${jobList}" th:value="${dto.jno}" name="jno">[[${dto.job}]]</option>
+                  <select class="job select_box" style="margin-right: 5px;" name="jno" th:each="member: ${member}">
+                    <option selected="selected" name="jno">[[${member.job.job}]]</option>
+                    <option th:each="dto: ${jobList}" th:value="${dto.jno}" name="jno">[[${dto.job}]]</option>
                   </select>
-                  <select class="experience select_box" name="experience"></select>
+                  <select class="experience select_box" name="experience" th:each="member: ${member}">
+                    <option selected="selected" name="experience">[[${member.experience}]]년차</option>
+                  </select>
                 </div>
                 <span class="resultBox"></span>
 
-              <div class="input_box">
-                  <input type="text" class="input_info" id="salary" name="salary" placeholder="연봉"
+                <div class="input_box">
+                  <input type="text" class="input_earn" id="salary" name="salary" th:attr="placeholder=${member.salary}"
                          onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-                  <div class="tooltip">ⓘ
-                    <span class="tooltiptext">연봉</span>
+                  <div class="earn_unit">
+                    <span>만원</span>
+                  </div>
+                  <div class="earn_info">
+                    <div class="alert_tip">ⓘ<span class="tooltiptext">연봉</span></div>
                   </div>
                 </div>
 
-                <label for="salary">근무시간</label>
-                <div class="select_wrap">
-                  <select class="startTime select_box" name="startTime"></select>
-                  <select class="endTime select_box" name="endTime"></select><br>
+                <h6 class="mypage_sub">근무시간</h6>
+                <div class="select_wrap" th:each="member: ${member}">
+                  <input type="time" class="startTime select_box" style="margin-right: 5px;" name="startTime"
+                         th:attr="value=${member.startTime}"/>
+                  <input type="time" class="endTime select_box" name="endTime" th:attr="value=${member.endTime}"/>
+<!--                  <select class="startTime select_box" style="margin-right: 5px;" name="startTime" th:each="member: ${member}">-->
+<!--                    <option selected="selected" name="startTime">[[${member.startTime}]]</option>-->
+<!--                  </select>-->
+<!--                  <select class="endTime select_box" name="endTime" th:each="member: ${member}">-->
+<!--                    <option selected="selected" name="endTime">[[${member.endTime}]]</option>-->
+<!--                  </select><br>-->
                 </div>
-
-              <button type="submit" class="mypage_btn btn-primary a_white">수정하기</button>
+              </div>
+              <button type="submit" class="submit_btn a_white">수정하기</button>
             </form>
           </div>
         </div>
@@ -86,16 +100,17 @@
             <hr class="my_margin">
 
             <div class="center">
-              <div class="my_margin">
+              <div class="my_margin" th:each="member: ${member}">
                 <span class="money_title">실수령액</span>
-                <input type="text" class="money_input" name="earn" readonly />
+                <span style="display:none;" id="earn">[[${member.salary}]]</span>
+                <input type="text" class="money_input" id="earn_month" name="earn" disabled />
               </div>
 
               <div>
                 <h4 class="mypage_subtitle margin_bottom">나의 위시 리스트</h4>
                 <div class="my_margin2">
                   <span class="money_title">금액</span>
-                  <input type="text" class="money_input" name="wish_total" readonly />
+                  <input type="text" class="money_input" name="wish_total" disabled />
                 </div>
 
                 <table class="wish_table margin_top">
