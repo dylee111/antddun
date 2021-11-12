@@ -83,7 +83,21 @@
             </ul>
         </nav>
 
-        <a th:href="@{/member/qna/register}" class="write">글쓰기</a>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link">Previous</a>
+                </li>
+
+                <li class="page-item" th:each="i"><a class="page-link" href="#">1</a></li>
+
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+
+        <a th:href="@{/member/qna/registerForm}" class="write">글쓰기</a>
         <!-- 본문 끝 -->
         <!--페이지 수정 부분 끝-->
     </th:block>

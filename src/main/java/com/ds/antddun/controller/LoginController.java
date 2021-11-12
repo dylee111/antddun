@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @Log4j2
 @SessionAttributes("member")
@@ -36,9 +38,11 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String login(String error, String logout, Model model){
-        log.info("login error: " + error);
-        log.info("login logout: " + logout);
+    public String login(String error, String logout, Model model, HttpServletRequest request){
+
+        String referer = request.getHeader("Referer");
+        request.getSession().setAttribute("redirectURI",referer);
+
         if (error != null) {
             model.addAttribute("error", "Login Error Check Your Account");
         }
@@ -47,4 +51,5 @@ public class LoginController {
         }
         return "/member/login";
     }
+
 }
