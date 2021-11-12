@@ -7,12 +7,12 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-@SequenceGenerator(name="IMAGE_SEQ_GEN", sequenceName = "IMAGE_SEQ", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "IMG_SEQ_GEN", sequenceName = "IMG_SEQ", initialValue = 1, allocationSize = 1)
 public class UploadFile extends BaseEntity{
 	
-	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SOSOIMAGE_SEQ_GEN")
-	private Long imageNo;
-
+	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IMG_SEQ_GEN")
+	private Long inum;
+	
 	@Column
 	private String fileName;
 	@Column
@@ -23,4 +23,14 @@ public class UploadFile extends BaseEntity{
 	private String contentType;
 	
 	private long size;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private JayuBoard jayuBoard;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private QnaBoard qnaBoard;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private SosoJobBoard sosoJobBoard;
+
 }

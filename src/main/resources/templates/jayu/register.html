@@ -18,8 +18,8 @@
 
         <!-- 본문 시작 -->
         <div class="content">
-            <form th:action="@{/member/jayu}" th:method="post">
-
+            <form th:action="@{/member/jayu/confirm}" th:method="post">
+                <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
                 <!--카테고리-->
                 <div class="option">
                     <select class="category" name="category">
