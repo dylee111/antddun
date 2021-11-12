@@ -16,9 +16,11 @@
 <body>
 
 <div th:fragment="content">
-    <meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, height=device-height, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
 
-    <form name="frm" th:action="@{/login}"  style="position:absolute" class="loginBox"  method="post"> <!-- 시큐리티가 낚아챔! (config) -->
+    <form name="frm" th:action="@{/login}" style="position:absolute" class="loginBox" method="post">
+        <!-- 시큐리티가 낚아챔! (config) -->
         <fieldset>
             <header>
                 <h2><a th:href="@{/}" style="color:black;">개미는 뚠뚠</a></h2>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+    <th:block th:fragment="content">
+        <!-- 페이지 css/ js 추가 -->
+        <link th:href="@{/css/member/messenger.css}" rel="stylesheet"/>
+        <link rel="stylesheet" th:href="@{/css/board/summernote/summernote-lite.css}">
+        <link rel="stylesheet" th:href="@{/css/board/summernote/custom.css}">
+
+        <script th:src="@{/js/board/summernote/summernote-lite.js}"></script>
+        <script th:src="@{/js/board/summernote/custom.js}"></script>
+        <script th:src=" @{https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js}"></script>
+        <!-- 본문 시작 -->
+        <!--홈 좌측 : 회원정보 / 광고 / 점메추-->
+        <div class="col-lg-3">
+            <div class="m_border" style="margin-bottom: 20px;">
+                <table>
+                    <thead>
+                    <tr>
+                        <td>
+                            <select>
+                                <option selected="selected">전체 보기</option>
+                                <option>거래 중</option>
+                                <option>거래 완료</option>
+                            </select>
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <strong>김본명 </strong>
+                            21/11/12<br>
+                            단가 문의드립니다.
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!--홈 우측 : 게시물 리스트-->
+        <div class="col-lg-9">
+            <div class="m_border">
+                <div style="border-bottom: 2px solid #ededed; padding-bottom: 30px; margin-bottom: 20px;">
+                    <h3>단가 문의드립니다.</h3>
+                    <div>
+                        <span>김본명 </span>
+                        <span>abc@ds.com</span>
+                        <span>2021.11.12 오후 12:32</span>
+                        <button>거래완료</button>
+                        <button>답장하기</button>
+                    </div>
+                    <hr>
+                    <div>
+                        담당자님, 비즈니스 프로필을 최신 상태로 유지하세요. Google 검색 및 지도에서 내 비즈니스를 찾는 사람들이 신규 고객으로 전환될 수 있습니다.
+                        이제 더 쉽게 내 비즈니스 프로필을 관리할 수 있습니다.
+                    </div>
+                </div>
+
+                <div id="mail_write">
+                    <form th:action="@{/member/jayu/register}" th:method="post">
+                        <!--내용-->
+                        <div class="form-group">
+                            <textarea id="summernote" name="summernote"></textarea>
+                        </div>
+
+                        <!--작성완료 버튼-->
+                        <button type="submit" class="btn btn-primary">등록</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- 본문 끝 -->
+        <!--페이지 수정 부분 끝-->
+    </th:block>
+</th:block>
