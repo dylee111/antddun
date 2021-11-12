@@ -2,6 +2,7 @@ package com.ds.antddun.controller;
 
 import com.ds.antddun.dto.JobListDTO;
 import com.ds.antddun.dto.MemberDTO;
+import com.ds.antddun.entity.Member;
 import com.ds.antddun.service.JobListService;
 import com.ds.antddun.service.MemberService;
 import lombok.extern.log4j.Log4j2;
@@ -57,7 +58,7 @@ public class JoinController {
     }
 
     @GetMapping("/joinPage")
-    public String joinPage(Model model, JobListDTO jobListDTO) {
+    public String joinPage(Model model) {
 
         model.addAttribute("jobList", jobListService.getList());
         log.info("LIST>>>>>" + jobListService.getList());
@@ -98,15 +99,10 @@ public class JoinController {
     // select가 필요 -> 어떤 식으로 mno를 받아오지???ㅏ
 
     @GetMapping("/joinWelcome")
-    public String welcomeMsg(@RequestParam("firstName") String firstName,
-                             @RequestParam("experience") int experience,
-                             Model model) {
-
-        model.addAttribute("firstName", firstName);
-        model.addAttribute("experience", experience);
-
-        log.info("FIRSTNAME>>>>>>>>>>>>>>>>>>>>"+firstName);
-        log.info("EXPERIENCE>>>>>>>>>>>>>>>>>>>>"+experience);
+    public String welcomeMsg(Member member, Model model) {
+        Long mno = member.getMno();
+        log.info("WELCOME MNO >>>>>" + mno);
+        model.addAttribute("member", memberService.welcomeMsg(mno));
 
         return "/member/welcome";
     }

@@ -13,23 +13,3 @@
     display: none;
 }
 
-/* 모달 수정 */
-.note-modal-footer{
-    height: 50px;
-}
-.note-form-label{
-    text-align: left;
-}
-label{
-    text-align:left;
-}
-
-/* palette 수정 */
-.note-dropdown-menu{
-    padding: 0 0 0 10px;
-}
-
-/* 링크 첨부 모달 수정*/
-label{
-    text-align:left;
-}

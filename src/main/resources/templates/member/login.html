@@ -27,12 +27,12 @@
             </header>
 
             <div class="input-box">
-                <input id="username" type="text" name="username" placeholder="아이디">
+                <input id="username" type="text" value="test@test.com" name="username" placeholder="아이디">
                 <label for="username">아이디</label>
             </div>
 
             <div class="input-box">
-                <input id="password" type="password" name="password" placeholder="비밀번호">
+                <input id="password" type="password" value="111111a!" name="password" placeholder="비밀번호">
                 <label for="password">비밀번호</label>
             </div>
 
@@ -42,12 +42,14 @@
             </div>
 
             <button id="btnSubmit" class="btn" type="button" name="button">로그인</button>
+            <button id="btnNaver" type="button" th:href="@{/oauth2/authorization/naver}">NAVER 로그인</button><br>
 
+<!--
             <div class="social">
                 <a class="btn_social" th:href="@{/oauth2/authorization/google}">Google 로그인</a><br>
                 <a class="btn_social" th:href="@{/oauth2/authorization/facebook}">Facebook 로그인</a><br>
-                <a class="btn_social" th:href="@{/oauth2/authorization/naver}">Naver 로그인</a><br>
             </div>
+-->
 
             <div id="content">
                 <ul class="find">

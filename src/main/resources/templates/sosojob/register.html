@@ -12,6 +12,7 @@
         <link rel="stylesheet" th:href="@{/css/board/summernote/custom.css}">
         <script th:src="@{/js/board/summernote/summernote-lite.js}"></script>
         <script th:src="@{/js/board/summernote/custom.js}"></script>
+
         <!-- summernote 한글 적용 -->
         <script th:src=" @{https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js}"></script>
 
@@ -22,16 +23,8 @@
 
                 <!--카테고리-->
                 <div class="option">
-                    <select class="category" name="category">
-                        <!--                        <option value="1" selected>소곤소곤</option>-->
-                        <!--                        <option value="2">이직</option>-->
-                        <!--                        <option value="3">JOB담</option>-->
-                        <!--                        <option value="4">연애</option>-->
-                        <!--                        <option value="5">결혼·육아</option>-->
-                        <!--                        <option value="6">재테크</option>-->
-                        <!--                        <option value="7">취미</option>-->
-                        <!--                        <option value="8">뷰티·패션</option>-->
-                        <!--                        <option value="9">스포츠·게임</option>-->
+                    <select class="category" name="cateNo">
+                        <option th:each="category : ${category}" th:value="${category.cateNo}">[[${category.sosoCateName}]]</option>
                     </select>
                 </div>
 
@@ -39,32 +32,27 @@
                 <div class="form-group">
                     <input type="text" id="title" class="form-control" name="title" required placeholder="제목을 입력해주세요">
 
-
                 </div>
 
                 <!--내용-->
                 <div class="form-group">
 
-
-                    <textarea id="summernote" class="content" name="content"></textarea>
+                    <textarea id="summernote" class="content"  name="content" ></textarea>
 
                 </div>
 
                 <!--뚠-->
                 <div class="form-group">
 
-
                     <img th:src="@{/assets/coins.png}" width="25rem">
                     <input type="text" id="ddun" class="form-control ddun" name="ddun"
                            onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-                           placeholder="150"> <label class="ddun"> 뚠</label>
-
+                           placeholder="150" required> <label class="ddun"> 뚠</label>
 
                 </div>
 
                 <!--작성자-->
                 <div class="form-group">
-
 
                     <input type="text" class="form-control" name="writer" readonly>
                 </div>
@@ -72,41 +60,22 @@
                 <!--작성완료 버튼-->
                 <button type="submit" class="btn btn-save btn-primary">등록</button>
             </form>
-
         </div>
         <script>
-            $(document).ready(function() {
+<!--            $(document).ready(function() {-->
 
 
-                const title = $("#title");
-                const content = $(".content");
-                const ddun = $("#ddun");
+<!--                const title = $("#title");-->
+<!--                const content = $(".content");-->
+<!--                const ddun = $("#ddun");-->
 
-                const categoryArr = ["IT","디자인·설계","미디어","번역","문서작업","마케팅","취업·이직","실무교육"];
+<!--                const categoryArr = ["IT","디자인·설계","미디어","번역","문서작업","마케팅","취업·이직","실무교육"];-->
 
-                for(var i = 0; i < categoryArr.length; i++){
-                    $(".category").append("<option value="+categoryArr[i]+">" + categoryArr[i] + "</option>");
-                }
+<!--                for(var i = 0; i < categoryArr.length; i++){-->
+<!--                    $(".category").append("<option value="+categoryArr[i]+">" + categoryArr[i] + "</option>");-->
+<!--                }-->
+<!--            });-->
 
-                $(".btn-save").click(function() {
-                    if(title.val() == "") {
-                        alert("제목을 입력하세요.");
-                        title.focus();
-                        return;
-                    }
-                    if(content.val() == "") {
-                        alert("내용을 입력하세요.");
-                        content.focus();
-                        return;
-                    }
-                    if(ddun.val() == "") {
-                        alert("내용을 입력하세요.");
-                        ddun.focus();
-                        return;
-                    }
-                });
-
-            });
 
         </script>
         <!-- 본문 끝 -->
@@ -114,4 +83,6 @@
     </th:block>
 </th:block>
 
+
 </html>
+
