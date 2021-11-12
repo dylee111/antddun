@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class JayuBoard extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "JAYU_SEQ_GEN")
-    private Long Jno;
+    private Long jayuNo;
 
     @Column(nullable = false)
     private String title;

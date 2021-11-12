@@ -21,6 +21,6 @@ public class JayuBoardServiceImpl implements JayuBoardService{
         JayuBoard jayuBoard = dtoToEntity(jayuBoardDTO);
         jayuBoard.setMember(member);
         jayuBoardRepository.save(jayuBoard);
-        return jayuBoard.getJno();
+        return jayuBoard.getJayuNo();
     }
 }
