@@ -101,13 +101,13 @@ input:focus, input:not(:placeholder-shown){
     border:none;
     color:white;
     border-radius: 5px;
-    width:67%;
-    height:35px;
     font-size: 14pt;
-    margin-top:1px;
     margin-left: 64px;
     margin-bottom: 10px;
     cursor: pointer;
+    padding: 5px;
+    padding-left: 70px;
+    padding-right: 78px;
 }
 
 
@@ -123,7 +123,7 @@ a{
 
 .find {
   font-size: 8px;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-left:100px;
 }
 
