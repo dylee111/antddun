@@ -60,13 +60,20 @@ public class SosoJobServiceImpl implements SosoJobService {
 
     }
 
+    /*
+    * Category 이름(String)
+    * */
     @Override
     public List<SosoJobBoard> getListByCategory(String category) {
-
         List<SosoJobBoard> result = sosoBoardRepository.getListByCategory(category);
-
-
         return result;
     }
-
+    /*
+     * Category 번호(int)
+     * */
+    @Override
+    public List<SosoJobBoard> getListByCategoryNo(int categoryNo) {
+        List<SosoJobBoard> result = sosoBoardRepository.getListByCategoryNo(categoryNo);
+        return result;
+    }
 }

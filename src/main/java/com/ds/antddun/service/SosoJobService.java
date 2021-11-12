@@ -17,8 +17,8 @@ public interface SosoJobService {
 
     void delete();
 
-    // String 말고 Category로 받아와야 함.
     List<SosoJobBoard> getListByCategory(String category);
+    List<SosoJobBoard> getListByCategoryNo(int categoryNo);
 
     PageResultDTO<SosoBoardDTO, SosoJobBoard> getList(PageRequestDTO requestDTO);
 
