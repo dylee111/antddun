@@ -10,15 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@Log4j2
 @RequestMapping("/member")
-@SessionAttributes("member")
+@Log4j2
 public class JayuBoardController {
 
     @Autowired
@@ -29,14 +27,10 @@ public class JayuBoardController {
         httpSession = request.getSession();
         return "jayu/register";
     }
-
-
-    @PostMapping("/jayu/read")
+    @PostMapping("/jayu/confirm")
     public String register(JayuBoardDTO jayuBoardDTO, @AuthenticationPrincipal PrincipalDetails principal) {
-
         jayuBoardService.register(jayuBoardDTO, principal.getMember());
-        return "jayu/read";
+        return "jayu/main";
     }
 
 }
-
