@@ -52,10 +52,11 @@
                         <br>
                         <div>
                             <div class="name-box">
-                                <input type="text" class="name" id="firstName" name="firstName" placeholder="성">
+                                <input type="text" class="name" th:value="${lastName}" id="lastName" name="lastName" placeholder="성">
                             </div>
 
-                            <div class="name-box"><input type="text" class="name" id="lastName" name="lastName" placeholder="이름">
+                            <div class="name-box">
+                                <input type="text" class="name" id="firstName" name="firstName" placeholder="이름">
                             </div>
                             <div id="result"></div>
                         </div>
@@ -84,7 +85,7 @@
                     -->
                     <div>
                         <select class="job" name="jno">
-                            <option th:each="dto : ${jobList}" th:value="${dto.jno}">[[${dto.job}]]</option>
+                            <option th:each="dto : ${jobList}" th:value="${dto.jno}" name="jno">[[${dto.job}]]</option>
                         </select>
                         <select class="experience" name="experience"></select>
                     </div>
@@ -98,10 +99,10 @@
                         </div>
                         <br>
                         <div class="input-box">
-                            <input type="text" id="salary" name="salary" placeholder="연봉"
+                            <input type="text" id="salary" name="salary" placeholder="연봉 (ex.3000)"
                                    onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                             <div class="alert_tip">ⓘ
-                                <span class="tooltiptext">연봉</span>
+                                <span class="tooltiptext">기입하지 않을 경우</br>서비스가 제한됩니다.</span>
                             </div>
                         </div>
                     </div>
@@ -127,7 +128,7 @@
                     <br>
                     <div class="input-box">
                         <input type="text" id="recommendUser" name="" placeholder="추천인">
-                        <div class="alert_tip">ⓘ<span class="tooltiptext">추천인</span></div>
+                        <div class="alert_tip">ⓘ<span class="tooltiptext">추천인과 신규회원 모두</br>5,000뚠 지급</span></div>
                     </div>
                     <button type="submit" class="button btnJoin">회원가입</button>
                 </form>

@@ -31,11 +31,11 @@ $(document).ready(function() {
     fontNames: ['맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체','Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
     styleTags: ['p','h1','h2','h3','h4','h5','h6'],
     callbacks : {
-    	onImageUpload : function(files, editor, welEditable) {
-    			for (var i = 0; i < files.length; i++) {
-    			    sendFile(files[i], this);
-    			}
-    	}
+       onImageUpload : function(files, editor, welEditable) {
+             for (var i = 0; i < files.length; i++) {
+                 sendFile(files[i], this);
+             }
+       }
     }
   });
 });
@@ -61,8 +61,3 @@ function sendFile(file, el) {
                      }
 			});
 }
-
-
-
-
-

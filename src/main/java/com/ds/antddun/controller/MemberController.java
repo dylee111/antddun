@@ -51,11 +51,13 @@ public class MemberController {
         }
         return "member/mypage";
     }
-//    @PutMapping("/member/mypage")
-//    public String usermodify (Model model, MemberDTO memberDTO, @AuthenticationPrincipal PrincipalDetails principal) {
-//        if(principal != null) {
-//            model.addAttribute("member", principal.getMember());
-//        }
-//        return "member/mypage";
-//    }
+
+    @GetMapping("/member/messenger")
+    public String messenger (Model model, MemberDTO memberDTO, @AuthenticationPrincipal PrincipalDetails principal) {
+        if(principal != null) {
+            model.addAttribute("member", principal.getMember());
+            model.addAttribute("jobList", jobListService.getList());
+        }
+        return "member/messenger";
+    }
 }
