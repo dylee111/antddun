@@ -1,11 +1,13 @@
 package com.ds.antddun.dto;
 
 import com.ds.antddun.entity.JobList;
+import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.QnaBoard;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,14 +23,8 @@ public class QnaBoardDTO {
     private String content;
     private String category;
     private String writer;
-    private Long mno; // username
     private int ddun;
     private int cnt;
-
-    private String job;
-    private int experience;
-
-    private double avg;
 
     @Builder.Default
     private List<UploadImageDTO> imageDTOList = new ArrayList<>();
@@ -36,30 +32,15 @@ public class QnaBoardDTO {
     private LocalDateTime regDate;
     private LocalDateTime modDate;
 
-    public QnaBoard toEntity(){
-        QnaBoard build = QnaBoard.builder()
-                .qnaNo(qnaNo)
-                .title(title)
-                .content(content)
-                .cnt(cnt)
-                .ddun(ddun)
-                .category(category)
-                .build();
-        return build;
-    }
 
-    public QnaBoardDTO(Long qnaNo, String title, String content, String category, String writer, Long mno, int ddun, int cnt, String job, int experience, double avg, List<UploadImageDTO> imageDTOList, LocalDateTime regDate, LocalDateTime modDate) {
+    public QnaBoardDTO(Long qnaNo, String title, String content, String category, String writer, int ddun, int cnt, List<UploadImageDTO> imageDTOList, LocalDateTime regDate, LocalDateTime modDate) {
         this.qnaNo = qnaNo;
         this.title = title;
         this.content = content;
         this.category = category;
         this.writer = writer;
-        this.mno = mno;
         this.ddun = ddun;
         this.cnt = cnt;
-        this.job = job;
-        this.experience = experience;
-        this.avg = avg;
         this.imageDTOList = imageDTOList;
         this.regDate = regDate;
         this.modDate = modDate;

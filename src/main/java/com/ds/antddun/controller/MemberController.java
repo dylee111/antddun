@@ -22,11 +22,6 @@ public class MemberController {
     @Autowired
     private JobListService jobListService;
 
-    @GetMapping("/loginPage")
-    public String loginPage() {
-        log.info("LOGIN >>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        return "/member/login";
-    }
 
 //    @GetMapping("/member/mypage")
 //    public String wallet() {

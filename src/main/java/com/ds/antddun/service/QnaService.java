@@ -11,9 +11,8 @@ import java.util.stream.Collectors;
 
 public interface QnaService {
 
-    List<QnaBoardDTO> getBoardList();
 
-    List<QnaBoard> getList(Pageable pageable);
+    PageResultDTO<QnaBoardDTO, QnaBoard> getBoardList(PageRequestDTO requestDTO);
 
     Long register(QnaBoardDTO qnaBoardDTO, Member member);
 
@@ -21,42 +20,11 @@ public interface QnaService {
 
     void delete();
 
-    List<QnaBoardDTO> getListByCategory(QnaBoard qnaBoard);
-
-/*    PageResultDTO<QnaBoardDTO, QnaBoard> getList(PageRequestDTO requestDTO);*/
-
-    default QnaBoardDTO entityToDTO(QnaBoard qnaBoard ,Member member, List<UploadImage> uploadImageList, Long cnt) {
-
-        QnaBoardDTO qnaBoardDTO = QnaBoardDTO.builder()
-                .qnaNo(qnaBoard.getQnaNo())
-                .title(qnaBoard.getTitle())
-                .content(qnaBoard.getContent())
-                .category(qnaBoard.getCategory())
-                .regDate(qnaBoard.getRegDate())
-                .mno(member.getMno())
-                .modDate(qnaBoard.getModDate())
-                .ddun(qnaBoard.getDdun())
-                .build();
-
-        List<UploadImageDTO> imageDTOList = uploadImageList.stream().map(uploadImage -> {
-            return UploadImageDTO.builder()
-                    .imgName(uploadImage.getImgName())
-                    .path(uploadImage.getPath())
-                    .uuid(uploadImage.getUuid())
-                    .build();
-        }).collect(Collectors.toList());
-
-        qnaBoardDTO.setImageDTOList(imageDTOList);
-        qnaBoardDTO.setCnt(cnt.intValue());
-
-        return qnaBoardDTO;
-    }
-
     default QnaBoard dtoToEntity(QnaBoardDTO qnaBoardDTO) {
 
         MemberDTO memberDTO = new MemberDTO();
 
-        QnaBoard qnaBoard = QnaBoard.builder()
+        QnaBoard entity = QnaBoard.builder()
                 .qnaNo(qnaBoardDTO.getQnaNo())
                 .category(qnaBoardDTO.getCategory())
                 .title(qnaBoardDTO.getTitle())
@@ -66,9 +34,25 @@ public interface QnaService {
                 .member(Member.builder().mno(memberDTO.getMno()).build())
                 .build();
 
-        return qnaBoard;
+        return entity;
     }
 
+    default QnaBoardDTO entityToDTO(QnaBoard qnaBoard ) {
+        Member member = new Member();
 
+        QnaBoardDTO dto = QnaBoardDTO.builder()
+                .qnaNo(qnaBoard.getQnaNo())
+                .title(qnaBoard.getTitle())
+                .writer(qnaBoard.getMember().getExperience()+"년차 " + qnaBoard.getMember().getJob().getJob() + " " + qnaBoard.getMember().getLastName() +"개미")
+                .content(qnaBoard.getContent())
+                .category(qnaBoard.getCategory())
+                .regDate(qnaBoard.getRegDate())
+                .cnt(qnaBoard.getCnt())
+                .modDate(qnaBoard.getModDate())
+                .ddun(qnaBoard.getDdun())
+                .build();
+
+        return dto;
+    }
 
 }

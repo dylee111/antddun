@@ -16,19 +16,19 @@
         </div>
 
         <!-- 게시물 -->
-        <div class="card qnaCardList" th:each="post : ${postList}">
+        <div class="card qnaCardList" th:each="dto : ${result.dtoList}">
 
             <div class="post-body attach-img-pre">
 
                 <div class="leftSection">
                     <!-- 카테고리, 뚠 -->
-                    <span class="smallDdun" th:text="${post.ddun}"></span>
-                    <span class="smallCategory" th:text="${post.category}"></span>
+                    <span class="smallDdun" th:text="${dto.ddun}"></span>
+                    <span class="smallCategory" th:text="${dto.category}"></span>
                     <!-- 제목 + 글 -->
                     <div class="post-content">
-                        <h3><a href="#post" th:text="${post.title}"></a></h3>
+                        <h3><a href="#post" th:text="${dto.title}"></a></h3>
                         <p class="content-text">
-                            <a href="#post" th:text="${post.content}"></a>
+                            <a href="#post" th:text="${dto.content}"></a>
                         </p>
                     </div>
 
@@ -38,8 +38,8 @@
                     <a href="#post">
                         <img class="imgTest" style="display:inline-block;
                     background:lightgray; width:8rem; height:8rem;" src="" alt="">
-             <!--           <img th:if="${dto.imageDTOList.size() > 0 && dto.imageDTOList[0].path != null}"
-                             th:src="|/display?fileName=${dto.imageDTOList[0].getThumbnailURL()}|">-->
+                        <!--           <img th:if="${dto.imageDTOList.size() > 0 && dto.imageDTOList[0].path != null}"
+                                        th:src="|/display?fileName=${dto.imageDTOList[0].getThumbnailURL()}|">-->
                     </a>
                 </div>
             </div>
@@ -48,18 +48,19 @@
             <div class="boardInfo">
                 <!--   세 번째 영역 -->
                 <div class="leftSection">
+                    <div class="" ><a class="nickName" href="#post">[[${dto.writer}]]</a></div>
 
                     <div class="wrapInfo">
-                        <a class="views" href="#post"><img th:src="@{/assets/eye.png}" width="24px;"> [[${post.cnt}]]</a>
-                        <a class="like"><img th:src="@{/assets/heart.png}" width="20px;"> [[${post.cnt}]]</a>
-                        <a class="cmt" href="#post"><img th:src="@{/assets/messenger.png}" width="19"> [[${post.cnt}]]</a>
+                        <a class="views" href="#post"><img th:src="@{/assets/eye.png}" width="24px;"> [[${dto.cnt}]]</a>
+                        <a class="like"><img th:src="@{/assets/heart.png}" width="20px;"> [[${dto.cnt}]]</a>
+                        <a class="cmt" href="#post"><img th:src="@{/assets/messenger.png}" width="19"> [[${dto.cnt}]]</a>
                     </div>
 
                 </div>
 
                 <!--   네 번째 영역 -->
                 <div class="rightSection">
-                    <a href="#post" class="regDate" th:text="${#temporals.format(post.regDate, 'yy-MM-dd')}"></a>
+                    <a href="#post" class="regDate" th:text="${#temporals.format(dto.regDate, 'yy-MM-dd')}"></a>
                 </div>
 
             </div>
@@ -88,8 +89,6 @@
                 <li class="page-item disabled">
                     <a class="page-link">Previous</a>
                 </li>
-
-                <li class="page-item" th:each="i"><a class="page-link" href="#">1</a></li>
 
                 <li class="page-item">
                     <a class="page-link" href="#">Next</a>

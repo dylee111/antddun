@@ -1,7 +1,6 @@
 package com.ds.antddun.entity;
 
-import com.ds.antddun.entity.BaseEntity;
-import com.ds.antddun.entity.Member;
+
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -29,7 +28,6 @@ public class QnaBoard extends BaseEntity {
     @ColumnDefault("0")
     private int cnt;
     private int ddun;
-
 
     private String category;
 
