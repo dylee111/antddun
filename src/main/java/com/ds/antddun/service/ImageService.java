@@ -19,7 +19,7 @@ public class ImageService {
 	@Autowired
 	UploadFileRepository uploadFileRepository;
 	
-	private final Path rootLocation; // c:/upload/
+	private final Path rootLocation; // d:/image/
 
 	public ImageService(String uploadPath) {
 		this.rootLocation = Paths.get(uploadPath);
@@ -29,9 +29,10 @@ public class ImageService {
 	public UploadFile store(MultipartFile file) throws Exception {
 		//		 fileName : 예제1.jpg
 		//		 filePath : c:/upload/uuid-예제1.jpg
-		//		 saveFileName : uuid-예제1.png
+		//		 saveFileName : uuid-예ㅈ[.png
 		//		 contentType : image/jpeg
 		//		 size : 4994942
+		//		 registerDate : 2020-02-06 22:29:57.748
 		try {
 			if(file.isEmpty()) {
 				throw new Exception("Failed to store empty file " + file.getOriginalFilename());

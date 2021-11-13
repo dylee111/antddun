@@ -3,13 +3,14 @@ package com.ds.antddun.service;
 import com.ds.antddun.dto.PageRequestDTO;
 import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.dto.SosoBoardDTO;
-import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.SosoJobBoard;
+import com.ds.antddun.repository.SosoBoardRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.stream.IntStream;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 @SpringBootTest
 class SosoJobServiceImplTest {
@@ -17,6 +18,8 @@ class SosoJobServiceImplTest {
     @Autowired
     private SosoJobService sosoJobService;
 
+    @Autowired
+    private SosoBoardRepository sosoBoardRepository;
 
 //    @Test
 //    void register() {
@@ -37,17 +40,15 @@ class SosoJobServiceImplTest {
 //    }
 
 
-//    @Test
-//    public void testRead() {
-//
-//        PageRequestDTO pageRequestDTO = PageRequestDTO.builder().page(1).size(10).build();
-//
-//        PageResultDTO<SosoJobBoard, SosoBoardDTO> resultDTO = sosoJobService.getList(pageRequestDTO);
-//
-//        for (SosoBoardDTO sosoBoardDTO : resultDTO.getDtoList()) {
-//            sou
-//        }
-//    }
+    @Test
+    public void testRead() {
+        Pageable pageable = PageRequest.of(0, 12);
+
+        Page<SosoJobBoard> result = sosoBoardRepository.findAll(pageable);
+
+        System.out.println(result);
+
+    }
 
     @Test
     void getListByCategoryTest() {

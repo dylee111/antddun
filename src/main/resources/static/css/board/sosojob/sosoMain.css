@@ -17,11 +17,11 @@ article {
 }
 
 .img.coin {
-    display: inline;
+    display: inline-block;
 }
 
 .img.heart {
-    display: inline;
+    display: inline-block;
 }
 
 .ddun-box {

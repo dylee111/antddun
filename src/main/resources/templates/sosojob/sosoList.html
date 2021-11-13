@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+    <th:block th:fragment="content">
+        <link th:href="@{/css/board/sosojob/sosoMain.css}" rel="stylesheet">
+        <h1>LIST</h1>
+        <div class="slick-card" >
+            <article >
+                <img class="cate-thumbnail" th:src="@{https://dummyimage.com/230x160/000/fff}"/>
+                <div clss="content-container">
+                    <div><span class="tag_c"  th:name="@{#}"></span></div>
+                    <div class="title"><span>제목입니다~~~~~~~~~~~~</span></div>
+                    <div class="ddun-box">
+                        <span><img class="img coin" th:src="@{/assets/coins.png}" width="12">
+                        <span class="price">10000</span><span>뚠</span></span>
+                    </div>
+
+                    <div class="star-box">
+                        <span><img style="img heart" th:src="@{/assets/heart.png}" width="12">5.0작성자</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+    </th:block>
+</th:block>

@@ -6,7 +6,7 @@ $(document).ready(function() {
     minHeight : null,
     maxHeight : null,
     toolbar : toolbar,
-    placeholder: '개미는 뚠뚠은 여러분과 함께 생각과 의견을 존중하고 나누기 위해 만들어진 곳입니다.<br> 성숙한 직장인 인터넷 문화를 만들어 나갈 수 있도록 도움 부탁드려요!<br><br> &#8251;개미는 뚠뚠의 취지와 관련 없는 인신공격 및 허위사실 유포 글은 통보없이 즉시 삭제 처리 될 수 있습니다.',
+    placeholder: '개미는 뚠뚠은 여러분과 함께 생각과 의견을 존중하고 나누기 위해 만들어진 곳입니다.<br> 성숙한 직장인 문화를 만들어 나갈 수 있도록 도움 부탁드려요!<br><br> &#8251;개미는 뚠뚠의 취지와 관련 없는 인신공격 및 허위사실 유포 글은 통보없이 즉시 삭제 처리 될 수 있습니다.',
 
     toolbar: [
          // 스타일 설정
@@ -39,3 +39,25 @@ $(document).ready(function() {
     }
   });
 });
+function sendFile(file, el) {
+            var contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
+			var form_data = new FormData();
+			form_data.append('file', file);
+			$.ajax({
+				data : form_data,
+				type : "POST",
+				url : contextPath+'/image',
+				cache : false,
+				contentType : false,
+				enctype : 'multipart/form-data',
+				processData : false,
+				success : function(url) {
+					$(el).summernote('insertImage', url, function($image) {
+					    $image.css('width', "50%");
+                    });
+               },
+                error: function(data) {
+                       console.log(data);
+                     }
+			});
+}

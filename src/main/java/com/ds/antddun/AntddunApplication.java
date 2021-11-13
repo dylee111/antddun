@@ -12,6 +12,7 @@ public class AntddunApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AntddunApplication.class, args);
 	}
+
 	@Bean(name = "uploadPath")
 	public String uploadPath() {
 		return "C:\\\\upload";

@@ -1,20 +1,24 @@
 package com.ds.antddun.repository;
 
-import com.ds.antddun.dto.SosoBoardDTO;
 import com.ds.antddun.entity.SosoJobBoard;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
 public interface SosoBoardRepository extends JpaRepository<SosoJobBoard, Long> {
-//    @Query(value = "SELECT sjb, m FROM SosoJobBoard sjb, Member m WHERE sjb.member=m.mno and sjb.category=:category")
-//    @Query(value = "SELECT sjb FROM SosoJobBoard, SosoCategory sc sjb WHERE sjb.category=:category")
+
     @Query("SELECT sj, sc " +
             " FROM SosoJobBoard sj, SosoCategory sc " +
             " WHERE sj.category=sc.cateNo " +
             " AND sc.sosoCateName=:category ")
     List<SosoJobBoard> getListByCategory(String category);
 
+    @Query("SELECT sj, sc " +
+            " FROM SosoJobBoard sj, SosoCategory sc " +
+            " WHERE sj.category=sc.cateNo " +
+            " AND sc.cateNo=:categoryNo ")
+    List<SosoJobBoard> getListByCategoryNo(int categoryNo);
 
 }
