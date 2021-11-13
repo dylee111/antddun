@@ -1,5 +1,77 @@
-.m_border {
+.list_border {
+    height: 100%;
+    border: 3px solid #ededed;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.content_border {
+    height: 100%;
     border: 3px solid #ededed;
     border-radius: 10px;
     padding: 30px;
+}
+
+.mail {
+    border-bottom: 2px solid #ededed;
+    padding-bottom: 30px;
+    margin-bottom: 20px;
+}
+
+.select_box {
+    margin-bottom: 20px;
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid rgb(220,220,220);
+}
+
+
+
+.sender {
+    display: inline-block;
+    height: 20px;
+    float: left;
+    margin-right: 10px;
+}
+
+.send_date {
+    display: inline-block;
+    float: right;
+    height: 20px;
+    text-align: right;
+    color: #a8a8a8;
+}
+
+.send_time {
+    display: inline-block;
+    height: 20px;
+    text-align: right;
+    color: #a8a8a8;
+}
+
+.send_message {
+    display: inline-block;
+    width: 100%;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    height: 30px;
+    line-height: 40px;
+}
+
+.send_title {
+    display: inline-block;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.btn_finished {
+    width: 3rem;
+    height: 2rem;
+    line-height: 2.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
 }

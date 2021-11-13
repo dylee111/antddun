@@ -6,12 +6,15 @@
     font-style: normal;
     font-style: normal;
 }
+
 @font-face {
     font-family: 'ELAND_Choice_M';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/ELAND_Choice_M.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face {font-family:MalgunGothic; src:url(font/MalgunGothic.eot);}
 
 body {
     margin: 0;
@@ -21,6 +24,9 @@ body {
 
 span {
     display: inline-block;
+}
+
+.font_e {
     font-family: 'ELAND_Choice_M';
 }
 
