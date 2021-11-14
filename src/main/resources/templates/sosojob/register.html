@@ -24,21 +24,18 @@
                 <!--카테고리-->
                 <div class="option">
                     <select class="category" name="cateNo">
-                        <option th:each="category : ${category}" th:value="${category.cateNo}">[[${category.sosoCateName}]]</option>
+                        <option th:each="category : ${category}" th:value="${category.cateNo}" name="cateNo">[[${category.sosoCateName}]]</option>
                     </select>
                 </div>
 
                 <!--제목-->
                 <div class="form-group">
                     <input type="text" id="title" class="form-control" name="title" required placeholder="제목을 입력해주세요">
-
                 </div>
 
                 <!--내용-->
                 <div class="summernote">
-
                     <textarea id="summernote" class="content"  name="content" ></textarea>
-
                 </div>
 
                 <!--뚠-->

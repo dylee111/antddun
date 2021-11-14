@@ -18,7 +18,7 @@ public class SosoBoardDTO {
     private Long sosoNo;
     private String title;
     private String content;
-    private String category;
+    private int category;
     private Long mno; // username
     private String firstName;
     private int ddun;

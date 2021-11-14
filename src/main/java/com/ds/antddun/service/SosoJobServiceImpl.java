@@ -3,15 +3,19 @@ package com.ds.antddun.service;
 import com.ds.antddun.dto.PageRequestDTO;
 import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.dto.SosoBoardDTO;
+import com.ds.antddun.dto.SosoCategoryDTO;
 import com.ds.antddun.entity.Member;
+import com.ds.antddun.entity.SosoCategory;
 import com.ds.antddun.entity.SosoJobBoard;
 import com.ds.antddun.repository.SosoBoardRepository;
+import com.ds.antddun.repository.SosoCategoryRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,19 +27,32 @@ public class SosoJobServiceImpl implements SosoJobService {
 
     @Autowired
     private SosoBoardRepository sosoBoardRepository;
+    @Autowired
+    private SosoCategoryRepository sosoCategoryRepository;
 
     /*
     * method : register
     * */
+    @Transactional
     @Override
-    public Long register(SosoBoardDTO sosoBoardDTO, Member member) {
+    public Long register(SosoBoardDTO sosoBoardDTO,SosoCategoryDTO sosoCategoryDTO, Member member) {
 
-        SosoJobBoard sosoJobBoard = dtoToEntity(sosoBoardDTO);
+//        SosoJobBoard sosoJobBoard = dtoToEntity(sosoBoardDTO, sosoCategoryDTO);
+//        sosoJobBoard.setMember(member); // Controller에서 PrincipalDetails 클래스에서 member 객체를 받아서 인증받은 유저를 매개변수로 받음.
+//        sosoBoardRepository.save(sosoJobBoard);
+//        return sosoJobBoard.getSosoNo();
 
-        sosoJobBoard.setMember(member); // Controller에서 PrincipalDetails 클래스에서 member 객체를 받아서 인증받은 유저를 매개변수로 받음.
-        sosoBoardRepository.save(sosoJobBoard);
+        SosoCategory sosoCategory = sosoCategoryRepository.findById(sosoCategoryDTO.getCateNo()).get();
+        log.info("SSCATEGORY"+sosoCategory);
+        return sosoBoardRepository.save(SosoJobBoard.builder()
+                .sosoNo(sosoBoardDTO.getSosoNo())
+                .title(sosoBoardDTO.getTitle())
+                .content(sosoBoardDTO.getContent())
+                .member(member)
+                .ddun(sosoBoardDTO.getDdun())
+                .category(sosoCategory)
+                .build()).getSosoNo();
 
-        return sosoJobBoard.getSosoNo();
     }
 
     @Override

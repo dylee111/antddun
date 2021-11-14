@@ -13,8 +13,27 @@ $(document).ready(function() {
         $('#money_page').show();
         $('#my_page').hide();
     });
-});
 
+    const wishList = new Array();
+    const price = new Array();
+    const rate = new Array();
+
+    $(".save_btn").click(function() {
+        $("input[name=wishList]").each(function(index, wish) {
+            wishList.push($(wish).val());
+        });
+        $("input[name=price]").each(function(index, p) {
+            price.push($(p).val());
+        });
+        $("input[name=rate]").each(function(index, r) {
+            rate.push($(r).val());
+        });
+        console.log(wishList);
+        console.log(price);
+        console.log(rate);
+    });
+
+});
 
 // 실수령 계산기
 $(document).ready(function() {

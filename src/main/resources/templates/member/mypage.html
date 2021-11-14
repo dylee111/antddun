@@ -110,6 +110,7 @@
                 </div>
 
                 <div id="money_page" style="display:none;">
+                    <form method="POST" th:action="@{/}">
                     <div id="user_wallet" style="margin-bottom: 70px;">
                         <h2 class="mypage_title">내 돈 정보</h2>
                         <button class="save_btn">저장</button>
@@ -142,23 +143,23 @@
                                     <tbody>
                                     <tr>
                                         <td><input type="radio" name="main_wish"/></td>
-                                        <td><input class="input_pd" placeholder="상품명을 입력하세요."></td>
-                                        <td><input class="input_cost" placeholder="ex) 50000"></td>
-                                        <td><input class="input_per" placeholder="ex) 10">%</td>
+                                        <td><input class="input_pd" placeholder="상품명을 입력하세요." name="wishList"></td>
+                                        <td><input class="input_cost" placeholder="ex) 50000" name="price"></td>
+                                        <td><input class="input_per" placeholder="ex) 10" name="rate">%</td>
                                         <td>D-4</td>
                                     </tr>
                                     <tr>
                                         <td><input type="radio" name="main_wish"/></td>
-                                        <td><input class="input_pd"></td>
-                                        <td><input class="input_cost"></td>
-                                        <td><input class="input_per">%</td>
+                                        <td><input class="input_pd" name="wishList"></td>
+                                        <td><input class="input_cost" name="price"></td>
+                                        <td><input class="input_per" name="rate">%</td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td><input type="radio" name="main_wish"/></td>
-                                        <td><input class="input_pd"></td>
-                                        <td><input class="input_cost"></td>
-                                        <td><input class="input_per">%</td>
+                                        <td><input class="input_pd" name="wishList"></td>
+                                        <td><input class="input_cost" name="price"></td>
+                                        <td><input class="input_per" name="rate">%</td>
                                         <td></td>
                                     </tr>
                                     </tbody>
@@ -166,6 +167,7 @@
                             </div>
                         </div>
                     </div>
+                    </form>
 
                     <div id="user_ddun">
                         <h2 class="mypage_title">내 뚠 정보</h2>
