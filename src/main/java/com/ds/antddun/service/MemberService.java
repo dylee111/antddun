@@ -7,9 +7,12 @@ import com.ds.antddun.entity.Member;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface MemberService {
     public List<Member> getList();
+
+    String findByPhoneNum(String phoneNum);
 
     Long join(MemberDTO memberDTO, JobListDTO jobListDTO);
 

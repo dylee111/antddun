@@ -34,6 +34,13 @@ public class MemberServiceImpl implements MemberService {
         return null;
     }
 
+
+    @Override
+    public String findByPhoneNum(String phoneNum) {
+        String username = memberRepository.findByPhoneNum(phoneNum);
+        return username;
+    }
+
     @Override
     public Long join(MemberDTO memberDTO, JobListDTO jobListDTO) {
 
