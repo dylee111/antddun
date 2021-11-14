@@ -75,3 +75,16 @@
     border-radius: 5px;
     border: none;
 }
+
+
+
+.sender_info {
+    float: left;
+    width: 90%;
+}
+
+.reply {
+    width: 10%;
+    height: 100px;
+    line-height: 150px;
+}

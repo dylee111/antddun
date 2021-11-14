@@ -7,6 +7,7 @@
         <link rel="stylesheet" th:href="@{/css/board/summernote/summernote-lite.css}">
         <link rel="stylesheet" th:href="@{/css/board/summernote/custom.css}">
 
+        <script th:src="@{/js/member/messenger.js}"></script>
         <script th:src="@{/js/board/summernote/summernote-lite.js}"></script>
         <script th:src="@{/js/board/summernote/custom1.js}"></script>
         <script th:src=" @{https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js}"></script>
@@ -39,24 +40,30 @@
         <div class="col-lg-9">
             <div class="content_border">
                 <div class="mail">
-                    <div class="margin_bottom">
-                        <button class="btn_finished a_white">완료</button>
-                        <span class="send_title">단가 문의드립니다.</span>
-                    </div>
-                    <div>
-                        <strong class="sender">김본명 </strong>
-                        <span>(<span>abc@ds.com</span>)</span><br>
-                        <span class="send_time">2021.11.12 오후 12:32</span>
+                    <div style="width: 100%; display:inline-flex;">
+                        <div class="sender_info">
+                            <div class="margin_bottom">
+                                <button class="btn_finished a_white">완료</button>
+                                <span class="send_title">단가 문의드립니다.</span>
+                            </div>
+                            <div>
+                                <strong class="sender">김본명 </strong>
+                                <span>(<span>abc@ds.com</span>)</span><br>
+                                <span class="send_time">2021.11.12 오후 12:32</span>
+                            </div>
+                        </div>
+                        <div class="reply">
+                            <button id="reply">답장하기</button>
+                        </div>
                     </div>
                     <hr>
                     <div>
                         담당자님, 비즈니스 프로필을 최신 상태로 유지하세요. Google 검색 및 지도에서 내 비즈니스를 찾는 사람들이 신규 고객으로 전환될 수 있습니다.
                         이제 더 쉽게 내 비즈니스 프로필을 관리할 수 있습니다.
                     </div>
-                    <button>답장하기</button>
                 </div>
 
-                <div id="mail_write">
+                <div id="mail_write" style="display: none;">
                     <form th:action="@{/member/jayu/register}" th:method="post">
                         <!--내용-->
                         <div class="form-group">

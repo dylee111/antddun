@@ -1,10 +1,9 @@
 $(document).ready(function() {
-//    $('.btn_login').on('click', function(){
-//        $('#unlogin').hide();
-//        $('.wish').show();
-//        $('.container-main').css("margin-top", '13rem');
-//        $('#login').show();
-//    });
+/*    <!-- Daily-earn Calculate -->
+    $(document).ready(function() {
+        var startTime = [(${member.startTime})];
+        return $('#daily_earn').val(startTime);
+    });*/
 
     <!-- Search Bar JS -->
     $.fn.toggleState = function (b) {
