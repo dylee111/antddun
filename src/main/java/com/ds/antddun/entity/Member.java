@@ -13,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Data
+@Getter
 @SequenceGenerator(name="MEMBER_SEQ_GEN",sequenceName = "MEMBER_SEQ", initialValue = 1, allocationSize = 1)
 //@DynamicInsert // INSERT 시 Null인 값을 제외
 public class Member {

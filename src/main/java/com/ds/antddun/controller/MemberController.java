@@ -10,6 +10,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -50,6 +51,12 @@ public class MemberController {
             model.addAttribute("jobList", jobListService.getList());
         }
         return "member/mypage";
+    }
+
+    @PostMapping("/member/mypage")
+    public String wishListSave() {
+        // 동일한 name 속성을 가진 데이터는 배열 형태로 Controller로 넘어온다. split(",")을 이용해 잘라서 사용.'
+        return "";
     }
 
     @GetMapping("/member/messenger")

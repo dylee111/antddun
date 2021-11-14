@@ -5,6 +5,7 @@ import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.dto.SosoBoardDTO;
 import com.ds.antddun.entity.SosoJobBoard;
 import com.ds.antddun.repository.SosoBoardRepository;
+import com.ds.antddun.repository.SosoCategoryRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +21,15 @@ class SosoJobServiceImplTest {
 
     @Autowired
     private SosoBoardRepository sosoBoardRepository;
+
+    @Autowired
+    private SosoCategoryRepository sosoCategoryRepository;
+
+    @Test
+    public void readCate() {
+        System.out.println(sosoCategoryRepository.findById(1).get().getCateNo());
+
+    }
 
 //    @Test
 //    void register() {

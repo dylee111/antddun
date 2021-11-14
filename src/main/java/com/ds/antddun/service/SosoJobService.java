@@ -1,17 +1,17 @@
 package com.ds.antddun.service;
 
-import com.ds.antddun.dto.MemberDTO;
-import com.ds.antddun.dto.PageRequestDTO;
-import com.ds.antddun.dto.PageResultDTO;
-import com.ds.antddun.dto.SosoBoardDTO;
+import com.ds.antddun.dto.*;
 import com.ds.antddun.entity.Member;
+import com.ds.antddun.entity.SosoCategory;
 import com.ds.antddun.entity.SosoJobBoard;
+import com.ds.antddun.repository.SosoCategoryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public interface SosoJobService {
 
-    Long register(SosoBoardDTO sosoBoardDTO, Member member);
+    Long register(SosoBoardDTO sosoBoardDTO, SosoCategoryDTO sosoCategoryDTO, Member member);
 
     void modify();
 
@@ -28,7 +28,7 @@ public interface SosoJobService {
                 .sosoNo(sosoJobBoard.getSosoNo())
                 .title(sosoJobBoard.getTitle())
                 .content(sosoJobBoard.getContent())
-                .category(sosoJobBoard.getCategory().getSosoCateName())
+                .category(sosoJobBoard.getCategory().getCateNo())
                 .regDate(sosoJobBoard.getRegDate())
                 .mno(sosoJobBoard.getMember().getMno())
                 .firstName(sosoJobBoard.getMember().getFirstName())
@@ -50,18 +50,19 @@ public interface SosoJobService {
         return sosoBoardDTO;
     }
 
-    default SosoJobBoard dtoToEntity(SosoBoardDTO sosoBoardDTO) {
+    default SosoJobBoard dtoToEntity(SosoBoardDTO sosoBoardDTO, SosoCategoryDTO sosoCategoryDTO) {
 
         MemberDTO memberDTO = new MemberDTO();
 
         SosoJobBoard sosoJobBoard = SosoJobBoard.builder()
                 .sosoNo(sosoBoardDTO.getSosoNo())
-//                .category(sosoBoardDTO.getCategory())
+                .category(SosoCategory.builder().cateNo(sosoCategoryDTO.getCateNo()).build())
                 .title(sosoBoardDTO.getTitle())
                 .content(sosoBoardDTO.getContent())
                 .ddun(sosoBoardDTO.getDdun())
                 .member(Member.builder().mno(memberDTO.getMno()).build())
                 .build();
+
         return sosoJobBoard;
     }
 }

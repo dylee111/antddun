@@ -9,7 +9,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Setter
+@ToString(exclude = "member")
 @SequenceGenerator(name="WISH_SEQ_GEN",sequenceName = "WISH_SEQ", initialValue = 1, allocationSize = 1)
 
 public class MemberWishList extends BaseEntity{

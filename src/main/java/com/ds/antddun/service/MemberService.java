@@ -4,6 +4,7 @@ import com.ds.antddun.dto.JobListDTO;
 import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.entity.JobList;
 import com.ds.antddun.entity.Member;
+import com.ds.antddun.entity.MemberWishList;
 
 import java.util.Date;
 import java.util.List;
@@ -18,8 +19,6 @@ public interface MemberService {
     int mobileCheck(String mobile) throws Exception;
 
     boolean recommendUserCheck(String recommendUser);
-
-    Date convertDate(String startTime, String endTime);
 
     Member welcomeMsg(Long mno);
 
@@ -53,13 +52,5 @@ public interface MemberService {
         return memberDTO;
     }
 
-//    default JobList dtoToEntity(JobListDTO jobListDTO) {
-//
-//        JobList jobList = JobList.builder()
-//                .jno(jobListDTO.getJno())
-//                .job(jobList.getJob())
-//                .build();
-//        return jobList;
-//    }
 }
 
