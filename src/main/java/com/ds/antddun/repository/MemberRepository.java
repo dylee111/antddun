@@ -1,12 +1,9 @@
 package com.ds.antddun.repository;
 
-import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.entity.Member;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
@@ -35,4 +32,9 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     @Query("select m from Member m where username =:username ")
     Member findByUsername(String username);
+
+
+    @Query("select m.username from Member m where m.phoneNum=:phoneNum ")
+    String findByPhoneNum(String phoneNum);
+
 }

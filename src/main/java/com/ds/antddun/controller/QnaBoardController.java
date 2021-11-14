@@ -4,6 +4,7 @@ import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.PageRequestDTO;
 import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.dto.QnaBoardDTO;
+import com.ds.antddun.entity.JobList;
 import com.ds.antddun.entity.QnaBoard;
 import com.ds.antddun.repository.QnaBoardRepository;
 import com.ds.antddun.service.JobListService;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 @Log4j2
@@ -58,7 +61,10 @@ public class QnaBoardController {
     @GetMapping("/qna/list")
     public String lists(Model model, PageRequestDTO pageRequestDTO,
                         RedirectAttributes redirect) {
+
         PageResultDTO<QnaBoardDTO, QnaBoard> result = qnaService.getBoardList(pageRequestDTO);
+        List<JobList> list = jobListService.getList();
+        model.addAttribute("jobList", list);
         model.addAttribute("result",result);
         log.info("controller result>>"+result);
         return "/qna/list";

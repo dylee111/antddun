@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <link th:href="@{/css/join/join.css}" rel="stylesheet" />-->
+    <script th:src="@{/js/login/findId.js}"></script>
+</head>
+<body>
+<h2>아이디(이메일) 찾기</h2>
+<hr>
+<form method="post" th:action="@{/findUsername}" id="frm">
+휴대폰 번호 : <input type="text" id="phoneNum" name="phoneNum" value="01071570271">
+<button type="submit" id="btnFindId">찾기</button>
+    <span class="result" id="result"></span>
+
+</form>
+</body>
+</html>
