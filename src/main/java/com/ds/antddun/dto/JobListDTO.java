@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JobListDTO {
-    private Long jno;
+    private int jno;
     private String job;
 
 }

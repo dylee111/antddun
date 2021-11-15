@@ -1,6 +1,7 @@
 package com.ds.antddun.controller;
 
 import com.ds.antddun.config.auth.PrincipalDetails;
+import com.ds.antddun.dto.JobListDTO;
 import com.ds.antddun.dto.PageRequestDTO;
 import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.dto.QnaBoardDTO;
@@ -39,20 +40,21 @@ public class QnaBoardController {
 
     //게시물 작성
     @GetMapping("/member/qna/registerForm") //여기서는 principal로 한 번 더 확인
-    public String register(QnaBoardDTO qnaBoardDTO, @AuthenticationPrincipal PrincipalDetails principal) {
+    public String register(QnaBoardDTO qnaBoardDTO,@AuthenticationPrincipal PrincipalDetails principal,Model model) {
         if (principal == null) {
             System.out.println("멤버권한이 없음");
             return "redirect:/login";
         } else {
             log.info("principal.getMember())" + principal.getMember());
         }
+        model.addAttribute("jobList", jobListService.getList());
         return "/qna/registerForm";
     }
 
     //글 등록
     @PostMapping("/member/qna/register")
-    public ModelAndView register(QnaBoardDTO qnaBoardDTO, Model model , @AuthenticationPrincipal PrincipalDetails principal) {
-        qnaService.register(qnaBoardDTO, principal.getMember());
+    public ModelAndView register(QnaBoardDTO qnaBoardDTO, JobListDTO jobListDTO, Model model , @AuthenticationPrincipal PrincipalDetails principal) {
+        qnaService.register(qnaBoardDTO, jobListDTO, principal.getMember());
         ModelAndView mav = new ModelAndView("redirect:/qna/list");
         return mav;
     }
