@@ -1,10 +1,4 @@
 $(document).ready(function() {
-/*    <!-- Daily-earn Calculate -->
-    $(document).ready(function() {
-        var startTime = [(${member.startTime})];
-        return $('#daily_earn').val(startTime);
-    });*/
-
     <!-- Search Bar JS -->
     $.fn.toggleState = function (b) {
     	$(this)
@@ -70,23 +64,34 @@ $(document).ready(function() {
     	}
     });
 
-
     <!--WishList Close JS-->
     $('.wish_close').on('click', function(){
         $('.wish').hide();
-        $('.container-main').css("margin-top", '9rem');
+        $('.blank').hide();
     });
 
     <!--Alert Open JS-->
     $('.li_left').on('click', function(){
-        $('#user_info').css("border-radius", '15px 15px 0 0');
-        $('.li_left').css("border-radius", '0px');
-        $('.li_right').css("border-radius", '0px');
-        $('.li_left').css("background", '#f9c74f');
-        $('.li_center').css("background", '#e3e3e3');
-        $('.li_right').css("background", '#e3e3e3');
-        $('#user_alert').show();
-        $('#user_secret').hide();
+        $('#user_alert').toggle(
+            function(){
+                $('#user_alert').show();
+                $('#user_info').css("border-radius", '15px 15px 0 0');
+                $('.li_left').css("border-radius", '0px');
+                $('.li_right').css("border-radius", '0px');
+                $('.li_left').css("background", '#f9c74f');
+                $('.li_center').css("background", '#e3e3e3');
+                $('.li_right').css("background", '#e3e3e3');
+            },
+            function(){
+                $('#user_alert').hide();
+                $('#user_info').css("border-radius", '15px');
+                $('.li_left').css("border-radius", '0 0 0 10px');
+                $('.li_right').css("border-radius", '0 0 10px 0');
+                $('.li_left').css("background", '#f9c74f');
+                $('.li_center').css("background", '#f9c74f');
+                $('.li_right').css("background", '#f9c74f');
+            }
+        );
     });
 
     $('.li_center').on('click', function(){
@@ -110,6 +115,12 @@ $(document).ready(function() {
         $('#user_secret').show();
         $('#user_alert').hide();
     });
+
+//    i =
+//    hourlyWage = 0;
+//    for(i=0; i>=; i++) {
+//        hourlyWage +=hourlyWage;
+//    }
 
     <!--slick slider JS-->
     $('.visual').slick({

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -18,13 +19,18 @@
 
     <script th:src="@{js/main/jquery.easing.1.3.js}" type="text/javascript" charset="utf-8"></script>
     <script th:src="@{js/main/jquery.jSlots.min.js}" type="text/javascript" charset="utf-8"></script>
+    <!-- Bootstrap core JS-->
+    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js}"></script>
+    <!-- Core theme JS-->
+    <script th:inline="javascript" th:src="@{js/main/main.js}"></script>
+
 </head>
 <body>
 <div>
     <div id="fixed">
         <!--로그인 정보에 따라 노출 유무 결정-->
         <header>
-            <div class="wish">
+            <div class="wish" sec:authorize="isAuthenticated()">
                     <span class="impact">
                         🎉<strong class="impact">아이폰13PRO</strong>까지
                         <strong class="impact">5일</strong> 남았습니다.✨
@@ -32,7 +38,6 @@
                 <img th:src="@{assets/close.png}" class="wish_close"/>
             </div>
         </header>
-
         <!--페이지 상단 공통 : logo & nav-->
         <nav class="navbar navbar-expand-md navbar-light bg-primary">
             <div class="container">
@@ -53,6 +58,8 @@
     </div>
 
     <!--메인 메뉴-->
+    <div class="blank" sec:authorize="isAuthenticated()">
+    </div>
     <div class="container-main container">
         <div class="row">
 
@@ -60,7 +67,7 @@
             <div class="col-lg-3">
                 <div class="mb-3 margin_bottom">
                     <!--After Login-->
-                    <div id="login">
+                    <div id="login" sec:authorize="isAuthenticated()">
                         <div id="user_info">
                             <div class="user_wrap">
                                 <div class="user_item" th:each="member: ${member}">
@@ -134,12 +141,12 @@
                     </div>
 
                     <!--Before Login-->
-                    <div id="unlogin">
+                    <div id="unlogin" sec:authorize="!isAuthenticated()">
                         <button class="button btn_login">
-                            <a th:href="@{/login}" class="a_white">로그인</a>
+                            <a th:href="@{/login}" class="button a_white">로그인</a>
                         </button>
                         <button class="button btn_regist">
-                            <a th:href="@{/joinAgree}" class="a_white">회원가입</a>
+                            <a th:href="@{/joinAgree}" class="button a_white">회원가입</a>
                         </button>
                     </div>
                 </div>
@@ -383,118 +390,6 @@
         <div class="container"><p class="m-0 text-center text-white">Copyright ⓒ개미는뚠뚠 2021</p></div>
     </footer>
 </div>
-  
-<!-- Bootstrap core JS-->
-<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js}"></script>
-<!-- Core theme JS-->
-<script th:src="@{/js/main/main.js}"></script>
 
-<!--<script th:inline="javascript">-->
-<!--            &lt;!&ndash;Login JS&ndash;&gt;-->
-<!--&lt;!&ndash;            function test() {&ndash;&gt;-->
-<!--&lt;!&ndash;                let id = [[${mno}]];&ndash;&gt;-->
-<!--&lt;!&ndash;                console.log(id);&ndash;&gt;-->
-<!--&lt;!&ndash;            }&ndash;&gt;-->
-
-<!--            $('.btn_login').on('click', function(){-->
-<!--                $('#unlogin').hide();-->
-<!--                $('.wish').show();-->
-<!--                $('.container-main').css("margin-top", '13rem');-->
-<!--                $('#login').show();-->
-<!--            });-->
-
-<!--            &lt;!&ndash;WishList Close JS&ndash;&gt;-->
-<!--            $('.wish_close').on('click', function(){-->
-<!--                $('.wish').hide();-->
-<!--                $('.container-main').css("margin-top", '9rem');-->
-<!--            });-->
-
-<!--            &lt;!&ndash;Alert Open JS&ndash;&gt;-->
-<!--            $('.li_left').on('click', function(){-->
-<!--                $('#user_info').css("border-radius", '15px 15px 0 0');-->
-<!--                $('.li_left').css("border-radius", '0px');-->
-<!--                $('.li_right').css("border-radius", '0px');-->
-<!--                $('.li_left').css("background", '#f9c74f');-->
-<!--                $('.li_center').css("background", '#e3e3e3');-->
-<!--                $('.li_right').css("background", '#e3e3e3');-->
-<!--                $('#user_alert').show();-->
-<!--                $('#user_secret').hide();-->
-<!--            });-->
-
-<!--            $('.li_center').on('click', function(){-->
-<!--                $('#user_info').css("border-radius", '15px 15px 0 0');-->
-<!--                $('.li_left').css("border-radius", '0px');-->
-<!--                $('.li_right').css("border-radius", '0px');-->
-<!--                $('.li_center').css("background", '#f9c74f');-->
-<!--                $('.li_left').css("background", '#e3e3e3');-->
-<!--                $('.li_right').css("background", '#e3e3e3');-->
-<!--                $('#user_alert').show();-->
-<!--                $('#user_secret').hide();-->
-<!--            });-->
-
-<!--            $('.li_right').on('click', function(){-->
-<!--                $('#user_info').css("border-radius", '15px 15px 0 0');-->
-<!--                $('.li_left').css("border-radius", '0px');-->
-<!--                $('.li_right').css("border-radius", '0px');-->
-<!--                $('.li_right').css("background", '#f9c74f');-->
-<!--                $('.li_left').css("background", '#e3e3e3');-->
-<!--                $('.li_center').css("background", '#e3e3e3');-->
-<!--                $('#user_secret').show();-->
-<!--                $('#user_alert').hide();-->
-<!--            });-->
-
-
-<!--            &lt;!&ndash;slick slider JS&ndash;&gt;-->
-<!--            $('.visual').slick({-->
-<!--              slidesToShow: 5,-->
-<!--              slidesToScroll: 5,-->
-<!--              pauseOnHover : true,-->
-<!--              prevArrow : "<button type='button' class='slick-prev'>Previous</button>",-->
-<!--              nextArrow : "<button type='button' class='slick-next'>Next</button>",-->
-<!--              draggable : true,-->
-<!--              responsive: [-->
-<!--                { breakpoint: 1400, settings: { slidesToShow: 4, slidesToScroll: 4 }},-->
-<!--                { breakpoint: 1200, settings: { slidesToShow: 3, slidesToScroll: 3 }},-->
-<!--                { breakpoint: 765, settings: { slidesToShow: 1, slidesToScroll: 1}}-->
-<!--              ]-->
-<!--            });-->
-
-<!--            var filtered = false;-->
-
-<!--            $('.js-filter').on('click', function(){-->
-<!--              if (filtered === false) {-->
-<!--                $('.visual').slick('slickFilter',':even');-->
-<!--                $(this).text('Unfilter Slides');-->
-<!--                filtered = true;-->
-<!--              } else {-->
-<!--                $('.visual').slick('slickUnfilter');-->
-<!--                $(this).text('Filter Slides');-->
-<!--                filtered = false;-->
-<!--              }-->
-<!--            });-->
-
-<!--            &lt;!&ndash;Lunch slot JS&ndash;&gt;-->
-<!--            $(document).ready(function() {-->
-<!--                var width = $(window).width();-->
-
-<!--                if (width > 991){-->
-<!--                    $('.slotRun1').jSlots({spinner: '.playNormal1'});-->
-<!--                } else {-->
-<!--                    $('.slotRun2').jSlots({spinner: '.playNormal2'});-->
-<!--                }-->
-<!--            });-->
-
-<!--            $(window).resize(function() {-->
-<!--                var width = $(window).width();-->
-
-<!--                if (width > 991){-->
-<!--                    $('.slotRun1').jSlots({spinner: '.playNormal1'});-->
-<!--                } else {-->
-<!--                    $('.slotRun2').jSlots({spinner: '.playNormal2'});-->
-<!--                }-->
-<!--            });-->
-
-
-<!--</script>-->
 </body>
 </html>

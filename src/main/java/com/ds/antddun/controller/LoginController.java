@@ -55,11 +55,6 @@ public class LoginController {
             model.addAttribute("error", "Login Error Check Your Account");
         } else if (logout != null) {
             model.addAttribute("logout", "Logout!");
-        } else {
-            String id = session.getAttribute("id") == null ? (String) session.getAttribute("id") : "";
-            model.addAttribute("id", id);
-
-            log.info("session>>>>>>>>>>>>"+session.getId());
         }
         return "/member/login";
     }

@@ -1,26 +1,37 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <th:block th:fragment="setContent(content)">
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-        <meta name="description" content=""/>
-        <meta name="author" content=""/>
         <title>개미는 뚠뚠</title>
         <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}"/>
 
         <link th:href="@{/css/main/styles.css}" rel="stylesheet"/>
         <link th:href="@{/css/main/main.css}" rel="stylesheet">
+        <link th:href="@{/css/main/slick.css}" rel="stylesheet">
+        <link th:href="@{/css/main/slotmachine.css}" rel="stylesheet">
+        <link th:href="@{//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css}" type="text/css" rel="stylesheet">
+
         <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
+        <script type="text/javascript"
+                th:src="@{http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js}"></script>
+
+        <script th:src="@{/js/main/jquery.easing.1.3.js}" type="text/javascript" charset="utf-8"></script>
+        <script th:src="@{/js/main/jquery.jSlots.min.js}" type="text/javascript" charset="utf-8"></script>
         <!-- Bootstrap core JS-->
         <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js}"></script>
+        <!-- Core theme JS-->
+        <script th:inline="javascript" th:src="@{/js/main/main.js}"></script>
+
     </head>
     <body>
     <div>
         <div id="fixed">
             <!--로그인 정보에 따라 노출 유무 결정-->
             <header>
-                <div class="wish">
+                <div class="wish" sec:authorize="isAuthenticated()">
                     <span class="impact">
                         🎉<strong class="impact">아이폰13PRO</strong>까지
                         <strong class="impact">5일</strong> 남았습니다.✨
@@ -43,16 +54,12 @@
                     </div>
                 </div>
             </nav>
-<!--            &lt;!&ndash; 검색 창 &ndash;&gt;-->
-<!--            <div class='search-box-container' style="margin: 1.5% 4.5%;">-->
-<!--                <button class='submit'>-->
-<!--                    <i class='fa fa-search'></i>-->
-<!--                </button>-->
-<!--                <input class='search-box'>-->
-<!--            </div>-->
         </div>
 
         <!--메인 메뉴-->
+        <div class="blank" sec:authorize="isAuthenticated()">
+        </div>
+
         <div class="container-main container">
             <div class="row">
                 <th:block th:replace="${content}"></th:block>
