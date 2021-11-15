@@ -22,37 +22,38 @@ public interface SosoJobService {
 
     PageResultDTO<SosoBoardDTO, SosoJobBoard> getList(PageRequestDTO requestDTO);
 
-    default SosoBoardDTO entityToDTO(SosoJobBoard sosoJobBoard) {
+//    default SosoBoardDTO entityToDTO(SosoJobBoard sosoJobBoard) {
+//
+//        SosoBoardDTO sosoBoardDTO = SosoBoardDTO.builder()
+//                .sosoNo(sosoJobBoard.getSosoNo())
+//                .title(sosoJobBoard.getTitle())
+//                .content(sosoJobBoard.getContent())
+//                .category(sosoJobBoard.getCategory().getCateNo())
+//                .regDate(sosoJobBoard.getRegDate())
+//                .mno(sosoJobBoard.getMember().getMno())
+//                .firstName(sosoJobBoard.getMember().getFirstName())
+//                .modDate(sosoJobBoard.getModDate())
+//                .ddun(sosoJobBoard.getDdun())
+//                .build();
+//
+////        List<UploadImageDTO> imageDTOList = uploadImageList.stream().map(uploadImage -> {
+////            return UploadImageDTO.builder()
+////                    .imgName(uploadImage.getImgName())
+////                    .path(uploadImage.getPath())
+////                    .uuid(uploadImage.getUuid())
+////                    .build();
+////        }).collect(Collectors.toList());
+//
+////        sosoBoardDTO.setImageDTOList(imageDTOList);
+////        sosoBoardDTO.setAvg(avg);
+//
+//        return sosoBoardDTO;
+//    }
 
-        SosoBoardDTO sosoBoardDTO = SosoBoardDTO.builder()
-                .sosoNo(sosoJobBoard.getSosoNo())
-                .title(sosoJobBoard.getTitle())
-                .content(sosoJobBoard.getContent())
-                .category(sosoJobBoard.getCategory().getCateNo())
-                .regDate(sosoJobBoard.getRegDate())
-                .mno(sosoJobBoard.getMember().getMno())
-                .firstName(sosoJobBoard.getMember().getFirstName())
-                .modDate(sosoJobBoard.getModDate())
-                .ddun(sosoJobBoard.getDdun())
-                .build();
-
-//        List<UploadImageDTO> imageDTOList = uploadImageList.stream().map(uploadImage -> {
-//            return UploadImageDTO.builder()
-//                    .imgName(uploadImage.getImgName())
-//                    .path(uploadImage.getPath())
-//                    .uuid(uploadImage.getUuid())
-//                    .build();
-//        }).collect(Collectors.toList());
-
-//        sosoBoardDTO.setImageDTOList(imageDTOList);
-//        sosoBoardDTO.setAvg(avg);
-
-        return sosoBoardDTO;
-    }
-
-    default SosoJobBoard dtoToEntity(SosoBoardDTO sosoBoardDTO, SosoCategoryDTO sosoCategoryDTO) {
+    default SosoJobBoard dtoToEntity(SosoBoardDTO sosoBoardDTO) {
 
         MemberDTO memberDTO = new MemberDTO();
+        SosoCategoryDTO sosoCategoryDTO = new SosoCategoryDTO();
 
         SosoJobBoard sosoJobBoard = SosoJobBoard.builder()
                 .sosoNo(sosoBoardDTO.getSosoNo())

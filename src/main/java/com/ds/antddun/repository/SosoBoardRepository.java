@@ -21,4 +21,5 @@ public interface SosoBoardRepository extends JpaRepository<SosoJobBoard, Long> {
             " AND sc.cateNo=:categoryNo ")
     List<SosoJobBoard> getListByCategoryNo(int categoryNo);
 
+
 }

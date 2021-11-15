@@ -19,6 +19,5 @@ public class SosoCategory {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SOSOCATE_SEQ_GEN")
     private int cateNo;
 
-    @Column(name= "sosoCateName")
     private String sosoCateName;
 }

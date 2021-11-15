@@ -74,7 +74,7 @@ public class SosoBoardController {
 
     @PostMapping("/sosojob/register")
     public String register(SosoBoardDTO sosoBoardDTO,
-                           SosoCategoryDTO sosoCategoryDTO,
+                            SosoCategoryDTO sosoCategoryDTO,
                            @AuthenticationPrincipal PrincipalDetails principal) {
 
         log.info("BEFORE"+ sosoCategoryDTO);
@@ -114,22 +114,48 @@ public class SosoBoardController {
         for (int i = 0; i < list.size(); i++) {
             categoryNo = list.get(i).getCateNo();
             cateNoList.add(categoryNo);
-            if (categoryNo == list.get(i).getCateNo()) {
-                model.addAttribute("cate", sosoJobService.getListByCategoryNo(categoryNo));
-            }
+//            if (categoryNo == list.get(i).getCateNo()) {
+//                model.addAttribute("cate", sosoJobService.getListByCategoryNo(categoryNo));
+//            }
+        }
+        // 마지막 번호만 찍힘....
+
+        if (categoryNo == 1) {
+            model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(0)));
+            return "/sosojob/list/" + categoryNo;
+        }
+        if (categoryNo == 2) {
+            model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(1)));
+            return "/sosojob/list/" + categoryNo;
+        }
+        if (categoryNo == 3) {
+            model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(2)));
+            return "/sosojob/list/" + categoryNo;
+        }
+        if (categoryNo == 4) {
+            model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(3)));
+            return "/sosojob/list/" + categoryNo;
+        }
+        if (categoryNo == 5) {
+            model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(4)));
+            return "/sosojob/list/" + categoryNo;
+        }
+        if (categoryNo == 6) {
+            model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(5)));
+            return "/sosojob/list/" + categoryNo;
+        }
+        if (categoryNo == 7) {
+            model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(6)));
+            return "/sosojob/list/" + categoryNo;
+        }
+        if (categoryNo == 8) {
+            model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(7)));
+            return "/sosojob/list/" + categoryNo;
         }
 
-        model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(0)));
-//        model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(1)));
-//        model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(2)));
-//        model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(3)));
-//        model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(4)));
-//        model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(5)));
-//        model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(6)));
-//        model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(7)));
-
         log.info("CATENOLIST>>>"+cateNoList);
-        return "/sosojob/sosoList";
+        log.info("CATENONONO>>>"+categoryNo);
+        return "/sosojob/sosoList/" + categoryNo ;
     }
 
 }

@@ -9,6 +9,7 @@ import com.ds.antddun.entity.SosoCategory;
 import com.ds.antddun.entity.SosoJobBoard;
 import com.ds.antddun.repository.SosoBoardRepository;
 import com.ds.antddun.repository.SosoCategoryRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,26 +24,30 @@ import java.util.function.Function;
 
 @Service
 @Log4j2
+@RequiredArgsConstructor
 public class SosoJobServiceImpl implements SosoJobService {
 
-    @Autowired
-    private SosoBoardRepository sosoBoardRepository;
-    @Autowired
-    private SosoCategoryRepository sosoCategoryRepository;
+    private final SosoBoardRepository sosoBoardRepository;
+    private final SosoCategoryRepository sosoCategoryRepository;
 
     /*
     * method : register
     * */
-    @Transactional
     @Override
-    public Long register(SosoBoardDTO sosoBoardDTO,SosoCategoryDTO sosoCategoryDTO, Member member) {
+    public Long register(SosoBoardDTO sosoBoardDTO,
+                         SosoCategoryDTO sosoCategoryDTO, Member member) {
 
-//        SosoJobBoard sosoJobBoard = dtoToEntity(sosoBoardDTO, sosoCategoryDTO);
+//        SosoJobBoard sosoJobBoard = dtoToEntity(sosoBoardDTO);
+//        log.info("SSJOBBOARD1111>>>" + sosoCategoryDTO.getCateNo());
 //        sosoJobBoard.setMember(member); // Controller에서 PrincipalDetails 클래스에서 member 객체를 받아서 인증받은 유저를 매개변수로 받음.
+////        sosoJobBoard.setCategory(sosoCategoryDTO.getCateNo());
+//        log.info("SSJOBBOARD2222>>>" + sosoCategoryDTO.getCateNo());
 //        sosoBoardRepository.save(sosoJobBoard);
 //        return sosoJobBoard.getSosoNo();
 
-        SosoCategory sosoCategory = sosoCategoryRepository.findById(sosoCategoryDTO.getCateNo()).get();
+        log.info("SSNO>>>>" + sosoCategoryDTO.getCateNo());
+        SosoCategory sosoCategory =
+                sosoCategoryRepository.findById(sosoCategoryDTO.getCateNo()).get();
         log.info("SSCATEGORY"+sosoCategory);
         return sosoBoardRepository.save(SosoJobBoard.builder()
                 .sosoNo(sosoBoardDTO.getSosoNo())

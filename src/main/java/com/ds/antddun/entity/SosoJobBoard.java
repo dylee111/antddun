@@ -28,8 +28,8 @@ public class SosoJobBoard extends BaseEntity {
     private int cnt;
     private int ddun;
 
-    @ManyToOne(fetch = FetchType.EAGER) // 영속성 (CasacadeType.ALL 제거 : 영속성을 제거하여 Member 엔티티가 중복으로 저장되는 현상 X)
-    @JoinColumn(name = "cate_no")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL) // 영속성 (CasacadeType.ALL 제거 : 영속성을 제거하여 Member 엔티티가 중복으로 저장되는 현상 X)
+//    @JoinColumn(name = "CATEGORY_CATE_NO")
     private SosoCategory category;
 
 

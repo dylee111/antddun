@@ -1,18 +1,16 @@
 package com.ds.antddun.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+
+@Getter
+@Setter
 public class SosoBoardDTO {
 
     private Long sosoNo;
@@ -30,5 +28,7 @@ public class SosoBoardDTO {
 
     private LocalDateTime regDate;
     private LocalDateTime modDate;
+
+
 
 }
