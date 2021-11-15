@@ -1,26 +1,20 @@
 package com.ds.antddun.controller;
 
-import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.config.auth.PrincipalDetailsService;
-import com.ds.antddun.entity.Member;
 import com.ds.antddun.repository.MemberRepository;
 import com.ds.antddun.service.MemberService;
-import com.ds.antddun.service.QnaService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.datasource.init.ScriptUtils;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import static java.lang.System.out;
 
 @Controller
 @Log4j2
@@ -41,8 +35,8 @@ public class LoginController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/user")
-    public String user() {
-        return "user";
+    public void user() {
+
     }
 
     @GetMapping("/admin")
@@ -80,21 +74,15 @@ public class LoginController {
         return "/member/findIdForm";
     }
 
-
     @ResponseBody
     @PostMapping("/findUsername")
     public String getPhoneNum(String phoneNum) throws Exception {
         String username = memberService.findByPhoneNum(phoneNum);
         log.info("findUsername>>>>>>>>>>>>>>>>>>>>>>> " + username);
-
-        return "/findId";
-    }
-
-    @GetMapping("/findId")
-    public String sendId(String phoneNum, Model model) {
-//        String username = memberRepository.findByPhoneNum(phoneNum);
-
-        return "/member/findIdForm";
+        if (username == null) {
+            return "해당 번호로 가입된 이메일이 없습니다.";
+        }
+        return username;
     }
 
 }

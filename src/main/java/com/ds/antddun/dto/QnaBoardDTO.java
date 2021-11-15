@@ -21,7 +21,8 @@ public class QnaBoardDTO {
     private Long qnaNo;
     private String title;
     private String content;
-    private String category;
+    private int jno;
+    private String job;
     private String writer;
     private int ddun;
     private int cnt;
@@ -32,12 +33,12 @@ public class QnaBoardDTO {
     private LocalDateTime regDate;
     private LocalDateTime modDate;
 
-
-    public QnaBoardDTO(Long qnaNo, String title, String content, String category, String writer, int ddun, int cnt, List<UploadImageDTO> imageDTOList, LocalDateTime regDate, LocalDateTime modDate) {
+    public QnaBoardDTO(Long qnaNo, String title, String content, int jno, String job, String writer, int ddun, int cnt, List<UploadImageDTO> imageDTOList, LocalDateTime regDate, LocalDateTime modDate) {
         this.qnaNo = qnaNo;
         this.title = title;
         this.content = content;
-        this.category = category;
+        this.jno = jno;
+        this.job = job;
         this.writer = writer;
         this.ddun = ddun;
         this.cnt = cnt;
