@@ -20,7 +20,7 @@ public class SosoPageRequestDTO {
 
     public SosoPageRequestDTO() {
         page = 1;
-        size = 10;
+        size = 12;
     }
 
     public Pageable getPageable(Sort sort) {

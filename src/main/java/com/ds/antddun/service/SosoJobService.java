@@ -20,7 +20,7 @@ public interface SosoJobService {
     List<SosoJobBoard> getListByCategory(String category);
     List<SosoJobBoard> getListByCategoryNo(int categoryNo);
 
-    PageResultDTO<SosoBoardDTO, SosoJobBoard> getList(PageRequestDTO requestDTO);
+    SosoPageResultDTO<SosoBoardDTO, SosoJobBoard> getList(int category, SosoPageRequestDTO requestDTO);
 
     default SosoBoardDTO entityToDTO(SosoJobBoard sosoJobBoard) {
 
@@ -29,12 +29,12 @@ public interface SosoJobService {
                 .title(sosoJobBoard.getTitle())
                 .content(sosoJobBoard.getContent())
                 .category(sosoJobBoard.getCategory().getCateNo())
-                .regDate(sosoJobBoard.getRegDate())
                 .mno(sosoJobBoard.getMember().getMno())
-                .firstName(sosoJobBoard.getMember().getFirstName())
-                .modDate(sosoJobBoard.getModDate())
                 .ddun(sosoJobBoard.getDdun())
+                .regDate(sosoJobBoard.getRegDate())
+                .modDate(sosoJobBoard.getModDate())
                 .build();
+        return sosoBoardDTO;
 
 //        List<UploadImageDTO> imageDTOList = uploadImageList.stream().map(uploadImage -> {
 //            return UploadImageDTO.builder()
@@ -47,12 +47,12 @@ public interface SosoJobService {
 //        sosoBoardDTO.setImageDTOList(imageDTOList);
 //        sosoBoardDTO.setAvg(avg);
 
-        return sosoBoardDTO;
     }
 
-    default SosoJobBoard dtoToEntity(SosoBoardDTO sosoBoardDTO, SosoCategoryDTO sosoCategoryDTO) {
+    default SosoJobBoard dtoToEntity(SosoBoardDTO sosoBoardDTO) {
 
         MemberDTO memberDTO = new MemberDTO();
+        SosoCategoryDTO sosoCategoryDTO = new SosoCategoryDTO();
 
         SosoJobBoard sosoJobBoard = SosoJobBoard.builder()
                 .sosoNo(sosoBoardDTO.getSosoNo())
