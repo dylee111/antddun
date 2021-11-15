@@ -2,7 +2,9 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
     <th:block th:fragment="content">
-        <!--페이지 수정 부분 시작-->
+        <!-- 페이지 수정 부분 시작 -->
+        <!--Context Root-->
+        <link th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
         <!-- 페이지 css/ js 추가 -->
         <link rel="stylesheet" th:href="@{/css/board/jayu/register.css}">
         <script th:src="@{/js/board/jayu/register.js}"></script>
@@ -18,7 +20,7 @@
 
         <!-- 본문 시작 -->
         <div class="content">
-            <form th:action="@{/member/jayu/confirm}" th:method="post">
+            <form th:action="@{/member/jayu/read}" method="post" >
                 <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
                 <!--카테고리-->
                 <div class="option">

@@ -11,8 +11,10 @@ import static com.ds.antddun.entity.QJayuBoard.jayuBoard;
 
 public interface JayuBoardService {
 
-    Long register(JayuBoardDTO jayuBoardDTO, Member member);
-//    List<JayuBoardDTO> getListByCategory(JayuBoard jayuBoard);
+    Long register(JayuBoardDTO jayuBoardDTO);
+    JayuBoard findById(Long jayuNo);
+    List<JayuBoard> findAll();
+
 
     default JayuBoardDTO entityToDTO(JayuBoard jayuBoard) {
         JayuBoardDTO jayuBoardDTO = JayuBoardDTO.builder()

@@ -25,7 +25,7 @@ public interface QnaService {
 
 /*    PageResultDTO<QnaBoardDTO, QnaBoard> getList(PageRequestDTO requestDTO);*/
 
-    default QnaBoardDTO entityToDTO(QnaBoard qnaBoard ,Member member, List<UploadImage> uploadImageList, Long cnt) {
+    default QnaBoardDTO entityToDTO(QnaBoard qnaBoard , Member member, List<UploadImage> uploadImageList, Long cnt) {
 
         QnaBoardDTO qnaBoardDTO = QnaBoardDTO.builder()
                 .qnaNo(qnaBoard.getQnaNo())
@@ -40,9 +40,9 @@ public interface QnaService {
 
         List<UploadImageDTO> imageDTOList = uploadImageList.stream().map(uploadImage -> {
             return UploadImageDTO.builder()
-                    .imgName(uploadImage.getImgName())
-                    .path(uploadImage.getPath())
-                    .uuid(uploadImage.getUuid())
+//                    .imgName(uploadImage.getImgName())
+//                    .path(uploadImage.getPath())
+//                    .uuid(uploadImage.getUuid())
                     .build();
         }).collect(Collectors.toList());
 

@@ -10,5 +10,5 @@ import java.util.List;
 
 public interface JayuBoardRepository extends JpaRepository<JayuBoard, Long>{
     @Query("SELECT jayu FROM JayuBoard jayu WHERE jayu.category=:category")
-    List<JayuBoardDTO> getListByCategory(String category);
+    List<Object[]> getListByCategory(String category);
 }

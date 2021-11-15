@@ -1,7 +1,7 @@
 package com.ds.antddun.service;
 
-import com.ds.antddun.entity.UploadFile;
-import com.ds.antddun.repository.UploadFileRepository;
+import com.ds.antddun.entity.UploadImage;
+import com.ds.antddun.repository.UploadImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
@@ -17,7 +17,7 @@ import java.util.UUID;
 public class ImageService {
 
 	@Autowired
-	UploadFileRepository uploadFileRepository;
+	UploadImageRepository uploadImageRepository;
 	
 	private final Path rootLocation; // d:/image/
 
@@ -26,7 +26,7 @@ public class ImageService {
 		System.out.println(rootLocation.toString());
 	}
 	
-	public UploadFile store(MultipartFile file) throws Exception {
+	public UploadImage store(MultipartFile file) throws Exception {
 		//		 fileName : 예제1.jpg
 		//		 filePath : c:/upload/uuid-예제1.jpg
 		//		 saveFileName : uuid-예ㅈ[.png
@@ -39,13 +39,13 @@ public class ImageService {
 			}
 			
 			String saveFileName = fileSave(rootLocation.toString(), file);
-			UploadFile saveFile = new UploadFile();
+			UploadImage saveFile = new UploadImage();
 			saveFile.setFileName(file.getOriginalFilename());
 			saveFile.setSaveFileName(saveFileName);
 			saveFile.setContentType(file.getContentType());
 			saveFile.setSize(file.getResource().contentLength());
 			saveFile.setFilePath(rootLocation.toString().replace(File.separatorChar, '/') +'/' + saveFileName);
-			uploadFileRepository.save(saveFile);
+			uploadImageRepository.save(saveFile);
 			return saveFile;
 			
 		} catch(IOException e) {
@@ -55,8 +55,8 @@ public class ImageService {
 		
 	}
 
-	public UploadFile load(Long fileId) {
-		return uploadFileRepository.findById(fileId).get();
+	public UploadImage load(Long fileId) {
+		return uploadImageRepository.findById(fileId).get();
 	}
 	
 	public String fileSave(String rootLocation, MultipartFile file) throws IOException {

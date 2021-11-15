@@ -45,11 +45,11 @@ function sendFile(file, el) {
 			form_data.append('file', file);
 			$.ajax({
 				data : form_data,
-				type : "POST",
+				type : 'POST',
 				url : contextPath+'/image',
-				cache : false,
-				contentType : false,
 				enctype : 'multipart/form-data',
+				cache : false,
+				contentType: false,
 				processData : false,
 				success : function(url) {
 					$(el).summernote('insertImage', url, function($image) {

@@ -20,12 +20,4 @@ public class JayuBoardDTO {
     private Long mno; //username
 
     private LocalDateTime regDate, modDate;
-
-    public JayuBoardDTO(String title, String content, String category, LocalDateTime regDate, LocalDateTime modDate){
-        this.title = title;
-        this.content = content;
-        this.category = category;
-        this.regDate = regDate;
-        this.modDate = modDate;
-    }
 }
