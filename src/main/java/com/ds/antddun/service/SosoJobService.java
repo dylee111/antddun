@@ -20,35 +20,34 @@ public interface SosoJobService {
     List<SosoJobBoard> getListByCategory(String category);
     List<SosoJobBoard> getListByCategoryNo(int categoryNo);
 
-    PageResultDTO<SosoBoardDTO, SosoJobBoard> getList(PageRequestDTO requestDTO);
+    SosoPageResultDTO<SosoBoardDTO, SosoJobBoard> getList(int category, SosoPageRequestDTO requestDTO);
 
-//    default SosoBoardDTO entityToDTO(SosoJobBoard sosoJobBoard) {
-//
-//        SosoBoardDTO sosoBoardDTO = SosoBoardDTO.builder()
-//                .sosoNo(sosoJobBoard.getSosoNo())
-//                .title(sosoJobBoard.getTitle())
-//                .content(sosoJobBoard.getContent())
-//                .category(sosoJobBoard.getCategory().getCateNo())
-//                .regDate(sosoJobBoard.getRegDate())
-//                .mno(sosoJobBoard.getMember().getMno())
-//                .firstName(sosoJobBoard.getMember().getFirstName())
-//                .modDate(sosoJobBoard.getModDate())
-//                .ddun(sosoJobBoard.getDdun())
-//                .build();
-//
-////        List<UploadImageDTO> imageDTOList = uploadImageList.stream().map(uploadImage -> {
-////            return UploadImageDTO.builder()
-////                    .imgName(uploadImage.getImgName())
-////                    .path(uploadImage.getPath())
-////                    .uuid(uploadImage.getUuid())
-////                    .build();
-////        }).collect(Collectors.toList());
-//
-////        sosoBoardDTO.setImageDTOList(imageDTOList);
-////        sosoBoardDTO.setAvg(avg);
-//
-//        return sosoBoardDTO;
-//    }
+    default SosoBoardDTO entityToDTO(SosoJobBoard sosoJobBoard) {
+
+        SosoBoardDTO sosoBoardDTO = SosoBoardDTO.builder()
+                .sosoNo(sosoJobBoard.getSosoNo())
+                .title(sosoJobBoard.getTitle())
+                .content(sosoJobBoard.getContent())
+                .category(sosoJobBoard.getCategory().getCateNo())
+                .mno(sosoJobBoard.getMember().getMno())
+                .ddun(sosoJobBoard.getDdun())
+                .regDate(sosoJobBoard.getRegDate())
+                .modDate(sosoJobBoard.getModDate())
+                .build();
+        return sosoBoardDTO;
+
+//        List<UploadImageDTO> imageDTOList = uploadImageList.stream().map(uploadImage -> {
+//            return UploadImageDTO.builder()
+//                    .imgName(uploadImage.getImgName())
+//                    .path(uploadImage.getPath())
+//                    .uuid(uploadImage.getUuid())
+//                    .build();
+//        }).collect(Collectors.toList());
+
+//        sosoBoardDTO.setImageDTOList(imageDTOList);
+//        sosoBoardDTO.setAvg(avg);
+
+    }
 
     default SosoJobBoard dtoToEntity(SosoBoardDTO sosoBoardDTO) {
 

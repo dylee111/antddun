@@ -3,12 +3,15 @@ package com.ds.antddun.controller;
 import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.SosoBoardDTO;
 import com.ds.antddun.dto.SosoCategoryDTO;
+import com.ds.antddun.dto.SosoPageRequestDTO;
 import com.ds.antddun.entity.SosoCategory;
 import com.ds.antddun.entity.SosoJobBoard;
 import com.ds.antddun.service.SosoCateService;
 import com.ds.antddun.service.SosoJobService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -104,58 +107,29 @@ public class SosoBoardController {
         return "/sosojob/sosojobMain";
     }
 
-    @GetMapping("/sosojob/list/{category}")
-    public String cateList(@PathVariable("category")int categoryNo, Model model) {
-        log.info("CATEGORYLIST======================");
-
-        List<SosoCategory> list = cateService.getList(); // 카테고리 리스트
-        List<Integer> cateNoList = new ArrayList<>(); // 카테고리 No. 담기 위한 LIST
-
-        for (int i = 0; i < list.size(); i++) {
-            categoryNo = list.get(i).getCateNo();
-            cateNoList.add(categoryNo);
-//            if (categoryNo == list.get(i).getCateNo()) {
-//                model.addAttribute("cate", sosoJobService.getListByCategoryNo(categoryNo));
-//            }
-        }
-        // 마지막 번호만 찍힘....
-
-        if (categoryNo == 1) {
-            model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(0)));
-            return "/sosojob/list/" + categoryNo;
-        }
-        if (categoryNo == 2) {
-            model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(1)));
-            return "/sosojob/list/" + categoryNo;
-        }
-        if (categoryNo == 3) {
-            model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(2)));
-            return "/sosojob/list/" + categoryNo;
-        }
-        if (categoryNo == 4) {
-            model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(3)));
-            return "/sosojob/list/" + categoryNo;
-        }
-        if (categoryNo == 5) {
-            model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(4)));
-            return "/sosojob/list/" + categoryNo;
-        }
-        if (categoryNo == 6) {
-            model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(5)));
-            return "/sosojob/list/" + categoryNo;
-        }
-        if (categoryNo == 7) {
-            model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(6)));
-            return "/sosojob/list/" + categoryNo;
-        }
-        if (categoryNo == 8) {
-            model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(7)));
-            return "/sosojob/list/" + categoryNo;
-        }
-
-        log.info("CATENOLIST>>>"+cateNoList);
-        log.info("CATENONONO>>>"+categoryNo);
-        return "/sosojob/sosoList/" + categoryNo ;
-    }
+//    @GetMapping("/sosojob/list/{category}")
+//    public String cateList(@PathVariable("category")int categoryNo, Model model, SosoPageRequestDTO sosoPageRequestDTO) {
+//        log.info("CATEGORYLIST======================");
+//
+//        List<SosoCategory> list = cateService.getList(); // 카테고리 리스트
+//        List<Integer> cateNoList = new ArrayList<>(); // 카테고리 No. 담기 위한 LIST
+//
+//
+//        for (int i = 0; i < list.size(); i++) {
+//            categoryNo = list.get(i).getCateNo();
+//            cateNoList.add(categoryNo);
+////            if (categoryNo == list.get(i).getCateNo()) {
+////                model.addAttribute("cate", sosoJobService.getListByCategoryNo(categoryNo));
+////            }
+//        }
+//
+//        // 마지막 번호만 찍힘....
+////        model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(0)));
+//        model.addAttribute("cate", sosoJobService.getList(cateNoList.get(0),sosoPageRequestDTO));
+//
+//        log.info("CATENOLIST>>>"+cateNoList);
+//        log.info("CATENONONO>>>"+categoryNo);
+//        return "/sosojob/sosoList/" + categoryNo ;
+//    }
 
 }
