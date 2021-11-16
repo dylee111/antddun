@@ -158,12 +158,13 @@
                 data: {"email" : $("#username").val()},
                 success: function(data) {
                     if(data == 1) {
+                        console.log(data);
                         idResult.html("중복된 아이디입니다.");
                         return false;
                     } else if(data == 0) {
                         idResult.html("사용 가능한 아이디입니다.");
                         idResult.css("color","blue");
-                        return true;
+                        return true;77
                     }
                 }
             }) // ajax end.

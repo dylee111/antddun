@@ -6,7 +6,6 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,7 +13,7 @@ import javax.persistence.*;
 public class JobList {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "JOBLIST_SEQ_GEN")
-    private Long jno;
+    private int jno;
 
     private String job;
 

@@ -1,206 +1,220 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
-  <th:block th:fragment="content">
-    <!-- 페이지 css/ js 추가 -->
-    <link th:href="@{/css/member/mypage.css}" rel="stylesheet" />
-    <script th:src="@{/js/join/join.js}"></script>
-    <script th:src="@{/js/member/mypage.js}"></script>
+    <th:block th:fragment="content">
+        <!-- 페이지 css/ js 추가 -->
+        <link th:href="@{/css/member/mypage.css}" rel="stylesheet"/>
+        <script th:src="@{/js/join/join.js}"></script>
+        <script th:src="@{/js/member/mypage.js}"></script>
 
-    <!-- 본문 시작 -->
-    <div class="content">
-      <div style="margin-left: 6%;">
-        <nav class="mypage_nav">
-          <ul id="tabs">
-            <li><a id="my_tab">회원 정보</a></li>
-            <li><a id="money_tab">내 돈 정보</a></li>
-          </ul>
-        </nav>
-      </div>
-
-      <div id="my_wrap">
-
-        <div id="my_page">
-          <div id="user_data">
-            <h2 class="mypage_title">회원 정보</h2>
-            <hr class="my_margin">
-
-            <form method="POST" class="center my_margin" id="frm">
-              <div th:each="member: ${member}">
-                <div class="input_box">
-
-                  <input type="email" class="input_info margin_bottom" id="username" name="username" th:attr="placeholder=${member.username}" disabled/>
-                </div>
-                <span class="resultBox"></span>
-
-                <div class="input_box">
-                  <input type="password" class="input_info pass" id="password" name="password" placeholder="비밀번호(영문,숫자,특수문자 8~15자)"/>
-
-                </div>
-                <span class="resultBox pwdCheckResult"></span>
-
-                <div class="input_box">
-                  <input type="password"  class="input_info pass" id="rePassword" name=""
-                         placeholder="비밀번호 재확인">
-                </div>
-                <span class="resultBox rePwdCheckResult"></span>
-
-                <div class="mb_wrap">
-                  <div class="input_mb">
-
-                    <input type="text" class="input_info" name="phoneNum" id="phoneNum" th:attr="placeholder=${member.phoneNum}" maxlength="11"
-                           onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
-                  </div>
-                  <button type="button" id="btnPhone" class="mypage_btn phoneAuthBtn a_white"
-                          style="margin-left: 5px;">인증</button>
-                </div>
-
-                <span class="resultBox"></span>
-
-                <div class="select_wrap">
-                  <select class="job select_box" style="margin-right: 5px;" name="jno" th:each="member: ${member}">
-                    <option selected="selected" name="jno">[[${member.job.job}]]</option>
-                    <option th:each="dto: ${jobList}" th:value="${dto.jno}" name="jno">[[${dto.job}]]</option>
-                  </select>
-                  <select class="experience select_box" name="experience" th:each="member: ${member}">
-                    <option selected="selected" name="experience">[[${member.experience}]]년차</option>
-                  </select>
-                </div>
-                <span class="resultBox"></span>
-
-                <div class="input_box">
-                  <input type="text" class="input_earn" id="salary" name="salary" th:attr="placeholder=${member.salary}"
-                         onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-                  <div class="earn_unit">
-                    <span>만원</span>
-                  </div>
-                  <div class="earn_info">
-                    <div class="alert_tip">ⓘ<span class="tooltiptext">연봉</span></div>
-                  </div>
-                </div>
-
-                <h6 class="mypage_sub">근무시간</h6>
-                <div class="select_wrap" th:each="member: ${member}">
-                  <input type="time" class="startTime select_box" style="margin-right: 5px;" name="startTime"
-                         th:attr="value=${member.startTime}"/>
-                  <input type="time" class="endTime select_box" name="endTime" th:attr="value=${member.endTime}"/>
-<!--                  <select class="startTime select_box" style="margin-right: 5px;" name="startTime" th:each="member: ${member}">-->
-<!--                    <option selected="selected" name="startTime">[[${member.startTime}]]</option>-->
-<!--                  </select>-->
-<!--                  <select class="endTime select_box" name="endTime" th:each="member: ${member}">-->
-<!--                    <option selected="selected" name="endTime">[[${member.endTime}]]</option>-->
-<!--                  </select><br>-->
-                </div>
-              </div>
-              <button type="submit" class="submit_btn a_white">수정하기</button>
-            </form>
-          </div>
-        </div>
-
-        <div id="money_page" style="display:none;">
-          <div id="user_wallet" style="margin-bottom: 70px;">
-            <h2 class="mypage_title">내 돈 정보</h2>
-            <button class="save_btn">저장</button>
-            <hr class="my_margin">
-
-            <div class="center">
-              <div class="my_margin" th:each="member: ${member}">
-                <span class="money_title">실수령액</span>
-                <span style="display:none;" id="earn">[[${member.salary}]]</span>
-                <input type="text" class="money_input" id="earn_month" name="earn" disabled />
-              </div>
-
-              <div>
-                <h4 class="mypage_subtitle margin_bottom">나의 위시 리스트</h4>
-                <div class="my_margin2">
-                  <span class="money_title">금액</span>
-                  <input type="text" class="money_input" name="wish_total" disabled />
-                </div>
-
-                <table class="wish_table margin_top">
-                  <thead>
-                  <tr>
-                    <td style="width:10%;">메인</td>
-                    <td style="width:40%;">상품</td>
-                    <td style="width:20%;">금액</td>
-                    <td style="width:15%;">적금(%)</td>
-                    <td style="width:15%;">D-DAY</td>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td><input type="radio" name="main_wish"/></td>
-                    <td><input class="input_pd" placeholder="상품명을 입력하세요."></td>
-                    <td><input class="input_cost" placeholder="ex) 50000"></td>
-                    <td><input class="input_per" placeholder="ex) 10">%</td>
-                    <td>D-4</td>
-                  </tr>
-                  <tr>
-                    <td><input type="radio" name="main_wish"/></td>
-                    <td><input class="input_pd"></td>
-                    <td><input class="input_cost"></td>
-                    <td><input class="input_per">%</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><input type="radio" name="main_wish"/></td>
-                    <td><input class="input_pd"></td>
-                    <td><input class="input_cost"></td>
-                    <td><input class="input_per">%</td>
-                    <td></td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
+        <!-- 본문 시작 -->
+        <div class="content">
+            <div style="margin-left: 14%;">
+                <nav class="mypage_nav">
+                    <ul id="tabs">
+                        <li><a id="my_tab">회원 정보</a></li>
+                        <li><a id="money_tab">내 돈 정보</a></li>
+                    </ul>
+                </nav>
             </div>
-          </div>
 
-          <div id="user_ddun">
-            <h2 class="mypage_title">내 뚠 정보</h2>
-            <button class="charge_btn">충전</button>
-            <hr class="my_margin">
+            <div id="my_wrap">
 
-            <div class="center my_margin">
-              <div>
-                <div class="my_ddun_wrap">
-                  <span class="my_ddun">이번 달 적립</span>
-                  <span class="my_ddun"><strong>540</strong>뚠</span>
+                <div id="my_page">
+                    <div id="user_data">
+                        <h2 class="mypage_title">회원 정보</h2>
+                        <hr class="my_margin">
+
+                        <form method="POST" class="center my_margin" id="frm">
+                            <div th:each="member: ${member}">
+                                <div class="input_box">
+                                    <input type="email" class="input_info margin_bottom" id="username" name="username"
+                                           th:attr="placeholder=${member.username}" disabled/>
+                                </div>
+                                <span class="resultBox"></span>
+
+                                <div class="input_box">
+                                    <input type="password" class="input_info pass" id="password" name="password"
+                                           placeholder="비밀번호(영문,숫자,특수문자 8~15자)"/>
+                                </div>
+                                <span class="resultBox pwdCheckResult"></span>
+
+                                <div class="input_box">
+                                    <input type="password" class="input_info pass" id="rePassword" name=""
+                                           placeholder="비밀번호 재확인">
+                                </div>
+                                <span class="resultBox rePwdCheckResult"></span>
+
+                                <div class="mb_wrap">
+                                    <div class="input_mb">
+                                        <input type="text" class="input_info" name="phoneNum" id="phoneNum"
+                                               th:attr="placeholder=${member.phoneNum}" maxlength="11"
+                                               onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
+                                    </div>
+                                    <button type="button" id="btnPhone" class="mypage_btn phoneAuthBtn a_white"
+                                            style="margin-left: 5px;">인증
+                                    </button>
+                                </div>
+                                <span class="resultBox"></span>
+
+                                <div class="select_wrap">
+                                    <select class="job select_box" style="margin-right: 5px;" name="jno"
+                                            th:each="member: ${member}">
+                                        <option selected="selected" name="jno">[[${member.job.job}]]</option>
+                                        <option th:each="dto: ${jobList}" th:value="${dto.jno}" name="jno">
+                                            [[${dto.job}]]
+                                        </option>
+                                    </select>
+                                    <select class="experience select_box" name="experience" th:each="member: ${member}">
+                                        <option selected="selected" name="experience">[[${member.experience}]]년차
+                                        </option>
+                                    </select>
+                                </div>
+                                <span class="resultBox"></span>
+
+                                <div class="input_box">
+                                    <input type="text" class="input_earn" id="salary" name="salary"
+                                           th:attr="placeholder=${member.salary}"
+                                           onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+                                    <div class="earn_unit">
+                                        <span>만원</span>
+                                    </div>
+                                    <div class="earn_info">
+                                        <div class="alert_tip">
+                                            ⓘ
+                                            <span class="tooltiptext">
+                                                기입하지 않을 경우</br>서비스가 제한됩니다.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h6 class="mypage_sub">근무시간</h6>
+                                <div class="select_wrap" th:each="member: ${member}">
+                                    <input type="time" class="startTime select_box" style="margin-right: 5px;"
+                                           name="startTime"
+                                           th:attr="value=${member.startTime}"/>
+                                    <input type="time" class="endTime select_box" name="endTime"
+                                           th:attr="value=${member.endTime}"/>
+                                    <!--                  <select class="startTime select_box" style="margin-right: 5px;" name="startTime" th:each="member: ${member}">-->
+                                    <!--                    <option selected="selected" name="startTime">[[${member.startTime}]]</option>-->
+                                    <!--                  </select>-->
+                                    <!--                  <select class="endTime select_box" name="endTime" th:each="member: ${member}">-->
+                                    <!--                    <option selected="selected" name="endTime">[[${member.endTime}]]</option>-->
+                                    <!--                  </select><br>-->
+                                </div>
+                            </div>
+                            <button type="submit" class="submit_btn a_white">수정하기</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="my_ddun_wrap">
-                  <span class="my_ddun">보유 뚠</span>
-                  <span class="my_ddun"><strong>10,000</strong>뚠</span>
-                </div>
-              </div>
 
-              <div>
-                <h4 class="mypage_subtitle">뚠 사용 내역</h4>
-                <table class="wish_table margin_top">
-                  <thead>
-                  <tr>
-                    <td style="width:10%;">일자</td>
-                    <td style="width:40%;">상세 내용</td>
-                    <td style="width:15%;">입금</td>
-                    <td style="width:15%;">출금</td>
-                    <td style="width:20%;">남은 뚠</td>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>2021.11.09</td>
-                    <td>포토샵 누끼</td>
-                    <td>-</td>
-                    <td>5,000</td>
-                    <td>10,000</td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
+                <div id="money_page" style="display:none;">
+                    <form method="POST" th:action="@{/}">
+                    <div id="user_wallet" style="margin-bottom: 70px;">
+                        <h2 class="mypage_title">내 돈 정보</h2>
+                        <button class="save_btn">저장</button>
+                        <hr class="my_margin">
+
+                        <div class="center">
+                            <div class="my_margin" th:each="member: ${member}">
+                                <span class="money_title">실수령액</span>
+                                <span style="display:none;" id="earn">[[${member.salary}]]</span>
+                                <input type="text" class="money_input" id="earn_month" name="earn" disabled/>
+                            </div>
+
+                            <div>
+                                <h4 class="mypage_subtitle margin_bottom">나의 위시 리스트</h4>
+                                <div class="my_margin2">
+                                    <span class="money_title">금액</span>
+                                    <input type="text" class="money_input" name="wish_total" disabled/>
+                                </div>
+
+                                <table class="wish_table margin_top">
+                                    <thead>
+                                    <tr>
+                                        <td style="width:10%;">메인</td>
+                                        <td style="width:40%;">상품</td>
+                                        <td style="width:20%;">금액</td>
+                                        <td style="width:15%;">적금 비율</td>
+                                        <td style="width:15%;">D-DAY</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><input type="radio" name="main_wish"/></td>
+                                        <td><input class="input_pd" placeholder="상품명을 입력하세요." name="wishList"></td>
+                                        <td><input class="input_cost" placeholder="ex) 50000" name="price"></td>
+                                        <td><input class="input_per" placeholder="ex) 10" name="rate">%</td>
+                                        <td>D-4</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="radio" name="main_wish"/></td>
+                                        <td><input class="input_pd" name="wishList"></td>
+                                        <td><input class="input_cost" name="price"></td>
+                                        <td><input class="input_per" name="rate">%</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="radio" name="main_wish"/></td>
+                                        <td><input class="input_pd" name="wishList"></td>
+                                        <td><input class="input_cost" name="price"></td>
+                                        <td><input class="input_per" name="rate">%</td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+
+                    <div id="user_ddun">
+                        <h2 class="mypage_title">내 뚠 정보</h2>
+                        <button class="charge_btn">충전</button>
+                        <hr class="my_margin">
+
+                        <div class="center my_margin">
+                            <div>
+                                <div class="my_ddun_wrap">
+                                    <span class="my_ddun">이번 달 적립</span>
+                                    <span class="my_ddun"><strong>540</strong>뚠</span>
+                                </div>
+                                <div class="my_ddun_wrap">
+                                    <span class="my_ddun">보유 뚠</span>
+                                    <span class="my_ddun"><strong>10,000</strong>뚠</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="mypage_subtitle">뚠 사용 내역</h4>
+                                <table class="wish_table margin_top">
+                                    <thead>
+                                    <tr>
+                                        <td style="width:10%;">일자</td>
+                                        <td style="width:40%;">상세 내용</td>
+                                        <td style="width:15%;">입금</td>
+                                        <td style="width:15%;">출금</td>
+                                        <td style="width:20%;">남은 뚠</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>2021.11.09</td>
+                                        <td>포토샵 누끼</td>
+                                        <td>-</td>
+                                        <td>5,000</td>
+                                        <td>10,000</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-    <!-- 본문 끝 -->
-    <!--페이지 수정 부분 끝-->
-  </th:block>
+        <!-- 본문 끝 -->
+        <!--페이지 수정 부분 끝-->
+    </th:block>
 </th:block>

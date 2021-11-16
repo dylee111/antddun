@@ -12,7 +12,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "member")
-@Data
+@Getter
+@Setter
 @SequenceGenerator(name = "SOSOJOB_SEQ_GEN", sequenceName = "SOSOJOB_SEQ", initialValue = 1, allocationSize = 1)
 public class SosoJobBoard extends BaseEntity {
     @Id
@@ -27,9 +28,11 @@ public class SosoJobBoard extends BaseEntity {
     private int cnt;
     private int ddun;
 
-    @ManyToOne(fetch = FetchType.LAZY) // 영속성 (CasacadeType.ALL 제거 : 영속성을 제거하여 Member 엔티티가 중복으로 저장되는 현상 X)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL) // 영속성 (CasacadeType.ALL 제거 : 영속성을 제거하여 Member 엔티티가 중복으로 저장되는 현상 X)
+//    @JoinColumn(name = "CATEGORY_CATE_NO")
     private SosoCategory category;
 
-    @ManyToOne(fetch = FetchType.LAZY) // 영속성 (CasacadeType.ALL 제거 : 영속성을 제거하여 Member 엔티티가 중복으로 저장되는 현상 X)
+
+    @ManyToOne(fetch = FetchType.EAGER) // 영속성 (CasacadeType.ALL 제거 : 영속성을 제거하여 Member 엔티티가 중복으로 저장되는 현상 X)
     private Member member;
 }

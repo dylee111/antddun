@@ -34,13 +34,18 @@ public class MemberServiceImpl implements MemberService {
         return null;
     }
 
+
+    @Override
+    public String findByPhoneNum(String phoneNum) {
+        String username = memberRepository.findByPhoneNum(phoneNum);
+        return username;
+    }
+
     @Override
     public Long join(MemberDTO memberDTO, JobListDTO jobListDTO) {
 
         memberDTO.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
 
-        log.info("GetSTART>>>>>>>>>>>>>>>>"+memberDTO.getStartTime());
-        log.info("GetEND>>>>>>>>>>>>>>>>"+memberDTO.getEndTime());
         JobList jobList = jobListRepository.findById(jobListDTO.getJno()).get();
 
         return memberRepository.save(Member.builder()
@@ -110,14 +115,6 @@ public class MemberServiceImpl implements MemberService {
     /*
     * 시간 변환
     * */
-
-    @Override
-    public Date convertDate(String startTime, String endTime) {
-        Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat();
-
-        return null;
-    }
 
     @Override
     public Member welcomeMsg(Long mno) {

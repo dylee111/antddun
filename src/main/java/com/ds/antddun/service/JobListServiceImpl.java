@@ -15,15 +15,7 @@ public class JobListServiceImpl implements JobListService {
 
     @Override
     public List<JobList> getList() {
-
-//        JobListDTO result = entityToDTO(jobList);
         return jobListRepository.findAll();
     }
 
-//    @Override
-//    public void saveJob(JobListDTO jobListDTO) {
-//        JobList jobList = jobListRepository.findById(jobListDTO.getJno()).get();
-//
-//
-//    }
 }

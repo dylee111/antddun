@@ -19,26 +19,23 @@
         <!-- 본문 시작 -->
         <div class="content">
 
-            <form th:action="@{/member/sosojob/confirm}" th:method="post">
+            <form th:action="@{/member/sosojob/register}" method="post">
 
                 <!--카테고리-->
                 <div class="option">
-                    <select class="category" name="cateNo">
-                        <option th:each="category : ${category}" th:value="${category.cateNo}">[[${category.sosoCateName}]]</option>
+                    <select class="category" name="cateNo" >
+                        <option th:each="category : ${category}" th:value="${category.cateNo}" name="cateNo">[[${category.sosoCateName}]]</option>
                     </select>
                 </div>
 
                 <!--제목-->
                 <div class="form-group">
                     <input type="text" id="title" class="form-control" name="title" required placeholder="제목을 입력해주세요">
-
                 </div>
 
                 <!--내용-->
                 <div class="summernote">
-
                     <textarea id="summernote" class="content"  name="content" ></textarea>
-
                 </div>
 
                 <!--뚠-->
@@ -62,8 +59,10 @@
             </form>
         </div>
         <script>
-<!--            $(document).ready(function() {-->
-
+            $(document).ready(function() {
+                $(".btn-save").click(function() {
+                    alert($(".category").val());
+                });
 
 <!--                const title = $("#title");-->
 <!--                const content = $(".content");-->
@@ -74,7 +73,7 @@
 <!--                for(var i = 0; i < categoryArr.length; i++){-->
 <!--                    $(".category").append("<option value="+categoryArr[i]+">" + categoryArr[i] + "</option>");-->
 <!--                }-->
-<!--            });-->
+            });
 
 
         </script>

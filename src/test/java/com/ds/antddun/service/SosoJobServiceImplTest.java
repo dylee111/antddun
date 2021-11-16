@@ -1,15 +1,15 @@
 package com.ds.antddun.service;
 
-import com.ds.antddun.dto.PageRequestDTO;
-import com.ds.antddun.dto.PageResultDTO;
-import com.ds.antddun.dto.SosoBoardDTO;
-import com.ds.antddun.entity.Member;
+import com.ds.antddun.dto.*;
 import com.ds.antddun.entity.SosoJobBoard;
+import com.ds.antddun.repository.SosoBoardRepository;
+import com.ds.antddun.repository.SosoCategoryRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.stream.IntStream;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 @SpringBootTest
 class SosoJobServiceImplTest {
@@ -17,37 +17,27 @@ class SosoJobServiceImplTest {
     @Autowired
     private SosoJobService sosoJobService;
 
+    @Autowired
+    private SosoBoardRepository sosoBoardRepository;
 
-//    @Test
-//    void register() {
-//
-//
-//        IntStream.rangeClosed(1, 50).forEach(i -> {
-//
-//                SosoBoardDTO sosoBoardDTO = SosoBoardDTO.builder()
-//                        .title("홈페이지 제작합니다" + i)
-//                        .category(i < 25 ? "IT" : "마케팅")
-//                        .content("홈페이지 제작" + i)
-//                        .ddun(10000)
-//                        .mno(1L)
-//                        .build();
-//
-////            System.out.println(sosoJobService.register(sosoBoardDTO));
-//        });
-//    }
+    @Autowired
+    private SosoCategoryRepository sosoCategoryRepository;
 
+    @Test
+    public void readCate() {
+        System.out.println(sosoCategoryRepository.findById(1).get().getCateNo());
 
-//    @Test
-//    public void testRead() {
-//
-//        PageRequestDTO pageRequestDTO = PageRequestDTO.builder().page(1).size(10).build();
-//
-//        PageResultDTO<SosoJobBoard, SosoBoardDTO> resultDTO = sosoJobService.getList(pageRequestDTO);
-//
-//        for (SosoBoardDTO sosoBoardDTO : resultDTO.getDtoList()) {
-//            sou
-//        }
-//    }
+    }
+
+    @Test
+    public void testRead() {
+        Pageable pageable = PageRequest.of(0, 12);
+
+        Page<SosoJobBoard> result = sosoBoardRepository.findAll(pageable);
+
+        System.out.println(result);
+
+    }
 
     @Test
     void getListByCategoryTest() {
@@ -58,9 +48,15 @@ class SosoJobServiceImplTest {
 
     @Test
     void getList() {
-        PageRequestDTO pageRequestDTO = PageRequestDTO.builder().page(1).size(10).build();
+        SosoPageRequestDTO sosoPageRequestDTO = SosoPageRequestDTO.builder().page(1).size(12).build();
+        System.out.println("DTODTO" + sosoPageRequestDTO);
 
-        PageResultDTO<SosoBoardDTO, SosoJobBoard> resultDTO = sosoJobService.getList(pageRequestDTO);
+        SosoPageResultDTO<SosoBoardDTO, SosoJobBoard> resultDTO = sosoJobService.getList(1,sosoPageRequestDTO);
+        System.out.println("RESULT >>> " + resultDTO);
+
+        for (SosoBoardDTO sosoBoardDTO : resultDTO.getDtoList()) {
+            System.out.println("PAGINATION>>>"+ sosoBoardDTO);
+        }
     }
 
 

@@ -17,5 +17,4 @@ public class AntddunApplication {
 	public String uploadPath() {
 		return "c:\\upload";
 	}
-
 }

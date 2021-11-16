@@ -1,74 +1,58 @@
 package com.ds.antddun.service;
 
 import com.ds.antddun.dto.*;
-import com.ds.antddun.entity.Member;
-import com.ds.antddun.entity.QnaBoard;
-import com.ds.antddun.entity.UploadImage;
-import org.springframework.data.domain.Pageable;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import com.ds.antddun.entity.*;
 
 public interface QnaService {
 
-    List<QnaBoardDTO> getBoardList();
 
-    List<QnaBoard> getList(Pageable pageable);
+    PageResultDTO<QnaBoardDTO, QnaBoard> getBoardList(PageRequestDTO requestDTO);
 
-    Long register(QnaBoardDTO qnaBoardDTO, Member member);
+    Long register(QnaBoardDTO qnaBoardDTO, JobListDTO jobListDTO, Member member);
+
+//    List<JobList> getListByJob(String job);
+//    List<JobList> getListByJobNo (int jno);
 
     void modify();
 
     void delete();
 
-    List<QnaBoardDTO> getListByCategory(QnaBoard qnaBoard);
 
-/*    PageResultDTO<QnaBoardDTO, QnaBoard> getList(PageRequestDTO requestDTO);*/
-
-    default QnaBoardDTO entityToDTO(QnaBoard qnaBoard , Member member, List<UploadImage> uploadImageList, Long cnt) {
-
-        QnaBoardDTO qnaBoardDTO = QnaBoardDTO.builder()
-                .qnaNo(qnaBoard.getQnaNo())
-                .title(qnaBoard.getTitle())
-                .content(qnaBoard.getContent())
-                .category(qnaBoard.getCategory())
-                .regDate(qnaBoard.getRegDate())
-                .mno(member.getMno())
-                .modDate(qnaBoard.getModDate())
-                .ddun(qnaBoard.getDdun())
-                .build();
-
-        List<UploadImageDTO> imageDTOList = uploadImageList.stream().map(uploadImage -> {
-            return UploadImageDTO.builder()
-//                    .imgName(uploadImage.getImgName())
-//                    .path(uploadImage.getPath())
-//                    .uuid(uploadImage.getUuid())
-                    .build();
-        }).collect(Collectors.toList());
-
-        qnaBoardDTO.setImageDTOList(imageDTOList);
-        qnaBoardDTO.setCnt(cnt.intValue());
-
-        return qnaBoardDTO;
-    }
 
     default QnaBoard dtoToEntity(QnaBoardDTO qnaBoardDTO) {
 
-        MemberDTO memberDTO = new MemberDTO();
 
-        QnaBoard qnaBoard = QnaBoard.builder()
+        QnaBoard entity = QnaBoard.builder()
                 .qnaNo(qnaBoardDTO.getQnaNo())
-                .category(qnaBoardDTO.getCategory())
+                .jobList(JobList.builder().jno(qnaBoardDTO.getJno()).build()) //jno
                 .title(qnaBoardDTO.getTitle())
                 .content(qnaBoardDTO.getContent())
                 .ddun(qnaBoardDTO.getDdun())
                 .cnt(qnaBoardDTO.getCnt())
-                .member(Member.builder().mno(memberDTO.getMno()).build())
                 .build();
 
-        return qnaBoard;
+        System.out.println("dtoToEntity>>"+qnaBoardDTO);
+        return entity;
     }
 
 
+
+    default QnaBoardDTO entityToDTO(QnaBoard qnaBoard) {
+
+        QnaBoardDTO dto = QnaBoardDTO.builder()
+                .qnaNo(qnaBoard.getQnaNo())
+                .title(qnaBoard.getTitle())
+                .writer(qnaBoard.getMember().getExperience()+"년차 " + qnaBoard.getMember().getJob().getJob() + " " + qnaBoard.getMember().getLastName() +"개미")
+                .content(qnaBoard.getContent())
+                .jno(qnaBoard.getJobList().getJno())
+                .job(qnaBoard.getJobList().getJob()) //here
+                .regDate(qnaBoard.getRegDate())
+                .cnt(qnaBoard.getCnt())
+                .modDate(qnaBoard.getModDate())
+                .ddun(qnaBoard.getDdun())
+                .build();
+        System.out.println("entityToDto>>>>"+dto);
+        return dto;
+    }
 
 }

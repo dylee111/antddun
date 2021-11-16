@@ -1,26 +1,26 @@
 package com.ds.antddun.service;
 
-import com.ds.antddun.dto.MemberDTO;
-import com.ds.antddun.dto.PageRequestDTO;
-import com.ds.antddun.dto.PageResultDTO;
-import com.ds.antddun.dto.SosoBoardDTO;
+import com.ds.antddun.dto.*;
 import com.ds.antddun.entity.Member;
+import com.ds.antddun.entity.SosoCategory;
 import com.ds.antddun.entity.SosoJobBoard;
+import com.ds.antddun.repository.SosoCategoryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public interface SosoJobService {
 
-    Long register(SosoBoardDTO sosoBoardDTO, Member member);
+    Long register(SosoBoardDTO sosoBoardDTO, SosoCategoryDTO sosoCategoryDTO, Member member);
 
     void modify();
 
     void delete();
 
-    // String 말고 Category로 받아와야 함.
     List<SosoJobBoard> getListByCategory(String category);
+    List<SosoJobBoard> getListByCategoryNo(int categoryNo);
 
-    PageResultDTO<SosoBoardDTO, SosoJobBoard> getList(PageRequestDTO requestDTO);
+    SosoPageResultDTO<SosoBoardDTO, SosoJobBoard> getList(int category, SosoPageRequestDTO requestDTO);
 
     default SosoBoardDTO entityToDTO(SosoJobBoard sosoJobBoard) {
 
@@ -28,13 +28,13 @@ public interface SosoJobService {
                 .sosoNo(sosoJobBoard.getSosoNo())
                 .title(sosoJobBoard.getTitle())
                 .content(sosoJobBoard.getContent())
-                .category(sosoJobBoard.getCategory().getSosoCateName())
-                .regDate(sosoJobBoard.getRegDate())
+                .category(sosoJobBoard.getCategory().getCateNo())
                 .mno(sosoJobBoard.getMember().getMno())
-                .firstName(sosoJobBoard.getMember().getFirstName())
-                .modDate(sosoJobBoard.getModDate())
                 .ddun(sosoJobBoard.getDdun())
+                .regDate(sosoJobBoard.getRegDate())
+                .modDate(sosoJobBoard.getModDate())
                 .build();
+        return sosoBoardDTO;
 
 //        List<UploadImageDTO> imageDTOList = uploadImageList.stream().map(uploadImage -> {
 //            return UploadImageDTO.builder()
@@ -47,21 +47,22 @@ public interface SosoJobService {
 //        sosoBoardDTO.setImageDTOList(imageDTOList);
 //        sosoBoardDTO.setAvg(avg);
 
-        return sosoBoardDTO;
     }
 
     default SosoJobBoard dtoToEntity(SosoBoardDTO sosoBoardDTO) {
 
         MemberDTO memberDTO = new MemberDTO();
+        SosoCategoryDTO sosoCategoryDTO = new SosoCategoryDTO();
 
         SosoJobBoard sosoJobBoard = SosoJobBoard.builder()
                 .sosoNo(sosoBoardDTO.getSosoNo())
-//                .category(sosoBoardDTO.getCategory())
+                .category(SosoCategory.builder().cateNo(sosoCategoryDTO.getCateNo()).build())
                 .title(sosoBoardDTO.getTitle())
                 .content(sosoBoardDTO.getContent())
                 .ddun(sosoBoardDTO.getDdun())
                 .member(Member.builder().mno(memberDTO.getMno()).build())
                 .build();
+
         return sosoJobBoard;
     }
 }
