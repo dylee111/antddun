@@ -16,10 +16,10 @@
 
     </style>
         <div class="main-container" >
-            <section class="card mg_bottom"  th:each="map : ${category}" style="margin-bottom:15px;">
+            <section class="card mg_bottom"  th:each="map, mapValue : ${category}" style="margin-bottom:15px;">
                 <div class="card-header" >
                     <h3 class="boardlist"  th:text=${map.key}></h3>
-                    <span class="more" th:each="cateNum : ${cateNoList}"><a th:value="${cateNum}" class="category-page" th:href="@{'/member/sosojob/list/' + ${cateNum}}">더보기</a></span>
+                    <span class="more" th:each="cateNum : ${cateNoList}" ><a class="category-page" th:href="@{'/member/sosojob/list/' + ${cateNum}}" >더보기</a></span>
 <!--                    <span class="more"><a th:href="@{/sosojob/list/미디어}">더보기</a></span>-->
                 </div>
                 <div class="card-body" >
@@ -27,15 +27,15 @@
                         <div class="row">
                             <div class="column small-11 small-centered" >
                                 <section class="visual" th:src="@{/assets/sosojob_cate/it.jpeg}">
-                                    <div class="slick-card" th:each="catevalue : ${map.value}">
+                                    <div class="slick-card" th:each="cateValue : ${map.value}">
                                         <article >
                                             <img class="cate-thumbnail" th:src="@{https://dummyimage.com/230x160/000/fff}"/>
                                             <div clss="content-container">
-                                                <div><span class="tag_c" th:text="${catevalue.category.sosoCateName}" ></span></div>
-                                                <div class="title"><span th:text="${catevalue.title}"></span></div>
+                                                <div><span class="tag_c" th:text="${cateValue.category.sosoCateName}" ></span></div>
+                                                <div class="title"><span th:text="${cateValue.title}"></span></div>
                                                 <div class="ddun-box">
                                                     <span><img class="img coin" th:src="@{/assets/coins.png}" width="12">
-                                                        <span class="price" th:text="${catevalue.ddun}"></span><span>뚠</span></span>
+                                                        <span class="price" th:text="${cateValue.ddun}"></span><span>뚠</span></span>
                                                 </div>
 
                                                 <div class="star-box">
@@ -92,19 +92,15 @@
               }
             });
 
-            $(document).ready(function() {
+<!--            $(document).ready(function() {-->
 
-                var cateNum = $(".category-page").val();
-
-                $(".category-page").click(function() {
-                    ajax({
-                        url: "/antddun/member/sosojob/" + cateNum,
-                        methods: "GET",
-                        dataType: "html"
-
-                    });
-                });
-            });
+<!--                $(".more").on('click', function() {-->
+<!--                    .ajax({-->
+<!--                        type: 'GET',-->
+<!--                        url:-->
+<!--                    })-->
+<!--                });-->
+<!--            });-->
 
         </script>
 

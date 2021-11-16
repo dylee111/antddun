@@ -33,9 +33,11 @@ class SosoJobServiceImplTest {
     public void testRead() {
         Pageable pageable = PageRequest.of(0, 12);
 
-        Page<SosoJobBoard> result = sosoBoardRepository.findAll(pageable);
+        Page<SosoJobBoard> result = sosoBoardRepository.getPageByCategoryNo(1,pageable);
 
         System.out.println(result);
+        System.out.println(result.getTotalElements());
+        System.out.println(result.getTotalPages());
 
     }
 
