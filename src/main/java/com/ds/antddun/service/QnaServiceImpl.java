@@ -7,6 +7,7 @@ import com.ds.antddun.dto.QnaBoardDTO;
 import com.ds.antddun.entity.JobList;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.QnaBoard;
+import com.ds.antddun.entity.SosoCategory;
 import com.ds.antddun.repository.JobListRepository;
 import com.ds.antddun.repository.QnaBoardRepository;
 import com.ds.antddun.repository.UploadImageRepository;
@@ -37,23 +38,16 @@ public class QnaServiceImpl implements QnaService {
 
     @Transactional
     @Override
-    public Long register(QnaBoardDTO qnaBoardDTO,JobListDTO jobListDTO, Member member) {
+    public Long register(QnaBoardDTO qnaBoardDTO, JobListDTO jobListDTO, Member member) {
 
-        QnaBoard qnaBoard = dtoToEntity(qnaBoardDTO, jobListDTO);
-
+        QnaBoard qnaBoard = dtoToEntity(qnaBoardDTO);
         qnaBoard.setMember(member);
         qnaBoardRepository.save(qnaBoard);
+
+        log.info("register>>>>>>"+qnaBoard);
+
         return qnaBoard.getQnaNo();
 
-/*        JobList jno = jobListRepository.findById(jobListDTO.getJno()).get();
-        log.info("JobList"+jno);
-        return jobListRepository.save(QnaBoard.builder()
-                .qnaNo(qnaBoardDTO.getQnaNo())
-                .title(qnaBoardDTO.getTitle())
-                .content(qnaBoardDTO.getContent())
-                .ddun(qnaBoardDTO.getDdun())
-                .jno(jno)
-                .build()).getQnaNo();*/
     }
 
     @Override
@@ -70,22 +64,7 @@ public class QnaServiceImpl implements QnaService {
     public PageResultDTO<QnaBoardDTO, QnaBoard> getBoardList(PageRequestDTO requestDTO){
         Pageable pageable = requestDTO.getPageable(Sort.by("qnaNo").descending());
         Page<QnaBoard> result = qnaBoardRepository.findAll(pageable);
-        List<QnaBoardDTO> boardDTOList = new ArrayList<>();
 
-        for (QnaBoard board : result) {
-            QnaBoardDTO boardDTO = QnaBoardDTO.builder()
-                    .qnaNo(board.getQnaNo())
-                    .title(board.getTitle())
-                    .content(board.getContent())
-                    .job(board.getJno().getJob())
-                    .ddun(board.getDdun())
-                    .modDate(board.getModDate())
-                    .regDate(board.getRegDate())
-                    .cnt(board.getCnt())
-                    .build();
-            boardDTOList.add(boardDTO);
-            log.info("serviceImpl result >>"+boardDTOList);
-        }
         Function<QnaBoard, QnaBoardDTO> fn = (entity -> entityToDTO(entity));
         return new PageResultDTO<>(result, fn);
     }

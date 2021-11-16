@@ -16,6 +16,7 @@ import java.util.List;
 @Data
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class QnaBoardDTO {
 
     private Long qnaNo;
@@ -33,17 +34,5 @@ public class QnaBoardDTO {
     private LocalDateTime regDate;
     private LocalDateTime modDate;
 
-    public QnaBoardDTO(Long qnaNo, String title, String content, int jno, String job, String writer, int ddun, int cnt, List<UploadImageDTO> imageDTOList, LocalDateTime regDate, LocalDateTime modDate) {
-        this.qnaNo = qnaNo;
-        this.title = title;
-        this.content = content;
-        this.jno = jno;
-        this.job = job;
-        this.writer = writer;
-        this.ddun = ddun;
-        this.cnt = cnt;
-        this.imageDTOList = imageDTOList;
-        this.regDate = regDate;
-        this.modDate = modDate;
-    }
+
 }

@@ -54,7 +54,7 @@ public class QnaBoardController {
     //글 등록
     @PostMapping("/member/qna/register")
     public ModelAndView register(QnaBoardDTO qnaBoardDTO, JobListDTO jobListDTO, Model model , @AuthenticationPrincipal PrincipalDetails principal) {
-        qnaService.register(qnaBoardDTO, jobListDTO, principal.getMember());
+        qnaService.register(qnaBoardDTO, jobListDTO , principal.getMember());
         ModelAndView mav = new ModelAndView("redirect:/qna/list");
         return mav;
     }
@@ -64,11 +64,12 @@ public class QnaBoardController {
     public String lists(Model model, PageRequestDTO pageRequestDTO,
                         RedirectAttributes redirect) {
 
-        PageResultDTO<QnaBoardDTO, QnaBoard> result = qnaService.getBoardList(pageRequestDTO);
         List<JobList> list = jobListService.getList();
         model.addAttribute("jobList", list);
-        model.addAttribute("result",result);
-        log.info("controller result>>"+result);
+
+        PageResultDTO<QnaBoardDTO, QnaBoard> boardList = qnaService.getBoardList(pageRequestDTO);
+        model.addAttribute("boardList",boardList);
+
         return "/qna/list";
     }
 
