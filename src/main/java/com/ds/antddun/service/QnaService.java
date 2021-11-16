@@ -1,57 +1,57 @@
 package com.ds.antddun.service;
 
 import com.ds.antddun.dto.*;
-import com.ds.antddun.entity.Member;
-import com.ds.antddun.entity.QnaBoard;
-import com.ds.antddun.entity.UploadImage;
-import org.springframework.data.domain.Pageable;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import com.ds.antddun.entity.*;
 
 public interface QnaService {
 
 
     PageResultDTO<QnaBoardDTO, QnaBoard> getBoardList(PageRequestDTO requestDTO);
 
-    Long register(QnaBoardDTO qnaBoardDTO, Member member);
+    Long register(QnaBoardDTO qnaBoardDTO, JobListDTO jobListDTO, Member member);
+
+//    List<JobList> getListByJob(String job);
+//    List<JobList> getListByJobNo (int jno);
 
     void modify();
 
     void delete();
 
+
+
     default QnaBoard dtoToEntity(QnaBoardDTO qnaBoardDTO) {
 
-        MemberDTO memberDTO = new MemberDTO();
 
         QnaBoard entity = QnaBoard.builder()
                 .qnaNo(qnaBoardDTO.getQnaNo())
-                .category(qnaBoardDTO.getCategory())
+                .jobList(JobList.builder().jno(qnaBoardDTO.getJno()).build()) //jno
                 .title(qnaBoardDTO.getTitle())
                 .content(qnaBoardDTO.getContent())
                 .ddun(qnaBoardDTO.getDdun())
                 .cnt(qnaBoardDTO.getCnt())
-                .member(Member.builder().mno(memberDTO.getMno()).build())
                 .build();
 
+        System.out.println("dtoToEntity>>"+qnaBoardDTO);
         return entity;
     }
 
-    default QnaBoardDTO entityToDTO(QnaBoard qnaBoard ) {
-        Member member = new Member();
+
+
+    default QnaBoardDTO entityToDTO(QnaBoard qnaBoard) {
 
         QnaBoardDTO dto = QnaBoardDTO.builder()
                 .qnaNo(qnaBoard.getQnaNo())
                 .title(qnaBoard.getTitle())
                 .writer(qnaBoard.getMember().getExperience()+"년차 " + qnaBoard.getMember().getJob().getJob() + " " + qnaBoard.getMember().getLastName() +"개미")
                 .content(qnaBoard.getContent())
-                .category(qnaBoard.getCategory())
+                .jno(qnaBoard.getJobList().getJno())
+                .job(qnaBoard.getJobList().getJob()) //here
                 .regDate(qnaBoard.getRegDate())
                 .cnt(qnaBoard.getCnt())
                 .modDate(qnaBoard.getModDate())
                 .ddun(qnaBoard.getDdun())
                 .build();
-
+        System.out.println("entityToDto>>>>"+dto);
         return dto;
     }
 

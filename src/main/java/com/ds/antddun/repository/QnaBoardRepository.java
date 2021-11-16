@@ -10,8 +10,8 @@ import java.util.List;
 
 public interface QnaBoardRepository extends JpaRepository<QnaBoard, Long> {
 
-    @Query("SELECT qna FROM QnaBoard qna WHERE qna.category=:category")
-    List<QnaBoardDTO> getListByCategory(String category);
+/*    @Query("SELECT qna FROM QnaBoard qna WHERE qna.category=:category")
+    List<QnaBoardDTO> getListByCategory(String category);*/
 
 
     @Query("select qna, m, qna.cnt FROM QnaBoard qna inner join Member m ")

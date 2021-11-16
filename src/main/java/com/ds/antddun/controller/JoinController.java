@@ -61,8 +61,6 @@ public class JoinController {
     public String joinPage(Model model) {
 
         model.addAttribute("jobList", jobListService.getList());
-        log.info("LIST>>>>>" + jobListService.getList());
-
         return "/member/join";
     }
 
@@ -75,22 +73,15 @@ public class JoinController {
     public String join(MemberDTO memberDTO,
                        JobListDTO jobListDTO,
                        String username,
-                       String phoneNum,
-                       HttpSession httpSession) throws Exception {
+                       String phoneNum) throws Exception {
 
         int idDuplicateCheck = memberService.idCheck(username);
         int mobileDuplicateCheck = memberService.mobileCheck(phoneNum);
-
-//        httpSession.setAttribute("JOIN_USER", memberService.welcomeMsg(memberDTO.getMno()));
-
-        log.info("ID>>>>>>>>>>>>>>>>>>>>>>>>" + idDuplicateCheck);
-        log.info("MOBILE>>>>>>>>>>>>>>>>>>>>>>>>" + mobileDuplicateCheck);
 
         if (idDuplicateCheck != 0 || mobileDuplicateCheck != 0) {
             return "redirect:/joinPage";
         } else {
             memberService.join(memberDTO, jobListDTO);
-            log.info("MNOMNO>>>>>>>" + memberDTO.getMno());
         }
 
         return "/member/welcome";

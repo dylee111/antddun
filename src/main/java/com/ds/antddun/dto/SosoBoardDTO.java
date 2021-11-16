@@ -1,15 +1,14 @@
 package com.ds.antddun.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,10 +24,12 @@ public class SosoBoardDTO {
 
     private double avg;
 
-    @Builder.Default
-    private List<UploadImageDTO> imageDTOList = new ArrayList<>();
+//    @Builder.Default
+//    private List<UploadImageDTO> imageDTOList = new ArrayList<>();
 
     private LocalDateTime regDate;
     private LocalDateTime modDate;
+
+
 
 }
