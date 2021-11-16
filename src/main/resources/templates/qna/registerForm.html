@@ -22,9 +22,9 @@
 
         <!--카테고리-->
         <div class="option">
-          <select class="category" name="cateNo">
+          <select class="category" name="jno">
             <option th:each="jobList : ${jobList}" th:value="${jobList.jno}"
-                    onchange="handleOnChange(this)" name="cateNo">[[${jobList.job}]]</option>
+                    onchange="handleOnChange(this)" name="jno">[[${jobList.job}]]</option>
           </select>
         </div>
 
