@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'ELAND_Choice_M';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/ELAND_Choice_M.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 .list_border {
     height: 100%;
     border: 3px solid #ededed;
@@ -15,7 +23,7 @@
 .mail {
     border-bottom: 2px solid #ededed;
     padding-bottom: 30px;
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
 .select_box {
@@ -45,6 +53,7 @@
 
 .send_time {
     display: inline-block;
+    float: right;
     height: 20px;
     text-align: right;
     color: #a8a8a8;
@@ -74,4 +83,75 @@
     font-size: 1rem;
     border-radius: 5px;
     border: none;
+}
+
+
+
+.sender_info {
+    float: left;
+    width: 100%;
+}
+
+.reply {
+    text-align: right;
+}
+
+.reply_btn {
+    color: #fff;
+    background-color : #f9c64f;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+    font-family: 'ELAND_Choice_M';
+    font-size: 1rem;
+    text-align: center;
+    cursor: pointer;
+    padding: 0.375rem 0.75rem;
+}
+
+
+
+.check_btn {
+  appearance: none;
+  vertical-align: super;
+  border: none;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.14s;
+  outline: none;
+
+  &:active {
+    transform: translateY(3px);
+  }
+}
+
+.button--primary {
+  box-shadow: 0 3px 0 0 lightgray;
+  color: #383838;
+  margin-bottom: 10px;
+}
+
+.button--primary:after {
+    Box-shadow: 0 3px 0 0 #b89300;
+    background: #ffd633;
+}
+
+.button--with-icon {
+  color: lightgray;
+  padding: 7px 8px;
+  min-width: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 24px;
+  }
+}
+
+
+.send_msg{
+    display: none;
 }

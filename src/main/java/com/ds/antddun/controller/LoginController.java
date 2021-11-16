@@ -5,6 +5,7 @@ import com.ds.antddun.repository.MemberRepository;
 import com.ds.antddun.service.MemberService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,8 @@ import javax.servlet.http.HttpSession;
 @Log4j2
 @SessionAttributes("member")
 public class LoginController {
+    @Autowired
+    private MemberService service;
 
     @Autowired
     private MemberService memberService;
