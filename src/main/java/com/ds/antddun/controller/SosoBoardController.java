@@ -42,7 +42,7 @@ public class SosoBoardController {
     public String mainRead(Model model,
                            @AuthenticationPrincipal PrincipalDetails principalDetails) {
 
-        List<SosoCategory> list = cateService.getList(); // 카테고리 리스트 호출
+        List<SosoCategory> list = cateService.getCateList(); // 카테고리 리스트 호출
         List<Integer> cateNoList = new ArrayList<>(); // 카테고리 No. 담을 리스트
 
         Map<String, List<SosoJobBoard>> getCateList = new HashMap<>(); // key(카테고리 이름):value(카테고리 별 리스트)
@@ -69,20 +69,20 @@ public class SosoBoardController {
     @GetMapping("/sosojob/register")
     public String register(Model model) {
 
-        log.info("CATELIST >>" + cateService.getList().toString());
-        model.addAttribute("category", cateService.getList());
+        log.info("CATELIST >>" + cateService.getCateList().toString());
+        model.addAttribute("category", cateService.getCateList());
 
         return "/sosojob/register";
     }
 
     @PostMapping("/sosojob/register")
     public String register(SosoBoardDTO sosoBoardDTO,
-                            SosoCategoryDTO sosoCategoryDTO,
+                           SosoCategoryDTO sosoCategoryDTO,
                            @AuthenticationPrincipal PrincipalDetails principal) {
 
-        log.info("BEFORE"+ sosoCategoryDTO);
-        sosoJobService.register(sosoBoardDTO, sosoCategoryDTO ,principal.getMember());
-        log.info("AFTER"+ sosoCategoryDTO);
+        log.info("BEFORE" + sosoCategoryDTO);
+        sosoJobService.register(sosoBoardDTO, sosoCategoryDTO, principal.getMember());
+        log.info("AFTER" + sosoCategoryDTO);
 
         return "/sosojob/sosojobMain";
     }
@@ -93,8 +93,8 @@ public class SosoBoardController {
     @GetMapping("/sosojob/modify")
     public String modify(Model model) {
 
-        log.info("CATELIST >>" + cateService.getList().toString());
-        model.addAttribute("category", cateService.getList());
+        log.info("CATELIST >>" + cateService.getCateList().toString());
+        model.addAttribute("category", cateService.getCateList());
 
         return "/sosojob/modify";
     }
@@ -107,29 +107,31 @@ public class SosoBoardController {
         return "/sosojob/sosojobMain";
     }
 
-//    @GetMapping("/sosojob/list/{category}")
-//    public String cateList(@PathVariable("category")int categoryNo, Model model, SosoPageRequestDTO sosoPageRequestDTO) {
-//        log.info("CATEGORYLIST======================");
-//
-//        List<SosoCategory> list = cateService.getList(); // 카테고리 리스트
-//        List<Integer> cateNoList = new ArrayList<>(); // 카테고리 No. 담기 위한 LIST
-//
-//
-//        for (int i = 0; i < list.size(); i++) {
-//            categoryNo = list.get(i).getCateNo();
-//            cateNoList.add(categoryNo);
-////            if (categoryNo == list.get(i).getCateNo()) {
-////                model.addAttribute("cate", sosoJobService.getListByCategoryNo(categoryNo));
-////            }
-//        }
-//
-//        // 마지막 번호만 찍힘....
-////        model.addAttribute("cate", sosoJobService.getListByCategoryNo(cateNoList.get(0)));
-//        model.addAttribute("cate", sosoJobService.getList(cateNoList.get(0),sosoPageRequestDTO));
-//
-//        log.info("CATENOLIST>>>"+cateNoList);
-//        log.info("CATENONONO>>>"+categoryNo);
-//        return "/sosojob/sosoList/" + categoryNo ;
-//    }
+    @GetMapping("/sosojob/list/{category}")
+    public String cateList(@PathVariable("category") int categoryNo, Model model, SosoPageRequestDTO sosoPageRequestDTO) {
 
+        List<SosoCategory> list = cateService.getCateList(); // 카테고리 리스트
+        List<Integer> cateNoList = new ArrayList<>(); // 카테고리 No. 담기 위한 LIST
+
+        Map<String, List<SosoJobBoard>> getCateList = new HashMap<>(); // key(카테고리 이름):value(카테고리 별 리스트)
+
+        getCateList.put(list.get(categoryNo - 1).getSosoCateName(),
+                sosoJobService.getListByCategory(list.get(categoryNo - 1).getSosoCateName()));
+        cateNoList.add(categoryNo);
+
+//        log.info("PAGING RESULT >>>" + sosoPageRequestDTO + "//" + categoryNo);
+//        model.addAttribute("cate", sosoJobService.getList(categoryNo, sosoPageRequestDTO));
+        model.addAttribute("cate", getCateList);
+        model.addAttribute("cateName", list);
+
+        log.info("LIST>>>"+list);
+        log.info("getCateList>>>"+getCateList);
+
+        return "/sosojob/sosoList";
+    }
+
+    @GetMapping("/sosojob/list/read")
+    public String sosoRead() {
+        return "/sosojob/sosoDetailView";
+    }
 }

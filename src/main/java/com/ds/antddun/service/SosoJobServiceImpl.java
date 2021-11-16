@@ -16,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
@@ -35,10 +34,8 @@ public class SosoJobServiceImpl implements SosoJobService {
     public Long register(SosoBoardDTO sosoBoardDTO,
                          SosoCategoryDTO sosoCategoryDTO, Member member) {
 
-        log.info("SSNO>>>>" + sosoCategoryDTO.getCateNo());
         SosoCategory sosoCategory =
                 sosoCategoryRepository.findById(sosoCategoryDTO.getCateNo()).get();
-        log.info("SSCATEGORY"+sosoCategory);
         return sosoBoardRepository.save(SosoJobBoard.builder()
                 .sosoNo(sosoBoardDTO.getSosoNo())
                 .title(sosoBoardDTO.getTitle())
@@ -66,15 +63,13 @@ public class SosoJobServiceImpl implements SosoJobService {
     @Override
     public SosoPageResultDTO<SosoBoardDTO, SosoJobBoard> getList(int category, SosoPageRequestDTO requestDTO) {
         Pageable pageable = requestDTO.getPageable(Sort.by("sosoNo").descending());
-//        Page<SosoJobBoard> result = sosoBoardRepository.getPageByCategoryNo(category, pageable);
 
-        Page<SosoJobBoard> result = sosoBoardRepository.findAll(pageable);
-
-
+//        Page<SosoJobBoard> result = sosoBoardRepository.findAll(pageable);
+        Page<SosoJobBoard> result = sosoBoardRepository.getPageByCategoryNo(category, pageable);
 
         Function<SosoJobBoard, SosoBoardDTO> fn = (entity -> entityToDTO(entity));
         log.info("FNFNFNFN" + fn);
-        log.info("result>>>>>" + result.getContent());
+        log.info("result >>>>>" + result.getContent());
         return new SosoPageResultDTO<>(result, fn);
     }
 
