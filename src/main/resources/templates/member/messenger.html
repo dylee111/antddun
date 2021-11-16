@@ -31,6 +31,20 @@
                             <span class="send_message">제가 구구절절 궁금한게 많은데요.... 문의를 해도 괜찮을지 모르겠어요^_ㅠ</span>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <strong class="sender">이름</strong>
+                            <span class="send_date">2021.11.12</span>
+                            <span class="send_message">제가 구구절절 궁금한게 많은데요.... 문의를 해도 괜찮을지 모르겠어요^_ㅠ</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong class="sender">이름</strong>
+                            <span class="send_date">2021.11.12</span>
+                            <span class="send_message">제가 구구절절 궁금한게 많은데요.... 문의를 해도 괜찮을지 모르겠어요^_ㅠ</span>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -39,31 +53,49 @@
         <!--홈 우측 : 게시물 리스트-->
         <div class="col-lg-9">
             <div class="content_border">
+                <div class="margin_bottom">
+                    <input type="button" class="check_btn button--primary button--with-icon" value="거래 중" />
+                    <span class="send_title">단가 문의드립니다.</span>
+                </div>
+
                 <div class="mail">
-                    <div style="width: 100%; display:inline-flex;">
+                    <div>
                         <div class="sender_info">
-                            <div class="margin_bottom">
-                                <button class="check_btn button--primary button--with-icon">거래 중</button>
-                                <span class="send_title">단가 문의드립니다.</span>
-                            </div>
-                            <div>
+                            <div style="height: 45px;">
                                 <strong class="sender">김본명 </strong>
                                 <span>(<span>abc@ds.com</span>)</span>
                                 <span class="send_time">2021.11.12 오후 12:32</span>
                             </div>
                         </div>
-                    </div>
-                    <hr>
-                    <div>
-                        담당자님, 비즈니스 프로필을 최신 상태로 유지하세요. Google 검색 및 지도에서 내 비즈니스를 찾는 사람들이 신규 고객으로 전환될 수 있습니다.
-                        이제 더 쉽게 내 비즈니스 프로필을 관리할 수 있습니다.
+                        <div class="send_msg">
+                            <hr>
+                            <div>
+                                담당자님, 비즈니스 프로필을 최신 상태로 유지하세요. Google 검색 및 지도에서 내 비즈니스를 찾는 사람들이 신규 고객으로 전환될 수 있습니다.
+                                이제 더 쉽게 내 비즈니스 프로필을 관리할 수 있습니다.
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="reply">
-                    <button id="reply" class="reply_btn">답장하기</button>
+                <div class="mail">
+                    <div>
+                        <div class="sender_info">
+                            <div style="height: 45px;">
+                                <strong class="sender">김본명 </strong>
+                                <span>(<span>abc@ds.com</span>)</span>
+                                <span class="send_time">2021.11.12 오후 12:32</span>
+                            </div>
+                        </div>
+                        <div class="send_msg">
+                            <hr>
+                            <div>
+                                담당자님, 비즈니스 프로필을 최신 상태로 유지하세요. Google 검색 및 지도에서 내 비즈니스를 찾는 사람들이 신규 고객으로 전환될 수 있습니다.
+                                이제 더 쉽게 내 비즈니스 프로필을 관리할 수 있습니다.
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div id="mail_write" style="display: none;">
+                <div id="mail_write">
                     <form th:action="@{/member/jayu/register}" th:method="post">
                         <!--내용-->
                         <div class="form-group">
@@ -71,7 +103,7 @@
                         </div>
 
                         <!--작성완료 버튼-->
-                        <button type="submit" class="reply reply_btn" style="float: right; margin: 1rem 0 3rem 0;">등록</button>
+                        <button type="submit" class="reply reply_btn" style="float: right; margin: 1rem 0 3rem 0;">답장하기</button>
                     </form>
                 </div>
             </div>

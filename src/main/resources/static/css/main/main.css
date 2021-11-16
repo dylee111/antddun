@@ -289,15 +289,15 @@ strong.impact {
     width:100%;
 }
 
-#alert_tb {
-    width: 100%;
-    margin: 0px 15px 15px 15px;
-}
-
-.alert {
-    font-size: 14px;
-    border-bottom: 1px solid #e3e3e3;
+#user_msg {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 3px solid #F9C74F;
+    border-top: none;
+    border-radius: 0 0 15px 15px;
     padding: 10px;
+    width:100%;
 }
 
 #user_secret {
@@ -309,6 +309,17 @@ strong.impact {
     border-radius: 0 0 15px 15px;
     padding: 20px;
     width:100%;
+}
+
+.alert_tb {
+    width: 100%;
+    margin: 0px 15px 15px 15px;
+}
+
+.alert {
+    font-size: 14px;
+    border-bottom: 1px solid #e3e3e3;
+    padding: 10px;
 }
 
 
@@ -416,4 +427,36 @@ strong.impact {
     color: #919191;
     border: 2px solid #e0e0e0;
     text-align: center;
+}
+
+
+
+/* Search-box Style */
+#search-wrap {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#search-bar {
+    width: 200px;
+    height: 40px;
+    border: 3px solid #ffc107;
+    border-radius: 20px 0 0 20px;
+    padding: 0 20px;
+}
+
+input:focus {
+    outline: none;
+}
+
+.searchButton {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ffc107;
+  background: #ffc107;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 20px 20px 0;
+  cursor: pointer;
+  font-size: 20px;
 }

@@ -23,7 +23,7 @@
 .mail {
     border-bottom: 2px solid #ededed;
     padding-bottom: 30px;
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
 .select_box {
@@ -149,4 +149,9 @@
   svg {
     width: 24px;
   }
+}
+
+
+.send_msg{
+    display: none;
 }
