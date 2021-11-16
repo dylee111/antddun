@@ -7,8 +7,6 @@ import com.ds.antddun.entity.Member;
 
 import java.util.List;
 
-import static com.ds.antddun.entity.QJayuBoard.jayuBoard;
-
 public interface JayuBoardService {
 
     Long register(JayuBoardDTO jayuBoardDTO);

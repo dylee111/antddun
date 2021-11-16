@@ -33,13 +33,13 @@ $(document).ready(function() {
     callbacks : {
     	onImageUpload : function(files, editor, welEditable) {
     			for (var i = 0; i < files.length; i++) {
-    			    sendFile(files[i], this);
+    			    sendImg(files[i],this);
     			}
     	}
     }
   });
 });
-function sendFile(file, el) {
+function sendImg(file, el) {
             var contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
 			var form_data = new FormData();
 			form_data.append('file', file);

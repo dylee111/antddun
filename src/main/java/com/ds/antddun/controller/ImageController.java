@@ -11,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
+
+
 @Controller
 @Log4j2
 public class ImageController {
@@ -21,11 +24,15 @@ public class ImageController {
     @Autowired
     ResourceLoader resourceLoader;
 
+    @Autowired
+    private ServletContext context;
+
     @PostMapping("/image")
     public ResponseEntity<?> imageUpload(@RequestParam("file") MultipartFile file) {
         try {
             UploadImage uploadImage = imageService.store(file);
-            return ResponseEntity.ok().body("/antddun/image/" + uploadImage.getImgNo());
+            String path = context.getContextPath();
+            return ResponseEntity.ok().body(path + "/image/" + uploadImage.getImgNo());
         } catch(Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();

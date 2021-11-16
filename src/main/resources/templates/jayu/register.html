@@ -2,8 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
     <th:block th:fragment="content">
-        <!-- 페이지 수정 부분 시작 -->
-        <!--Context Root-->
+        <!--페이지 수정 부분 시작-->
         <link th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
         <!-- 페이지 css/ js 추가 -->
         <link rel="stylesheet" th:href="@{/css/board/jayu/register.css}">
@@ -20,7 +19,7 @@
 
         <!-- 본문 시작 -->
         <div class="content">
-            <form th:action="@{/member/jayu/read}" method="post" >
+            <form th:action="@{/member/jayu/read}" method="post">
                 <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
                 <!--카테고리-->
                 <div class="option">
@@ -32,9 +31,12 @@
                 <div class="option">
                     <label class="peong">💣펑예</label>
                     <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+                    <div class="alert_tip">ⓘ
+                        <span class="tooltiptext">익일 자정에 펑! 삭제됩니다.</span>
+                    </div>
                 </div>
 
                 <!--제목-->
@@ -46,6 +48,11 @@
                 <!--내용-->
                 <div class="form-group">
                     <textarea id="summernote" name="content" required></textarea>
+                </div>
+
+                <!--작성자-->
+                <div class="form-group">
+                    <input type="text" class="form-control" name="writer" readonly>
                 </div>
 
                 <!--작성완료 버튼-->

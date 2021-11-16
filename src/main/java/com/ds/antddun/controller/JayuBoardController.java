@@ -1,56 +1,54 @@
 package com.ds.antddun.controller;
 
+import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.JayuBoardDTO;
 import com.ds.antddun.entity.JayuBoard;
-import com.ds.antddun.repository.JayuBoardRepository;
 import com.ds.antddun.service.JayuBoardService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/member")
+@SessionAttributes("member")
 @Log4j2
 public class JayuBoardController {
 
     @Autowired
     private JayuBoardService jayuBoardService;
 
-    //작성
-    @GetMapping("/jayu/register")
+    //게시글 작성
+    @GetMapping("/member/jayu/register")
     public String register(){
         return "jayu/register";
+
     }
 
-    @PostMapping("/jayu/register")
-    public String setRegister(JayuBoardDTO jayuBoardDTO, Model model){
-        jayuBoardService.register(jayuBoardDTO);
+    //게시글 등록
+    @PostMapping("/member/jayu/register")
+    public String setRegister(JayuBoardDTO jayuBoardDTO, Model model, @AuthenticationPrincipal PrincipalDetails principal){
+        jayuBoardService.register(jayuBoardDTO, principal.getMember());
         return "redirect:/jayu/read/" + jayuBoardDTO.getJayuNo();
     }
 
-    //보기
-    @GetMapping("/jayu/read/{jayuNo}")
+    //게시글 조회
+    @GetMapping("/member/jayu/read/{jayuNo}")
     public String read(Model model, @PathVariable Long jayuNo) {
         JayuBoard jayuBoard = jayuBoardService.findById(jayuNo);
         model.addAttribute("jayuNo", jayuNo);
         return "/jayu/read";
     }
 
-    //목록
-    @GetMapping("/jayu")
+    //게시글 목록
+    @GetMapping("/member/jayu/list")
     public String main(Model model) {
         List<JayuBoard> jayuList = jayuBoardService.findAll();
         model.addAttribute("jayuList", jayuList);
         jayuList.forEach(System.out::println);
-        return "jayu/main";
+        return "jayu/list";
     }
-
-
 }
