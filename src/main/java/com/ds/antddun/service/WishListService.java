@@ -4,8 +4,12 @@ import com.ds.antddun.dto.MemberWishListDTO;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.MemberWishList;
 
+import java.util.List;
+
 public interface WishListService {
     Long register(MemberWishListDTO memberWishListDTO, Member member);
+
+    List<MemberWishList> getListByMno(Long mno);
 
     default MemberWishList dtoToEntity(MemberWishListDTO wishListDTO, Member member) {
 
