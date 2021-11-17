@@ -67,6 +67,7 @@ public class SosoJobServiceImpl implements SosoJobService {
 //        Page<SosoJobBoard> result = sosoBoardRepository.findAll(pageable);
         Page<SosoJobBoard> result = sosoBoardRepository.getPageByCategoryNo(category, pageable);
 
+
         Function<SosoJobBoard, SosoBoardDTO> fn = (entity -> entityToDTO(entity));
         log.info("FNFNFNFN" + fn);
         log.info("result >>>>>" + result.getContent());

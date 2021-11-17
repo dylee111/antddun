@@ -4,6 +4,7 @@ import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.service.JobListService;
 import com.ds.antddun.service.MemberService;
+import com.ds.antddun.service.WishListService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -13,15 +14,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("/")
 @Log4j2
 public class MemberController {
-    //추가
+    @Autowired
     private MemberService memberService;
 
     @Autowired
     private JobListService jobListService;
+
+    @Autowired
+    private WishListService wishListService;
 
 
 //    @GetMapping("/member/mypage")
@@ -49,9 +55,18 @@ public class MemberController {
     }
 
     @PostMapping("/member/mypage")
-    public String wishListSave() {
+    public String wishListSave(HttpServletRequest request) {
         // 동일한 name 속성을 가진 데이터는 배열 형태로 Controller로 넘어온다. split(",")을 이용해 잘라서 사용.'
-        return "";
+        String[] nameArr = request.getParameterValues("wishList");
+        String[] priceArr = request.getParameterValues("price");
+        String[] rateArr = request.getParameterValues("rate");
+        for (int i = 0; i < nameArr.length; i++) {
+
+            log.info("NAME ARR[" + i + "] >>> " + nameArr[i]);
+            log.info("PRICE ARR[" + i + "] >>> " + priceArr[i]);
+            log.info("RATE ARR[" + i + "] >>> " + rateArr[i]);
+        }
+        return "member/mypage";
     }
 
     @GetMapping("/member/messenger")
