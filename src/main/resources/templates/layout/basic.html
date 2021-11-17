@@ -25,6 +25,43 @@
         <!-- Core theme JS-->
         <script th:inline="javascript" th:src="@{/js/main/main.js}"></script>
 
+<!--        <script th:inline="javascript">-->
+<!--            &lt;!&ndash; Hourly Wage JS &ndash;&gt;-->
+<!--                &lt;!&ndash;현재 시간&ndash;&gt;-->
+<!--                var hour = new Date().getHours();-->
+<!--                var minute = new Date().getMinutes();-->
+<!--                console.log(hour+":"+minute);-->
+<!--        -->
+<!--                &lt;!&ndash;출근 시간&ndash;&gt;-->
+<!--                var startTime = [[${member.startTime}]];-->
+<!--                startTime = startTime.split(":");-->
+<!--                var startHour = startTime[0];-->
+<!--                var startMinute = startTime[1];-->
+<!--                console.log(startHour+":"+startMinute);-->
+<!--        -->
+<!--                &lt;!&ndash;퇴근 시간&ndash;&gt;-->
+<!--                var endTime = [[${member.endTime}]];-->
+<!--                endTime = endTime.split(":");-->
+<!--                var endHour = endTime[0];-->
+<!--                var endMinute = endTime[1];-->
+<!--                var end = new Date(endHour, endTime);-->
+<!--        -->
+<!--                &lt;!&ndash;시급 계산&ndash;&gt;-->
+<!--                var earn = [[${member.salary}]] * 10000;-->
+<!--                var workTime = end - start;-->
+<!--                var hourlyWage = (((earn / 12) - (earn * 0.009)) / 20 / workTime);-->
+<!--        -->
+<!--                let run;-->
+<!--                run = setInterval(function(){-->
+<!--                    if(now >= start) {-->
+<!--                        hourlyWage += hourlyWage;-->
+<!--                        return $('#daily_earn').val(hourlyWage);-->
+<!--                    } else if(now == end){-->
+<!--                        clearInterval(run);-->
+<!--                    }-->
+<!--                }, 1000*60*60);-->
+<!--        </script>-->
+
     </head>
     <body>
     <div>
@@ -62,7 +99,7 @@
 
         <div class="container-main container">
             <div id="search-wrap">
-                <div style="display: inherit;">
+                <div style="display: flex;">
                     <input type="text" id="search-bar" />
                     <button type="submit" class="searchButton">
                         <i class="fa fa-search"></i>
