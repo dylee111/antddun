@@ -110,7 +110,6 @@
                 </div>
 
                 <div id="money_page" style="display:none;">
-                    <form method="POST" th:action="@{/member/mypage}">
                     <div id="user_wallet" style="margin-bottom: 70px;">
                         <h2 class="mypage_title">내 돈 정보</h2>
                         <hr class="my_margin">
@@ -140,49 +139,54 @@
                                         <td style="width:12%;">적용</td>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
+                                    <tbody >
+                                    <form method="POST" onsubmit="return false;" th:action="@{/member/mypage}">
+                                    <tr th:each="list : ${wishList}">
                                         <td><input type="radio" name="main_wish"/></td>
-                                        <td><input class="input_pd" placeholder="상품명을 입력하세요." name="wishList"></td>
-                                        <td><input class="input_cost" placeholder="ex) 50000" name="price"></td>
-                                        <td><input class="input_per" placeholder="ex) 10" name="rate">%</td>
-                                        <td>D-4</td>
+                                        <td><input th:value="${list.wishList}" class="input_pd" placeholder="상품명을 입력하세요." name="wishList"></td>
+                                        <td><input th:value="${list.price}" class="input_cost" placeholder="ex) 50000" name="price" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
+                                        <td><input th:value="${list.rate}" class="input_per" placeholder="ex) 10" name="rate" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">%</td>
+                                        <td class="dDay" >D-4</td>
                                         <td>
-                                            <img th:src="@{/assets/wishlist/insert.png}" style="width:15px;">
-                                            <img th:src="@{/assets/wishlist/update.png}" style="width:15px;">
-                                            <img th:src="@{/assets/wishlist/delete.png}" style="width:15px;">
+                                            <img class="save"   id="'btn-save1" th:src="@{/assets/wishlist/insert.png}" style="width:15px; cursor:pointer;">
+                                            <img class="update" id="btn-update1" th:src="@{/assets/wishlist/update.png}" style="width:15px; cursor:pointer;">
+                                            <img class="delete" id="btn-delete1" th:src="@{/assets/wishlist/delete.png}" style="width:15px; cursor:pointer;">
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td><input type="radio" name="main_wish"/></td>
-                                        <td><input class="input_pd" name="wishList"></td>
-                                        <td><input class="input_cost" name="price"></td>
-                                        <td><input class="input_per" name="rate">%</td>
-                                        <td></td>
-                                        <td>
-                                            <img th:src="@{/assets/wishlist/insert.png}" style="width:15px;">
-                                            <img th:src="@{/assets/wishlist/update.png}" style="width:15px;">
-                                            <img th:src="@{/assets/wishlist/delete.png}" style="width:15px;">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="radio" name="main_wish"/></td>
-                                        <td><input class="input_pd" name="wishList"></td>
-                                        <td><input class="input_cost" name="price"></td>
-                                        <td><input class="input_per" name="rate">%</td>
-                                        <td></td>
-                                        <td>
-                                            <img th:src="@{/assets/wishlist/insert.png}" style="width:15px;">
-                                            <img th:src="@{/assets/wishlist/update.png}" style="width:15px;">
-                                            <img th:src="@{/assets/wishlist/delete.png}" style="width:15px;">
-                                        </td>
-                                    </tr>
+<!--                                    </form>-->
+<!--                                    <form method="POST" onsubmit="return false;" th:action="@{/member/mypage}">-->
+<!--                                    <tr>-->
+<!--                                        <td><input type="radio" name="main_wish"/></td>-->
+<!--                                        <td><input class="input_pd" name="wishList"></td>-->
+<!--                                        <td><input class="input_cost" name="price" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>-->
+<!--                                        <td><input class="input_per" name="rate" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">%</td>-->
+<!--                                        <td></td>-->
+<!--                                        <td>-->
+<!--                                            <img class="save"   id="btn-save2" th:src="@{/assets/wishlist/insert.png}" style="width:15px; cursor:pointer;" alt="저장">-->
+<!--                                            <img class="update" id="btn-update2" th:src="@{/assets/wishlist/update.png}" style="width:15px; cursor:pointer;" alt="수정">-->
+<!--                                            <img class="delete" id="btn-delete2" th:src="@{/assets/wishlist/delete.png}" style="width:15px; cursor:pointer;" alt="삭제">-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--&lt;!&ndash;                                    </form>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <form method="POST" onsubmit="return false;" th:action="@{/member/mypage}">&ndash;&gt;-->
+<!--                                    <tr>-->
+<!--                                        <td><input type="radio" name="main_wish"/></td>-->
+<!--                                        <td><input class="input_pd" name="wishList"></td>-->
+<!--                                        <td><input class="input_cost" name="price" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>-->
+<!--                                        <td><input class="input_per" name="rate" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">%</td>-->
+<!--                                        <td></td>-->
+<!--                                        <td>-->
+<!--                                            <img class="save"   id="btn-save3" th:src="@{/assets/wishlist/insert.png}" style="width:15px; cursor:pointer;">-->
+<!--                                            <img class="update" id="btn-update3" th:src="@{/assets/wishlist/update.png}" style="width:15px; cursor:pointer;">-->
+<!--                                            <img class="delete" id="btn-delete3" th:src="@{/assets/wishlist/delete.png}" style="width:15px; cursor:pointer;">-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+                                    </form>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                    </form>
 
                     <div id="user_ddun">
                         <h2 class="mypage_title">내 뚠 정보</h2>
