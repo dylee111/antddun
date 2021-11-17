@@ -1,17 +1,30 @@
-
 $(document).ready(function() {
     <!--WishList Close JS-->
-//    function setCookie(name, value, expirehours) {
-//        var todayDate = new Date();
-//        todayDate.setHours( todayDate.getHours() + expirehours );
-//        document.cookie = name + "=" +escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
-//    }
-//
-    $('.wish_close').on('click', function(){
-//        setCookie( "ncookie","done",24);
-        $('.wish').hide();
-        $('.blank').hide();
-    });
+   function setCookie( name, value, expiredays ) {
+      var todayDate = new Date();
+      todayDate.setDate( todayDate.getDate() + expiredays );
+      document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
+   }
+
+     //저장된 해당 쿠키가 있으면 창을 안 띄운다 없으면 뛰운다.
+     cookiedata = document.cookie;
+     if ( cookiedata.indexOf("topPop=done") < 0 ){
+        $(".wish").show();
+        $(".blank").show();
+     }
+     else {
+        $(".wish").hide();
+        $(".blank").hide();
+     }
+
+   jQuery(function($){
+      $(".wish_close").on("click",function(){
+        setCookie( "topPop", "done" , 1 );
+         $(".wish").hide();
+         $(".blank").hide();
+      });
+   })
+
 
     <!-- Hourly Wage JS -->
     $(document).ready(function() {
@@ -43,7 +56,8 @@ $(document).ready(function() {
 
         var nowWage = (nowTime - startHour) * hourlyWage;
         var reset = "근무시간이 아닙니다.";
-        if( startHour-1 < nowTime < endHour+1) {
+
+        if( nowTime > startHour-1 && nowTime < endHour+1) {
             var result = nowWage.toLocaleString();
             $('#daily_earn').text(result+" 원");
         } else {
