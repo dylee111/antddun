@@ -113,7 +113,6 @@
                     <form method="POST" th:action="@{/member/mypage}">
                     <div id="user_wallet" style="margin-bottom: 70px;">
                         <h2 class="mypage_title">내 돈 정보</h2>
-                        <button type="submit" class="save_btn">저장</button>
                         <hr class="my_margin">
 
                         <div class="center">
@@ -134,10 +133,11 @@
                                     <thead>
                                     <tr>
                                         <td style="width:10%;">메인</td>
-                                        <td style="width:40%;">상품</td>
-                                        <td style="width:20%;">금액</td>
+                                        <td style="width:30%;">상품</td>
+                                        <td style="width:15%;">금액</td>
                                         <td style="width:15%;">적금 비율</td>
-                                        <td style="width:15%;">D-DAY</td>
+                                        <td style="width:13%;">D-DAY</td>
+                                        <td style="width:12%;">적용</td>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -147,6 +147,11 @@
                                         <td><input class="input_cost" placeholder="ex) 50000" name="price"></td>
                                         <td><input class="input_per" placeholder="ex) 10" name="rate">%</td>
                                         <td>D-4</td>
+                                        <td>
+                                            <img th:src="@{/assets/wishlist/insert.png}" style="width:15px;">
+                                            <img th:src="@{/assets/wishlist/update.png}" style="width:15px;">
+                                            <img th:src="@{/assets/wishlist/delete.png}" style="width:15px;">
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td><input type="radio" name="main_wish"/></td>
@@ -154,6 +159,11 @@
                                         <td><input class="input_cost" name="price"></td>
                                         <td><input class="input_per" name="rate">%</td>
                                         <td></td>
+                                        <td>
+                                            <img th:src="@{/assets/wishlist/insert.png}" style="width:15px;">
+                                            <img th:src="@{/assets/wishlist/update.png}" style="width:15px;">
+                                            <img th:src="@{/assets/wishlist/delete.png}" style="width:15px;">
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td><input type="radio" name="main_wish"/></td>
@@ -161,6 +171,11 @@
                                         <td><input class="input_cost" name="price"></td>
                                         <td><input class="input_per" name="rate">%</td>
                                         <td></td>
+                                        <td>
+                                            <img th:src="@{/assets/wishlist/insert.png}" style="width:15px;">
+                                            <img th:src="@{/assets/wishlist/update.png}" style="width:15px;">
+                                            <img th:src="@{/assets/wishlist/delete.png}" style="width:15px;">
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
