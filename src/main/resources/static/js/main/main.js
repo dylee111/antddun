@@ -1,10 +1,101 @@
-
 $(document).ready(function() {
     <!--WishList Close JS-->
-    $('.wish_close').on('click', function(){
-        $('.wish').hide();
-        $('.blank').hide();
+   function setCookie( name, value, expiredays ) {
+      var todayDate = new Date();
+      todayDate.setDate( todayDate.getDate() + expiredays );
+      document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
+   }
+
+     //저장된 해당 쿠키가 있으면 창을 안 띄운다 없으면 뛰운다.
+     cookiedata = document.cookie;
+     if ( cookiedata.indexOf("topPop=done") < 0 ){
+        $(".wish").show();
+        $(".blank").show();
+     }
+     else {
+        $(".wish").hide();
+        $(".blank").hide();
+     }
+
+   jQuery(function($){
+      $(".wish_close").on("click",function(){
+        setCookie( "topPop", "done" , 1 );
+         $(".wish").hide();
+         $(".blank").hide();
+      });
+   })
+
+
+    <!-- Hourly Wage JS -->
+    $(document).ready(function() {
+        <!--현재 시간-->
+        var nowTime = new Date().getHours();
+        var hours = new Date().getHours()*60;
+        var minutes = new Date().getMinutes();
+        var now = hours + minutes;
+
+        <!--출근 시간-->
+        var startTime = $('#startTime').text();
+        var startHour = parseInt(startTime.substring(0,2));
+        var startHours = parseInt(startTime.substring(0,2))*60;
+        var startMinutes = parseInt(startTime.substring(3,5));
+        var start = startHours + startMinutes;
+
+        <!--퇴근 시간-->
+        var endTime = $('#endTime').text();
+        var endHour = parseInt(endTime.substring(0,2));
+        var endHours = parseInt(endTime.substring(0,2))*60;
+        var endMinutes = parseInt(endTime.substring(3,5));
+        var end = endHours + endMinutes;
+
+        <!--시급 계산-->
+        var salary = $('#salary').text();
+        var earn = parseInt(salary) * 10000;
+        var workTime = ((endHours - startHours) + (endMinutes - startMinutes)) / 60;
+        var hourlyWage = Math.floor(((earn / 12) - (earn * 0.009)) / 20 / workTime);
+
+        var nowWage = (nowTime - startHour) * hourlyWage;
+        var reset = "근무시간이 아닙니다.";
+
+        if( nowTime > startHour-1 && nowTime < endHour+1) {
+            var result = nowWage.toLocaleString();
+            $('#daily_earn').text(result+" 원");
+        } else {
+            $('#daily_earn').text(reset);
+        }
     });
+
+//    let run = setInterval(function(){
+//        var reset = "근무시간이 아닙니다.";
+//
+//        if (nowTime <= i++ < workTime) {
+//            result = i*hourlyWage;
+//            console.log(result);
+//        } else {
+//            clearInterval(run);
+//            console.log(reset);
+//        }
+//    }, 1000*60*60);
+
+//    let run = setInterval(function(){
+//        var result = 0;
+//        var reset = "---";
+//
+//        for(i=0; i<workTime; i++){
+//            result = i*hourlyWage;
+//            console.log(result);
+//        }
+//        if(now >= start && now <= end) {
+//            result += hourlyWage;
+//            //return $('#daily_earn').val(result);
+//            console.log(result);
+//        } else {
+//            console.log(reset);
+//            clearInterval(run);
+//            return $('#daily_earn').val(reset);
+//        }
+//    }, 5000);
+
 
     <!--Alert Open JS-->
     $('.li_left').click(function(){
