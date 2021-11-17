@@ -147,11 +147,18 @@
 
                         <div id="user_secret" style="display: none;">
                             <div id="home">
-                                <span class="impact">오늘 내가 번 돈</span>
+                                <span id="earn_title">오늘 내가 번 돈</span>
                             </div>
-                            <div id="money">
-                                <span id="daily_earn"></span>원
+                            <div id="money" th:each="member: ${member}">
+                                <span id="daily_earn"></span>
                             </div>
+
+                            <div style="display: none;">
+                                <span id="startTime">[[${member.startTime}]]</span>
+                                <span id="endTime">[[${member.endTime}]]</span>
+                                <span id="salary">[[${member.salary}]]</span>
+                            </div>
+
                         </div>
 
                         <!--wish list 달성률-->
