@@ -1,26 +1,10 @@
+
 $(document).ready(function() {
     <!--WishList Close JS-->
     $('.wish_close').on('click', function(){
         $('.wish').hide();
         $('.blank').hide();
     });
-
-    <!-- Hourly Wage JS -->
-/*    function getWage(){
-        var startTime = [[${member.startTime}]];
-        var endTime = [[${member.endTime}]];
-        var workTime = endTime - startTime;
-
-        var earn = [[${member.salary}]];
-        var hourlyWage = (((earn * 10000 / 12) - (earn * 10000  * 0.009))/20/workTime);
-
-        setInterval(function(){
-            var now = new Date().getHours();
-            var gap = endTime - now;
-
-            return sum + currValue;
-        });
-    }*/
 
     <!--Alert Open JS-->
     $('.li_left').click(function(){
