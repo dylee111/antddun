@@ -110,7 +110,7 @@ public class SosoBoardController {
     @GetMapping("/sosojob/list/{category}")
     public String cateList(@PathVariable("category") int categoryNo, Model model, SosoPageRequestDTO sosoPageRequestDTO) {
 
-        List<SosoCategory> list = cateService.getCateList(); // 카테고리 리스트
+        List<SosoCategory> list = cateService.getCateList(); // 카테고리 리스트(cateNo / cateName)
         List<Integer> cateNoList = new ArrayList<>(); // 카테고리 No. 담기 위한 LIST
 
         Map<String, List<SosoJobBoard>> getCateList = new HashMap<>(); // key(카테고리 이름):value(카테고리 별 리스트)
@@ -120,8 +120,8 @@ public class SosoBoardController {
         cateNoList.add(categoryNo);
 
 //        log.info("PAGING RESULT >>>" + sosoPageRequestDTO + "//" + categoryNo);
-//        model.addAttribute("cate", sosoJobService.getList(categoryNo, sosoPageRequestDTO));
-        model.addAttribute("cate", getCateList);
+        model.addAttribute("cate", sosoJobService.getList(categoryNo, sosoPageRequestDTO));
+//        model.addAttribute("cate", getCateList);
         model.addAttribute("cateName", list);
 
         log.info("LIST>>>"+list);
