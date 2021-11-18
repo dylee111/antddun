@@ -27,6 +27,7 @@ public class ImageController {
     @Autowired
     private ServletContext context;
 
+
     @PostMapping("/image")
     public ResponseEntity<?> imageUpload(@RequestParam("file") MultipartFile file) {
         try {
@@ -49,6 +50,5 @@ public class ImageController {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();
         }
-
     }
 }

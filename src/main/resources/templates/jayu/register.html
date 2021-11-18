@@ -19,7 +19,7 @@
 
         <!-- 본문 시작 -->
         <div class="content">
-            <form th:action="@{/member/jayu/read}" method="post">
+            <form th:action="@{/member/jayu/register}" method="post">
                 <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
                 <!--카테고리-->
                 <div class="option">
@@ -48,11 +48,6 @@
                 <!--내용-->
                 <div class="form-group">
                     <textarea id="summernote" name="content" required></textarea>
-                </div>
-
-                <!--작성자-->
-                <div class="form-group">
-                    <input type="text" class="form-control" name="writer" readonly>
                 </div>
 
                 <!--작성완료 버튼-->

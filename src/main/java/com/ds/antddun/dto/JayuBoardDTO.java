@@ -16,8 +16,10 @@ public class JayuBoardDTO {
     private Long jayuNo;
     private String title;
     private String content;
-    private String category;
-    private Long mno; //username
+    private String writer;
+
+    private int cnt;
+    private int likes;
 
     private LocalDateTime regDate, modDate;
 }

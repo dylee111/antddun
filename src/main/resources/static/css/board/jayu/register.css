@@ -101,7 +101,6 @@ option{
 
 /* Tool Tip */
 .alert_tip {
-    position: relative;
     display: inline-block;
     color: rgb(220,220,220);
     font-size: 1.3rem;

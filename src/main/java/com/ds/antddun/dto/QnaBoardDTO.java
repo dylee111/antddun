@@ -28,8 +28,9 @@ public class QnaBoardDTO {
     private int ddun;
     private int cnt;
 
-    @Builder.Default
-    private List<UploadImageDTO> imageDTOList = new ArrayList<>();
+    //UploadImageDTO 삭제 완
+//    @Builder.Default
+//    private List<UploadImageDTO> imageDTOList = new ArrayList<>();
 
     private LocalDateTime regDate;
     private LocalDateTime modDate;

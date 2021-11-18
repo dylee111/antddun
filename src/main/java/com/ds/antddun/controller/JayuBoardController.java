@@ -25,14 +25,14 @@ public class JayuBoardController {
     @GetMapping("/member/jayu/register")
     public String register(){
         return "jayu/register";
-
     }
 
     //게시글 등록
     @PostMapping("/member/jayu/register")
     public String setRegister(JayuBoardDTO jayuBoardDTO, Model model, @AuthenticationPrincipal PrincipalDetails principal){
         jayuBoardService.register(jayuBoardDTO, principal.getMember());
-        return "redirect:/jayu/read/" + jayuBoardDTO.getJayuNo();
+        log.info(">>>>>"+jayuBoardDTO.getJayuNo());
+        return "redirect:/member/jayu/read/" + jayuBoardDTO.getJayuNo();
     }
 
     //게시글 조회

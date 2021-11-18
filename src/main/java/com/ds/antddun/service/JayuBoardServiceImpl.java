@@ -20,8 +20,9 @@ public class JayuBoardServiceImpl implements JayuBoardService{
     private JayuBoardRepository jayuBoardRepository;
 
     @Override
-    public Long register(JayuBoardDTO jayuBoardDTO){
+    public Long register(JayuBoardDTO jayuBoardDTO, Member member){
         JayuBoard jayuBoard = dtoToEntity(jayuBoardDTO);
+        jayuBoard.setMember(member);
         jayuBoardRepository.save(jayuBoard);
         return jayuBoard.getJayuNo();
     }

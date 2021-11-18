@@ -9,8 +9,10 @@ import java.util.List;
 
 public interface JayuBoardService {
 
-    Long register(JayuBoardDTO jayuBoardDTO);
+    Long register(JayuBoardDTO jayuBoardDTO, Member member);
+
     JayuBoard findById(Long jayuNo);
+
     List<JayuBoard> findAll();
 
 
@@ -18,11 +20,10 @@ public interface JayuBoardService {
         JayuBoardDTO jayuBoardDTO = JayuBoardDTO.builder()
                 .jayuNo(jayuBoard.getJayuNo())
                 .title(jayuBoard.getTitle())
+                .writer(jayuBoard.getMember().getJob().getJob() + " " +jayuBoard.getMember().getExperience()+"년차 " + jayuBoard.getMember().getLastName() +"개미")
                 .content(jayuBoard.getContent())
-                .category(jayuBoard.getCategory())
                 .regDate(jayuBoard.getRegDate())
                 .modDate(jayuBoard.getModDate())
-                .mno(jayuBoard.getMember().getMno())
                 .build();
         return jayuBoardDTO;
     }
@@ -32,7 +33,6 @@ public interface JayuBoardService {
                 .jayuNo(jayuBoardDTO.getJayuNo())
                 .title(jayuBoardDTO.getTitle())
                 .content(jayuBoardDTO.getContent())
-                .category(jayuBoardDTO.getCategory())
                 .member(Member.builder().mno(memberDTO.getMno()).build())
                 .build();
         return jayuBoard;
