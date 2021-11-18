@@ -1,6 +1,6 @@
 package com.ds.antddun.controller;
 
-import com.ds.antddun.entity.UploadFile;
+import com.ds.antddun.entity.UploadImage;
 import com.ds.antddun.service.ImageService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,38 +11,44 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
+
+
 @Controller
-@RequestMapping("/antddun")
 @Log4j2
 public class ImageController {
 
-	@Autowired
-	ImageService imageService;
+    @Autowired
+    ImageService imageService;
 
-	@Autowired
-	ResourceLoader resourceLoader;
+    @Autowired
+    ResourceLoader resourceLoader;
 
-	@PostMapping("/image")
-	public ResponseEntity<?> imageUpload(@RequestParam("file") MultipartFile file) {
-		try {
-			UploadFile uploadFile = imageService.store(file);
-			return ResponseEntity.ok().body("/image/" + uploadFile.getInum());
-		} catch(Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.badRequest().build();
-		}
-	}
+    @Autowired
+    private ServletContext context;
 
-	@GetMapping("/image/{fileId}")
-	public ResponseEntity<?> serveFile(@PathVariable Long fileId){
-		try {
-			UploadFile uploadFile = imageService.load(fileId);
-			Resource resource = resourceLoader.getResource("file:" + uploadFile.getFilePath());
-			return ResponseEntity.ok().body(resource);
-		} catch(Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.badRequest().build();
-		}
 
-	}
+    @PostMapping("/image")
+    public ResponseEntity<?> imageUpload(@RequestParam("file") MultipartFile file) {
+        try {
+            UploadImage uploadImage = imageService.store(file);
+            String path = context.getContextPath();
+            return ResponseEntity.ok().body(path + "/image/" + uploadImage.getImgNo());
+        } catch(Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/image/{imgNo}")
+    public ResponseEntity<?> serveFile(@PathVariable Long imgNo){
+        try {
+            UploadImage uploadImage = imageService.load(imgNo);
+            Resource resource = resourceLoader.getResource("file:" + uploadImage.getFilePath());
+            return ResponseEntity.ok().body(resource);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }

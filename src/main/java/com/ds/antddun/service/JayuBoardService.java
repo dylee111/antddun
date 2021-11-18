@@ -7,12 +7,14 @@ import com.ds.antddun.entity.Member;
 
 import java.util.List;
 
-import static com.ds.antddun.entity.QJayuBoard.jayuBoard;
-
 public interface JayuBoardService {
 
     Long register(JayuBoardDTO jayuBoardDTO, Member member);
-//    List<JayuBoardDTO> getListByCategory(JayuBoard jayuBoard);
+
+    JayuBoard findById(Long jayuNo);
+
+    List<JayuBoard> findAll();
+
 
     default JayuBoardDTO entityToDTO(JayuBoard jayuBoard) {
         JayuBoardDTO jayuBoardDTO = JayuBoardDTO.builder()
@@ -20,9 +22,10 @@ public interface JayuBoardService {
                 .title(jayuBoard.getTitle())
                 .content(jayuBoard.getContent())
                 .category(jayuBoard.getCategory())
+                .mno(jayuBoard.getMember().getMno())
+                .firstName(jayuBoard.getMember().getJob().getJob() + " " +jayuBoard.getMember().getExperience()+"년차 " + jayuBoard.getMember().getLastName() +"개미")
                 .regDate(jayuBoard.getRegDate())
                 .modDate(jayuBoard.getModDate())
-                .mno(jayuBoard.getMember().getMno())
                 .build();
         return jayuBoardDTO;
     }

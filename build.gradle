@@ -52,10 +52,6 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
 	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
-
-	implementation 'com.google.code.gson:gson:2.8.6'
-
-
 }
 
 test {

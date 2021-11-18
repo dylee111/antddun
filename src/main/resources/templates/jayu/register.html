@@ -3,6 +3,7 @@
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
     <th:block th:fragment="content">
         <!--페이지 수정 부분 시작-->
+        <link th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
         <!-- 페이지 css/ js 추가 -->
         <link rel="stylesheet" th:href="@{/css/board/jayu/register.css}">
         <script th:src="@{/js/board/jayu/register.js}"></script>
@@ -18,7 +19,7 @@
 
         <!-- 본문 시작 -->
         <div class="content">
-            <form th:action="@{/member/jayu/confirm}" th:method="post">
+            <form th:action="@{/member/jayu/register}" method="post">
                 <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
                 <!--카테고리-->
                 <div class="option">
@@ -30,9 +31,12 @@
                 <div class="option">
                     <label class="peong">💣펑예</label>
                     <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+                    <div class="alert_tip">ⓘ
+                        <span class="tooltiptext">익일 자정에 펑! 삭제됩니다.</span>
+                    </div>
                 </div>
 
                 <!--제목-->

@@ -4,13 +4,16 @@ import com.ds.antddun.dto.JayuBoardDTO;
 import com.ds.antddun.entity.JayuBoard;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.repository.JayuBoardRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Log4j2
+@RequiredArgsConstructor
 public class JayuBoardServiceImpl implements JayuBoardService{
 
     @Autowired
@@ -22,5 +25,16 @@ public class JayuBoardServiceImpl implements JayuBoardService{
         jayuBoard.setMember(member);
         jayuBoardRepository.save(jayuBoard);
         return jayuBoard.getJayuNo();
+    }
+
+    @Override
+    public JayuBoard findById(Long jayuNo) {
+        return jayuBoardRepository.findById(jayuNo).get();
+    }
+
+    @Override
+    public List<JayuBoard> findAll() {
+        List<JayuBoard> jayuBoards = jayuBoardRepository.findAll();
+        return jayuBoards;
     }
 }

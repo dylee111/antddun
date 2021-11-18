@@ -13,19 +13,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class JayuBoardDTO {
 
-    private Long jayuNo;
-    private String title;
-    private String content;
-    private String category;
-    private Long mno; //username
+    private Long jayuNo, mno; //username
+    private String title, content, firstName, category;
 
+
+    private int cnt, likes;
     private LocalDateTime regDate, modDate;
-
-    public JayuBoardDTO(String title, String content, String category, LocalDateTime regDate, LocalDateTime modDate){
-        this.title = title;
-        this.content = content;
-        this.category = category;
-        this.regDate = regDate;
-        this.modDate = modDate;
-    }
 }

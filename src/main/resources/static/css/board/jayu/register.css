@@ -57,6 +57,7 @@ option{
     display: inline-block;
     width: 55px;
     height: 25px;
+    margin-left: -5px;
 }
 .switch input {
     opacity: 0;
@@ -97,6 +98,46 @@ option{
     -ms-transform: translateX(26px);
     transform: translateX(26px);
 }
+
+/* Tool Tip */
+.alert_tip {
+    display: inline-block;
+    color: rgb(220,220,220);
+    font-size: 1.3rem;
+    z-index: 1080;
+    line-height: 2.2;
+}
+
+.tooltiptext {
+     visibility: hidden;
+     width: 200px;
+     background-color: rgb(220,220,220);
+     color: #fff;
+     text-align: center;
+     border-radius: 6px;
+     padding: 5px 0;
+     font-weight: bold;
+     font-size: 0.8rem;
+     position: absolute;
+     z-index: 1;
+     left: 15
+     0%;
+}
+
+.alert_tip .tooltiptext::after {
+     visibility: hidden;
+     content: "";
+     position: absolute;
+     top: 50%;
+     right: 100%;
+     margin-top: -5px;
+     border-width: 5px;
+     border-style: solid;
+     border-color: transparent rgb(220,220,220) transparent transparent;
+}
+
+.alert_tip:hover .tooltiptext { visibility: visible; }
+.alert_tip:hover .tooltiptext::after { visibility: visible; }
 
 /* 등록 버튼 */
 .btn-primary{

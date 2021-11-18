@@ -7,59 +7,7 @@
 
         <!-- 본문 시작 -->
         <div class="content">
-            <!--카테고리-->
-            <div class="option">
-                <select class="category" name="category">
-                </select>
-            </div>
-
-            <!--펑예-->
-            <div class="option">
-                <label class="peong">💣펑예</label>
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider"></span>
-                </label>
-            </div>
-
-            <!--제목-->
-            <div class="form-group">
-                <input type="text" class="form-control" name="title" required
-                       placeholder="제목을 입력해주세요">
-            </div>
-
-            <!--내용-->
-            <div class="form-group">
-                <textarea id="summernote" name="content" required></textarea>
-            </div>
-
-            <!--등록일자-->
-            <div class="form-group">
-                <label>등록일</label>
-                <input type="text" class="form-control" name="regDate" readonly
-                       th:value="${#temporals.format(dto.regDate,'yyyy/MM/dd HH:mm:ss')}">
-            </div>
-
-            <!--수정일-->
-            <div class="form-group">
-                <label>수정일</label>
-                <input type="text" class="form-control" name="modDate" readonly
-                       th:value="${#temporals.format(dto.modDate,'yyyy/MM/dd HH:mm:ss')}">
-            </div>
-
-            <!--작성자-->
-            <div class="form-group">
-                <input type="text" class="form-control" name="writer" readonly>
-            </div>
-
-            <a th:href="@{/guestbook/modify(gno=${dto.gno}, page=${requestDTO.page}, type=${requestDTO.type},
-    keyword=${requestDTO.keyword})}">
-                <button class="btn btn-primary btn-modify">수정하기</button>
-            </a>
-            <a th:href="@{/guestbook/list(page=${requestDTO.page}, type=${requestDTO.type},
-    keyword=${requestDTO.keyword})}">
-                <button class="btn btn-primary">목록보기</button>
-            </a>
+            등록 성공!
         </div>
         <!-- 본문 끝 -->
         <!--페이지 수정 부분 끝-->
