@@ -31,9 +31,9 @@
         <header>
             <div class="wish" sec:authorize="isAuthenticated()">
 
-                    <span id="main_wish" class="impact" th:each="wishList1 : ${wishList1}">
-                        🎉 <strong class="main_wish impact" th:text="${wishList1.wishList}"></strong>까지
-                        <strong class="impact"><span class="wish_day" th:text="${wishList1.dDay}"></span>일</strong> 남았습니다. ✨
+                    <span id="main_wish" class="impact" th:each="wishListIndex : ${wishListIndex}">
+                        🎉 <strong class="main_wish impact" th:text="${wishListIndex.wishList}"></strong>까지
+                        <strong class="impact"><span class="wish_day" th:text="${wishListIndex.dDay}"></span>일</strong> 남았습니다. ✨
                     </span>
                     <span id="no_wish" class="impact" style="display: none;">
                         <strong class="impact">메인 위시리스트를 등록해주세요.</strong>📝
@@ -171,7 +171,7 @@
                             <table id="wish_table" style="table-layout: fixed">
                                 <tr th:each="wishList : ${wishList}">
                                     <td class="wish_product" th:text="${wishList.wishList}"></td>
-                                    <td class="wish_day" th:text="${wishList.dDay}"></td>
+                                    <td class="wish_day">D-<span th:text="${wishList.dDay}"></span></td>
                                 </tr>
                             </table>
                         </div>

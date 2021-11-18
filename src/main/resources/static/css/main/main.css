@@ -375,13 +375,12 @@ strong.impact {
 }
 
 .wish_product {
-    width: 80%;
+    width: 60%;
     color: #737373;
     font-weight: 400;
 }
 
 .wish_day {
-    width: 20%;
     text-align: right;
     color: #402700;
     font-weight: 400;
