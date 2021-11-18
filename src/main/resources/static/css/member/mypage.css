@@ -176,6 +176,20 @@
     font-size: 15px;
   }
 
+  .wish_read {
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+
+  }
+
+  .wish_read tr td{
+    border: 1px solid rgb(220,220,220);
+    padding: 7px 5px;
+    font-family: 'ELAND_Choice_M';
+    font-size: 15px;
+  }
+
   .input_pd {
     width: 90%;
     height: 25px;
@@ -199,6 +213,7 @@
     font-size: 15px;
   }
 
+/*
   .save_btn {
     border: none;
     height: 30px;
@@ -212,6 +227,22 @@
     float: right;
     cursor:pointer;
   }
+
+  .add_btn {
+    border: none;
+    height: 30px;
+    width: 70px;
+    border-radius: 5px;
+    font-family: 'ELAND_Choice_M';
+    font-size: 1rem;
+    color: white;
+    font-weight: bold;
+    background: #5D4B1D;
+    float: right;
+    cursor:pointer;
+    margin-right: 10px;
+  }
+*/
 
   .charge_btn {
     border: none;

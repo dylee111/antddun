@@ -106,3 +106,12 @@ $(document).ready(function() {
         return $('#earn_month').val(result);
     }
 });
+
+//위시 리스트
+$(document).ready(function() {
+    $('.wish_update').on('click', function(){
+        $('.input_pd').removeAttr("readonly");
+        $('.input_cost').removeAttr("readonly");
+        $('.input_per').removeAttr("readonly");
+    });
+});
