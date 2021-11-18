@@ -29,13 +29,13 @@
     <div id="fixed">
         <!--로그인 정보에 따라 노출 유무 결정-->
         <header>
-            <div class="wish" sec:authorize="isAuthenticated()" style="display: none;">
+            <div class="wish" sec:authorize="isAuthenticated()" th:each="wishList : ${wishList}">
                     <span id="main_wish" class="impact" style="display: none;">
-                        🎉 <strong class="main_wish impact"></strong>까지
-                        <strong class="impact"><span class="wish_day"></span>일</strong> 남았습니다. ✨
+                        🎉 <strong class="main_wish impact" th:text="${wishList.wishList}"></strong>까지
+                        <strong class="impact"><span class="wish_day" th:text="${wishList.dDay}"></span>일</strong> 남았습니다. ✨
                     </span>
-                    <span id="no_wish" class="impact">
-                        📝 <strong class="impact">메인 위시리스트를 등록해주세요.</strong>🥺
+                    <span id="no_wish" class="impact" style="display: none;">
+                        <strong class="impact">메인 위시리스트를 등록해주세요.</strong>📝
                     </span>
                 <img th:src="@{assets/close.png}" class="wish_close"/>
             </div>
@@ -165,18 +165,18 @@
                         </div>
 
                         <!--wish list 달성률-->
-                        <div id="user_goal" class="margin_bottom" style="display: none;">
-                            <strong>달성율</strong>
+                        <div id="user_goal" class="margin_bottom">
+                            <strong style="display: inline-block; margin-bottom: 10px;">달성율</strong>
                             <table id="wish_table" style="table-layout: fixed">
                                 <tr th:each="wishList : ${wishList}">
-                                    <td class="wish_product" th:value="${wishList.wishList}"></td>
-                                    <td class="wish_day">D-5</td>
+                                    <td class="wish_product" th:text="${wishList.wishList}"></td>
+                                    <td class="wish_day" th:text="${wishList.dDay}"></td>
                                 </tr>
                             </table>
                         </div>
-<!--                        <div id="no_goal" class="margin_bottom" style="display: none;">
+                        <div id="no_goal" class="margin_bottom" style="display: none;">
                             <strong>등록된 위시리스트가<br>없습니다.</strong>
-                        </div>-->
+                        </div>
                     </div>
 
                     <!--Before Login-->

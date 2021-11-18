@@ -44,6 +44,7 @@ public class MemberController {
     @GetMapping("")
     public String main (Model model, MemberDTO memberDTO, @AuthenticationPrincipal PrincipalDetails principal) {
         if(principal != null) {
+            model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
             model.addAttribute("member", principal.getMember());
         }
         return "index";

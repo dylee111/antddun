@@ -123,30 +123,27 @@
 
                             <div>
                                 <h4 class="mypage_subtitle margin_bottom">나의 위시 리스트</h4>
-                                <div class="my_margin2">
-                                    <span class="money_title">금액</span>
-                                    <input type="text" class="money_input" name="wish_total" disabled/>
-                                </div>
 
+                                <div>
+                                    <span>입력란</span>
+                                </div>
                                 <table class="wish_table margin_top">
                                     <thead>
                                     <tr>
-                                        <td style="width:10%;">메인</td>
                                         <td style="width:30%;">상품</td>
-                                        <td style="width:15%;">금액</td>
+                                        <td style="width:15%;">상품 금액</td>
                                         <td style="width:15%;">적금 비율</td>
                                         <td style="width:13%;">D-DAY</td>
                                         <td style="width:12%;">적용</td>
                                     </tr>
                                     </thead>
-                                  
+
                                     <tbody>
                                     <tr class="wishlist_add wishlist_tr">
-                                        <td><input type="radio" name="main_wish"/></td>
                                         <td><input id="input_list" class="input_pd" placeholder="상품명을 입력하세요." name="wishList"></td>
                                         <td><input id="input_price" class="input_cost" placeholder="ex) 50000" name="price"></td>
                                         <td><input id="input_rate" class="input_per" placeholder="ex) 10" name="rate">%</td>
-                                        <td><button id="day_btn">확인</button><span id="show_day" style="display: none;">D-</span><input id="input_day" name="dday" style="display: none;" readonly></td>
+                                        <td><button id="day_btn">확인</button><span id="show_day" style="display: none;">D -</span><input id="input_day" name="dday" style="display: none;" readonly></td>
                                         <td>
                                             <img id="btn-wishSave"  th:src="@{/assets/wishlist/insert.png}" style="width:15px;">
                                         </td>
@@ -154,10 +151,12 @@
                                     </tbody>
                                 </table>
 
+                                <div>
+                                    <span>위시 리스트</span>
+                                </div>
                                 <table class="wish_read">
                                     <tbody>
                                     <tr id="wishlist_read" th:each="wishList : ${wishList}">
-                                        <td style="width: 10%;"><input type="radio" name="main_wish" checked /></td>
                                         <td style="width: 30%;"><input class="input_pd" name="wishList" th:value="${wishList.wishList}" placeholder="아이폰" readonly></td>
                                         <td style="width: 15%;"><input class="input_cost" name="price" th:value="${wishList.price}" placeholder="100000" readonly></td>
                                         <td style="width: 15%;"><input class="input_per" name="rate" th:value="${wishList.rate}" placeholder="2" readonly>%</td>
