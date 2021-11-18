@@ -10,5 +10,6 @@ public class MemberWishListDTO {
     private String wishList;
     private int price;
     private int rate;
+    private int dDay;
     private Long member;
 }
