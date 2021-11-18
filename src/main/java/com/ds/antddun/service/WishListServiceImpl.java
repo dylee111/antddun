@@ -36,4 +36,16 @@ public class WishListServiceImpl implements WishListService{
 
         return result;
     }
+
+    @Override
+    public void modify(MemberWishListDTO memberWishListDTO, Member member) {
+        MemberWishList memberWishList = dtoToEntity(memberWishListDTO, member);
+        memberWishListRepository.save(memberWishList);
+
+    }
+
+    @Override
+    public void remove(Long wno) {
+        memberWishListRepository.deleteById(wno);
+    }
 }

@@ -9,13 +9,12 @@ import com.ds.antddun.service.MemberService;
 import com.ds.antddun.service.WishListService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -39,8 +38,10 @@ public class MemberController {
             List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
 
             model.addAttribute("member", principal.getMember());
-            model.addAttribute("wishListIndex", wishLists.get(0));
 
+            if(wishLists.size() != 0) {
+                model.addAttribute("wishListIndex", wishLists.get(0));
+            }
         }
         return "index";
     }
@@ -65,11 +66,12 @@ public class MemberController {
         if(principal != null) {
             model.addAttribute("member", principal.getMember());
             model.addAttribute("jobList", jobListService.getList());
-            model.addAttribute("wishList", wishLists);
-            model.addAttribute("wishListIndex", wishLists.get(0));
+            if (wishLists.size() != 0) {
+                model.addAttribute("wishList", wishLists);
+                model.addAttribute("wishListIndex", wishLists.get(0));
+            }
         }
 //        return "member/mypage";
-        log.info("WISHLIST>>"+wishLists.get(0));
     }
 
     @ResponseBody
@@ -91,6 +93,18 @@ public class MemberController {
         return result;
     }
 
+    @DeleteMapping("/member/mypage/delete/{wno}")
+    public ResponseEntity<String> remove(@PathVariable("wno") Long wno) {
+        wishListService.remove(wno);
+        return new ResponseEntity<>("delete", HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @PutMapping("/member/mypage/modify/{wno}")
+    public ResponseEntity<String> modify(@RequestBody MemberWishListDTO memberWishListDTO, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        wishListService.modify(memberWishListDTO,principalDetails.getMember());
+        return new ResponseEntity<>("modify", HttpStatus.OK);
+    }
 
     @PostMapping("/member/mypage")
     public void wishList(MemberWishListDTO wishListDTO,
