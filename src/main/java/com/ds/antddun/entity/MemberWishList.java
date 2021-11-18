@@ -21,6 +21,6 @@ public class MemberWishList extends BaseEntity{
     private int price;
     private int rate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 }

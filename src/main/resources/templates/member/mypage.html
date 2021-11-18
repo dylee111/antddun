@@ -110,7 +110,6 @@
                 </div>
 
                 <div id="money_page" style="display:none;">
-                    <form method="POST" th:action="@{/member/mypage}">
                     <div id="user_wallet" style="margin-bottom: 70px;">
                         <h2 class="mypage_title">내 돈 정보</h2>
                         <hr class="my_margin">
@@ -140,6 +139,7 @@
                                         <td style="width:12%;">적용</td>
                                     </tr>
                                     </thead>
+                                  
                                     <tbody>
                                     <tr class="wishlist_add wishlist_tr">
                                         <td><input type="radio" name="main_wish"/></td>
@@ -173,7 +173,6 @@
                             </div>
                         </div>
                     </div>
-                    </form>
 
                     <div id="user_ddun">
                         <h2 class="mypage_title">내 뚠 정보</h2>

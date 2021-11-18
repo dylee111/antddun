@@ -380,3 +380,9 @@
 
    .alert_tip:hover .tooltiptext { visibility: visible; }
    .alert_tip:hover .tooltiptext::after { visibility: visible; }*/
+
+        /* wish list */
+
+   .update, .delete {
+        display: none;
+   }
