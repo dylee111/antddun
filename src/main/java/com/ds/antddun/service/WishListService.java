@@ -11,6 +11,8 @@ public interface WishListService {
 
     List<MemberWishList> getListByMno(Long mno);
 
+    int wishListCnt(Long mno);
+
     default MemberWishList dtoToEntity(MemberWishListDTO wishListDTO, Member member) {
 
         MemberWishList wishList = MemberWishList.builder()
@@ -18,6 +20,7 @@ public interface WishListService {
                 .price(wishListDTO.getPrice())
                 .rate(wishListDTO.getRate())
                 .member(member)
+                .dDay(wishListDTO.getDDay())
                 .build();
         return wishList;
     }

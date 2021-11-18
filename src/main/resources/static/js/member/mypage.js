@@ -59,15 +59,34 @@ $(document).ready(function() {
     const price = $(".input_cost").val();
     const rate = $(".input_per").val();
 
-    $('.wish_update').on('click', function(){
-        $('.input_pd').removeAttr("readonly");
-        $('.input_cost').removeAttr("readonly");
-        $('.input_per').removeAttr("readonly");
+    const btnUpdate = $('.wish_update');
+
+    $('.wish_update').eq(1).on('click', function(){
+        alert("0");
+        $('.input_pd').eq(1).removeAttr("readonly");
+        $('.input_cost').eq(1).removeAttr("readonly");
+        $('.input_per').eq(1).removeAttr("readonly");
     });
+    $('.wish_update').eq(2).on('click', function(){
+        alert("1");
+        $('.input_pd').eq(2).removeAttr("readonly");
+        $('.input_cost').eq(2).removeAttr("readonly");
+        $('.input_per').eq(2).removeAttr("readonly");
+    });
+    $('.wish_update').eq(3).on('click', function(){
+            alert("2");
+        $('.input_pd').eq(3).removeAttr("readonly");
+        $('.input_cost').eq(3).removeAttr("readonly");
+        $('.input_per').eq(3).removeAttr("readonly");
+    });
+
+
+
 
     /* 저장 버튼 */
     $("#btn-wishSave").click(function() {
         wishListSave();
+
         var str = "";
         $.each(function() {
             str += "<td style='width: 10%;'><input type='radio' name='main_wish' checked /></td>";
@@ -83,6 +102,7 @@ $(document).ready(function() {
         $("#wishlist_read").html(str);
 //          $(".dDay").html(day);
 //          $(".input_pd").prop('readonly', true);
+
     });
 
     /* 위시리스트 저장 */
@@ -105,16 +125,21 @@ $(document).ready(function() {
             type: 'POST',
             dataType: 'text',
             data: {
+                  member: $("#member_mno").val(),
                   wishList: $("#input_list").val(),
                   price: $("#input_price").val(),
                   rate: $("#input_rate").val()
             },
             success: function(data) {
-                alert("성공");
+                if(data < 3) {
+                    alert("성공");
+                } else if(data >= 3) {
+                    alert("3개 이상");
+                    return false;
+                }
                 $(this).submit();
-
             },
-            error: function() {
+            error: function(data) {
                 console.log(data);
                 alert("실패");
             }
@@ -123,6 +148,23 @@ $(document).ready(function() {
          return false;
     };
 
+    function loadWishList() {
+        $.getJSON('/antddun/member/mypage/save', function(arr) {
+            console.log(arr);
+            $.each(function() {
+                str += "<td style='width: 10%;'><input type='radio' name='main_wish' checked /></td>";
+                str += "<td style='width: 30%;'><input class='input_pd' name='wishList' th:value='${wishList.wishList}' readonly></td>";
+                str += "<td style='width: 15%;'><input class='input_cost' name='price' th:value='${wishList.price}' readonly></td>";
+                str += "<td style='width: 15%;'><input class='input_per' name='rate' th:value='${wishList.rate}' readonly>%</td>";
+                str += "<td style='width: 13%;'>D-<span class='wish_day'></span></td>";
+                str += "<td style='width: 12%;'>";
+                str += "<img class='wish_update' th:src='@{/assets/wishlist/update.png}' style='width:15px;'>";
+                str += "<img class='wish_update' th:src='@{/assets/wishlist/delete.png}' style='width:15px;'>";
+                str += "</td>";
+            });
+            $("#wishlist_read").html(str);
+        })
+    }
 
 });
 

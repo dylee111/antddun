@@ -391,6 +391,6 @@
 
         /* wish list */
 
-   .update, .delete {
-        display: none;
+   .btn-image  {
+        cursor: pointer;
    }

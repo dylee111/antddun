@@ -29,4 +29,11 @@ public class WishListServiceImpl implements WishListService{
         List<MemberWishList> result = memberWishListRepository.getWishListByMno(mno);
         return result;
     }
+
+    @Override
+    public int wishListCnt(Long mno) {
+        int result = memberWishListRepository.wishListCnt(mno);
+
+        return result;
+    }
 }
