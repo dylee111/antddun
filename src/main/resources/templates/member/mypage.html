@@ -156,8 +156,8 @@
                                 </table>
 
                                 <table class="wish_read">
-                                    <tbody>
-                                    <tr class="wishlist_read" th:each="wishList : ${wishList}">
+                                    <tbody th:each="wishList : ${wishList}" >
+                                    <tr class="wishlist_read" th:each="i : ${#numbers.sequence(1, 3)}">
                                         <td style="width: 10%;"><input type="radio" name="main_wish" checked /></td>
                                         <td style="width: 30%;"><input class="input_pd" name="wishList" th:value="${wishList.wishList}" th:placeholder="${wishList.wishList}" readonly></td>
                                         <td style="width: 15%;"><input class="input_cost" name="price" th:value="${wishList.price}" th:placeholder="${wishList.price}" readonly></td>
@@ -170,6 +170,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
+
 
                             </div>
                         </div>
