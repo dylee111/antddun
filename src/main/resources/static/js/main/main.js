@@ -25,7 +25,6 @@ $(document).ready(function() {
       });
    })
 
-
     <!-- Hourly Wage JS -->
     $(document).ready(function() {
         <!--현재 시간-->

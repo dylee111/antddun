@@ -147,7 +147,7 @@
                                         <td><input id="input_list" class="input_pd" placeholder="상품명을 입력하세요." name="wishList"></td>
                                         <td><input id="input_price" class="input_cost" placeholder="ex) 50000" name="price"></td>
                                         <td><input id="input_rate" class="input_per" placeholder="ex) 10" name="rate">%</td>
-                                        <td>D-<span class="wish_day"></span></td>
+                                        <td><button id="day_btn">확인</button><span id="show_day" style="display: none;">D-</span><input id="input_day" name="dday" style="display: none;" readonly></td>
                                         <td>
                                             <img id="btn-wishSave" class="btn-image"  th:src="@{/assets/wishlist/insert.png}" style="width:15px;">
                                         </td>
@@ -159,10 +159,12 @@
                                     <tbody th:each="wishList : ${wishList}" >
                                     <tr class="wishlist_read" th:each="i : ${#numbers.sequence(1, 3)}">
                                         <td style="width: 10%;"><input type="radio" name="main_wish" checked /></td>
+
                                         <td style="width: 30%;"><input class="input_pd" name="wishList" th:value="${wishList.wishList}" th:placeholder="${wishList.wishList}" readonly></td>
                                         <td style="width: 15%;"><input class="input_cost" name="price" th:value="${wishList.price}" th:placeholder="${wishList.price}" readonly></td>
                                         <td style="width: 15%;"><input class="input_per" name="rate" th:value="${wishList.rate}" th:placeholder="${wishList.rate}" readonly>%</td>
                                         <td style="width: 13%;" >D-[[${dDay}]]<span class="wish_day"></span></td>
+
                                         <td style="width: 12%;">
                                             <img class="btn-image wish_update" th:src="@{/assets/wishlist/update.png}" style="width:15px;">
                                             <img class="btn-image wish_delete" th:src="@{/assets/wishlist/delete.png}" style="width:15px;">
@@ -179,6 +181,17 @@
                     <div id="user_ddun">
                         <h2 class="mypage_title">내 뚠 정보</h2>
                         <button class="charge_btn">충전</button>
+
+                        <div class="card-body bg-white mt-0 shadow" style="display: none;">
+                            <p style="font-weight: bold">뚠 충전 : 네이버페이</p>
+                            <label class="box-radio-input"><input type="radio" name="cp_item" value="5000"><span>5,000원</span></label>
+                            <label class="box-radio-input"><input type="radio" name="cp_item" value="10000"><span>10,000원</span></label>
+                            <label class="box-radio-input"><input type="radio" name="cp_item" value="30000"><span>30,000원</span></label>
+                            <label class="box-radio-input"><input type="radio" name="cp_item" value="50000"><span>50,000원</span></label>
+                            <label class="box-radio-input"><input type="radio" name="cp_item" value="100000"><span>100,000원</span></label>
+                            <button type="button" class="btn btn-lg btn-block  btn-custom" id="charge_kakao">충 전 하 기</button>
+                        </div>
+
                         <hr class="my_margin">
 
                         <div class="center my_margin">

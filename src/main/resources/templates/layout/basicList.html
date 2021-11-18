@@ -60,6 +60,15 @@
         </div>
 
         <div class="container-main container">
+            <div id="search-wrap">
+                <div style="display: flex;">
+                    <input type="text" id="search-bar" />
+                    <button type="submit" class="searchButton">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
             <div class="row">
                 <th:block th:replace="${content}"></th:block>
             </div>
