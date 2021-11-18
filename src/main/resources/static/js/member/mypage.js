@@ -60,7 +60,7 @@ $(document).ready(function() {
         }
 
         $('#day_btn').hide();
-        $("#input_day").show();
+        $("#show_day").show();
         $("#input_day").show();
 
         return $("#input_day").val(wishDay);
