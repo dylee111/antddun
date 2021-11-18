@@ -29,12 +29,12 @@
     <div id="fixed">
         <!--로그인 정보에 따라 노출 유무 결정-->
         <header>
-            <div class="wish" sec:authorize="isAuthenticated()" style="display: none;">
-                    <span id="main_wish" class="impact" style="display: none;">
-                        🎉 <strong class="main_wish impact"></strong>까지
-                        <strong class="impact"><span class="wish_day"></span>일</strong> 남았습니다. ✨
+            <div class="wish" sec:authorize="isAuthenticated()">
+                    <span id="main_wish" class="impact" style="display: none;" th:each="list : ${wishListIndex}">
+                        🎉 <strong class="main_wish impact" th:text="${list.wishList}"></strong>까지
+                        <strong class="impact" th:text="${list.dDay}"><span class="wish_day"></span>일</strong> 남았습니다. ✨
                     </span>
-                    <span id="no_wish" class="impact">
+                    <span id="no_wish" class="impact"  style="display: none;">
                         📝 <strong class="impact">메인 위시리스트를 등록해주세요.</strong>🥺
                     </span>
                 <img th:src="@{assets/close.png}" class="wish_close"/>
