@@ -49,7 +49,7 @@ $(document).ready(function() {
     }
 });
 
-//위시리스트
+//위시 리스트
 $(document).ready(function() {
     $('.wish_update').on('click', function(){
         $('.input_pd').removeAttr("readonly");
