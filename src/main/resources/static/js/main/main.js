@@ -35,11 +35,11 @@ $(document).ready(function() {
     }
 
     if($('.main_wish').val() == null) {
-        $('#main_wish').show();
-        $('#no_wish').hide();
-    } else {
         $('#no_wish').show();
         $('#main_wish').hide();
+    } else {
+        $('#main_wish').show();
+        $('#no_wish').hide();
     }
 
     <!-- Hourly Wage JS -->
