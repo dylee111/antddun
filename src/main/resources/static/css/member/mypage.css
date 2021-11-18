@@ -213,6 +213,14 @@
     font-size: 15px;
   }
 
+  #input_day {
+    width: 25%;
+    height: 25px;
+    border: none;
+    text-align: center;
+    font-size: 15px;
+  }
+
 /*
   .save_btn {
     border: none;

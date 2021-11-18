@@ -25,16 +25,6 @@ $(document).ready(function() {
       });
    })
 
-    <!-- WishList Notice JS -->
-//    if ($('.main_wish').text("[[${member.wish.main}]]") == true) {
-//        $('#no_wish').show();
-//        $('#main_wish').hide();
-//    } else {
-//        $('#main_wish').show();
-//        $('#no_wish').hide();
-//    }
-//    console.log($('.main_wish').text());
-
     <!-- Hourly Wage JS -->
     $(document).ready(function() {
         <!--현재 시간-->
