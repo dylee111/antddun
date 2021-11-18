@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 @SpringBootTest
 class SosoJobServiceImplTest {
 
@@ -33,9 +35,13 @@ class SosoJobServiceImplTest {
     public void testRead() {
         Pageable pageable = PageRequest.of(0, 12);
 
-        Page<SosoJobBoard> result = sosoBoardRepository.findAll(pageable);
+        Page<SosoJobBoard> result = sosoBoardRepository.getPageByCategoryNo(1,pageable);
 
         System.out.println(result);
+        System.out.println(result.getTotalElements());
+        System.out.println(result.getTotalPages());
+
+
 
     }
 

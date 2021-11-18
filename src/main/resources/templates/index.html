@@ -23,14 +23,13 @@
     <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js}"></script>
     <!-- Core theme JS-->
     <script th:inline="javascript" th:src="@{js/main/main.js}"></script>
-
 </head>
 <body>
 <div>
     <div id="fixed">
         <!--로그인 정보에 따라 노출 유무 결정-->
         <header>
-            <div class="wish" sec:authorize="isAuthenticated()">
+            <div class="wish" sec:authorize="isAuthenticated()" style="display: none;">
                     <span class="impact">
                         🎉<strong class="impact">아이폰13PRO</strong>까지
                         <strong class="impact">5일</strong> 남았습니다.✨
@@ -148,11 +147,18 @@
 
                         <div id="user_secret" style="display: none;">
                             <div id="home">
-                                <span class="impact">오늘 내가 번 돈</span>
+                                <span id="earn_title">오늘 내가 번 돈</span>
                             </div>
-                            <div id="money">
-                                <span id="daily_earn"></span>원
+                            <div id="money" th:each="member: ${member}">
+                                <span id="daily_earn"></span>
                             </div>
+
+                            <div style="display: none;">
+                                <span id="startTime">[[${member.startTime}]]</span>
+                                <span id="endTime">[[${member.endTime}]]</span>
+                                <span id="salary">[[${member.salary}]]</span>
+                            </div>
+
                         </div>
 
                         <!--wish list 달성률-->

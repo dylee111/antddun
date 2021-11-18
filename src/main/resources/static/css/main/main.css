@@ -337,9 +337,17 @@ strong.impact {
     font-size: 1.5rem;
 }
 
+#earn_title {
+    font-family: 'ELAND_Choice_M';
+    font-size: 18px;
+    color: #737373;
+    margin: 10px 0 5px 0;
+}
+
 #daily_earn {
+    font-family: 'ELAND_Choice_M';
     font-size: 2rem;
-    font-weight: 900;
+    margin-bottom: 10px;
 }
 
 #user_goal {

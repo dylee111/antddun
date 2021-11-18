@@ -28,5 +28,4 @@ public interface SosoBoardRepository extends JpaRepository<SosoJobBoard, Long> {
             " AND sc.cateNo=:categoryNo ")
     Page<SosoJobBoard> getPageByCategoryNo(int categoryNo, Pageable pageable);
 
-
 }

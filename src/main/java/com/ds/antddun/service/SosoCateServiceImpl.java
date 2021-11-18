@@ -16,7 +16,7 @@ public class SosoCateServiceImpl implements SosoCateService{
     private final SosoCategoryRepository sosoCategoryRepository;
 
     @Override
-    public List<SosoCategory> getList() {
+    public List<SosoCategory> getCateList() {
         List<SosoCategory> result = sosoCategoryRepository.findAll();
 
         return result;

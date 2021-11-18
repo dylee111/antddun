@@ -45,3 +45,7 @@ article {
     text-align: center;
     line-height: 8px;
 }
+
+.text-width {
+    width: 900px;
+}
