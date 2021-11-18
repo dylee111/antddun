@@ -30,17 +30,17 @@ public class JayuBoardController {
     //게시글 등록
     @PostMapping("/member/jayu/register")
     public String setRegister(JayuBoardDTO jayuBoardDTO, Model model, @AuthenticationPrincipal PrincipalDetails principal){
-        jayuBoardService.register(jayuBoardDTO, principal.getMember());
         log.info(">>>>>"+jayuBoardDTO.getJayuNo());
-        return "redirect:/member/jayu/read/" + jayuBoardDTO.getJayuNo();
+        jayuBoardService.register(jayuBoardDTO, principal.getMember());
+        return "redirect:/member/jayu/read/";
     }
 
     //게시글 조회
-    @GetMapping("/member/jayu/read/{jayuNo}")
+    @GetMapping("/member/jayu/read")
     public String read(Model model, @PathVariable Long jayuNo) {
         JayuBoard jayuBoard = jayuBoardService.findById(jayuNo);
         model.addAttribute("jayuNo", jayuNo);
-        return "/jayu/read";
+        return "member/jayu/read";
     }
 
     //게시글 목록

@@ -20,8 +20,10 @@ public interface JayuBoardService {
         JayuBoardDTO jayuBoardDTO = JayuBoardDTO.builder()
                 .jayuNo(jayuBoard.getJayuNo())
                 .title(jayuBoard.getTitle())
-                .writer(jayuBoard.getMember().getJob().getJob() + " " +jayuBoard.getMember().getExperience()+"년차 " + jayuBoard.getMember().getLastName() +"개미")
                 .content(jayuBoard.getContent())
+                .category(jayuBoard.getCategory())
+                .mno(jayuBoard.getMember().getMno())
+                .firstName(jayuBoard.getMember().getJob().getJob() + " " +jayuBoard.getMember().getExperience()+"년차 " + jayuBoard.getMember().getLastName() +"개미")
                 .regDate(jayuBoard.getRegDate())
                 .modDate(jayuBoard.getModDate())
                 .build();
@@ -33,6 +35,7 @@ public interface JayuBoardService {
                 .jayuNo(jayuBoardDTO.getJayuNo())
                 .title(jayuBoardDTO.getTitle())
                 .content(jayuBoardDTO.getContent())
+                .category(jayuBoardDTO.getCategory())
                 .member(Member.builder().mno(memberDTO.getMno()).build())
                 .build();
         return jayuBoard;
