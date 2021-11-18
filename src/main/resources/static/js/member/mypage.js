@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
 
     var earn = parseInt($('#earn').text());
@@ -23,6 +24,22 @@ $(document).ready(function() {
         $('#my_page').hide();
     });
 
+
+
+
+
+// 실수령 계산기
+
+    if(result == "NaN") {
+        return $('#earn_month').val(result2);
+    } else {
+        return $('#earn_month').val(result);
+    }
+});
+
+//위시 리스트
+$(document).ready(function() {
+
     const wishListArr = new Array();
     const priceArr = new Array();
     const rateArr = new Array();
@@ -31,32 +48,34 @@ $(document).ready(function() {
     const price = $(".input_cost").val();
     const rate = $(".input_per").val();
 
+    $('.wish_update').on('click', function(){
+        $('.input_pd').removeAttr("readonly");
+        $('.input_cost').removeAttr("readonly");
+        $('.input_per').removeAttr("readonly");
+    });
 
     /* 저장 버튼 */
-    $("#btn-save1").click(function() {
-        wishListSave(0);
-        $("#btn-save1").hide();
-        $("#btn-update1").show();
-        $("#btn-delete1").show();
-        $(".dDay").html(day);
-//        $(".input_pd").prop('readonly', true);
-    });
-    $("#btn-save2").click(function() {
-        wishListSave(1);
-        $("#btn-save2").hide();
-        $("#btn-update2").show();
-        $("#btn-delete2").show();
-
-    });
-    $("#btn-save3").click(function() {
-        wishListSave(2);
-        $("#btn-save3").hide();
-        $("#btn-update3").show();
-        $("#btn-delete3").show();
+    $("#btn-wishSave").click(function() {
+        wishListSave();
+        var str = "";
+        $.each(function() {
+            str += "<td style='width: 10%;'><input type='radio' name='main_wish' checked /></td>";
+            str += "<td style='width: 30%;'><input class='input_pd' name='wishList' th:value='${wishList.wishList}' readonly></td>";
+            str += "<td style='width: 15%;'><input class='input_cost' name='price' th:value='${wishList.price}' readonly></td>";
+            str += "<td style='width: 15%;'><input class='input_per' name='rate' th:value='${wishList.rate}' readonly>%</td>";
+            str += "<td style='width: 13%;'>D-<span class='wish_day'></span></td>";
+            str += "<td style='width: 12%;'>";
+            str += "<img class='wish_update' th:src='@{/assets/wishlist/update.png}' style='width:15px;'>";
+            str += "<img class='wish_update' th:src='@{/assets/wishlist/delete.png}' style='width:15px;'>";
+            str += "</td>";
+        });
+        $("#wishlist_read").html(str);
+//          $(".dDay").html(day);
+//          $(".input_pd").prop('readonly', true);
     });
 
     /* 위시리스트 저장 */
-    function wishListSave(idx) {
+    function wishListSave() {
         $("input[name=wishList]").each(function(index, wish) {
             wishListArr.push($(wish).val());
         });
@@ -75,18 +94,14 @@ $(document).ready(function() {
             type: 'POST',
             dataType: 'text',
             data: {
-//                wishList: $(".input_pd").val(),
-//                price: $(".input_cost").val(),
-//                rate: $(".input_per").val()
-                  wishList: $("input[name='wishList']").eq(idx).val(),
-                  price: $("input[name='price']").eq(idx).val(),
-                  rate: $("input[name='rate']").eq(idx).val()
+                  wishList: $("#input_list").val(),
+                  price: $("#input_price").val(),
+                  rate: $("#input_rate").val()
             },
             success: function(data) {
                 alert("성공");
                 $(this).submit();
-//                $('#money_page').show();
-//                $('#my_page').hide();
+
             },
             error: function() {
                 console.log(data);
@@ -98,20 +113,4 @@ $(document).ready(function() {
     };
 
 
-// 실수령 계산기
-
-    if(result == "NaN") {
-        return $('#earn_month').val(result2);
-    } else {
-        return $('#earn_month').val(result);
-    }
-});
-
-//위시 리스트
-$(document).ready(function() {
-    $('.wish_update').on('click', function(){
-        $('.input_pd').removeAttr("readonly");
-        $('.input_cost').removeAttr("readonly");
-        $('.input_per').removeAttr("readonly");
-    });
 });
