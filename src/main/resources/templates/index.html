@@ -30,6 +30,7 @@
         <!--로그인 정보에 따라 노출 유무 결정-->
         <header>
             <div class="wish" sec:authorize="isAuthenticated()">
+
                     <span id="main_wish" class="impact" th:each="wishList1 : ${wishList1}">
                         🎉 <strong class="main_wish impact" th:text="${wishList1.wishList}"></strong>까지
                         <strong class="impact"><span class="wish_day" th:text="${wishList1.dDay}"></span>일</strong> 남았습니다. ✨

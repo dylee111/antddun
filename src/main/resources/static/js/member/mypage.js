@@ -35,6 +35,8 @@ $(document).ready(function() {
 
 //위시 리스트
 $(document).ready(function() {
+
+    /* D-DAY 확인 버튼 */
     $('#day_btn').on('click', function (){
         var earn = parseInt($('#earn').text());
         var monthly = parseInt((earn * 10000 / 12) - (earn * 10000  * 0.009));
@@ -43,6 +45,19 @@ $(document).ready(function() {
         var wishPer = Number.parseInt($('#input_rate').val());
         var wishRate = Number.parseFloat(monthly * wishPer * 0.01);
         var wishDay = Number.parseInt(Math.ceil(wishCost / wishRate));
+        var price = $("#input_price");
+        var rate = $("#input_rate");
+
+        if(price.val() == "") {
+            alert("위시리스트 금액을 입력해주세요.");
+            price.focus();
+            return;
+        }
+        if(rate.val() == "") {
+            alert("적금 입력");
+            rate.focus();
+            return;
+        }
 
         $('#day_btn').hide();
         $("#show_day").show();
@@ -84,7 +99,8 @@ $(document).ready(function() {
 
 
     /* 저장 버튼 */
-    $("#btn-wishSave").click(function() {
+    $("#btn-wishSave").click(function(e) {
+        e.preventDefault();
         wishListSave();
 
         var str = "";
@@ -128,16 +144,17 @@ $(document).ready(function() {
                   member: $("#member_mno").val(),
                   wishList: $("#input_list").val(),
                   price: $("#input_price").val(),
-                  rate: $("#input_rate").val()
+                  rate: $("#input_rate").val(),
+                  dDay: $("#input_day").val()
             },
             success: function(data) {
                 if(data < 3) {
-                    alert("성공");
+                    alert("등록되었습니다.");
                 } else if(data >= 3) {
-                    alert("3개 이상");
+                    alert("위시 리스트는 3개만 작성가능");
                     return false;
                 }
-                $(this).submit();
+
             },
             error: function(data) {
                 console.log(data);

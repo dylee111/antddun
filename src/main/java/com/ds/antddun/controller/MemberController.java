@@ -3,7 +3,6 @@ package com.ds.antddun.controller;
 import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.dto.MemberWishListDTO;
-import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.MemberWishList;
 import com.ds.antddun.service.JobListService;
 import com.ds.antddun.service.MemberService;
@@ -37,11 +36,17 @@ public class MemberController {
     @GetMapping("")
     public String main (Model model, MemberDTO memberDTO, @AuthenticationPrincipal PrincipalDetails principal) {
         if(principal != null) {
+
+            List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
             List<MemberWishList> wishList1 = wishListService.getListByMno(principal.getMember().getMno());
+
 
             model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
             model.addAttribute("wishList1", wishList1.get(1));
             model.addAttribute("member", principal.getMember());
+
+            model.addAttribute("wishListIndex", wishLists.get(0));
+
         }
         return "index";
     }
@@ -67,8 +72,10 @@ public class MemberController {
             model.addAttribute("member", principal.getMember());
             model.addAttribute("jobList", jobListService.getList());
             model.addAttribute("wishList", wishLists);
+            model.addAttribute("wishListIndex", wishLists.get(0));
         }
 //        return "member/mypage";
+        log.info("WISHLIST>>"+wishLists.get(0));
     }
 
     @ResponseBody
@@ -83,7 +90,10 @@ public class MemberController {
 //            log.info("RATE ARR>>> " + rateArr[0] +"/"+ rateArr[1] + "/" +rateArr[2]);
         int result = wishListService.wishListCnt(principalDetails.getMember().getMno());
         log.info("MNOCNT>>>" + result);
-        wishListService.register(wishListDTO, principalDetails.getMember());
+        // 위시리스트 3개까지 작성 가능.
+        if (result < 3) {
+            wishListService.register(wishListDTO, principalDetails.getMember());
+        }
         return result;
     }
 
