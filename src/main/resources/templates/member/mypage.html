@@ -4,8 +4,8 @@
     <th:block th:fragment="content">
         <!-- 페이지 css/ js 추가 -->
         <link th:href="@{/css/member/mypage.css}" rel="stylesheet"/>
-        <script th:src="@{/js/join/join.js}"></script>
-        <script th:src="@{/js/member/mypage.js}"></script>
+        <script th:inline="javascript" th:src="@{/js/join/join.js}"></script>
+        <script th:inline="javascript" th:src="@{/js/member/mypage.js}"></script>
 
         <!-- 본문 시작 -->
         <div class="content">
@@ -143,12 +143,12 @@
                                     <tbody>
                                     <tr class="wishlist_add wishlist_tr">
                                         <td><input type="radio" name="main_wish"/></td>
-                                        <td><input class="input_pd" placeholder="상품명을 입력하세요." name="wishList"></td>
-                                        <td><input class="input_cost" placeholder="ex) 50000" name="price"></td>
-                                        <td><input class="input_per" placeholder="ex) 10" name="rate">%</td>
+                                        <td><input id="input_list" class="input_pd" placeholder="상품명을 입력하세요." name="wishList"></td>
+                                        <td><input id="input_price" class="input_cost" placeholder="ex) 50000" name="price"></td>
+                                        <td><input id="input_rate" class="input_per" placeholder="ex) 10" name="rate">%</td>
                                         <td>D-<span class="wish_day"></span></td>
                                         <td>
-                                            <img th:src="@{/assets/wishlist/insert.png}" style="width:15px;">
+                                            <img id="btn-wishSave"  th:src="@{/assets/wishlist/insert.png}" style="width:15px;">
                                         </td>
                                     </tr>
                                     </tbody>
@@ -156,11 +156,11 @@
 
                                 <table class="wish_read">
                                     <tbody>
-                                    <tr>
-                                        <td style="width: 10%;"><input type="radio" name="main_wish"/></td>
-                                        <td style="width: 30%;"><input class="input_pd" name="wishList" placeholder="아이폰" readonly></td>
-                                        <td style="width: 15%;"><input class="input_cost" name="price" placeholder="100000" readonly></td>
-                                        <td style="width: 15%;"><input class="input_per" name="rate" placeholder="2" readonly>%</td>
+                                    <tr id="wishlist_read" th:each="wishList : ${wishList}">
+                                        <td style="width: 10%;"><input type="radio" name="main_wish" checked /></td>
+                                        <td style="width: 30%;"><input class="input_pd" name="wishList" th:value="${wishList.wishList}" placeholder="아이폰" readonly></td>
+                                        <td style="width: 15%;"><input class="input_cost" name="price" th:value="${wishList.price}" placeholder="100000" readonly></td>
+                                        <td style="width: 15%;"><input class="input_per" name="rate" th:value="${wishList.rate}" placeholder="2" readonly>%</td>
                                         <td style="width: 13%;">D-<span class="wish_day"></span></td>
                                         <td style="width: 12%;">
                                             <img class="wish_update" th:src="@{/assets/wishlist/update.png}" style="width:15px;">
