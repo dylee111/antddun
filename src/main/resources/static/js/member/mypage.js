@@ -24,21 +24,32 @@ $(document).ready(function() {
         $('#my_page').hide();
     });
 
-
-
-
-
-// 실수령 계산기
-
+    // 실수령 계산기
     if(result == "NaN") {
         return $('#earn_month').val(result2);
     } else {
         return $('#earn_month').val(result);
     }
+
 });
 
 //위시 리스트
 $(document).ready(function() {
+    $('#day_btn').on('click', function (){
+        var earn = parseInt($('#earn').text());
+        var monthly = parseInt((earn * 10000 / 12) - (earn * 10000  * 0.009));
+
+        var wishCost = parseInt($('#input_price').val());
+        var wishPer = Number.parseInt($('#input_rate').val());
+        var wishRate = Number.parseFloat(monthly * wishPer * 0.01);
+        var wishDay = Number.parseInt(Math.ceil(wishCost / wishRate));
+
+        $('#day_btn').hide();
+        $("#input_day").show();
+        $("#input_day").show();
+
+        return $("#input_day").val(wishDay);
+    });
 
     const wishListArr = new Array();
     const priceArr = new Array();
@@ -63,7 +74,7 @@ $(document).ready(function() {
             str += "<td style='width: 30%;'><input class='input_pd' name='wishList' th:value='${wishList.wishList}' readonly></td>";
             str += "<td style='width: 15%;'><input class='input_cost' name='price' th:value='${wishList.price}' readonly></td>";
             str += "<td style='width: 15%;'><input class='input_per' name='rate' th:value='${wishList.rate}' readonly>%</td>";
-            str += "<td style='width: 13%;'>D-<span class='wish_day'></span></td>";
+            str += "<td style='width: 13%;'><span class='wish_day'></span></td>";
             str += "<td style='width: 12%;'>";
             str += "<img class='wish_update' th:src='@{/assets/wishlist/update.png}' style='width:15px;'>";
             str += "<img class='wish_update' th:src='@{/assets/wishlist/delete.png}' style='width:15px;'>";

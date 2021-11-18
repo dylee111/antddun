@@ -146,7 +146,7 @@
                                         <td><input id="input_list" class="input_pd" placeholder="상품명을 입력하세요." name="wishList"></td>
                                         <td><input id="input_price" class="input_cost" placeholder="ex) 50000" name="price"></td>
                                         <td><input id="input_rate" class="input_per" placeholder="ex) 10" name="rate">%</td>
-                                        <td>D-<span class="wish_day"></span></td>
+                                        <td><button id="day_btn">확인</button><span id="show_day" style="display: none;">D-</span><input id="input_day" name="dday" style="display: none;" readonly></td>
                                         <td>
                                             <img id="btn-wishSave"  th:src="@{/assets/wishlist/insert.png}" style="width:15px;">
                                         </td>
@@ -161,7 +161,7 @@
                                         <td style="width: 30%;"><input class="input_pd" name="wishList" th:value="${wishList.wishList}" placeholder="아이폰" readonly></td>
                                         <td style="width: 15%;"><input class="input_cost" name="price" th:value="${wishList.price}" placeholder="100000" readonly></td>
                                         <td style="width: 15%;"><input class="input_per" name="rate" th:value="${wishList.rate}" placeholder="2" readonly>%</td>
-                                        <td style="width: 13%;">D-<span class="wish_day"></span></td>
+                                        <td style="width: 13%;"><span class="wish_day"></span></td>
                                         <td style="width: 12%;">
                                             <img class="wish_update" th:src="@{/assets/wishlist/update.png}" style="width:15px;">
                                             <img class="wish_delete" th:src="@{/assets/wishlist/delete.png}" style="width:15px;">
