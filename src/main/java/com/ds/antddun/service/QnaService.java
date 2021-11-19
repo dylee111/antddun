@@ -3,12 +3,16 @@ package com.ds.antddun.service;
 import com.ds.antddun.dto.*;
 import com.ds.antddun.entity.*;
 
+import java.util.List;
+
 public interface QnaService {
 
 
     PageResultDTO<QnaBoardDTO, QnaBoard> getBoardList(PageRequestDTO requestDTO);
 
-    Long register(QnaBoardDTO qnaBoardDTO, JobListDTO jobListDTO, Member member);
+    Long register(QnaBoardDTO qnaBoardDTO, Member member);
+
+//    QnaBoardDTO getBoard(int qnaNo);
 
 //    List<JobList> getListByJob(String job);
 //    List<JobList> getListByJobNo (int jno);
@@ -18,9 +22,7 @@ public interface QnaService {
     void delete();
 
 
-
     default QnaBoard dtoToEntity(QnaBoardDTO qnaBoardDTO) {
-
 
         QnaBoard entity = QnaBoard.builder()
                 .qnaNo(qnaBoardDTO.getQnaNo())
@@ -28,7 +30,7 @@ public interface QnaService {
                 .title(qnaBoardDTO.getTitle())
                 .content(qnaBoardDTO.getContent())
                 .ddun(qnaBoardDTO.getDdun())
-                .cnt(qnaBoardDTO.getCnt())
+                .viewCnt(qnaBoardDTO.getCnt())
                 .build();
 
         System.out.println("dtoToEntity>>"+qnaBoardDTO);
@@ -37,7 +39,7 @@ public interface QnaService {
 
 
 
-    default QnaBoardDTO entityToDTO(QnaBoard qnaBoard) {
+    default QnaBoardDTO entityToDTO(QnaBoard qnaBoard/*, List<UploadImage> uploadImages, Long likes, Long reviewCnt*/) {
 
         QnaBoardDTO dto = QnaBoardDTO.builder()
                 .qnaNo(qnaBoard.getQnaNo())
@@ -45,9 +47,9 @@ public interface QnaService {
                 .writer(qnaBoard.getMember().getExperience()+"년차 " + qnaBoard.getMember().getJob().getJob() + " " + qnaBoard.getMember().getLastName() +"개미")
                 .content(qnaBoard.getContent())
                 .jno(qnaBoard.getJobList().getJno())
-                .job(qnaBoard.getJobList().getJob()) //here
+                .job(qnaBoard.getJobList().getJob())
                 .regDate(qnaBoard.getRegDate())
-                .cnt(qnaBoard.getCnt())
+                .cnt(qnaBoard.getViewCnt())
                 .modDate(qnaBoard.getModDate())
                 .ddun(qnaBoard.getDdun())
                 .build();
