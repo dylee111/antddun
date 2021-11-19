@@ -9,6 +9,10 @@ import java.util.List;
 public interface WishListService {
     Long register(MemberWishListDTO memberWishListDTO, Member member);
 
+    void modify(MemberWishListDTO memberWishListDTO, Member member);
+
+    void remove(Long wno);
+
     List<MemberWishList> getListByMno(Long mno);
 
     int wishListCnt(Long mno);

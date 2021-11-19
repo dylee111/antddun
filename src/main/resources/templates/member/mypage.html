@@ -123,9 +123,9 @@
 
                             <div>
                                 <h4 class="mypage_subtitle margin_bottom">나의 위시 리스트</h4>
-
-                                <div>
-                                    <span>입력란</span>
+                                <div class="my_margin2">
+                                    <span class="money_title">금액</span>
+                                    <input type="text" class="money_input" name="wish_total" disabled/>
                                 </div>
                                 <table class="wish_table margin_top">
                                     <thead>
@@ -137,9 +137,11 @@
                                         <td style="width:12%;">적용</td>
                                     </tr>
                                     </thead>
-
+                                  
                                     <tbody>
                                     <tr class="wishlist_add wishlist_tr">
+                                        <input type="hidden" id="member_mno" th:value="${member.mno}"}>
+                                        <td><input type="radio" name="main_wish"/></td>
                                         <td><input id="input_list" class="input_pd" placeholder="상품명을 입력하세요." name="wishList"></td>
                                         <td><input id="input_price" class="input_cost" placeholder="ex) 50000" name="price"></td>
                                         <td><input id="input_rate" class="input_per" placeholder="ex) 10" name="rate">%</td>
@@ -161,17 +163,17 @@
                                     <span>위시 리스트</span>
                                 </div>
                                 <table class="wish_read">
-                                    <tbody th:each="wishList : ${wishList}" >
+                                    <tbody th:each="wishList, index : ${wishList}" >
                                     <tr class="wishlist_read">
-
-                                        <td style="width: 30%;"><input class="input_pd" name="wishList" th:value="${wishList.wishList}" th:placeholder="${wishList.wishList}" readonly></td>
-                                        <td style="width: 15%;"><input class="input_cost" name="price" th:value="${wishList.price}" th:placeholder="${wishList.price}" readonly></td>
-                                        <td style="width: 15%;"><input class="input_per" name="rate" th:value="${wishList.rate}" th:placeholder="${wishList.rate}" readonly>%</td>
+                                        <input type="hidden" th:id="'wno'+${index.index}" th:value="${wishList.wno}"/>
+                                        <td style="width: 10%;"><input type="radio" name="main_wish" checked /></td>
+                                        <td style="width: 30%;"><input th:id="'list'+${index.index}" class="input_pd" name="wishList" th:value="${wishList.wishList}" th:placeholder="${wishList.wishList}" readonly></td>
+                                        <td style="width: 15%;"><input th:id="'price'+${index.index}" class="input_cost" name="price" th:value="${wishList.price}" th:placeholder="${wishList.price}" readonly></td>
+                                        <td style="width: 15%;"><input th:id="'rate'+${index.index}" class="input_per" name="rate" th:value="${wishList.rate}" th:placeholder="${wishList.rate}" readonly>%</td>
                                         <td style="width: 13%;" >D-[[${wishList.dDay}]]<span class="wish_day"></span></td>
-
                                         <td style="width: 12%;">
-                                            <img class="btn-image wish_update" th:src="@{/assets/wishlist/update.png}" style="width:15px;">
-                                            <img class="btn-image wish_delete" th:src="@{/assets/wishlist/delete.png}" style="width:15px;">
+                                            <img th:id="'btn-update'+${index.index}" class="btn-image wish_update" th:src="@{/assets/wishlist/update.png}" style="width:15px;">
+                                            <img th:id="'btn-delete'+${index.index}" class="btn-image wish_delete" th:src="@{/assets/wishlist/delete.png}" style="width:15px;">
                                         </td>
                                     </tr>
                                     </tbody>
