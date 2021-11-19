@@ -20,6 +20,7 @@ public interface WishListService {
     default MemberWishList dtoToEntity(MemberWishListDTO wishListDTO, Member member) {
 
         MemberWishList wishList = MemberWishList.builder()
+                .wno(wishListDTO.getWno())
                 .wishList(wishListDTO.getWishList())
                 .price(wishListDTO.getPrice())
                 .rate(wishListDTO.getRate())

@@ -67,6 +67,24 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
+    @Override
+    public void modifyMember(MemberDTO memberDTO, JobListDTO jobListDTO) {
+        memberDTO.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
+
+        JobList jobList = jobListRepository.findById(jobListDTO.getJno()).get();
+
+        memberRepository.save(Member.builder()
+                .mno(memberDTO.getMno())
+                .password(memberDTO.getPassword())
+                .phoneNum(memberDTO.getPhoneNum())
+                .job(jobList)
+                .experience(memberDTO.getExperience())
+                .salary(memberDTO.getSalary())
+                .startTime(memberDTO.getStartTime())
+                .endTime(memberDTO.getEndTime())
+                .build());
+    }
+
     /*
      * 아이디 중복 체크
      * */
