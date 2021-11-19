@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+    <th:block th:fragment="content">
+        <!-- 페이지 css/ js 추가 -->
+        <link th:href="@{/css/member/mypage.css}" rel="stylesheet"/>
+        <script th:inline="javascript" th:src="@{/js/member/mypage.js}"></script>
+        <!--아임포트 js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+        <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+        <!-- 본문 시작 -->
+        <div class="content">
+            <div style="margin-left: 14%;">
+                <nav class="mypage_nav">
+                    <ul id="tabs">
+                        <li><a class="tab_inactive" th:href="@{/member/mypage/info}">회원 정보</a></li>
+                        <li><a class="tab_active" th:href="@{/member/mypage/wallet}">내 돈 정보</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div id="my_wrap">
+                <div id="money_page">
+                    <div id="user_wallet" style="margin-bottom: 70px;">
+                        <h2 class="mypage_title">내 돈 정보</h2>
+                        <hr class="my_margin">
+
+                        <div class="center">
+                            <div class="my_margin" th:each="member: ${member}">
+                                <span class="money_title">실수령액</span>
+                                <span style="display:none;" id="earn">[[${member.salary}]]</span>
+                                <input type="text" class="money_input" id="earn_month" name="earn" disabled/>
+                            </div>
+
+                            <div>
+                                <h4 class="mypage_subtitle margin_bottom">나의 위시 리스트</h4>
+
+                                <div>
+                                    <span class="wish_label">📝 입력란</span>
+                                </div>
+                                <table class="wish_table margin_top">
+                                    <thead>
+                                    <tr>
+                                        <td style="width:30%;">상품</td>
+                                        <td style="width:15%;">상품 금액</td>
+                                        <td style="width:15%;">적금 비율</td>
+                                        <td style="width:13%;">D-DAY</td>
+                                        <td style="width:12%;">적용</td>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr class="wishlist_add wishlist_tr">
+                                        <td><input id="input_list" class="input_pd" placeholder="상품명을 입력하세요." name="wishList"></td>
+                                        <td><input id="input_price" class="input_cost" placeholder="ex) 50000" name="price"></td>
+                                        <td><input id="input_rate" class="input_per" placeholder="ex) 10" name="rate">%</td>
+
+                                        <td>
+                                            <button id="day_btn">확인</button>
+                                            <span id="show_day" style="display: none;">D -</span>
+                                            <input id="input_day" name="dday" style="display: none;" readonly>
+                                        </td>
+
+                                        <td>
+                                            <img id="btn-wishSave" class="btn-image"  th:src="@{/assets/wishlist/insert.png}" style="width:15px;">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                                <div>
+                                    <span class="wish_label" style="margin-top: 40px;">📋 나의 위시 리스트</span>
+                                </div>
+                                <table class="wish_read">
+                                    <tbody th:each="wishList : ${wishList}" >
+                                    <tr class="wishlist_read">
+
+                                        <td style="width: 30%;"><input class="input_pd" name="wishList" th:value="${wishList.wishList}" th:placeholder="${wishList.wishList}" readonly></td>
+                                        <td style="width: 15%;"><input class="input_cost" name="price" th:value="${wishList.price}" th:placeholder="${wishList.price}" readonly></td>
+                                        <td style="width: 15%;"><input class="input_per" name="rate" th:value="${wishList.rate}" th:placeholder="${wishList.rate}" readonly>%</td>
+                                        <td style="width: 13%;" >D-[[${wishList.dDay}]]<span class="wish_day"></span></td>
+
+                                        <td style="width: 12%;">
+                                            <img class="btn-image wish_update" th:src="@{/assets/wishlist/update.png}" style="width:15px;">
+                                            <img class="btn-image wish_delete" th:src="@{/assets/wishlist/delete.png}" style="width:15px;">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div id="user_ddun">
+                        <h2 class="mypage_title">내 뚠 정보</h2>
+                        <button class="charge_btn">충전</button>
+
+                        <div class="card-body bg-white mt-0 shadow charge_container" style="display: none;">
+                            <div>
+                                <img th:src="@{/assets/close.png}" class="charge_close"/>
+                            </div>
+                            <div>
+                                <p id="charge_title">뚠 충전 : 카카오 페이</p>
+                            </div>
+                            <div style="margin-top: 30px; text-align: center;">
+                                <input type="radio" name="cp_item" class="cp_item" id="5" value="5000" checked><label class="lb_5">5,000원</label>
+                                <input type="radio" name="cp_item" class="cp_item" id="10" value="10000"><label class="lb_10">10,000원</label>
+                                <input type="radio" name="cp_item" class="cp_item" id="30" value="30000"><label class="lb_30">30,000원</label>
+                                <input type="radio" name="cp_item" class="cp_item" id="50" value="50000"><label class="lb_50">50,000원</label>
+                                <input type="radio" name="cp_item" class="cp_item" id="100" value="100000"><label class="lb_100">100,000원</label>
+                            </div>
+                            <div style="text-align: center;">
+                                <button type="button" class="submit_btn" id="charge_kakao" style="margin-bottom: 30px;">충 전 하 기</button>
+                            </div>
+                        </div>
+                        <div class="dim" style="display: none;"></div>
+
+                        <hr class="my_margin">
+
+                        <div class="center my_margin">
+                            <div>
+                                <div class="my_ddun_wrap">
+                                    <span class="my_ddun">이번 달 적립</span>
+                                    <span class="my_ddun"><strong>540</strong>뚠</span>
+                                </div>
+                                <div class="my_ddun_wrap">
+                                    <span class="my_ddun">보유 뚠</span>
+                                    <span class="my_ddun"><strong>10,000</strong>뚠</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="mypage_subtitle">뚠 사용 내역</h4>
+                                <table class="wish_table margin_top">
+                                    <thead>
+                                    <tr>
+                                        <td style="width:10%;">일자</td>
+                                        <td style="width:40%;">상세 내용</td>
+                                        <td style="width:15%;">입금</td>
+                                        <td style="width:15%;">출금</td>
+                                        <td style="width:20%;">남은 뚠</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>2021.11.09</td>
+                                        <td>포토샵 누끼</td>
+                                        <td>-</td>
+                                        <td>5,000</td>
+                                        <td>10,000</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 본문 끝 -->
+        <!--페이지 수정 부분 끝-->
+    </th:block>
+</th:block>
