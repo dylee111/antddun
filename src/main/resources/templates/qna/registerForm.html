@@ -23,8 +23,7 @@
         <!--카테고리-->
         <div class="option">
           <select class="category" name="jno">
-            <option th:each="jobList : ${jobList}" th:value="${jobList.jno}"
-                    onchange="handleOnChange(this)" name="jno">[[${jobList.job}]]</option>
+            <option th:each="jobList : ${jobList}" th:value="${jobList.jno}" name="jno">[[${jobList.job}]]</option>
           </select>
         </div>
 
@@ -69,25 +68,6 @@
 
     </div>
 
-<!--    <script>-->
-<!--    $(document).ready(function() {-->
-
-<!--        const title = $("#title");-->
-<!--        const content = $(".content").val();-->
-<!--        const ddun = $("#ddun");-->
-
-<!--        const categoryArr = ["마케팅","IT","디자인","영업·유통","물류·자재","상품기획","생산","건설·건축","R&D","의료·제약","미디어","금융"];-->
-
-<!--        for(var i = 0; i < categoryArr.length; i++){-->
-<!--            $(".category").append("<option value="+categoryArr[i]+">" + categoryArr[i] + "</option>");-->
-<!--        }-->
-
-<!--    });-->
-
-<!--        </script>-->
-
-    <!-- 본문 끝 -->
-    <!--페이지 수정 부분 끝-->
   </th:block>
 </th:block>
 

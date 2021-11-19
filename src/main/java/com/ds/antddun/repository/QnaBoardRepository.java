@@ -14,8 +14,13 @@ public interface QnaBoardRepository extends JpaRepository<QnaBoard, Long> {
     List<QnaBoardDTO> getListByCategory(String category);*/
 
 
+/*
     @Query("select qna, m, qna.cnt FROM QnaBoard qna inner join Member m ")
     Page<Object[]> getListPage(Pageable pageable);
+
+    @Query("select qna from QnaBoard qna where qnaNo=:qnaNo")
+    List<Object[]> getBoardByQnaNo(int qnaNo);
+*/
 
 
 }
