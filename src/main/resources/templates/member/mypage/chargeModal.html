@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>뚠 충전하기</title>
+    <link th:href="@{/css/member/mypage.css}" rel="stylesheet"/>
+    <script th:inline="javascript" th:src="@{/js/member/mypage.js}"></script>
+</head>
+
+<body>
+<div id="modal" class="modal-overlay">
+  <div class="modal-window">
+    <div class="card-body bg-white mt-0 shadow charge_container">
+      <div>
+        <img th:src="@{/assets/close.png}" class="charge_close"/>
+      </div>
+      <div>
+        <p id="charge_title">뚠 충전 : 카카오 페이</p>
+      </div>
+      <div style="margin-top: 30px; text-align: center;">
+        <input type="radio" name="cp_item" class="cp_item" id="5" value="5000" checked><label class="lb_5">5,000원</label>
+        <input type="radio" name="cp_item" class="cp_item" id="10" value="10000"><label class="lb_10">10,000원</label>
+        <input type="radio" name="cp_item" class="cp_item" id="30" value="30000"><label class="lb_30">30,000원</label>
+        <input type="radio" name="cp_item" class="cp_item" id="50" value="50000"><label class="lb_50">50,000원</label>
+        <input type="radio" name="cp_item" class="cp_item" id="100" value="100000"><label class="lb_100">100,000원</label>
+      </div>
+      <div style="text-align: center;">
+        <button type="button" class="submit_btn" id="charge_kakao" style="margin-bottom: 30px;">충 전 하 기</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
