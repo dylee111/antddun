@@ -3,13 +3,38 @@
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
     <th:block th:fragment="content">
 
+        <script th:src=@{"/js/board/qna/like.js"}>
+
         <!--페이지 수정 부분 시작-->
         <!-- 페이지 css/ js 추가 -->
         <link th:href="@{/css/board/qna/.css}" rel="stylesheet" />
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <!-- 본문 시작 -->
+        <div class="card qnaCardList" th:each="boardList : ${boardList.dtoList}">
+            <span class="smallDdun" th:text="${boardList.ddun}"></span>
+            <span class="qno" id="qnaNo" th:value="${boardList.qnaNo}">[[]]</span>
 
+        </div>
+        //추가
+        <a th:href="@{/post/likes}"><img  src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/heart.png" alt="하트"></a>
+
+        <div id="is-not-already-like">
+            <h3 class="text-muted">
+                <a href="#" id="like" class="text-decoration-none text-secondary">
+                    <i id="like-logo" class="bi bi-bookmark-heart"></i>
+                    <span class="like-count"></span>
+                </a>
+            </h3>
+        </div>
+        <div id="is-already-like" style="display: none">
+            <h3 class="text-muted">
+                <a href="#" id="cancel-like" class="text-decoration-none text-warning">
+                    <i class="bi bi-bookmark-heart-fill"></i>
+                    <span class="like-count">99</span>
+                </a>
+            </h3>
+        </div>
 
 
         <!-- 본문 끝 -->

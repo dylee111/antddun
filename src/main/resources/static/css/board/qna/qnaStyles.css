@@ -13,6 +13,26 @@
     border-radius:4px !important;
     padding: 0px 5px 0px 5px !important;
 }
+
+#likebtn {
+    background: lightblue;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.liked{
+    background: pink;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+
+
+
 .smallCategory {
     background: gray !important;
     color: white !important;
@@ -109,9 +129,14 @@
 .post-content {
     margin-top: 1em;
     margin-bottom:1em;
+    height: 75px;
 }
 
-.content-text  > a{
+a.content-text > p > img {
+    display : none;
+}
+
+.content-text  > a > p{
     text-decoration:none;
     color: #4f4f4f;
     font-weight: bold;
@@ -129,7 +154,7 @@
     word-break:break-all;
     -webkit-box-orient:vertical;
     -webkit-line-clamp:2
-   }
+}
 
 boardInfo{
   flex: 1 1 auto;

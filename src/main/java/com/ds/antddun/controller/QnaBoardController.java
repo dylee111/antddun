@@ -1,7 +1,6 @@
 package com.ds.antddun.controller;
 
 import com.ds.antddun.config.auth.PrincipalDetails;
-import com.ds.antddun.dto.JobListDTO;
 import com.ds.antddun.dto.PageRequestDTO;
 import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.dto.QnaBoardDTO;
@@ -16,6 +15,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,14 +32,29 @@ public class QnaBoardController {
     private JobListService jobListService;
 
     @Autowired
-    private QnaBoardRepository repository;
+    private QnaBoardRepository qnaBoardRepository;
 
     @Autowired
     private QnaService qnaService;
 
 
-    //게시물 작성
-    @GetMapping("/member/qna/registerForm") //여기서는 principal로 한 번 더 확인
+    //리스트 출력
+    @GetMapping("/qna/list")
+    public String list(Model model, PageRequestDTO pageRequestDTO,
+                       RedirectAttributes redirect, @AuthenticationPrincipal PrincipalDetails principal) {
+
+        List<JobList> list = jobListService.getList();
+        model.addAttribute("jobList", list);
+
+        PageResultDTO<QnaBoardDTO, QnaBoard> boardList = qnaService.getBoardList(pageRequestDTO);
+        model.addAttribute("boardList",boardList);
+
+        return "/qna/list";
+    }
+
+
+    //게시물 작성 양식
+    @GetMapping("/member/qna/registerForm")
     public String register(QnaBoardDTO qnaBoardDTO,@AuthenticationPrincipal PrincipalDetails principal,Model model) {
         if (principal == null) {
             System.out.println("멤버권한이 없음");
@@ -53,31 +68,19 @@ public class QnaBoardController {
 
     //글 등록
     @PostMapping("/member/qna/register")
-    public ModelAndView register(QnaBoardDTO qnaBoardDTO, JobListDTO jobListDTO, Model model , @AuthenticationPrincipal PrincipalDetails principal) {
-        qnaService.register(qnaBoardDTO, jobListDTO , principal.getMember());
-        ModelAndView mav = new ModelAndView("redirect:/qna/list");
+    public ModelAndView register(QnaBoardDTO qnaBoardDTO, Model model, @PathVariable Long qnaNo,
+                                 @AuthenticationPrincipal PrincipalDetails principal) {
+        qnaService.register(qnaBoardDTO, principal.getMember());
+        ModelAndView mav = new ModelAndView("redirect:/member/qna/read/{qnaNo}");
         return mav;
     }
 
-    //리스트로 값을 보냄(페이징 임시)
-    @GetMapping("/qna/list")
-    public String lists(Model model, PageRequestDTO pageRequestDTO,
-                        RedirectAttributes redirect) {
-
-        List<JobList> list = jobListService.getList();
-        model.addAttribute("jobList", list);
-
-        PageResultDTO<QnaBoardDTO, QnaBoard> boardList = qnaService.getBoardList(pageRequestDTO);
-        model.addAttribute("boardList",boardList);
-
-        return "/qna/list";
-    }
-
-
 
     //게시판 조회
-    @GetMapping("/member/qna/read")
-    public String read(){
+    @GetMapping("/member/qna/read/{qnaNo}")
+    public String read(QnaBoardDTO qnaBoardDTO, Model model, @PathVariable Long qnaNo){
+        QnaBoard qnaBoard = qnaBoardRepository.getById(qnaNo);
+        model.addAttribute("boardList", qnaBoard);
         return "/member/qna/read";
     }
 
