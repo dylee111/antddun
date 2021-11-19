@@ -1,15 +1,22 @@
 package com.ds.antddun.service;
 
 import com.ds.antddun.dto.JayuBoardDTO;
+import com.ds.antddun.dto.PageRequestDTO;
+import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.entity.JayuBoard;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.repository.JayuBoardRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 
 @Service
 @Log4j2
@@ -28,13 +35,25 @@ public class JayuBoardServiceImpl implements JayuBoardService{
     }
 
     @Override
-    public JayuBoard findById(Long jayuNo) {
-        return jayuBoardRepository.findById(jayuNo).get();
+    public JayuBoardDTO read(Long jayuNo) {
+        Optional<JayuBoard> result = jayuBoardRepository.findById(jayuNo);
+        return result.isPresent()?entityToDTO(result.get()):null;
     }
 
+//    @Override
+//    public List<JayuBoard> findAll() {
+//        List<JayuBoard> jayuBoards = jayuBoardRepository.findAll();
+//        return jayuBoards;
+//    }
+
+    //게시물 목록
     @Override
-    public List<JayuBoard> findAll() {
-        List<JayuBoard> jayuBoards = jayuBoardRepository.findAll();
-        return jayuBoards;
+    public PageResultDTO<JayuBoardDTO,JayuBoard> getList(PageRequestDTO requestDTO){
+        Pageable pageable = requestDTO.getPageable(Sort.by("regDate").descending());
+        Page<JayuBoard> result = jayuBoardRepository.findAll(pageable);
+
+        Function<JayuBoard, JayuBoardDTO> fn = (entity -> entityToDTO(entity));
+        return new PageResultDTO<>(result, fn);
     }
+
 }
