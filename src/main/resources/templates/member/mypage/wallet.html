@@ -53,9 +53,8 @@
                                     <tbody>
                                     <tr class="wishlist_add wishlist_tr">
                                         <td><input id="input_list" class="input_pd" placeholder="상품명을 입력하세요." name="wishList"></td>
-                                        <td><input id="input_price" class="input_cost" placeholder="ex) 50000" name="price"></td>
-                                        <td><input id="input_rate" class="input_per" placeholder="ex) 10" name="rate">%</td>
-
+                                        <td><input type="number" id="input_price" class="input_cost" placeholder="ex) 50000" name="price"></td>
+                                        <td><input type="number" id="input_rate" class="input_per" placeholder="ex) 10" name="rate">%</td>
                                         <td>
                                             <button id="day_btn">확인</button>
                                             <span id="show_day" style="display: none;">D -</span>
@@ -104,11 +103,11 @@
                                 <p id="charge_title">뚠 충전 : 카카오 페이</p>
                             </div>
                             <div style="margin-top: 30px; text-align: center;">
-                                <input type="radio" name="cp_item" class="cp_item" id="5" value="5000" checked><label class="lb_5">5,000원</label>
-                                <input type="radio" name="cp_item" class="cp_item" id="10" value="10000"><label class="lb_10">10,000원</label>
-                                <input type="radio" name="cp_item" class="cp_item" id="30" value="30000"><label class="lb_30">30,000원</label>
-                                <input type="radio" name="cp_item" class="cp_item" id="50" value="50000"><label class="lb_50">50,000원</label>
-                                <input type="radio" name="cp_item" class="cp_item" id="100" value="100000"><label class="lb_100">100,000원</label>
+                                <input type="radio" name="cp_item" class="cp_item" id="5000" value="5000" checked="checked"><label class="lb_5" for="5000">5,000원</label>
+                                <input type="radio" name="cp_item" class="cp_item" id="10000" value="10000"><label class="lb_10" for="10000">10,000원</label>
+                                <input type="radio" name="cp_item" class="cp_item" id="30000" value="30000"><label class="lb_30" for="30000">30,000원</label>
+                                <input type="radio" name="cp_item" class="cp_item" id="50000" value="50000"><label class="lb_50" for="50000">50,000원</label>
+                                <input type="radio" name="cp_item" class="cp_item" id="100000" value="100000"><label class="lb_100" for="100000">100,000원</label>
                             </div>
                             <div style="text-align: center;">
                                 <button type="button" class="submit_btn" id="charge_kakao" style="margin-bottom: 30px;">충 전 하 기</button>
