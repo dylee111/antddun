@@ -35,7 +35,6 @@ $(document).ready(function() {
 
 //위시 리스트
 $(document).ready(function() {
-
     /* D-DAY 확인 버튼 */
     $('#day_btn').on('click', function (){
         var earn = parseInt($('#earn').text());

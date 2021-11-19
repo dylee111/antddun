@@ -413,14 +413,14 @@
         margin: 0 auto;
         width: 60%;
         border-radius: 15px;
-        position: absolute;
+        position: fixed;
         left: 50%;
         top:50%;
         z-index: 1;
         transform: translate(-50%, -50%)
     }
     .dim {
-        position: absolute;
+        position: fixed;
         left: 0;
         top: 0;
         z-index: 0;
