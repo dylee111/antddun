@@ -25,7 +25,7 @@ public interface MemberService {
 
     Member welcomeMsg(Long mno);
 
-    void modifyMember(MemberDTO memberDTO,JobListDTO jobListDTO);
+    void modifyMember(MemberDTO memberDTO);
 
     default Member dtoToEntity(MemberDTO memberDTO) {
         Member member = Member.builder()

@@ -12,11 +12,13 @@ import com.ds.antddun.repository.SosoCategoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 @Service
@@ -62,11 +64,10 @@ public class SosoJobServiceImpl implements SosoJobService {
     * */
     @Override
     public SosoPageResultDTO<SosoBoardDTO, SosoJobBoard> getList(int category, SosoPageRequestDTO requestDTO) {
-        Pageable pageable = requestDTO.getPageable(Sort.by("sosoNo").descending());
+        Pageable pageable = requestDTO.getPageable(Sort.by("category").descending());
 
 //        Page<SosoJobBoard> result = sosoBoardRepository.findAll(pageable);
         Page<SosoJobBoard> result = sosoBoardRepository.getPageByCategoryNo(category, pageable);
-
 
         Function<SosoJobBoard, SosoBoardDTO> fn = (entity -> entityToDTO(entity));
         log.info("FNFNFNFN" + fn);
@@ -89,5 +90,12 @@ public class SosoJobServiceImpl implements SosoJobService {
     public List<SosoJobBoard> getListByCategoryNo(int categoryNo) {
         List<SosoJobBoard> result = sosoBoardRepository.getListByCategoryNo(categoryNo);
         return result;
+    }
+
+    @Override
+    public SosoBoardDTO read(Long sosoNo) {
+        Optional<SosoJobBoard> result = sosoBoardRepository.findById(sosoNo);
+
+        return result.isPresent() ? entityToDTO(result.get()) : null;
     }
 }

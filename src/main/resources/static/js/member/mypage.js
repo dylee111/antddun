@@ -218,8 +218,36 @@ $(document).ready(function() {
     $("#btn-wishSave").click(function(e) {
         e.preventDefault();
         wishListSave();
-        loadWishList();
     });
+        /* 회원 정보 수정 */
+        $("#btn_member_modify").click(function(){
+            var infoMno = $("#myMno").val();
+            var myInfo = {
+                mno: infoMno,
+                username: $("#username").val(),
+                password: $("#password").val(),
+                phoneNum: $("#phoneNum").val(),
+                job: $(".job").val(),
+                experience: $(".experience").val(),
+                salary: $("#salary").val(),
+                startTime: $(".startTime").val(),
+                endTime: $(".endTime").val()
+            }
+            alert(infoMno);
+            alert(myInfo);
+
+            $.ajax({
+                url: '/antddun/member/mypage/info/modify/' + infoMno,
+                method: 'put',
+                data: JSON.stringify(myInfo),
+                contentType: 'application/json; charset=utf-8',
+                success: function(result) {
+                    if(result === 'MemberModify') {
+                        alert("수정완료"+ infoMno);
+                    }
+                }
+            })
+        });
 }); // document.ready2 end
 
         const wishListArr = new Array();
@@ -231,29 +259,6 @@ $(document).ready(function() {
         const rate = $(".input_per").val();
 
     const btnUpdate = $('.wish_update');
-
-    /* 저장 버튼 */
-    $("#btn-wishSave").click(function(e) {
-        e.preventDefault();
-        wishListSave();
-
-        var str = "";
-        $.each(function() {
-            str += "<td style='width: 10%;'><input type='radio' name='main_wish' checked /></td>";
-            str += "<td style='width: 30%;'><input class='input_pd' name='wishList' th:value='${wishList.wishList}' readonly></td>";
-            str += "<td style='width: 15%;'><input class='input_cost' name='price' th:value='${wishList.price}' readonly></td>";
-            str += "<td style='width: 15%;'><input class='input_per' name='rate' th:value='${wishList.rate}' readonly>%</td>";
-            str += "<td style='width: 13%;'><span class='wish_day'></span></td>";
-            str += "<td style='width: 12%;'>";
-            str += "<img class='wish_update' th:src='@{/assets/wishlist/update.png}' style='width:15px;'>";
-            str += "<img class='wish_update' th:src='@{/assets/wishlist/delete.png}' style='width:15px;'>";
-            str += "</td>";
-        });
-        $("#wishlist_read").html(str);
-//          $(".dDay").html(day);
-//          $(".input_pd").prop('readonly', true);
-
-    });
 
     /* 위시리스트 저장 */
     function wishListSave() {
@@ -299,32 +304,7 @@ $(document).ready(function() {
          return false;
     }; // wishListSave() end
 
-    /* 회원 정보 수정 */
-    $("#btn_member_modify").click(function(){
-        var infoMno = $("#my_info_mno").val();
-        var myInfo = {
-            mno: infoMno,
-            password: $("#password").val(),
-            phoneNum: $("#phoneNum").val(),
-            job: $(".job").val(),
-            experience: $(".experience").val(),
-            salary: $("#salary").val(),
-            startTime: $(".startTime").val(),
-            endTime: $(".endTime").val()
-        }
 
-        $.ajax({
-            url: '/antddun/member/mypage/info/modify/' + infoMno,
-            method: 'put',
-            data: JSON.stringify(myInfo),
-            contentType: 'application/json; charset=utf-8',
-            success: function(result) {
-                if(result === 'MemberModify') {
-                    alert("수정완료"+ wno);
-                }
-            }
-        })
-    });
 
 //뚠 충전
 $(document).ready(function(){

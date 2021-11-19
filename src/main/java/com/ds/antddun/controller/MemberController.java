@@ -1,7 +1,6 @@
 package com.ds.antddun.controller;
 
 import com.ds.antddun.config.auth.PrincipalDetails;
-import com.ds.antddun.dto.JobListDTO;
 import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.dto.MemberWishListDTO;
 import com.ds.antddun.entity.MemberWishList;
@@ -13,11 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -32,6 +31,9 @@ public class MemberController {
 
     @Autowired
     private WishListService wishListService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("")
     public String main (Model model, MemberDTO memberDTO, @AuthenticationPrincipal PrincipalDetails principal) {
@@ -51,9 +53,15 @@ public class MemberController {
     }
 
     @GetMapping("/member/mypage/info")
-    public String userinfo (Model model, @AuthenticationPrincipal PrincipalDetails principal, MemberDTO memberDTO) {
+    public String userinfo (Model model, @AuthenticationPrincipal PrincipalDetails principal, MemberDTO memberDTO ) {
         model.addAttribute("member", principal.getMember());
+        model.addAttribute("jobList", jobListService.getList());
         return "member/mypage/info";
+    }
+
+    @PostMapping("/member/mypage/info")
+    public void userInfoPost() {
+
     }
 
     @GetMapping("/member/mypage/wallet")
@@ -94,14 +102,25 @@ public class MemberController {
     @PutMapping("/member/mypage/wishlist/modify/{wno}")
     public ResponseEntity<String> modifyWishList(@RequestBody MemberWishListDTO memberWishListDTO,
                                          @AuthenticationPrincipal PrincipalDetails principalDetails) {
+
         wishListService.modify(memberWishListDTO,principalDetails.getMember());
+
         return new ResponseEntity<>("modify", HttpStatus.OK);
     }
 
     @ResponseBody
     @PutMapping("/member/mypage/info/modify/{mno}")
-    public ResponseEntity<String> modifyMember(@RequestBody MemberDTO memberDTO, JobListDTO jobListDTO) {
-        memberService.modifyMember(memberDTO, jobListDTO);
+    public ResponseEntity<String> modifyMember(@RequestBody MemberDTO memberDTO, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        log.info("MODIFY MEMBER>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        memberDTO.setFirstName(principalDetails.getMember().getFirstName());
+        memberDTO.setUsername(principalDetails.getUsername());
+        memberDTO.setLastName(principalDetails.getMember().getLastName());
+        memberDTO.setRole(principalDetails.getMember().getRole().toString());
+        memberDTO.setCreateDate(principalDetails.getMember().getCreateDate());
+        log.info("MODIFY >>> " + memberDTO);
+
+        memberService.modifyMember(memberDTO);
+
         return new ResponseEntity<>("MemberModify", HttpStatus.OK);
     }
 

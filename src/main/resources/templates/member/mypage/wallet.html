@@ -73,17 +73,17 @@
                                     <span class="wish_label" style="margin-top: 40px;">📋 나의 위시 리스트</span>
                                 </div>
                                 <table class="wish_read">
-                                    <tbody th:each="wishList : ${wishList}" >
+                                    <tbody th:each="wishList, index : ${wishList}" >
                                     <tr class="wishlist_read">
-
-                                        <td style="width: 30%;"><input class="input_pd" name="wishList" th:value="${wishList.wishList}" th:placeholder="${wishList.wishList}" readonly></td>
-                                        <td style="width: 15%;"><input class="input_cost" name="price" th:value="${wishList.price}" th:placeholder="${wishList.price}" readonly></td>
-                                        <td style="width: 15%;"><input class="input_per" name="rate" th:value="${wishList.rate}" th:placeholder="${wishList.rate}" readonly>%</td>
+                                        <input type="hidden" th:id="'wno'+${index.index}" th:value="${wishList.wno}"/>
+                                        <td style="width: 10%;"><input type="radio" name="main_wish" checked /></td>
+                                        <td style="width: 30%;"><input th:id="'list'+${index.index}" class="input_pd" name="wishList" th:value="${wishList.wishList}" th:placeholder="${wishList.wishList}" readonly></td>
+                                        <td style="width: 15%;"><input th:id="'price'+${index.index}" class="input_cost" name="price" th:value="${wishList.price}" th:placeholder="${wishList.price}" readonly></td>
+                                        <td style="width: 15%;"><input th:id="'rate'+${index.index}" class="input_per" name="rate" th:value="${wishList.rate}" th:placeholder="${wishList.rate}" readonly>%</td>
                                         <td style="width: 13%;" >D-[[${wishList.dDay}]]<span class="wish_day"></span></td>
-
                                         <td style="width: 12%;">
-                                            <img class="btn-image wish_update" th:src="@{/assets/wishlist/update.png}" style="width:15px;">
-                                            <img class="btn-image wish_delete" th:src="@{/assets/wishlist/delete.png}" style="width:15px;">
+                                            <img th:id="'btn-update'+${index.index}" class="btn-image wish_update" th:src="@{/assets/wishlist/update.png}" style="width:15px;">
+                                            <img th:id="'btn-delete'+${index.index}" class="btn-image wish_delete" th:src="@{/assets/wishlist/delete.png}" style="width:15px;">
                                         </td>
                                     </tr>
                                     </tbody>
