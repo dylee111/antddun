@@ -25,6 +25,23 @@ $(document).ready(function() {
       });
    })
 
+    <!--WishList Show JS-->
+    if($('.wish_product').val() == null) {
+        $('#no_goal').show();
+        $('#user_goal').hide();
+    } else {
+        $('#user_goal').show();
+        $('#no_goal').hide();
+    }
+
+    if($('.main_wish').val() == null) {
+        $('#no_wish').show();
+        $('#main_wish').hide();
+    } else {
+        $('#main_wish').show();
+        $('#no_wish').hide();
+    }
+
     <!-- Hourly Wage JS -->
     $(document).ready(function() {
         <!--현재 시간-->
