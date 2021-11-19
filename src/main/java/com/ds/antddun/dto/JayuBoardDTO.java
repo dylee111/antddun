@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class JayuBoardDTO {
 
-    private Long jayuNo, mno; //username
-    private String title, content, firstName, category;
+    private Long jayuNo;
+    private String title, content, writer, category;
 
 
     private int cnt, likes;
