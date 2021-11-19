@@ -20,6 +20,8 @@ public interface SosoJobService {
     List<SosoJobBoard> getListByCategory(String category);
     List<SosoJobBoard> getListByCategoryNo(int categoryNo);
 
+    SosoBoardDTO read(Long sosoNo);
+
     SosoPageResultDTO<SosoBoardDTO, SosoJobBoard> getList(int category, SosoPageRequestDTO requestDTO);
 
     default SosoBoardDTO entityToDTO(SosoJobBoard sosoJobBoard) {

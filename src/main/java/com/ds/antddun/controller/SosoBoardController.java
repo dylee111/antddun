@@ -26,7 +26,6 @@ import java.util.Map;
 @Controller
 @Log4j2
 @RequestMapping("/member")
-@SessionAttributes("member")
 public class SosoBoardController {
 
     @Autowired
@@ -131,7 +130,8 @@ public class SosoBoardController {
     }
 
     @GetMapping("/sosojob/list/read")
-    public String sosoRead() {
-        return "/sosojob/sosoDetailView";
+    public void sosoRead(Long sosoNo, Model model) {
+        SosoBoardDTO sosoBoardDTO = sosoJobService.read(sosoNo);
+        model.addAttribute("read", sosoBoardDTO);
     }
 }

@@ -1,15 +1,10 @@
-
 $(document).ready(function() {
-
     var earn = parseInt($('#earn').text());
     var monthly = parseInt((earn * 10000 / 12) - (earn * 10000  * 0.009));
     var result = monthly.toLocaleString();
     var result2 = "회원정보에서 '연봉'을 입력하세요."
 
-//    var day = Math.ceil([[${list.price}]] / (monthly * [[${list.rate}]] / 100)));
-
     //Tab 전환 효과
-
 //    $('#my_tab').click(function(){
 //        $('#my_tab').css("color", '#f9c74f');
 //        $('#money_tab').css("color", '#ededed');
@@ -31,7 +26,7 @@ $(document).ready(function() {
         return $('#earn_month').val(result);
     }
 
-});
+}); // document.ready end
 
 //위시 리스트
 $(document).ready(function() {
@@ -63,62 +58,206 @@ $(document).ready(function() {
         $("#input_day").show();
 
         return $("#input_day").val(wishDay);
-    });
-
-    const wishListArr = new Array();
-    const priceArr = new Array();
-    const rateArr = new Array();
-
-    const wishList = $(".input_pd").val();
-    const price = $(".input_cost").val();
-    const rate = $(".input_per").val();
+    }); // end
 
     const btnUpdate = $('.wish_update');
 
-    $('.wish_update').eq(1).on('click', function(){
-        alert("0");
-        $('.input_pd').eq(1).removeAttr("readonly");
-        $('.input_cost').eq(1).removeAttr("readonly");
-        $('.input_per').eq(1).removeAttr("readonly");
+    var count = 0;
+    /* 수정 버튼 이벤트 */
+    $('#btn-update0').on('click', function(){
+        count++;
+        if(count == 1){
+        console.log(count);
+            $('#price0').removeAttr("readonly");
+            $('#rate0').removeAttr("readonly");
+            $('#list0').removeAttr("readonly");
+        } else if(count == 2) {
+                console.log(count);
+
+            alert("돌아감");
+            var wno = $("#wno0").val();
+            console.log(wno);
+            var wishList = {
+                wno: wno,
+                wishList: $("#list0").val(),
+                price: $("#price0").val(),
+                rate: $("#rate0").val()
+            }
+
+            $.ajax({
+                url: '/antddun/member/mypage/wishlist/modify/' + wno,
+                method: 'put',
+                data: JSON.stringify(wishList),
+                contentType: 'application/json; charset=utf-8',
+                success: function(result) {
+                    if(result === 'modify') {
+                        alert("수정완료"+ wno);
+                        $('#price0').attr("readonly");
+                        $('#rate0').attr("readonly");
+                        $('#list0').attr("readonly");
+                        count = 0;
+                    }
+                }
+            })
+        } // count == 2
+    }); // modify() end
+
+    $('#btn-update1').on('click', function(){
+        count++;
+        if(count == 1){
+        console.log(count);
+            $('#price1').removeAttr("readonly");
+            $('#rate1').removeAttr("readonly");
+            $('#list1').removeAttr("readonly");
+        } else if(count == 2) {
+                console.log(count);
+
+            alert("돌아감");
+            var wno = $("#wno1").val();
+            console.log(wno);
+            var wishList = {
+                wno: wno,
+                wishList: $("#list1").val(),
+                price: $("#price1").val(),
+                rate: $("#rate1").val()
+            }
+
+            $.ajax({
+                url: '/antddun/member/mypage/wishlist/modify/' + wno,
+                method: 'put',
+                data: JSON.stringify(wishList),
+                contentType: 'application/json; charset=utf-8',
+                success: function(result) {
+                    if(result === 'modify') {
+                        alert("수정완료"+ wno);
+                        $('#price1').attr("readonly");
+                        $('#rate1').attr("readonly");
+                        $('#list1').attr("readonly");
+                        count = 0;
+                    }
+                }
+            })
+        } // count == 2
     });
-    $('.wish_update').eq(2).on('click', function(){
-        alert("1");
-        $('.input_pd').eq(2).removeAttr("readonly");
-        $('.input_cost').eq(2).removeAttr("readonly");
-        $('.input_per').eq(2).removeAttr("readonly");
-    });
-    $('.wish_update').eq(3).on('click', function(){
-            alert("2");
-        $('.input_pd').eq(3).removeAttr("readonly");
-        $('.input_cost').eq(3).removeAttr("readonly");
-        $('.input_per').eq(3).removeAttr("readonly");
-    });
+    $('#btn-update2').on('click', function(){
+        count++;
+        if(count == 1){
+        console.log(count);
+            $('#price2').removeAttr("readonly");
+            $('#rate2').removeAttr("readonly");
+            $('#list2').removeAttr("readonly");
+        } else if(count == 2) {
+                console.log(count);
 
+            alert("돌아감");
+            var wno = $("#wno2").val();
+            console.log(wno);
+            var wishList = {
+                wno: wno,
+                wishList: $("#list2").val(),
+                price: $("#price2").val(),
+                rate: $("#rate2").val()
+            }
 
+            $.ajax({
+                url: '/antddun/member/mypage/wishlist/modify/' + wno,
+                method: 'put',
+                data: JSON.stringify(wishList),
+                contentType: 'application/json; charset=utf-8',
+                success: function(result) {
+                    if(result === 'modify') {
+                        alert("수정완료"+ wno);
+                        $('#price2').attr("readonly");
+                        $('#rate2').attr("readonly");
+                        $('#list2').attr("readonly");
+                        count = 0;
+                    }
+                }
+            })
+        } // count == 2
+    }); // end
 
-
-    /* 저장 버튼 */
+    /* 삭제 버튼 이벤트 */
+    $('#btn-delete0').on('click', function(){
+        var wno = $("#wno0").val();
+        $.ajax({
+            url: '/antddun/member/mypage/wishlist/delete/' + wno,
+            method: 'delete',
+            success: function(result) {
+                if(result == "delete") {
+                    alert(wno + "삭제 OK");
+                }
+            }
+        })
+    }); // end
+    $('#btn-delete1').on('click', function(){
+        var wno = $("#wno1").val();
+        $.ajax({
+            url: '/antddun/member/mypage/wishlist/delete/' + wno,
+            method: 'delete',
+            success: function(result) {
+                if(result == "delete") {
+                    alert(wno + "삭제 OK");
+                }
+            }
+        })
+    }); // end
+    $('#btn-delete2').on('click', function(){
+        var wno = $("#wno2").val();
+        $.ajax({
+            url: '/antddun/member/mypage/wishlist/delete/' + wno,
+            method: 'delete',
+            success: function(result) {
+                if(result == "delete") {
+                    alert(wno + "삭제 OK");
+                }
+            }
+        })
+    }); // end    /* 저장 버튼 */
     $("#btn-wishSave").click(function(e) {
         e.preventDefault();
         wishListSave();
-
-        var str = "";
-        $.each(function() {
-            str += "<td style='width: 10%;'><input type='radio' name='main_wish' checked /></td>";
-            str += "<td style='width: 30%;'><input class='input_pd' name='wishList' th:value='${wishList.wishList}' readonly></td>";
-            str += "<td style='width: 15%;'><input class='input_cost' name='price' th:value='${wishList.price}' readonly></td>";
-            str += "<td style='width: 15%;'><input class='input_per' name='rate' th:value='${wishList.rate}' readonly>%</td>";
-            str += "<td style='width: 13%;'><span class='wish_day'></span></td>";
-            str += "<td style='width: 12%;'>";
-            str += "<img class='wish_update' th:src='@{/assets/wishlist/update.png}' style='width:15px;'>";
-            str += "<img class='wish_update' th:src='@{/assets/wishlist/delete.png}' style='width:15px;'>";
-            str += "</td>";
-        });
-        $("#wishlist_read").html(str);
-//          $(".dDay").html(day);
-//          $(".input_pd").prop('readonly', true);
-
     });
+        /* 회원 정보 수정 */
+        $("#btn_member_modify").click(function(){
+            var infoMno = $("#myMno").val();
+            var myInfo = {
+                mno: infoMno,
+                username: $("#username").val(),
+                password: $("#password").val(),
+                phoneNum: $("#phoneNum").val(),
+                job: $(".job").val(),
+                experience: $(".experience").val(),
+                salary: $("#salary").val(),
+                startTime: $(".startTime").val(),
+                endTime: $(".endTime").val()
+            }
+            alert(infoMno);
+            alert(myInfo);
+
+            $.ajax({
+                url: '/antddun/member/mypage/info/modify/' + infoMno,
+                method: 'put',
+                data: JSON.stringify(myInfo),
+                contentType: 'application/json; charset=utf-8',
+                success: function(result) {
+                    if(result === 'MemberModify') {
+                        alert("수정완료"+ infoMno);
+                    }
+                }
+            })
+        });
+}); // document.ready2 end
+
+        const wishListArr = new Array();
+        const priceArr = new Array();
+        const rateArr = new Array();
+
+        const wishList = $(".input_pd").val();
+        const price = $(".input_cost").val();
+        const rate = $(".input_per").val();
+
+    const btnUpdate = $('.wish_update');
 
     /* 위시리스트 저장 */
     function wishListSave() {
@@ -136,7 +275,7 @@ $(document).ready(function() {
         console.log(rateArr);
 
         $.ajax({
-            url: '/antddun/member/mypage/save',
+            url: '/antddun/member/mypage/wishlist/save',
             type: 'POST',
             dataType: 'text',
             data: {
@@ -162,26 +301,9 @@ $(document).ready(function() {
 
         }); // ajax end.
          return false;
-    };
+    }; // wishListSave() end
 
-    function loadWishList() {
-        $.getJSON('/antddun/member/mypage/save', function(arr) {
-            console.log(arr);
-            $.each(function() {
-                str += "<td style='width: 10%;'><input type='radio' name='main_wish' checked /></td>";
-                str += "<td style='width: 30%;'><input class='input_pd' name='wishList' th:value='${wishList.wishList}' readonly></td>";
-                str += "<td style='width: 15%;'><input class='input_cost' name='price' th:value='${wishList.price}' readonly></td>";
-                str += "<td style='width: 15%;'><input class='input_per' name='rate' th:value='${wishList.rate}' readonly>%</td>";
-                str += "<td style='width: 13%;'>D-<span class='wish_day'></span></td>";
-                str += "<td style='width: 12%;'>";
-                str += "<img class='wish_update' th:src='@{/assets/wishlist/update.png}' style='width:15px;'>";
-                str += "<img class='wish_update' th:src='@{/assets/wishlist/delete.png}' style='width:15px;'>";
-                str += "</td>";
-            });
-            $("#wishlist_read").html(str);
-        })
-    }
-});
+
 
 //뚠 충전
 $(document).ready(function(){
@@ -235,3 +357,5 @@ $(document).ready(function(){
         });
     });
 });
+
+
