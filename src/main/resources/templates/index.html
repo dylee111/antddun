@@ -44,7 +44,7 @@
         <!--페이지 상단 공통 : logo & nav-->
         <nav class="navbar navbar-expand-md navbar-light bg-primary">
             <div class="container">
-                <a id="logo" class="navbar-brand" th:href="@{#}">개미는 뚠뚠</a>
+                <a id="logo" class="navbar-brand" th:href="@{/}">개미는 뚠뚠</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
@@ -80,7 +80,7 @@
                                     <span class="bold"><span>[[${member.job.job}]]</span> </span>
                                     <span class="bold"><span>[[${member.experience}]]</span>년차 </span>
                                     <span class="bold"><span>[[${member.lastName}]]</span>개미</span><br>
-                                    <span><a th:href="@{/member/mypage}" class="gray my_info">내정보</a></span>
+                                    <span><a th:href="@{/member/mypage/info}" class="gray my_info">내정보</a></span>
                                     <button class="btn_logout"><a th:href="@{/logout}" class="a_white">로그아웃</a></button>
                                 </div>
                             </div>

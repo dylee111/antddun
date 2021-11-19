@@ -50,8 +50,14 @@ public class MemberController {
         return "index";
     }
 
-    @GetMapping("/member/mypage")
-    public void userinfo (Model model, @AuthenticationPrincipal PrincipalDetails principal, MemberWishListDTO memberWishListDTO) {
+    @GetMapping("/member/mypage/info")
+    public String userinfo (Model model, @AuthenticationPrincipal PrincipalDetails principal, MemberDTO memberDTO) {
+        model.addAttribute("member", principal.getMember());
+        return "member/mypage/info";
+    }
+
+    @GetMapping("/member/mypage/wallet")
+    public String userwallet (Model model, @AuthenticationPrincipal PrincipalDetails principal, MemberWishListDTO memberWishListDTO) {
         List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
 
         if(principal != null) {
@@ -62,6 +68,7 @@ public class MemberController {
                 model.addAttribute("wishListIndex", wishLists.get(0));
             }
         }
+        return "member/mypage/wallet";
     }
 
     @ResponseBody
