@@ -11,4 +11,6 @@ public interface QnaLikesService {
 
     QnaLikes checkLikes(Long qnaNo, Long mno);
 
+    int countLikes(Long qnaNo);
+
 }

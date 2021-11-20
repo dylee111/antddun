@@ -3,16 +3,18 @@ package com.ds.antddun.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import lombok.extern.log4j.Log4j2;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.List;
 
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"member","jobList"})
+@ToString(exclude = {"member","jobList", "qnaLikes"})
 @Data
 @SequenceGenerator(name = "QNA_SEQ_GEN", sequenceName = "QNA_SEQ", initialValue = 1, allocationSize = 1)
 public class QnaBoard extends BaseEntity {
@@ -30,9 +32,6 @@ public class QnaBoard extends BaseEntity {
     @ColumnDefault("0")
     private int viewCnt;
     private int ddun;
-
-    @ColumnDefault("0")
-    private Long likeCnt;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "jobList_jno")

@@ -55,9 +55,9 @@
                     <div class="" ><a class="nickName" href="#post">[[${boardList.writer}]]</a></div>
 
                     <div class="wrapInfo">
-                        <a class="views" href="#post"><img th:src="@{/assets/eye.png}" width="24px;"> [[${boardList.cnt}]]</a>
-                        <a class="like"><img th:src="@{/assets/heart.png}" width="20px;"><span id="likesCnt"></span></a>
-                        <a class="cmt" href="#post"><img th:src="@{/assets/messenger.png}" width="19"> [[${boardList.cnt}]]</a>
+                        <a class="views" href="#post"><img th:src="@{/assets/eye.png}" width="24px;"> [[${boardList.viewCnt}]]</a>
+                        <a class="like"><img th:src="@{/assets/heart.png}" width="20px;"><span id="likesCnt">[[${boardList.likesCnt}]]</span></a>
+                        <a class="cmt" href="#post"><img th:src="@{/assets/messenger.png}" width="19"> [[${boardList.viewCnt}]]</a>
                     </div>
 
                 </div>
