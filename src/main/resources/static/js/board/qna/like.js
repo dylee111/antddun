@@ -37,21 +37,8 @@
 //    }
 //}
   $(document).ready(function() {
+   var contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
 
-          $.ajax({
-              url : contextPath + "/qna/" + qnaNo,
-              type : 'POST',
-              data: qnaNo,
-              dataType: 'text',
-              success : function(data){
-                        likesCnt.html(JSON.stringify(data.likesCnt));
-              },
-              error : function(data){
-                        console.log("없음" + data)
-                        likesCnt.html("0");
-              }
-
-              });
 
         $('#likebtn').click(function(){
                 likeupdate();
@@ -59,7 +46,6 @@
 
         function likeupdate(){
 
-            var contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
             var qnaNo = $('#qnaNo').text();
             var likesCnt = $('#likesCnt');
 
@@ -70,17 +56,18 @@
             dataType: 'JSON',
             success : function(data){
                         if ( data.response == null) { //좋아요 해제 후 db에 있는 개수 반영
-                            likesCnt.html(JSON.stringify(data.likesCnt));
+                            //likesCnt.html(JSON.stringify(data.likesCnt));
+                            likesCnt.text(JSON.stringify(data.likesCnt));
 
                         } else { //좋아요, db에 있는 개수 반영
-                            likesCnt.html(JSON.stringify(data.likesCnt));
-                            //likesCnt.text(JSON.stringify(data.likesCnt));
+                           // likesCnt.html(JSON.stringify(data.likesCnt));
+                            likesCnt.text(JSON.stringify(data.likesCnt));
                             console.log("좋아요 개수"+JSON.stringify(data.likesCnt));
                             $('#likebtn').attr('class','liked');
                         }
             },
             error : function(data){
-                console.log("에러??" + data)
+                alert("로그인 후 이용가능");
             }
 
             });

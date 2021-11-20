@@ -24,4 +24,5 @@ public interface QnaLikesRepository extends JpaRepository<QnaLikes, Long> {
     //좋아요 개수 세기
     @Query("SELECT COUNT(ql.qnaBoard.qnaNo) FROM QnaLikes ql WHERE ql.qnaBoard.qnaNo = :qnaNo ")
     int countLikes(Long qnaNo);
+
 }

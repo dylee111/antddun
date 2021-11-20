@@ -33,4 +33,10 @@ public class QnaLikesServiceImpl implements QnaLikesService {
         return qnaLikesRepository.checkLikeByBnoAndMno(qnaNo, mno);
     }
 
+    @Override
+    public int countLikes(Long qnaNo) {
+        return qnaLikesRepository.countLikes(qnaNo);
+    }
+
+
 }

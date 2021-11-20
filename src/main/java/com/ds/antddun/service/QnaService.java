@@ -8,7 +8,7 @@ import java.util.List;
 public interface QnaService {
 
 
-    PageResultDTO<QnaBoardDTO, QnaBoard> getBoardList(PageRequestDTO requestDTO);
+    PageResultDTO<QnaBoardDTO, Object[]> getList(PageRequestDTO requestDTO);
 
     Long register(QnaBoardDTO qnaBoardDTO, Member member);
 
@@ -30,7 +30,7 @@ public interface QnaService {
                 .title(qnaBoardDTO.getTitle())
                 .content(qnaBoardDTO.getContent())
                 .ddun(qnaBoardDTO.getDdun())
-                .viewCnt(qnaBoardDTO.getCnt())
+                .viewCnt(qnaBoardDTO.getViewCnt())
                 .build();
 
         System.out.println("dtoToEntity>>"+qnaBoardDTO);
@@ -39,7 +39,7 @@ public interface QnaService {
 
 
 
-    default QnaBoardDTO entityToDTO(QnaBoard qnaBoard/*, List<UploadImage> uploadImages, Long likes, Long reviewCnt*/) {
+    default QnaBoardDTO entityToDTO(QnaBoard qnaBoard, Long likesCnt /*, Long reviewCnt*/) {
 
         QnaBoardDTO dto = QnaBoardDTO.builder()
                 .qnaNo(qnaBoard.getQnaNo())
@@ -49,11 +49,14 @@ public interface QnaService {
                 .jno(qnaBoard.getJobList().getJno())
                 .job(qnaBoard.getJobList().getJob())
                 .regDate(qnaBoard.getRegDate())
-                .cnt(qnaBoard.getViewCnt())
+                .ViewCnt(qnaBoard.getViewCnt())
                 .modDate(qnaBoard.getModDate())
                 .ddun(qnaBoard.getDdun())
                 .build();
+
+        dto.setLikesCnt(likesCnt.intValue());
         System.out.println("entityToDto>>>>"+dto);
+
         return dto;
     }
 

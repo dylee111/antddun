@@ -7,6 +7,7 @@ import com.ds.antddun.dto.QnaBoardDTO;
 import com.ds.antddun.entity.JobList;
 import com.ds.antddun.entity.QnaBoard;
 import com.ds.antddun.repository.QnaBoardRepository;
+import com.ds.antddun.repository.QnaLikesRepository;
 import com.ds.antddun.service.JobListService;
 import com.ds.antddun.service.QnaService;
 import lombok.extern.log4j.Log4j2;
@@ -37,17 +38,17 @@ public class QnaBoardController {
     @Autowired
     private QnaService qnaService;
 
+    @Autowired
+    private QnaLikesRepository qnaLikesRepository;
+
 
     //리스트 출력
     @GetMapping("/qna/list")
-    public String list(Model model, PageRequestDTO pageRequestDTO,
-                       RedirectAttributes redirect, @AuthenticationPrincipal PrincipalDetails principal) {
+    public String list(Model model, PageRequestDTO pageRequestDTO, @AuthenticationPrincipal PrincipalDetails principal) {
 
         List<JobList> list = jobListService.getList();
         model.addAttribute("jobList", list);
-
-        PageResultDTO<QnaBoardDTO, QnaBoard> boardList = qnaService.getBoardList(pageRequestDTO);
-        model.addAttribute("boardList",boardList);
+        model.addAttribute("boardList", qnaService.getList(pageRequestDTO));
 
         return "/qna/list";
     }
