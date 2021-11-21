@@ -1,9 +1,8 @@
 package com.ds.antddun.service;
 
+import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.dto.SosoBoardDTO;
 import com.ds.antddun.dto.SosoCategoryDTO;
-import com.ds.antddun.dto.SosoPageRequestDTO;
-import com.ds.antddun.dto.SosoPageResultDTO;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.SosoCategory;
 import com.ds.antddun.entity.SosoJobBoard;
@@ -14,7 +13,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -63,16 +61,15 @@ public class SosoJobServiceImpl implements SosoJobService {
     * Paging
     * */
     @Override
-    public SosoPageResultDTO<SosoBoardDTO, SosoJobBoard> getList(int category, SosoPageRequestDTO requestDTO) {
-        Pageable pageable = requestDTO.getPageable(Sort.by("category").descending());
+    public PageResultDTO<SosoBoardDTO, SosoJobBoard> getList(int category) {
 
-//        Page<SosoJobBoard> result = sosoBoardRepository.findAll(pageable);
-        Page<SosoJobBoard> result = sosoBoardRepository.getPageByCategoryNo(category, pageable);
+        Pageable pageable = PageRequest.of(0, 12);
+
+        Page<SosoJobBoard> result = sosoBoardRepository.findAllByCategory(category, pageable);
 
         Function<SosoJobBoard, SosoBoardDTO> fn = (entity -> entityToDTO(entity));
-        log.info("FNFNFNFN" + fn);
-        log.info("result >>>>>" + result.getContent());
-        return new SosoPageResultDTO<>(result, fn);
+
+        return new PageResultDTO<>(result, fn);
     }
 
     /*
@@ -94,7 +91,7 @@ public class SosoJobServiceImpl implements SosoJobService {
 
     @Override
     public SosoBoardDTO read(Long sosoNo) {
-        Optional<SosoJobBoard> result = sosoBoardRepository.findById(sosoNo);
+        Optional<SosoJobBoard> result = sosoBoardRepository.readBySosoNo(sosoNo);
 
         return result.isPresent() ? entityToDTO(result.get()) : null;
     }

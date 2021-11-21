@@ -30,6 +30,7 @@ public class WishListServiceImpl implements WishListService{
         return result;
     }
 
+    // 위시리스트 회원 당 3개로 제한
     @Override
     public int wishListCnt(Long mno) {
         int result = memberWishListRepository.wishListCnt(mno);

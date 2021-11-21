@@ -34,7 +34,7 @@
                                     <div class="input_box">
                                         <input type="email" class="input_info margin_bottom" id="username"
                                                name="username"
-                                               th:attr="placeholder=${member.username}" disabled/>
+                                               th:value="${member.username}" disabled/>
                                     </div>
                                     <span class="resultBox"></span>
 
@@ -53,7 +53,7 @@
                                     <div class="mb_wrap">
                                         <div class="input_mb">
                                             <input type="text" class="input_info" name="phoneNum" id="phoneNum"
-                                                   th:attr="placeholder=${member.phoneNum}" maxlength="11"
+                                                   th:value="${member.phoneNum}" maxlength="11"
                                                    onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
                                         </div>
                                         <button type="button" id="btnPhone" class="mypage_btn phoneAuthBtn a_white"

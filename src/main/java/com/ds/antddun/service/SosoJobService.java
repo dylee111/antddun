@@ -1,11 +1,12 @@
 package com.ds.antddun.service;
 
-import com.ds.antddun.dto.*;
+import com.ds.antddun.dto.MemberDTO;
+import com.ds.antddun.dto.PageResultDTO;
+import com.ds.antddun.dto.SosoBoardDTO;
+import com.ds.antddun.dto.SosoCategoryDTO;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.SosoCategory;
 import com.ds.antddun.entity.SosoJobBoard;
-import com.ds.antddun.repository.SosoCategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public interface SosoJobService {
 
     SosoBoardDTO read(Long sosoNo);
 
-    SosoPageResultDTO<SosoBoardDTO, SosoJobBoard> getList(int category, SosoPageRequestDTO requestDTO);
+    PageResultDTO<SosoBoardDTO, SosoJobBoard> getList(int category);
 
     default SosoBoardDTO entityToDTO(SosoJobBoard sosoJobBoard) {
 
@@ -30,8 +31,12 @@ public interface SosoJobService {
                 .sosoNo(sosoJobBoard.getSosoNo())
                 .title(sosoJobBoard.getTitle())
                 .content(sosoJobBoard.getContent())
-                .category(sosoJobBoard.getCategory().getCateNo())
+                .categoryNo(sosoJobBoard.getCategory().getCateNo())
+                .categoryName(sosoJobBoard.getCategory().getSosoCateName())
+                .experience(sosoJobBoard.getMember().getExperience())
                 .mno(sosoJobBoard.getMember().getMno())
+                .job(sosoJobBoard.getMember().getJob().getJob())
+                .firstName(sosoJobBoard.getMember().getFirstName())
                 .ddun(sosoJobBoard.getDdun())
                 .regDate(sosoJobBoard.getRegDate())
                 .modDate(sosoJobBoard.getModDate())
