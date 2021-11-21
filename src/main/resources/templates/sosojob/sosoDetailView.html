@@ -17,6 +17,7 @@
                                                                 src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
                                                                 alt="..."/></div>
                                 <!--판매자 정보-->
+                                <div id="writer-name" ><span>[[${read.job}]] [[${read.experience}]]년차 [[${read.firstName}]]개미</span></div>
                             </div>
                         </div>
                     </div>
@@ -28,14 +29,13 @@
                         <!-- Post header-->
                         <header class="mb-4">
                             <!-- Post title-->
-                            <h1 class="text-width fw-bolder mb-1">Welcome to Blog Post!</h1>
+                            <h1 class="text-width fw-bolder mb-1" name="title">[[${read.title}]]</h1><span>[[${read.ddun}]]뚠</span>
                             <!-- Post meta content-->
-                            <div class="text-width text-muted fst-italic mb-2">Posted on January 1, 2021 by Start
-                                Bootstrap
+                            <div class="text-width text-muted fst-italic mb-2">
+                                [[${#temporals.format(read.regDate, 'yyyy/MM/dd')}]]
                             </div>
                             <!-- Post categories-->
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!" >[[${read.categoryName}]]</a>
                         </header>
                         <!-- Preview image figure-->
                         <div>
@@ -47,7 +47,7 @@
                             <div class="card bg-light">
                                 <div class="card-body">
                                     <!-- Comment form-->
-                                    <h1>내용</h1>
+                                    <h1>[[${read.content}]]</h1>
                                 </div>
                             </div>
                         </section >

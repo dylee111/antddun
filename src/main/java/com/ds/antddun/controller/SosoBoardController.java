@@ -3,19 +3,19 @@ package com.ds.antddun.controller;
 import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.SosoBoardDTO;
 import com.ds.antddun.dto.SosoCategoryDTO;
-import com.ds.antddun.dto.SosoPageRequestDTO;
 import com.ds.antddun.entity.SosoCategory;
 import com.ds.antddun.entity.SosoJobBoard;
 import com.ds.antddun.service.SosoCateService;
 import com.ds.antddun.service.SosoJobService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,9 +53,6 @@ public class SosoBoardController {
             cateNoList.add(list.get(i).getCateNo());
         }
 
-        log.info("MAPMAP" + getCateList);
-        log.info("CATENO" + cateNoList);
-
         model.addAttribute("category", getCateList);
         model.addAttribute("cateNoList", cateNoList);
 
@@ -68,7 +65,6 @@ public class SosoBoardController {
     @GetMapping("/sosojob/register")
     public String register(Model model) {
 
-        log.info("CATELIST >>" + cateService.getCateList().toString());
         model.addAttribute("category", cateService.getCateList());
 
         return "/sosojob/register";
@@ -78,12 +74,11 @@ public class SosoBoardController {
     public String register(SosoBoardDTO sosoBoardDTO,
                            SosoCategoryDTO sosoCategoryDTO,
                            @AuthenticationPrincipal PrincipalDetails principal) {
-
-        log.info("BEFORE" + sosoCategoryDTO);
+        log.info("reg.DTO >>> " + sosoBoardDTO.getCategoryNo());
         sosoJobService.register(sosoBoardDTO, sosoCategoryDTO, principal.getMember());
-        log.info("AFTER" + sosoCategoryDTO);
 
-        return "/sosojob/sosojobMain";
+//        return "/sosojob/sosojobMain";
+        return "redirect:/member/sosojob/list/" + (sosoBoardDTO.getCategoryNo()+1);
     }
 
     /*
@@ -107,7 +102,7 @@ public class SosoBoardController {
     }
 
     @GetMapping("/sosojob/list/{category}")
-    public String cateList(@PathVariable("category") int categoryNo, Model model, SosoPageRequestDTO sosoPageRequestDTO) {
+    public String cateList(@PathVariable("category") int categoryNo, Model model) {
 
         List<SosoCategory> list = cateService.getCateList(); // 카테고리 리스트(cateNo / cateName)
         List<Integer> cateNoList = new ArrayList<>(); // 카테고리 No. 담기 위한 LIST
@@ -118,20 +113,18 @@ public class SosoBoardController {
                 sosoJobService.getListByCategory(list.get(categoryNo - 1).getSosoCateName()));
         cateNoList.add(categoryNo);
 
-//        log.info("PAGING RESULT >>>" + sosoPageRequestDTO + "//" + categoryNo);
-        model.addAttribute("cate", sosoJobService.getList(categoryNo, sosoPageRequestDTO));
-//        model.addAttribute("cate", getCateList);
+        model.addAttribute("cate", sosoJobService.getList(categoryNo));
         model.addAttribute("cateName", list);
-
-        log.info("LIST>>>"+list);
-        log.info("getCateList>>>"+getCateList);
 
         return "/sosojob/sosoList";
     }
 
     @GetMapping("/sosojob/list/read")
-    public void sosoRead(Long sosoNo, Model model) {
+    public String sosoRead(Long sosoNo, Model model) {
+
         SosoBoardDTO sosoBoardDTO = sosoJobService.read(sosoNo);
+        log.info("SOSODTO>>>" + sosoBoardDTO);
         model.addAttribute("read", sosoBoardDTO);
+        return "/sosojob/sosoDetailView";
     }
 }

@@ -17,9 +17,12 @@ public class SosoBoardDTO {
     private Long sosoNo;
     private String title;
     private String content;
-    private int category;
+    private int categoryNo;
+    private String categoryName;
+    private String job;
     private Long mno; // username
     private String firstName;
+    private int experience;
     private int ddun;
 
     private double avg;
