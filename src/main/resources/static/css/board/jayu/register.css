@@ -144,3 +144,13 @@ option{
     float :right;
     font-family: 'ELAND_Choice_M';
 }
+
+/* 댓글 */
+.reply{
+    font-family: 'ELAND_Choice_M';
+    width: 100%;
+}
+.reply>textarea {
+    height: 5rem;
+}
+

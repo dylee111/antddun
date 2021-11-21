@@ -27,8 +27,8 @@
                     <span class="smallCategory">소근소근</span>
                     <!-- 제목 + 글 -->
                     <div class="post-content">
-                        <h3><a th:href="@{/member/jayu/read/}+${jayuList.jayuNo}" th:text="${jayuList.title}"></a></h3>
-                            <a class="content-text" th:href="@{/member/jayu/read/}+${jayuList.jayuNo}" th:utext="${jayuList.content}"></a>
+                        <h3><a th:href="@{/member/jayu/read/jayuNo=}+${jayuList.jayuNo}" th:text="${jayuList.title}"></a></h3>
+                            <a class="content-text" th:href="@{/member/jayu/read/jayuNo=}+${jayuList.jayuNo}" th:utext="${jayuList.content}"></a>
                     </div>
                 </div>
                 <!-- 썸네일 -->
@@ -46,18 +46,18 @@
             <div class="boardInfo">
                 <!-- 작성자 및 조회수 -->
                 <div class="leftSection">
-                    <div class="" ><a class="nickName" th:href="@{/member/jayu/read/}+${jayuList.jayuNo}">[[${jayuList.writer}]]</a></div>
+                    <div class="" ><a class="nickName" th:href="@{/member/jayu/read/jayuNo=}+${jayuList.jayuNo}">[[${jayuList.writer}]]</a></div>
 
                     <div class="wrapInfo">
-                        <a class="views" th:href="@{/member/jayu/read/}+${jayuList.jayuNo}"><img th:src="@{/assets/eye.png}" width="24px;"> [[${jayuList.cnt}]]</a>
-                        <a class="like" th:href="@{/member/jayu/read/}+${jayuList.jayuNo}"><img th:src="@{/assets/heart.png}" width="20px;"> [[${jayuList.cnt}]]</a>
-                        <a class="cmt" th:href="@{/member/jayu/read/}+${jayuList.jayuNo}"><img th:src="@{/assets/messenger.png}" width="19px;"> [[${jayuList.cnt}]]</a>
+                        <a class="views" th:href="@{/member/jayu/read/jayuNo=}+${jayuList.jayuNo}"><img th:src="@{/assets/eye.png}" width="24px;"> [[${jayuList.cnt}]]</a>
+                        <a class="like" th:href="@{/member/jayu/read/jayuNo=}+${jayuList.jayuNo}"><img th:src="@{/assets/heart.png}" width="20px;"> [[${jayuList.cnt}]]</a>
+                        <a class="cmt" th:href="@{/member/jayu/read/jayuNo=}+${jayuList.jayuNo}"><img th:src="@{/assets/messenger.png}" width="19px;"> [[${jayuList.cnt}]]</a>
                     </div>
                 </div>
 
                 <!-- 등록일 -->
                 <div class="rightSection">
-                    <a href="#post" class="regDate" th:href="@{/member/jayu/read/}+${jayuList.jayuNo}" th:text="${#temporals.format(jayuList.regDate, 'yy-MM-dd')}"></a>
+                    <a href="#post" class="regDate" th:href="@{/member/jayu/read/jayuNo=}+${jayuList.jayuNo}" th:text="${#temporals.format(jayuList.regDate, 'yy-MM-dd')}"></a>
                 </div>
             </div>
 

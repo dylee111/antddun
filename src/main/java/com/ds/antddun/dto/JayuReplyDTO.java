@@ -7,16 +7,15 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class JayuBoardDTO {
+@Data
+public class JayuReplyDTO {
 
-    private Long jayuNo;
-    private String title, content, writer, category;
+    private Long jayuRno, jayuNo;
 
+    private String text, replyer;
 
-    private int cnt, likes, replyCnt;
     private LocalDateTime regDate, modDate;
 }

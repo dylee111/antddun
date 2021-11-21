@@ -12,6 +12,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -43,12 +44,13 @@ public class JayuBoardController {
         Long jayuNo = jayuBoardService.register(jayuBoardDTO, principal.getMember());
         redirectAttributes.addFlashAttribute("jayuNo", jayuNo);
         log.info(">>>>>"+jayuBoardDTO);
-        return "redirect:/member/jayu/read/" + jayuNo;
+        return "redirect:/member/jayu/read/jayuNo=" + jayuNo+ "";
     }
 
     //게시글 조회
-    @GetMapping("/member/jayu/read/{jayuNo}")
-    public String read(Model model, @PathVariable Long jayuNo, @AuthenticationPrincipal PrincipalDetails principal) {
+    @GetMapping("/member/jayu/read/jayuNo={jayuNo}")
+    public String read(Model model, @PathVariable Long jayuNo, @AuthenticationPrincipal PrincipalDetails principal,
+                       @ModelAttribute("pageRequestDTO") PageRequestDTO pageRequestDTO) {
 
         if (principal == null) {
             return "redirect:/login";
