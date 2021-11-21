@@ -1,11 +1,11 @@
 $(document).ready(function() {
     //Messeage Show/Hide
     $('.send_msg').last().css("display", "block");
-    $('.sender_info').first().on("click", function(){
-        if($('.send_msg').css("display") == "none") {
-            $('.send_msg').first().css("display", "block");
+    $('.sender_info').on("click", function(){
+        if($(this).next().css("display") == "none") {
+            $(this).next().css("display", "block");
         } else {
-            $('.send_msg').first().css("display", "none");
+            $(this).next().css("display", "none");
         }
     });
 

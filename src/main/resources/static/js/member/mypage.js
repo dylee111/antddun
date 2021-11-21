@@ -35,36 +35,33 @@ $(document).ready(function() {
 
 //위시 리스트
 $(document).ready(function() {
-    /* D-DAY 확인 버튼 */
-    $('#day_btn').on('click', function (){
-        var earn = parseInt($('#earn').text());
-        var monthly = parseInt((earn * 10000 / 12) - (earn * 10000  * 0.009));
+    var earn = parseInt($('#earn').text());
+    var price = parseInt($("#input_price").val());
+    var rate = parseInt($("#input_rate").val());
 
-        var wishCost = parseInt($('#input_price').val());
-        var wishPer = Number.parseInt($('#input_rate').val());
-        var wishRate = Number.parseFloat(monthly * wishPer * 0.01);
-        var wishDay = Number.parseInt(Math.ceil(wishCost / wishRate));
-        var price = $("#input_price");
-        var rate = $("#input_rate");
+    var monthly = parseInt((earn * 10000 / 12) - (earn * 10000  * 0.009));
+    var wishDay = parseInt(Math.ceil(price / (monthly * rate * 0.01)));
 
-        if(price.val() == "") {
-            alert("위시리스트 금액을 입력해주세요.");
-            price.focus();
-            return;
+    $(".wish_cal").keyup(function(){
+        if ($("#input_rate").val() != "" && $("#input_rate").val() != ""){
+                $("#input_day").val(parseInt(wishDay));
+
+            console.log(earn);
+            console.log(monthly);
+            console.log(price);
+            console.log(rate);
+            console.log(wishDay);
         }
-        if(rate.val() == "") {
-            alert("적금 입력");
-            rate.focus();
-            return;
-        }
-
-        $('#day_btn').hide();
-        $("#show_day").show();
-        $("#input_day").show();
-
-        return $("#input_day").val(wishDay);
     });
 
+//    price.keyup(function(){
+//        if (price.val() != "" && rate.val() != ""){
+//            day.val(parseInt(wishDay));
+//        }
+//    });
+});
+
+$(document).ready(function() {
     const wishListArr = new Array();
     const priceArr = new Array();
     const rateArr = new Array();
@@ -93,8 +90,6 @@ $(document).ready(function() {
         $('.input_cost').eq(3).removeAttr("readonly");
         $('.input_per').eq(3).removeAttr("readonly");
     });
-
-
 
 
     /* 저장 버튼 */
@@ -221,7 +216,7 @@ $(document).ready(function(){
 
                 $.ajax({
                     type: "GET",
-                    url: "/member/mypage",
+                    url: "/member/mypage/wallet",
                     data: {
                         "amount" : money
                     },
