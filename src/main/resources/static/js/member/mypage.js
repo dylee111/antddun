@@ -30,35 +30,37 @@ $(document).ready(function() {
 
 //위시 리스트
 $(document).ready(function() {
-    /* D-DAY 확인 버튼 */
-    $('#day_btn').on('click', function (){
-        var earn = parseInt($('#earn').text());
-        var monthly = parseInt((earn * 10000 / 12) - (earn * 10000  * 0.009));
+    var earn = parseInt($('#earn').text());
+    var price = parseInt($("#input_price").val());
+    var rate = parseInt($("#input_rate").val());
 
-        var wishCost = parseInt($('#input_price').val());
-        var wishPer = Number.parseInt($('#input_rate').val());
-        var wishRate = Number.parseFloat(monthly * wishPer * 0.01);
-        var wishDay = Number.parseInt(Math.ceil(wishCost / wishRate));
-        var price = $("#input_price");
-        var rate = $("#input_rate");
+    var monthly = parseInt((earn * 10000 / 12) - (earn * 10000  * 0.009));
+    var wishDay = parseInt(Math.ceil(price / (monthly * rate * 0.01)));
 
-        if(price.val() == "") {
-            alert("위시리스트 금액을 입력해주세요.");
-            price.focus();
-            return;
+    $(".wish_cal").keyup(function(){
+        if ($("#input_rate").val() != "" && $("#input_rate").val() != ""){
+                $("#input_day").val(parseInt(wishDay));
+            console.log("price: "+isNaN(price));
+            console.log("rate: "+isNaN(rate));
+            console.log("wishDay: "+isNaN(wishDay));
         }
-        if(rate.val() == "") {
-            alert("적금 입력");
-            rate.focus();
-            return;
-        }
+    });
 
-        $('#day_btn').hide();
-        $("#show_day").show();
-        $("#input_day").show();
+//    price.keyup(function(){
+//        if (price.val() != "" && rate.val() != ""){
+//            day.val(parseInt(wishDay));
+//        }
+//    });
+});
 
-        return $("#input_day").val(wishDay);
-    }); // end
+$(document).ready(function() {
+    const wishListArr = new Array();
+    const priceArr = new Array();
+    const rateArr = new Array();
+
+    const wishList = $(".input_pd").val();
+    const price = $(".input_cost").val();
+    const rate = $(".input_per").val();
 
     const btnUpdate = $('.wish_update');
 
@@ -139,6 +141,7 @@ $(document).ready(function() {
             })
         } // count == 2
     });
+  
     $('#btn-update2').on('click', function(){
         count++;
         if(count == 1){
@@ -214,6 +217,7 @@ $(document).ready(function() {
             }
         })
     }); // end    /* 저장 버튼 */
+
     $("#btn-wishSave").click(function(e) {
         e.preventDefault();
         wishListSave();
@@ -343,7 +347,7 @@ $(document).ready(function(){
 
                 $.ajax({
                     type: "GET",
-                    url: "/member/mypage",
+                    url: "/member/mypage/wallet",
                     data: {
                         "amount" : money
                     },
