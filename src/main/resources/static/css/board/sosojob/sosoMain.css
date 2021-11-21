@@ -49,3 +49,8 @@ article {
 .text-width {
     width: 900px;
 }
+
+article {
+    max-width: 100%;
+    max-height: 100%;
+}

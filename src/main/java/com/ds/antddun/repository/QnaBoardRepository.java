@@ -10,12 +10,20 @@ import java.util.List;
 
 public interface QnaBoardRepository extends JpaRepository<QnaBoard, Long> {
 
+    @Query("SELECT qna, COUNT(likes.qnaBoard.qnaNo) " +
+            "FROM QnaBoard qna LEFT OUTER JOIN QnaLikes likes " +
+            "ON likes.qnaBoard.qnaNo = qna.qnaNo " +
+            "GROUP BY qna.qnaNo ")
+    Page<Object[]> getListPage(Pageable pageable);
+
 /*    @Query("SELECT qna FROM QnaBoard qna WHERE qna.category=:category")
     List<QnaBoardDTO> getListByCategory(String category);*/
 
 
-    @Query("select qna, m, qna.cnt FROM QnaBoard qna inner join Member m ")
-    Page<Object[]> getListPage(Pageable pageable);
+/*
+    @Query("select qna from QnaBoard qna where qnaNo=:qnaNo")
+    List<Object[]> getBoardByQnaNo(int qnaNo);
+*/
 
 
 }

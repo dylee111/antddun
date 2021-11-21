@@ -4,10 +4,7 @@ import com.ds.antddun.dto.JobListDTO;
 import com.ds.antddun.dto.PageRequestDTO;
 import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.dto.QnaBoardDTO;
-import com.ds.antddun.entity.JobList;
-import com.ds.antddun.entity.Member;
-import com.ds.antddun.entity.QnaBoard;
-import com.ds.antddun.entity.SosoCategory;
+import com.ds.antddun.entity.*;
 import com.ds.antddun.repository.JobListRepository;
 import com.ds.antddun.repository.QnaBoardRepository;
 import com.ds.antddun.repository.UploadImageRepository;
@@ -36,9 +33,10 @@ public class QnaServiceImpl implements QnaService {
     @Autowired
     private QnaBoardRepository qnaBoardRepository;
 
+    //게시물 등록
     @Transactional
     @Override
-    public Long register(QnaBoardDTO qnaBoardDTO, JobListDTO jobListDTO, Member member) {
+    public Long register(QnaBoardDTO qnaBoardDTO, Member member) {
 
         QnaBoard qnaBoard = dtoToEntity(qnaBoardDTO);
         qnaBoard.setMember(member);
@@ -50,6 +48,29 @@ public class QnaServiceImpl implements QnaService {
 
     }
 
+    //게시물 목록
+    @Override
+    public PageResultDTO<QnaBoardDTO, Object[]> getList(PageRequestDTO requestDTO){
+        Pageable pageable = requestDTO.getPageable(Sort.by("qnaNo").descending());
+        Page<Object[]> result = qnaBoardRepository.getListPage(pageable);
+
+        Function<Object[], QnaBoardDTO> fn = (arr -> entityToDTO(
+                (QnaBoard) arr[0],
+                (Long) arr[1])
+        );
+        return new PageResultDTO<>(result, fn);
+    }
+
+/*    //게시물 조회
+    @Override
+    public QnaBoardDTO getBoard(int qnaNo) {
+        List<Object[]> result = qnaBoardRepository.getBoardByQnaNo(qnaNo);
+        QnaBoard qnaBoard = (QnaBoard) result.get(0)[0];
+        List<UploadImage> imageList = new ArrayList<>();
+        return null;
+    }*/
+
+
     @Override
     public void modify(){
     }
@@ -60,13 +81,5 @@ public class QnaServiceImpl implements QnaService {
     }
 
 
-    @Override
-    public PageResultDTO<QnaBoardDTO, QnaBoard> getBoardList(PageRequestDTO requestDTO){
-        Pageable pageable = requestDTO.getPageable(Sort.by("qnaNo").descending());
-        Page<QnaBoard> result = qnaBoardRepository.findAll(pageable);
-
-        Function<QnaBoard, QnaBoardDTO> fn = (entity -> entityToDTO(entity));
-        return new PageResultDTO<>(result, fn);
-    }
 
 }

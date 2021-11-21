@@ -12,6 +12,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -65,6 +66,32 @@ public class MemberServiceImpl implements MemberService {
                 .createDate(memberDTO.getCreateDate())
                 .build()).getMno();
 
+    }
+
+    @Transactional
+    @Override
+    public void modifyMember(MemberDTO memberDTO) {
+        memberDTO.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
+        log.info("S.MODIFY.M >>> " + memberDTO);
+        JobList jobList = jobListRepository.findById(Integer.parseInt(memberDTO.getJob())).get();
+        log.info("S.MODIFY.J >>> " + jobList);
+
+        memberRepository.save(Member.builder()
+                .mno(memberDTO.getMno())
+                .password(memberDTO.getPassword())
+                .username(memberDTO.getUsername())
+                .phoneNum(memberDTO.getPhoneNum())
+                .firstName(memberDTO.getFirstName())
+                .lastName(memberDTO.getLastName())
+                .job(jobList)
+                .experience(memberDTO.getExperience())
+                .salary(memberDTO.getSalary())
+                .role(AntMemberRoleSet.USER)
+                .startTime(memberDTO.getStartTime())
+                .endTime(memberDTO.getEndTime())
+                .fromSocial(false)
+                .createDate(memberDTO.getCreateDate())
+                .build());
     }
 
     /*

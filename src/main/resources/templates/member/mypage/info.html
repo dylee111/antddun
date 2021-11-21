@@ -5,6 +5,7 @@
         <!-- 페이지 css/ js 추가 -->
         <link th:href="@{/css/member/mypage.css}" rel="stylesheet"/>
         <script th:inline="javascript" th:src="@{/js/join/join.js}"></script>
+        <script th:inline="javascript" th:src="@{/js/member/mypage.js}"></script>
         <!--아임포트 js-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
         <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
@@ -26,87 +27,92 @@
                         <h2 class="mypage_title">회원 정보</h2>
                         <hr class="my_margin">
 
-                        <form method="POST" class="center my_margin" id="frm">
-                            <div th:each="member: ${member}">
-                                <div class="input_box">
-                                    <input type="email" class="input_info margin_bottom" id="username" name="username"
-                                           th:attr="placeholder=${member.username}" disabled/>
-                                </div>
-                                <span class="resultBox"></span>
-
-                                <div class="input_box">
-                                    <input type="password" class="input_info pass" id="password" name="password"
-                                           placeholder="비밀번호(영문,숫자,특수문자 8~15자)"/>
-                                </div>
-                                <span class="resultBox pwdCheckResult"></span>
-
-                                <div class="input_box">
-                                    <input type="password" class="input_info pass" id="rePassword" name=""
-                                           placeholder="비밀번호 재확인">
-                                </div>
-                                <span class="resultBox rePwdCheckResult"></span>
-
-                                <div class="mb_wrap">
-                                    <div class="input_mb">
-                                        <input type="text" class="input_info" name="phoneNum" id="phoneNum"
-                                               th:attr="placeholder=${member.phoneNum}" maxlength="11"
-                                               onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
+<!--                        <form class="center my_margin" id="frm">-->
+                            <div class="center my_margin">
+                                <div th:each="member: ${member}">
+                                    <input type="hidden" id="myMno" th:value="${member.mno}">
+                                    <div class="input_box">
+                                        <input type="email" class="input_info margin_bottom" id="username"
+                                               name="username"
+                                               th:value="${member.username}" disabled/>
                                     </div>
-                                    <button type="button" id="btnPhone" class="mypage_btn phoneAuthBtn a_white"
-                                            style="margin-left: 5px;">인증
-                                    </button>
-                                </div>
-                                <span class="resultBox"></span>
+                                    <span class="resultBox"></span>
 
-                                <div class="select_wrap">
-                                    <select class="job select_box" style="margin-right: 5px;" name="jno"
-                                            th:each="member: ${member}">
-                                        <option selected="selected" name="jno">[[${member.job.job}]]</option>
-                                        <option th:each="dto: ${jobList}" th:value="${dto.jno}" name="jno">
-                                            [[${dto.job}]]
-                                        </option>
-                                    </select>
-                                    <select class="experience select_box" name="experience" th:each="member: ${member}">
-                                        <option selected="selected" name="experience">[[${member.experience}]]년차
-                                        </option>
-                                    </select>
-                                </div>
-                                <span class="resultBox"></span>
-
-                                <div class="input_box">
-                                    <input type="text" class="input_earn" id="salary" name="salary"
-                                           th:attr="placeholder=${member.salary}"
-                                           onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-                                    <div class="earn_unit">
-                                        <span>만원</span>
+                                    <div class="input_box">
+                                        <input type="password" class="input_info pass" id="password" name="password"
+                                               placeholder="비밀번호(영문,숫자,특수문자 8~15자)"/>
                                     </div>
-                                    <div class="earn_info">
-                                        <div class="alert_tip">
-                                            ⓘ
-                                            <span class="tooltiptext">
+                                    <span class="resultBox pwdCheckResult"></span>
+
+                                    <div class="input_box">
+                                        <input type="password" class="input_info pass" id="rePassword" name=""
+                                               placeholder="비밀번호 재확인">
+                                    </div>
+                                    <span class="resultBox rePwdCheckResult"></span>
+
+                                    <div class="mb_wrap">
+                                        <div class="input_mb">
+                                            <input type="text" class="input_info" name="phoneNum" id="phoneNum"
+                                                   th:value="${member.phoneNum}" maxlength="11"
+                                                   onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
+                                        </div>
+                                        <button type="button" id="btnPhone" class="mypage_btn phoneAuthBtn a_white"
+                                                style="margin-left: 5px;">인증
+                                        </button>
+                                    </div>
+                                    <span class="resultBox"></span>
+
+                                    <div class="select_wrap">
+                                        <select class="job select_box" style="margin-right: 5px;" name="jno"
+                                                th:each="member: ${member}">
+                                            <option selected="selected" name="jno">[[${member.job.job}]]</option>
+                                            <option th:each="dto: ${jobList}" th:value="${dto.jno}" name="jno">
+                                                [[${dto.job}]]
+                                            </option>
+                                        </select>
+                                        <select class="experience select_box" name="experience"
+                                                th:each="member: ${member}">
+                                            <option selected="selected" name="experience">[[${member.experience}]]년차
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <span class="resultBox"></span>
+
+                                    <div class="input_box">
+                                        <input type="text" class="input_earn" id="salary" name="salary"
+                                               th:attr="placeholder=${member.salary}"
+                                               onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+                                        <div class="earn_unit">
+                                            <span>만원</span>
+                                        </div>
+                                        <div class="earn_info">
+                                            <div class="alert_tip">
+                                                ⓘ
+                                                <span class="tooltiptext">
                                                 기입하지 않을 경우</br>서비스가 제한됩니다.
                                             </span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <h6 class="mypage_sub">근무시간</h6>
-                                <div class="select_wrap" th:each="member: ${member}">
-                                    <input type="time" class="startTime select_box" style="margin-right: 5px;"
-                                           name="startTime"
-                                           th:attr="value=${member.startTime}"/>
-                                    <input type="time" class="endTime select_box" name="endTime"
-                                           th:attr="value=${member.endTime}"/>
-                                    <!--                  <select class="startTime select_box" style="margin-right: 5px;" name="startTime" th:each="member: ${member}">-->
-                                    <!--                    <option selected="selected" name="startTime">[[${member.startTime}]]</option>-->
-                                    <!--                  </select>-->
-                                    <!--                  <select class="endTime select_box" name="endTime" th:each="member: ${member}">-->
-                                    <!--                    <option selected="selected" name="endTime">[[${member.endTime}]]</option>-->
-                                    <!--                  </select><br>-->
+                                    <h6 class="mypage_sub">근무시간</h6>
+                                    <div class="select_wrap" th:each="member: ${member}">
+                                        <input type="time" class="startTime select_box" style="margin-right: 5px;"
+                                               name="startTime"
+                                               th:attr="value=${member.startTime}"/>
+                                        <input type="time" class="endTime select_box" name="endTime"
+                                               th:attr="value=${member.endTime}"/>
+                                        <!--                  <select class="startTime select_box" style="margin-right: 5px;" name="startTime" th:each="member: ${member}">-->
+                                        <!--                    <option selected="selected" name="startTime">[[${member.startTime}]]</option>-->
+                                        <!--                  </select>-->
+                                        <!--                  <select class="endTime select_box" name="endTime" th:each="member: ${member}">-->
+                                        <!--                    <option selected="selected" name="endTime">[[${member.endTime}]]</option>-->
+                                        <!--                  </select><br>-->
+                                    </div>
                                 </div>
+                                <button type="button" id="btn_member_modify" class="submit_btn a_white">수정하기</button>
                             </div>
-                            <button type="submit" class="submit_btn a_white">수정하기</button>
-                        </form>
+<!--                        </form>-->
                     </div>
                 </div>
             </div>

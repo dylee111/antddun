@@ -4,10 +4,62 @@
     <th:block th:fragment="content">
         <!--페이지 수정 부분 시작-->
         <!-- 페이지 css/ js 추가 -->
+        <link rel="stylesheet" th:href="@{/css/board/jayu/register.css}">
+        <script th:src="@{/js/board/jayu/register.js}"></script>
 
         <!-- 본문 시작 -->
         <div class="content">
-            등록 성공!
+            <!--카테고리-->
+            <div class="option">
+                <select class="category" name="category">
+                    <option th:value="${jayuBoardDTO.category}" readonly></option>
+                </select>
+            </div>
+
+            <!--펑예-->
+            <div class="option">
+                <label class="peong">💣펑예</label>
+                <label class="switch">
+                    <input type="checkbox" readonly>
+                    <span class="slider"></span>
+                </label>
+                <div class="alert_tip">ⓘ
+                    <span class="tooltiptext">익일 자정에 펑! 삭제됩니다.</span>
+                </div>
+            </div>
+
+            <!--제목-->
+            <div class="form-group">
+                <input type="text" class="form-control" name="title" readonly
+                       th:value="${jayuBoardDTO.title}">
+            </div>
+
+            <!--내용-->
+            <div class="form-group">
+                <div name="content" th:utext="${jayuBoardDTO.content}"></div>
+            </div>
+
+            <!--작성자-->
+            <div class="form-group">
+                <input type="text" class="form-control" name="writer"
+                       th:value="${jayuBoardDTO.writer}" readonly>
+            </div>
+
+            <!--등록일자-->
+            <div class="form-group">
+                <input type="text" class="form-control" name="regDate" readonly
+                       th:value="${#temporals.format(jayuBoardDTO.regDate,'yyyy/MM/dd HH:mm:ss')}">
+            </div>
+
+            <!-- 수정일자-->
+            <div class="form-group">
+                <input type="text" class="form-control" name="modDate" readonly
+                       th:value="${#temporals.format(jayuBoardDTO.modDate,'yyyy/MM/dd HH:mm:ss')}">
+            </div>
+            <a th:href="@{/jayu/list}">
+                <button class="btn btn-primary">목록보기</button>
+            </a>
+
         </div>
         <!-- 본문 끝 -->
         <!--페이지 수정 부분 끝-->

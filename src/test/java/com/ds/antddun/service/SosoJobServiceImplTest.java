@@ -10,8 +10,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 class SosoJobServiceImplTest {
@@ -33,16 +35,10 @@ class SosoJobServiceImplTest {
 
     @Test
     public void testRead() {
-        Pageable pageable = PageRequest.of(0, 12);
 
-        Page<SosoJobBoard> result = sosoBoardRepository.getPageByCategoryNo(1,pageable);
-
-        System.out.println(result);
-        System.out.println(result.getTotalElements());
-        System.out.println(result.getTotalPages());
-
-
-
+        System.out.println("DTOLIST>>>"+sosoJobService.getList(1).getDtoList());
+        System.out.println("SIZE>>>"+sosoJobService.getList(1).getSize());
+        System.out.println("PAGELIST>>>"+sosoJobService.getList(1).getPageList());
     }
 
     @Test
@@ -54,15 +50,17 @@ class SosoJobServiceImplTest {
 
     @Test
     void getList() {
-        SosoPageRequestDTO sosoPageRequestDTO = SosoPageRequestDTO.builder().page(1).size(12).build();
-        System.out.println("DTODTO" + sosoPageRequestDTO);
+        // test ok
+        SosoBoardDTO result = sosoJobService.read(1L);
 
-        SosoPageResultDTO<SosoBoardDTO, SosoJobBoard> resultDTO = sosoJobService.getList(1,sosoPageRequestDTO);
-        System.out.println("RESULT >>> " + resultDTO);
+        System.out.println("CONTENT>>>>"+result.getContent());
+        System.out.println("MNO>>>>"+result.getMno());
+        System.out.println("TITLE>>>>"+result.getJob());
+        System.out.println("TITLE>>>>"+result.getCategoryName());
+        System.out.println("TITLE>>>>"+result.getTitle());
+        System.out.println("TITLE>>>>"+result.getFirstName());
 
-        for (SosoBoardDTO sosoBoardDTO : resultDTO.getDtoList()) {
-            System.out.println("PAGINATION>>>"+ sosoBoardDTO);
-        }
+
     }
 
 

@@ -6,7 +6,9 @@
         <!--페이지 수정 부분 시작-->
         <!-- 페이지 css/ js 추가 -->
         <link th:href="@{/css/board/qna/qnaStyles.css}" rel="stylesheet" />
+        <script th:src="@{/js/board/qna/like.js}"></script>
 
+        <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
 
         <!-- 본문 시작 -->
         <div class="subNav-body">
@@ -22,14 +24,16 @@
 
                 <div class="leftSection">
                     <!-- 카테고리, 뚠 -->
+                    <span id="qnaNo" hidden th:text="${boardList.qnaNo}"></span>
+                    <button id="likebtn" >좋아요</button>
+
                     <span class="smallDdun" th:text="${boardList.ddun}"></span>
+
                     <span class="smallCategory" th:text="${boardList.job}"></span>
                     <!-- 제목 + 글 -->
                     <div class="post-content">
                         <h3><a href="#post" th:text="${boardList.title}"></a></h3>
-                        <p class="content-text">
-                            <a href="#post" th:text="${boardList.content}"></a>
-                        </p>
+                        <a class="content-text" href="#post" th:utext="${boardList.content}"></a>
                     </div>
 
                 </div>
@@ -51,9 +55,9 @@
                     <div class="" ><a class="nickName" href="#post">[[${boardList.writer}]]</a></div>
 
                     <div class="wrapInfo">
-                        <a class="views" href="#post"><img th:src="@{/assets/eye.png}" width="24px;"> [[${boardList.cnt}]]</a>
-                        <a class="like"><img th:src="@{/assets/heart.png}" width="20px;"> [[${boardList.cnt}]]</a>
-                        <a class="cmt" href="#post"><img th:src="@{/assets/messenger.png}" width="19"> [[${boardList.cnt}]]</a>
+                        <a class="views" href="#post"><img th:src="@{/assets/eye.png}" width="24px;"> [[${boardList.viewCnt}]]</a>
+                        <a class="like"><img th:src="@{/assets/heart.png}" width="20px;"><span id="likesCnt">[[${boardList.likesCnt}]]</span></a>
+                        <a class="cmt" href="#post"><img th:src="@{/assets/messenger.png}" width="19"> [[${boardList.viewCnt}]]</a>
                     </div>
 
                 </div>

@@ -46,7 +46,7 @@ $(document).ready(function() {
 //확장자 및 사이즈 확인
 function checkExtension(fileName){
     var input = fileName.name;
-    if (input.match(/(.png|.jpg|.jpeg|.gif|.bmp)$/)){
+    if (input.match(/(.png|.jpg|.jpeg|.gif|.bmp|.PNG|.JPG|.JPEG|.GIF|.BMP)$/)){
         return true;
     }
     else alert("이미지 파일만 첨부할 수 있어요.");
@@ -71,7 +71,7 @@ function sendImg(file, el) {
                     });
                },
                 error: function(data) {
-                        alert("1MB이하 파일만 첨부할 수 있어요.")
+                        alert("1MB이하 파일만 첨부할 수 있어요.");
                      }
 			});
 }

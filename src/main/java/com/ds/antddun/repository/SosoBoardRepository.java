@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface SosoBoardRepository extends JpaRepository<SosoJobBoard, Long> {
 
@@ -22,10 +23,16 @@ public interface SosoBoardRepository extends JpaRepository<SosoJobBoard, Long> {
             " AND sc.cateNo=:categoryNo ")
     List<SosoJobBoard> getListByCategoryNo(int categoryNo);
 
-    @Query("SELECT sj, sc " +
-            " FROM SosoJobBoard sj, SosoCategory sc " +
+    @Query(value="SELECT * FROM soso_job_board sj, soso_category sc WHERE sj.category_cate_no = sc.cate_no AND sj.category_cate_no=:categoryNo ",
+    countQuery = "SELECT count(*) FROM soso_job_board sj, soso_category sc WHERE sj.category_cate_no = sc.cate_no AND sj.category_cate_no=:categoryNo ",
+    nativeQuery = true)
+    Page<SosoJobBoard> findAllByCategory(int categoryNo, Pageable pageable);
+
+    @Query("SELECT sj, sc, m " +
+            " FROM SosoJobBoard sj, SosoCategory sc, Member m " +
             " WHERE sj.category=sc.cateNo " +
-            " AND sc.cateNo=:categoryNo ")
-    Page<SosoJobBoard> getPageByCategoryNo(int categoryNo, Pageable pageable);
+            " AND sj.member=m.mno " +
+            " AND sj.sosoNo=:sosoNo ")
+    Optional<SosoJobBoard> readBySosoNo(Long sosoNo);
 
 }

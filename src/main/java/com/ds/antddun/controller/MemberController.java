@@ -9,15 +9,14 @@ import com.ds.antddun.service.MemberService;
 import com.ds.antddun.service.WishListService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -32,6 +31,9 @@ public class MemberController {
 
     @Autowired
     private WishListService wishListService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("")
     public String main (Model model, MemberDTO memberDTO, @AuthenticationPrincipal PrincipalDetails principal) {
@@ -51,27 +53,20 @@ public class MemberController {
     }
 
     @GetMapping("/member/mypage/info")
-    public String userinfo (Model model, @AuthenticationPrincipal PrincipalDetails principal, MemberDTO memberDTO) {
+    public String userinfo (Model model, @AuthenticationPrincipal PrincipalDetails principal, MemberDTO memberDTO ) {
         model.addAttribute("member", principal.getMember());
+        model.addAttribute("jobList", jobListService.getList());
         return "member/mypage/info";
+    }
+
+    @PostMapping("/member/mypage/info")
+    public void userInfoPost() {
+
     }
 
     @GetMapping("/member/mypage/wallet")
     public String userwallet (Model model, @AuthenticationPrincipal PrincipalDetails principal, MemberWishListDTO memberWishListDTO) {
         List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
-
-//        Long earn = principal.getMember().getSalary();
-//        log.info("EARN >> " + earn);
-//        Double monthly = (earn * 10000 / 12) - (earn * 10000 * 0.009);
-//        log.info("MONTHLY" + monthly);
-//        log.info("DTODTO11 >>> " + wishLists.get(0).getPrice());
-//        log.info("DTODTO22 >>> " + wishLists.get(0).getRate());
-//        double day = 0;
-//        day = Math.ceil(wishLists.get(0).getPrice() / (monthly * (wishLists.get(0).getRate() / 100)));
-//        log.info("DAY>>"+day);
-//        for (int i = 0; i < wishLists.size(); i++) {
-//            day = (int) Math.ceil(wishLists.get(i).getPrice() / (monthly * (wishLists.get(i).getRate() / 100)));
-//        }
 
         if(principal != null) {
             model.addAttribute("member", principal.getMember());
@@ -85,15 +80,9 @@ public class MemberController {
     }
 
     @ResponseBody
-    @PostMapping("/member/mypage/save")
-    public int wishListSave(MemberWishListDTO wishListDTO, @AuthenticationPrincipal PrincipalDetails principalDetails, HttpServletRequest request) {
+    @PostMapping("/member/mypage/wishlist/save")
+    public int saveWishList(MemberWishListDTO wishListDTO, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 
-//        String[] nameArr = request.getParameterValues("wishList");
-//        String[] priceArr = request.getParameterValues("price");
-//        String[] rateArr = request.getParameterValues("rate");
-//            log.info("NAME ARR>>> " + nameArr[0] +"/"+nameArr[1] +"/"+ nameArr[2]);
-//            log.info("PRICE ARR>>> " + priceArr[0] +"/"+ priceArr[1] + "/" +priceArr[2]);
-//            log.info("RATE ARR>>> " + rateArr[0] +"/"+ rateArr[1] + "/" +rateArr[2]);
         int result = wishListService.wishListCnt(principalDetails.getMember().getMno());
         log.info("MNOCNT>>>" + result);
         // 위시리스트 3개까지 작성 가능.
@@ -103,6 +92,37 @@ public class MemberController {
         return result;
     }
 
+    @DeleteMapping("/member/mypage/wishlist/delete/{wno}")
+    public ResponseEntity<String> removeWishList(@PathVariable("wno") Long wno) {
+        wishListService.remove(wno);
+        return new ResponseEntity<>("delete", HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @PutMapping("/member/mypage/wishlist/modify/{wno}")
+    public ResponseEntity<String> modifyWishList(@RequestBody MemberWishListDTO memberWishListDTO,
+                                         @AuthenticationPrincipal PrincipalDetails principalDetails) {
+
+        wishListService.modify(memberWishListDTO,principalDetails.getMember());
+
+        return new ResponseEntity<>("modify", HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @PutMapping("/member/mypage/info/modify/{mno}")
+    public ResponseEntity<String> modifyMember(@RequestBody MemberDTO memberDTO, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        log.info("MODIFY MEMBER>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        memberDTO.setFirstName(principalDetails.getMember().getFirstName());
+        memberDTO.setUsername(principalDetails.getUsername());
+        memberDTO.setLastName(principalDetails.getMember().getLastName());
+        memberDTO.setRole(principalDetails.getMember().getRole().toString());
+        memberDTO.setCreateDate(principalDetails.getMember().getCreateDate());
+        log.info("MODIFY >>> " + memberDTO);
+
+        memberService.modifyMember(memberDTO);
+
+        return new ResponseEntity<>("MemberModify", HttpStatus.OK);
+    }
 
     @PostMapping("/member/mypage")
     public void wishList(MemberWishListDTO wishListDTO,
@@ -110,12 +130,4 @@ public class MemberController {
 
     }
 
-    @GetMapping("/member/messenger")
-    public String messenger (Model model, MemberDTO memberDTO, @AuthenticationPrincipal PrincipalDetails principal) {
-        if(principal != null) {
-            model.addAttribute("member", principal.getMember());
-            model.addAttribute("jobList", jobListService.getList());
-        }
-        return "member/messenger";
-    }
 }
