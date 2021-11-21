@@ -46,11 +46,9 @@ $(document).ready(function() {
         if ($("#input_rate").val() != "" && $("#input_rate").val() != ""){
                 $("#input_day").val(parseInt(wishDay));
 
-            console.log(earn);
-            console.log(monthly);
-            console.log(price);
-            console.log(rate);
-            console.log(wishDay);
+            console.log("price: "+isNaN(price));
+            console.log("rate: "+isNaN(rate));
+            console.log("wishDay: "+isNaN(wishDay));
         }
     });
 
