@@ -20,6 +20,9 @@ public interface MemberService {
 
     Long join(MemberDTO memberDTO, JobListDTO jobListDTO);
 
+    //소셜로그인 후 추가 정보 기입
+    void socialJoin(@AuthenticationPrincipal PrincipalDetails principalDetails,MemberDTO memberDTO, JobListDTO jobListDTO);
+
     int idCheck(String username) throws Exception;
 
     int mobileCheck(String mobile) throws Exception;
@@ -61,23 +64,6 @@ public interface MemberService {
     }
 
 
-    //소셜로그인 후 추가 정보 기입
-    void socialJoin(MemberDTO memberDTO, JobListDTO jobListDTO);
-
-    default Member socialDtoToEntity(MemberDTO memberDTO) {
-        Member member = Member.builder()
-                .mno(memberDTO.getMno())
-                .username(memberDTO.getUsername())
-                .password(memberDTO.getPassword())
-                .firstName(memberDTO.getFirstName())
-                .lastName(memberDTO.getLastName())
-                .phoneNum(memberDTO.getPhoneNum())
-                .salary(memberDTO.getSalary())
-                .role(AntMemberRoleSet.SOCIAL)
-                .createDate(memberDTO.getCreateDate())
-                .build();
-        return member;
-    }
 
 }
 

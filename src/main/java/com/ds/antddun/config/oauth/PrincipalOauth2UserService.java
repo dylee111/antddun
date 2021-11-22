@@ -72,7 +72,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         String lastname = oAuth2UserInfo.getLastName();
 
         //권한
-        AntMemberRoleSet role = AntMemberRoleSet.USER;
+        AntMemberRoleSet role = AntMemberRoleSet.SOCIAL;
 
         //폰번호(naver만 가능)
         String mobile = oAuth2UserInfo.getMobile();
