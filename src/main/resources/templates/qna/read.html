@@ -32,6 +32,9 @@
                        th:value="${#temporals.format(boardList.regDate,'yyyy/MM/dd HH:mm:ss')}">
             </div>
 
+            <!--좋아요 개수-->
+                <div>[[${boardList.likesCnt}]]개</div>
+
             <!-- 수정일자-->
             <div class="form-group">
                 <input type="text" class="form-control" name="modDate" readonly
