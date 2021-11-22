@@ -30,19 +30,23 @@ $(document).ready(function() {
 
 //위시 리스트
 $(document).ready(function() {
-    var earn = parseInt($('#earn').text());
-    var price = parseInt($("#input_price").val());
-    var rate = parseInt($("#input_rate").val());
-
-    var monthly = parseInt((earn * 10000 / 12) - (earn * 10000  * 0.009));
-    var wishDay = parseInt(Math.ceil(price / (monthly * rate * 0.01)));
-
     $(".wish_cal").keyup(function(){
+        var earn = parseInt($('#earn').text());
+        var price = parseInt($("#input_price").val()) == NaN ? 0 : parseInt($("#input_price").val());
+        var rate = parseInt($("#input_rate").val()) == NaN ? 0 : parseInt($("#input_rate").val());
+
+        var monthly = (earn * 10000 / 12) - (earn * 10000  * 0.009);
+        var wishDay = parseInt(Math.ceil(price / (monthly * rate * 0.01)));
+
         if ($("#input_rate").val() != "" && $("#input_rate").val() != ""){
                 $("#input_day").val(parseInt(wishDay));
-            console.log("price: "+isNaN(price));
-            console.log("rate: "+isNaN(rate));
-            console.log("wishDay: "+isNaN(wishDay));
+
+            console.log("price: "+ price);
+            console.log("price type: "+ typeof(price));
+            console.log("price isNaN: "+isNaN(price));
+            console.log("rate: "+ rate);
+            console.log("rate type: "+ typeof(rate));
+            console.log("rate isNaN: "+isNaN(rate));
         }
     });
 

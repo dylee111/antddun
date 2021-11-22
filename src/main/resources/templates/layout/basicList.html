@@ -29,7 +29,8 @@
         <div id="fixed">
             <!--로그인 정보에 따라 노출 유무 결정-->
             <header>
-                <div class="wish" sec:authorize="isAuthenticated()" style="display: none;">
+                <div class="wish" sec:authorize="isAuthenticated()">
+
                     <span id="main_wish" class="impact" th:each="wishListIndex : ${wishListIndex}">
                         🎉 <strong class="main_wish impact" th:text="${wishListIndex.wishList}"></strong>까지
                         <strong class="impact"><span class="wish_day" th:text="${wishListIndex.dDay}"></span>일</strong> 남았습니다. ✨
@@ -63,7 +64,7 @@
 
         <div class="container-main container">
             <div id="search-wrap">
-                <div style="display: flex;">
+                <div style="display: flex; margin-right: 90px;">
                     <input type="text" id="search-bar" />
                     <button type="submit" class="searchButton">
                         <i class="fa fa-search"></i>
