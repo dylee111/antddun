@@ -343,10 +343,13 @@ $(document).ready(function(){
 
                 $.ajax({
                     type: "GET",
-                    url: "/member/mypage",
+                    url: "/antddun/member/mypage/wallet/save",
                     data: {
                         "amount" : money
                     },
+                    success: function(data) {
+                        console.log(data);
+                    }
                 });
             } else {
                 var msg = '결제에 실패하였습니다.';
