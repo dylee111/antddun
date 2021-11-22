@@ -70,9 +70,11 @@ $(document).ready(function() {
             $('#price0').removeAttr("readonly");
             $('#rate0').removeAttr("readonly");
             $('#list0').removeAttr("readonly");
+            $(this).css("filter", "brightness(1)");
+            $('#list0').focus();
         } else if(count == 2) {
                 console.log(count);
-
+            $(this).css("filter", "brightness(0)");
             alert("돌아감");
             var wno = $("#wno0").val();
             console.log(wno);
@@ -108,9 +110,11 @@ $(document).ready(function() {
             $('#price1').removeAttr("readonly");
             $('#rate1').removeAttr("readonly");
             $('#list1').removeAttr("readonly");
+            $(this).css("filter", "brightness(1)");
+            $('#list1').focus();
         } else if(count == 2) {
                 console.log(count);
-
+            $(this).css("filter", "brightness(0)");
             alert("돌아감");
             var wno = $("#wno1").val();
             console.log(wno);
@@ -146,9 +150,11 @@ $(document).ready(function() {
             $('#price2').removeAttr("readonly");
             $('#rate2').removeAttr("readonly");
             $('#list2').removeAttr("readonly");
+            $(this).css("filter", "brightness(1)");
+            $('#list2').focus();
         } else if(count == 2) {
                 console.log(count);
-
+            $(this).css("filter", "brightness(0)");
             alert("돌아감");
             var wno = $("#wno2").val();
             console.log(wno);
