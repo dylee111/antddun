@@ -3,6 +3,7 @@ package com.ds.antddun.entity;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -18,6 +19,7 @@ public class Ddun {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DDUN_SEQ_GEN")
     private Long DdunId;
+
     private Long inputAmount;
     private Long outputAmount;
 

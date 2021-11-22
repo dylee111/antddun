@@ -52,13 +52,13 @@
 
                                     <tbody>
                                     <tr class="wishlist_add wishlist_tr">
-                                        <td><input id="input_list" class="input_pd" placeholder="상품명을 입력하세요." name="wishList"></td>
-                                        <td><input type="number" id="input_price" class="input_cost" placeholder="ex) 50000" name="price"></td>
-                                        <td><input type="number" id="input_rate" class="input_per" placeholder="ex) 10" name="rate">%</td>
+                                        <td><input type="text" id="input_list" class="input_pd" placeholder="상품명을 입력하세요." name="wishList"></td>
+                                        <td><input type="text" id="input_price" class="wish_cal input_cost" placeholder="ex) 50000" value="" name="price"></td>
+                                        <td><input type="text" id="input_rate" class="wish_cal input_per" placeholder="ex) 10" value="" name="rate">%</td>
                                         <td>
-                                            <button id="day_btn">확인</button>
-                                            <span id="show_day" style="display: none;">D -</span>
-                                            <input id="input_day" name="dday" style="display: none;" readonly>
+<!--                                            <button id="day_btn">확인</button>-->
+                                            <span id="show_day">D -</span>
+                                            <input type="text" id="input_day" name="dday" readonly>
                                         </td>
 
                                         <td>
@@ -75,7 +75,6 @@
                                     <tbody th:each="wishList, index : ${wishList}" >
                                     <tr class="wishlist_read">
                                         <input type="hidden" th:id="'wno'+${index.index}" th:value="${wishList.wno}"/>
-                                        <td style="width: 10%;"><input type="radio" name="main_wish" checked /></td>
                                         <td style="width: 30%;"><input th:id="'list'+${index.index}" class="input_pd" name="wishList" th:value="${wishList.wishList}" th:placeholder="${wishList.wishList}" readonly></td>
                                         <td style="width: 15%;"><input th:id="'price'+${index.index}" class="input_cost" name="price" th:value="${wishList.price}" th:placeholder="${wishList.price}" readonly></td>
                                         <td style="width: 15%;"><input th:id="'rate'+${index.index}" class="input_per" name="rate" th:value="${wishList.rate}" th:placeholder="${wishList.rate}" readonly>%</td>

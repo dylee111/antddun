@@ -6,6 +6,7 @@
 
         <!-- 페이지 css/ js 추가 -->
         <link th:href="@{/css/board/qna/qnaStyles.css}" rel="stylesheet" />
+        <link th:href="@{/css/board/jayu/register.css}" rel="stylesheet" />
 
         <!-- 본문 시작 -->
         <div class="subNav-body">
@@ -15,7 +16,7 @@
         </div>
 
         <a th:href="@{/member/jayu/register}">
-            <button class="btn btn-primary">글 쓰기</button>
+            <button class="btn btn-primary" style="float: right; margin-top: -50px;">글 쓰기</button>
         </a>
 
         <!-- 게시물 -->
@@ -24,11 +25,11 @@
             <div class="post-body attach-img-pre">
                 <div class="leftSection">
                     <!-- 카테고리 -->
-                    <span class="smallCategory">소근소근</span>
+                    <span class="cate cate_line">소근소근</span>
                     <!-- 제목 + 글 -->
                     <div class="post-content">
-                        <h3><a th:href="@{/member/jayu/read/}+${jayuList.jayuNo}" th:text="${jayuList.title}"></a></h3>
-                            <a class="content-text" th:href="@{/member/jayu/read/}+${jayuList.jayuNo}" th:utext="${jayuList.content}"></a>
+                        <h3><a th:href="@{/member/jayu/read/}+${jayuList.jayuNo}" th:text="${jayuList.title}" class="list_title"></a></h3>
+                            <a class="content-text" style="height: 50px;" th:href="@{/member/jayu/read/}+${jayuList.jayuNo}" th:utext="${jayuList.content}"></a>
                     </div>
                 </div>
                 <!-- 썸네일 -->
@@ -50,7 +51,7 @@
 
                     <div class="wrapInfo">
                         <a class="views" th:href="@{/member/jayu/read/}+${jayuList.jayuNo}"><img th:src="@{/assets/eye.png}" width="24px;"> [[${jayuList.cnt}]]</a>
-                        <a class="like" th:href="@{/member/jayu/read/}+${jayuList.jayuNo}"><img th:src="@{/assets/heart.png}" width="20px;"> [[${jayuList.cnt}]]</a>
+                        <a class="like" th:href="@{/member/jayu/read/}+${jayuList.jayuNo}"><img th:src="@{/assets/heart_0.png}" width="20px;"> [[${jayuList.cnt}]]</a>
                         <a class="cmt" th:href="@{/member/jayu/read/}+${jayuList.jayuNo}"><img th:src="@{/assets/messenger.png}" width="19px;"> [[${jayuList.cnt}]]</a>
                     </div>
                 </div>
