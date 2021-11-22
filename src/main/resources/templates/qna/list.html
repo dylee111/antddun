@@ -13,7 +13,9 @@
         <!-- 본문 시작 -->
         <div class="subNav-body">
             <nav class="nav nav-underline" aria-label="Secondary navigation">
-                <a th:each="jobList : ${jobList}" class="subNav" href="#">[[${jobList.job}]]</a>
+                <a class="subNav" th:href="@{/qna/list/}">전체 </a><a th:each="jobList : ${jobList}" class="subNav" th:href="@{'/qna/list/' + ${jobList.jno}}">
+                    [[${jobList.job}]]
+                </a>
             </nav>
         </div>
 
@@ -25,14 +27,14 @@
                 <div class="leftSection">
                     <!-- 카테고리, 뚠 -->
                     <span id="qnaNo" hidden th:text="${boardList.qnaNo}"></span>
-                    <button id="likebtn" >좋아요</button>
+                    <button th:id="likebtn" >좋아요</button>
 
                     <span class="smallDdun" th:text="${boardList.ddun}"></span>
 
                     <span class="smallCategory" th:text="${boardList.job}"></span>
                     <!-- 제목 + 글 -->
                     <div class="post-content">
-                        <h3><a href="#post" th:text="${boardList.title}"></a></h3>
+                        <h3><a th:href="@{'/member/qna/read/' + ${boardList.qnaNo}}" th:text="${boardList.title}"></a></h3>
                         <a class="content-text" href="#post" th:utext="${boardList.content}"></a>
                     </div>
 
@@ -72,26 +74,25 @@
         </div> <!-- cardList end -->
 
 
-
         <nav aria-label="Page navigation example">
             <!--    페이지 번호     -->
             <ul class="pagination h-100 justify-content-center align-items-center">
                 <li class="page-item" th:if="${boardList.prev}">
-                    <a class="page-link" th:href="@{/qna/list(page=${boardList.start - 1},
+                    <a class="page-link" th:href="@{/qna/list/(page=${boardList.start - 1},
                 type=${pageRequestDTO.type},
                 keyword = ${pageRequestDTO.keyword} ) }" tabindex="-1">이전</a>
                 </li>
 
                 <li th:class=" 'page-item '+ ${boardList.page == page?'active':''} "
                     th:each="page: ${boardList.pageList}">
-                    <a class="page-link" th:href="@{/qna/list(page = ${page}, type=${pageRequestDTO.type},
+                    <a class="page-link" th:href="@{/qna/list/ (page = ${page}, type=${pageRequestDTO.type},
                 keyword = ${pageRequestDTO.keyword})}">
                         [[${page}]]
                     </a>
                 </li>
 
                 <li class="page-item" th:if="${boardList.next}">
-                    <a class="page-link" th:href="@{/qna/list(page= ${boardList.end + 1}, type=${pageRequestDTO.type}
+                    <a class="page-link" th:href="@{/qna/list/ (page= ${boardList.end + 1}, type=${pageRequestDTO.type}
                 , keyword = ${pageRequestDTO.keyword} )}">다음</a>
                 </li>
             </ul>
