@@ -5,7 +5,9 @@ import com.ds.antddun.dto.JayuBoardDTO;
 import com.ds.antddun.dto.PageRequestDTO;
 import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.entity.JayuBoard;
+import com.ds.antddun.entity.MemberWishList;
 import com.ds.antddun.service.JayuBoardService;
+import com.ds.antddun.service.WishListService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -26,14 +28,25 @@ public class JayuBoardController {
     @Autowired
     private JayuBoardService jayuBoardService;
 
+    @Autowired
+    private WishListService wishListService;
+
+
     //게시글 작성
     @GetMapping("/member/jayu/register")
-    public String register(@AuthenticationPrincipal PrincipalDetails principal){
+    public String register(Model model, @AuthenticationPrincipal PrincipalDetails principal){
 
         if (principal == null) {
             return "redirect:/login";
         } else {
             log.info("principal.getMember())" + principal.getMember());
+        }
+
+        //위시리스트
+        List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
+        model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
+        if (wishLists.size() != 0) {
+            model.addAttribute("wishListIndex", wishLists.get(0));
         }
 
         return "jayu/register";
@@ -63,13 +76,23 @@ public class JayuBoardController {
         JayuBoardDTO jayuBoardDTO = jayuBoardService.read(jayuNo);
         model.addAttribute("jayuBoardDTO", jayuBoardDTO);
         log.info("read......");
+
+        //위시리스트
+        List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
+        model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
+        if (wishLists.size() != 0) {
+            model.addAttribute("wishListIndex", wishLists.get(0));
+        }
+
         return "/jayu/read";
     }
 
     //게시글 목록
     @GetMapping("/jayu/list")
-    public String list(Model model, PageRequestDTO pageRequestDTO) {
+    public String list(Model model, PageRequestDTO pageRequestDTO,  @AuthenticationPrincipal PrincipalDetails principal) {
         PageResultDTO<JayuBoardDTO, JayuBoard> jayuList = jayuBoardService.getList(pageRequestDTO);
+
+        //summernote 태그 제거
         List<JayuBoardDTO> list = jayuList.getDtoList();
         for (int i = 0; i < list.size(); i++) {
             JayuBoardDTO tmp = (JayuBoardDTO) list.get(i);
@@ -78,6 +101,14 @@ public class JayuBoardController {
         }
         jayuList.setDtoList((List<JayuBoardDTO>) list);
         model.addAttribute("jayuList",jayuList);
+
+        //위시리스트
+        List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
+        model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
+        if (wishLists.size() != 0) {
+            model.addAttribute("wishListIndex", wishLists.get(0));
+        }
+
         return "/jayu/list";
     }
 }
