@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -36,15 +37,19 @@ public class DdunController {
     }
 
     @ResponseBody
-    @GetMapping("/sosojob/buy/{sosoNo}")
+    @GetMapping("/sosojob/buy/{sosoNo}/{mno}")
     public void sosoBuy(@PathVariable("sosoNo") Long sosoNo,
+                        @PathVariable("mno") Long mno,
                         @AuthenticationPrincipal PrincipalDetails principalDetails,
-                        @RequestParam("amount") Long amount, DdunDTO ddunDTO) {
+                        @RequestParam("amount") Long amount,
+                        DdunDTO ddunDTO, Model model) {
 
         log.info("SOSO BUY >>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
-        Long mno = sosoJobService.read(sosoNo).getMno();
+        log.info("DDUN MNO >>> " + mno);
         Long buyer = ddunService.totalAmountByMno(principalDetails.getMember().getMno());
+        log.info("TOTAL DDUN" + buyer);
+        model.addAttribute("buyerTotalDdun", buyer);
 
         if (buyer >= amount) {
             ddunService.sosoBuy(principalDetails.getMember(), amount, ddunDTO);

@@ -67,6 +67,7 @@
                                             구매하시겠습니까?
                                         </span>
                                     </div>
+
                                     <button type="button" class="buy_btn" style="margin-bottom: 30px;">구매하기</button>
                                 </div>
                             </form>
@@ -81,13 +82,16 @@
                         <!-- Post header-->
                         <header class="mb-4">
                             <!-- Post categories-->
+
                             <a class="cate" href="#!" >[[${read.categoryName}]]</a>
                             <!-- Post title-->
-
+                            <input id="soso_no" type="hidden" th:value="${read.categoryNo}">
+                            <input type="hidden" id="writer_no" th:value="${read.mno}">
+                            <input type="hidden" id="total_ddun" th:value="${buyerTotalDdun}">
                             <h1 class="text-width fw-bolder mb-1 sell_title" name="title">[[${read.title}]]</h1>
                             <div>
                                 <img th:src="@{/assets/coins.png}" width="19">
-                                <span>[[${read.ddun}]]</span>
+                                <span id="ddun">[[${read.ddun}]]</span>
                             </div>
                             <!-- Post meta content-->
                             <div class="text-width text-muted fst-italic mb-2">
