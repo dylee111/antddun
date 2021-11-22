@@ -145,13 +145,18 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member welcomeMsg(Long mno) {
-
 //        Member member = Member.builder().mno(mno).build();
         Member result = memberRepository.welcomeMsg(mno);
-
 //        List<Member> result = memberRepository.welcomeMsg(mno);
-
-
         return result;
     }
+
+    @Override
+    public void socialJoin(MemberDTO memberDTO, JobListDTO jobListDTO) {
+        JobList jobList = jobListRepository.findById(jobListDTO.getJno()).get();
+        Member member = socialDtoToEntity(memberDTO);
+        memberRepository.save(member);
+    }
+
+
 }
