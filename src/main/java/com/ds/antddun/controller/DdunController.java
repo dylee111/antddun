@@ -4,13 +4,12 @@ import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.DdunDTO;
 import com.ds.antddun.entity.Ddun;
 import com.ds.antddun.service.DdunService;
+import com.ds.antddun.service.SosoJobService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @Log4j2
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class DdunController {
 
     private final DdunService ddunService;
+    private final SosoJobService sosoJobService;
 
     @ResponseBody
     @GetMapping("/mypage/wallet/save")
@@ -33,5 +33,22 @@ public class DdunController {
         log.info("DTO >>>" + ddunDTO.getDdunId());
 
         ddunService.saveDdun(ddunDTO);
+    }
+
+    @ResponseBody
+    @GetMapping("/sosojob/buy/{sosoNo}")
+    public void sosoBuy(@PathVariable("sosoNo") Long sosoNo,
+                        @AuthenticationPrincipal PrincipalDetails principalDetails,
+                        @RequestParam("amount") Long amount, DdunDTO ddunDTO) {
+
+        log.info("SOSO BUY >>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+        Long mno = sosoJobService.read(sosoNo).getMno();
+        Long buyer = ddunService.totalAmountByMno(principalDetails.getMember().getMno());
+
+        if (buyer >= amount) {
+            ddunService.sosoBuy(principalDetails.getMember(), amount, ddunDTO);
+            ddunService.sosoSell(mno, amount, ddunDTO);
+        }
     }
 }
