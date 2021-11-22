@@ -37,6 +37,7 @@ public interface SosoJobService {
                 .mno(sosoJobBoard.getMember().getMno())
                 .job(sosoJobBoard.getMember().getJob().getJob())
                 .firstName(sosoJobBoard.getMember().getFirstName())
+                .lastName(sosoJobBoard.getMember().getLastName())
                 .ddun(sosoJobBoard.getDdun())
                 .regDate(sosoJobBoard.getRegDate())
                 .modDate(sosoJobBoard.getModDate())
