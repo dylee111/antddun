@@ -66,6 +66,7 @@ public class DdunServiceImpl implements DdunService{
     public Long sosoSell(Long mno, Long amount, DdunDTO ddunDTO) {
 
         ddunDTO.setMember(mno);
+
         ddunDTO.setInputAmount(amount);
         ddunDTO.setOutputAmount(0L);
         Ddun ddun = dtoToEntity(ddunDTO);

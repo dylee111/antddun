@@ -42,7 +42,7 @@ public class MemberController {
 
     @GetMapping("")
     public String main(Model model, @AuthenticationPrincipal PrincipalDetails principal) {
-
+            // index sosojob slick
             model.addAttribute("sosoCateList", sosoCateService.getCateList());
         if (principal != null) {
 
