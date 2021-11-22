@@ -19,7 +19,7 @@ public class JayuBoard extends BaseEntity{
 
     @Column(nullable = false)
     private String title;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 99900)
     private String content;
     @Column(nullable = false)
     private String category;

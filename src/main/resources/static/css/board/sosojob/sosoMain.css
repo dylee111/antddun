@@ -54,3 +54,176 @@ article {
     max-width: 100%;
     max-height: 100%;
 }
+
+
+
+/* 문의하기 & 구매하기 */
+    .send_container {
+        margin: 0 auto;
+        width: 700px;
+        height: 500px;
+        border-radius: 15px;
+        position: fixed;
+        left: 50%;
+        top: 60%;
+        z-index: 1;
+        transform: translate(-50%, -50%)
+    }
+
+    .buy_container {
+        margin: 0 auto;
+        width: 400px;
+        height: 340px;
+        border-radius: 15px;
+        position: fixed;
+        left: 45%;
+        top: 60%;
+        z-index: 1;
+        transform: translate(-50%, -50%)
+    }
+
+    .dim {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba(0,0,0,0.6);
+    }
+
+    .btn_close {
+        width: 20px;
+        height: 20px;
+        margin-right:20px;
+        margin: 15px;
+        float: right;
+        cursor:pointer;
+    }
+
+
+   .soso_title {
+        text-align: center;
+        font-family: 'ELAND_Choice_M';
+        font-size: 1.3rem;
+        font-weight: bold;
+        padding: 20px 0 15px 0;
+        border-bottom: 2px solid #dfdfdf;
+        max-width: 80%;
+        margin: 0 auto;
+    }
+
+    #msg_title {
+        display: block;
+        margin: 0 auto;
+        width: 80%;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    .msg_context {
+        margin-top: 15px;
+        width: 80%;
+        height: 240px;
+    }
+
+    #button-send{
+        width: 100%;
+        font-size: 1.1rem;
+        font-family: 'ELAND_Choice_M';
+        margin-bottom: 10px;
+    }
+
+    #button-buy {
+        background: #402700;
+        border-color: #402700;
+        width: 100%;
+        font-size: 1.1rem;
+        font-family: 'ELAND_Choice_M';
+        margin-bottom: 40px;
+    }
+
+  .submit_btn {
+    width: 5rem;
+    font-family: 'ELAND_Choice_M';
+    font-size: 1rem;
+    font-weight: bold;
+    height: 40px;
+    background: #ffc107;
+    border: none;
+    border-radius: 5px;
+    color: white;
+  }
+
+  .buy_btn {
+    width: 8rem;
+    font-family: 'ELAND_Choice_M';
+    font-size: 1rem;
+    font-weight: bold;
+    height: 50px;
+    background: #ffc107;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    margin-top: 20px;
+  }
+
+.buy_alert {
+    text-align: center;
+    font-family: 'ELAND_Choice_M';
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #737373;
+}
+
+.buy_ddun {
+    font-size: 2rem;
+    color: #402700;
+}
+
+
+
+/* 판매자 정보 */
+.user_box {
+    width: 100%;
+    height: 70px;
+}
+
+.seller_title {
+    font-family: 'ELAND_Choice_M';
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.seller_info {
+font-family: 'ELAND_Choice_M';
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-left: 45px;
+    line-height: 50px;
+}
+
+.user_img_s {
+    display: block;
+    height: 120px;
+    margin: 0 auto;
+}
+
+
+/* 게시글 */
+.sell_title{
+    font-family: 'ELAND_Choice_M';
+    font-size: 2rem;
+    display: inline;
+    margin-left: 10px;
+}
+
+.cate {
+    color: #919191;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid #e0e0e0;
+    padding: 3px 10px;
+}

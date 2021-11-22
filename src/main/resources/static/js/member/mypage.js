@@ -40,13 +40,6 @@ $(document).ready(function() {
 
         if ($("#input_rate").val() != "" && $("#input_rate").val() != ""){
                 $("#input_day").val(parseInt(wishDay));
-
-            console.log("price: "+ price);
-            console.log("price type: "+ typeof(price));
-            console.log("price isNaN: "+isNaN(price));
-            console.log("rate: "+ rate);
-            console.log("rate type: "+ typeof(rate));
-            console.log("rate isNaN: "+isNaN(rate));
         }
     });
 
