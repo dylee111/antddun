@@ -367,7 +367,10 @@ $(document).ready(function(){
             alert(msg);
             document.location.href="/antddun/member/mypage/wallet";
         });
-    });
+    }); // 아임포트 end;
+
+
+
 });
 
 

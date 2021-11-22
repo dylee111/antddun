@@ -3,6 +3,7 @@
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
     <th:block th:fragment="content">
         <link th:href="@{/css/board/sosojob/sosoMain.css}" rel="stylesheet">
+        <script th:inline="javascript" th:src="@{/js/board/sosojob/sosojob.js}"></script>
         <!-- Page content-->
         <div class="container mt-5">
             <div class="row">
@@ -21,7 +22,7 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary" id="button-buy" type="button">구매하기</button>
+                    <button class="btn btn-primary" id="button_buy" type="button">구매하기</button>
                 </div>
                 <div class="col-lg-8">
                     <!-- Post content-->
@@ -29,7 +30,8 @@
                         <!-- Post header-->
                         <header class="mb-4">
                             <!-- Post title-->
-                            <h1 class="text-width fw-bolder mb-1" name="title">[[${read.title}]]</h1><span>[[${read.ddun}]]뚠</span>
+                            <input type="hidden" id="soso_no" th:value="${read.sosoNo}">
+                            <h1 class="text-width fw-bolder mb-1" name="title">[[${read.title}]]</h1><span id="ddun">[[${read.ddun}]]뚠</span>
                             <!-- Post meta content-->
                             <div class="text-width text-muted fst-italic mb-2">
                                 [[${#temporals.format(read.regDate, 'yyyy/MM/dd')}]]

@@ -124,7 +124,7 @@
                                 </div>
                                 <div class="my_ddun_wrap">
                                     <span class="my_ddun">보유 뚠</span>
-                                    <span class="my_ddun"><strong>10,000</strong>뚠</span>
+                                    <span class="my_ddun"><strong>[[${totalDdun}]]</strong>뚠</span>
                                 </div>
                             </div>
 
@@ -138,15 +138,16 @@
                                         <td style="width:15%;">입금</td>
                                         <td style="width:15%;">출금</td>
                                         <td style="width:20%;">남은 뚠</td>
+
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>2021.11.09</td>
+                                    <tr th:each="ddunList : ${ddunList}">
+                                        <td>[[${ddunList.chargeDate}]]</td>
                                         <td>포토샵 누끼</td>
-                                        <td>-</td>
-                                        <td>5,000</td>
-                                        <td>10,000</td>
+                                        <td>[[${ddunList.inputAmount}]]</td>
+                                        <td>[[${ddunList.outputAmount}]]</td>
+                                        <td>[[${totalDdun}]]</td>
                                     </tr>
                                     </tbody>
                                 </table>
