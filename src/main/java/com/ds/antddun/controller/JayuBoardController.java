@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 @Log4j2
 public class JayuBoardController {
@@ -67,10 +69,15 @@ public class JayuBoardController {
     //게시글 목록
     @GetMapping("/jayu/list")
     public String list(Model model, PageRequestDTO pageRequestDTO) {
-
         PageResultDTO<JayuBoardDTO, JayuBoard> jayuList = jayuBoardService.getList(pageRequestDTO);
+        List<JayuBoardDTO> list = jayuList.getDtoList();
+        for (int i = 0; i < list.size(); i++) {
+            JayuBoardDTO tmp = (JayuBoardDTO) list.get(i);
+            tmp.setContent(tmp.getContent().replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", ""));
+            list.set(i, tmp);
+        }
+        jayuList.setDtoList((List<JayuBoardDTO>) list);
         model.addAttribute("jayuList",jayuList);
-
         return "/jayu/list";
     }
 }

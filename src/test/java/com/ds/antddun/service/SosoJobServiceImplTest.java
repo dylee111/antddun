@@ -27,6 +27,9 @@ class SosoJobServiceImplTest {
     @Autowired
     private SosoCategoryRepository sosoCategoryRepository;
 
+    @Autowired
+    private SosoCateService sosoCateService;
+
     @Test
     public void readCate() {
         System.out.println(sosoCategoryRepository.findById(1).get().getCateNo());
@@ -34,17 +37,7 @@ class SosoJobServiceImplTest {
     }
 
     @Test
-    public void testRead() {
-
-        System.out.println("DTOLIST>>>"+sosoJobService.getList(1).getDtoList());
-        System.out.println("SIZE>>>"+sosoJobService.getList(1).getSize());
-        System.out.println("PAGELIST>>>"+sosoJobService.getList(1).getPageList());
-    }
-
-    @Test
     void getListByCategoryTest() {
-
-
         System.out.println(sosoJobService.getListByCategory("IT"));
     }
 
@@ -63,5 +56,27 @@ class SosoJobServiceImplTest {
 
     }
 
+    @Test
+    void page() {
+
+        PageResultDTO<SosoBoardDTO, SosoJobBoard> resultDTO = sosoJobService.getList(1);
+        System.out.println(resultDTO.isNext());
+        System.out.println(resultDTO.getPage());
+        for (SosoBoardDTO sosoBoardDTO : resultDTO.getDtoList()) {
+            System.out.println(sosoBoardDTO);
+        }
+    }
+
+    @Test
+    void 카테고리로드() {
+        System.out.println(sosoCateService.getCateList().get(0));
+    }
+
+    @Test
+    void paging() {
+        System.out.println(sosoJobService.getList(1).getPage());
+        System.out.println(sosoJobService.getList(1).getTotalPage());
+
+    }
 
 }

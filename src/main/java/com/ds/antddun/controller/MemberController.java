@@ -4,8 +4,10 @@ import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.dto.MemberWishListDTO;
 import com.ds.antddun.entity.MemberWishList;
+import com.ds.antddun.entity.SosoCategory;
 import com.ds.antddun.service.JobListService;
 import com.ds.antddun.service.MemberService;
+import com.ds.antddun.service.SosoCateService;
 import com.ds.antddun.service.WishListService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/")
@@ -30,21 +35,26 @@ public class MemberController {
     private JobListService jobListService;
 
     @Autowired
+    private SosoCateService sosoCateService;
+
+    @Autowired
     private WishListService wishListService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("")
-    public String main (Model model, MemberDTO memberDTO, @AuthenticationPrincipal PrincipalDetails principal) {
-        if(principal != null) {
+    public String main(Model model, @AuthenticationPrincipal PrincipalDetails principal) {
+
+        if (principal != null) {
 
             List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
 
             model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
             model.addAttribute("member", principal.getMember());
+            model.addAttribute("sosoCateList", sosoCateService.getCateList());
 
-            if(wishLists.size() != 0) {
+            if (wishLists.size() != 0) {
                 model.addAttribute("wishListIndex", wishLists.get(0));
             }
 
@@ -53,7 +63,7 @@ public class MemberController {
     }
 
     @GetMapping("/member/mypage/info")
-    public String userinfo (Model model, @AuthenticationPrincipal PrincipalDetails principal, MemberDTO memberDTO ) {
+    public String userinfo(Model model, @AuthenticationPrincipal PrincipalDetails principal, MemberDTO memberDTO) {
         model.addAttribute("member", principal.getMember());
         model.addAttribute("jobList", jobListService.getList());
         return "member/mypage/info";
@@ -65,10 +75,10 @@ public class MemberController {
     }
 
     @GetMapping("/member/mypage/wallet")
-    public String userwallet (Model model, @AuthenticationPrincipal PrincipalDetails principal, MemberWishListDTO memberWishListDTO) {
+    public String userwallet(Model model, @AuthenticationPrincipal PrincipalDetails principal, MemberWishListDTO memberWishListDTO) {
         List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
 
-        if(principal != null) {
+        if (principal != null) {
             model.addAttribute("member", principal.getMember());
             model.addAttribute("jobList", jobListService.getList());
             if (wishLists.size() != 0) {
@@ -101,9 +111,9 @@ public class MemberController {
     @ResponseBody
     @PutMapping("/member/mypage/wishlist/modify/{wno}")
     public ResponseEntity<String> modifyWishList(@RequestBody MemberWishListDTO memberWishListDTO,
-                                         @AuthenticationPrincipal PrincipalDetails principalDetails) {
+                                                 @AuthenticationPrincipal PrincipalDetails principalDetails) {
 
-        wishListService.modify(memberWishListDTO,principalDetails.getMember());
+        wishListService.modify(memberWishListDTO, principalDetails.getMember());
 
         return new ResponseEntity<>("modify", HttpStatus.OK);
     }
@@ -126,7 +136,7 @@ public class MemberController {
 
     @PostMapping("/member/mypage")
     public void wishList(MemberWishListDTO wishListDTO,
-                               @AuthenticationPrincipal PrincipalDetails principalDetail) {
+                         @AuthenticationPrincipal PrincipalDetails principalDetail) {
 
     }
 

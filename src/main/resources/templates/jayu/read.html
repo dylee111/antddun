@@ -6,81 +6,43 @@
         <!-- 페이지 css/ js 추가 -->
         <link rel="stylesheet" th:href="@{/css/board/jayu/register.css}">
         <script th:src="@{/js/board/jayu/register.js}"></script>
-        <script th:src="@{/js/board/jayu/reply.js}"></script>
 
         <!-- 본문 시작 -->
         <div class="content">
-            <!--카테고리-->
-            <div class="option">
-                <select class="category" name="category">
-                    <option th:value="${jayuBoardDTO.category}" readonly></option>
-                </select>
-            </div>
-
-            <!--펑예-->
-            <div class="option">
-                <label class="peong">💣펑예</label>
-                <label class="switch">
-                    <input type="checkbox" readonly>
-                    <span class="slider"></span>
-                </label>
-                <div class="alert_tip">ⓘ
-                    <span class="tooltiptext">익일 자정에 펑! 삭제됩니다.</span>
+            <div class="form-group">
+                <!--카테고리 & 펑예-->
+                <div>
+                    <span class="peong_simple">💣</span>
+                    <span class="cate" th:utext="${jayuBoardDTO.category}" ></span>
                 </div>
-            </div>
 
-            <!--제목-->
-            <div class="form-group">
-                <input type="text" class="form-control" name="title" readonly
-                       th:value="${jayuBoardDTO.title}">
-            </div>
+                <!-- 제목 -->
+                <div class="title" name="title" th:utext="${jayuBoardDTO.title}"></div>
 
-            <!--내용-->
-            <div class="form-group">
-                <div class="summerContent" name="content" th:utext="${jayuBoardDTO.content}"></div>
-            </div>
-
-            <!--작성자-->
-            <div class="form-group">
-                <input type="text" class="form-control" name="writer"
-                       th:value="${jayuBoardDTO.writer}" readonly>
-            </div>
-
-            <!--등록일자-->
-            <div class="form-group">
-                <input type="text" class="form-control" name="regDate" readonly
-                       th:value="${#temporals.format(jayuBoardDTO.regDate,'yyyy/MM/dd HH:mm:ss')}">
-            </div>
-
-            <!-- 수정일자-->
-            <div class="form-group">
-                <input type="text" class="form-control" name="modDate" readonly
-                       th:value="${#temporals.format(jayuBoardDTO.modDate,'yyyy/MM/dd HH:mm:ss')}">
-            </div>
-            <a th:href="@{/jayu/list(page=${pageRequestDTO.page}, type=${pageRequestDTO.type},
-    keyword=${pageRequestDTO.keyword})}">
-                <button class="btn btn-primary">목록보기</button>
-            </a>
-
-            <!--댓글-->
-            <div>
-                <div class="mt-4">
-                    <span>댓글 수</span> <br>
-                    <hr>
-                    <form th:action="@{/member/jayu/register}" method="post">
-
-                        <div class="form-group reply">
-                            <textarea type="text" class="form-control" name="text" required
-                                      placeholder="댓글을 입력해주세요"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary replySaveBtn">등록</button>
-                    </form>
-                    <div class="list-group replyList">
-                        <!--댓글 출력-->
+                <div style="width:100%;">
+                    <!-- 작성자 -->
+                    <div class="writer" name="writer" th:utext="${jayuBoardDTO.writer}"></div>
+                    <!-- 날짜 -->
+                    <div class="dateTime">
+                    <span>등록일:
+                        <span name="regDate" th:utext="${#temporals.format(jayuBoardDTO.regDate,'yyyy/MM/dd HH:mm:ss')}"
+                              style="margin-right: 15px;"></span>
+                    </span>
+                        <span>수정일:
+                        <span name="modDate" th:utext="${#temporals.format(jayuBoardDTO.modDate,'yyyy/MM/dd HH:mm:ss')}"></span>
+                    </span>
                     </div>
                 </div>
 
+                <!-- 본문 -->
+                <hr>
+                <div class="content_height" name="content" th:utext="${jayuBoardDTO.content}"></div>
             </div>
+
+            <a th:href="@{/jayu/list}">
+                <button class="btn btn-primary">목록보기</button>
+            </a>
+
         </div>
         <!-- 본문 끝 -->
         <!--페이지 수정 부분 끝-->

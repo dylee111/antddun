@@ -2,43 +2,47 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
     <th:block th:fragment="content">
-
-        <script th:src=@{"/js/board/qna/like.js"}>
-
         <!--페이지 수정 부분 시작-->
         <!-- 페이지 css/ js 추가 -->
-        <link th:href="@{/css/board/qna/.css}" rel="stylesheet" />
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" th:href="@{/css/board/qnaStyles/.css}">
 
         <!-- 본문 시작 -->
-        <div class="card qnaCardList" th:each="boardList : ${boardList.dtoList}">
-            <span class="smallDdun" th:text="${boardList.ddun}"></span>
-            <span class="qno" id="qnaNo" th:value="${boardList.qnaNo}">[[]]</span>
+        <div class="content">
+
+            <!--제목-->
+            <div class="form-group">
+                <input type="text" class="form-control" name="title" readonly
+                       th:value="${boardList.title}">
+            </div>
+
+            <!--내용-->
+            <div class="form-group">
+                <div name="content" th:utext="${boardList.content}"></div>
+            </div>
+
+            <!--작성자-->
+            <div class="form-group">
+                <input type="text" class="form-control" name="writer"
+                       th:value="${boardList.writer}" readonly>
+            </div>
+
+            <!--등록일자-->
+            <div class="form-group">
+                <input type="text" class="form-control" name="regDate" readonly
+                       th:value="${#temporals.format(boardList.regDate,'yyyy/MM/dd HH:mm:ss')}">
+            </div>
+
+            <!-- 수정일자-->
+            <div class="form-group">
+                <input type="text" class="form-control" name="modDate" readonly
+                       th:value="${#temporals.format(boardList.modDate,'yyyy/MM/dd HH:mm:ss')}">
+            </div>
+            <a th:href="@{/qna/list}">
+                <button class="btn btn-primary">목록보기</button>
+            </a>
 
         </div>
-        //추가
-        <a th:href="@{/post/likes}"><img  src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/heart.png" alt="하트"></a>
-
-        <div id="is-not-already-like">
-            <h3 class="text-muted">
-                <a href="#" id="like" class="text-decoration-none text-secondary">
-                    <i id="like-logo" class="bi bi-bookmark-heart"></i>
-                    <span class="like-count"></span>
-                </a>
-            </h3>
-        </div>
-        <div id="is-already-like" style="display: none">
-            <h3 class="text-muted">
-                <a href="#" id="cancel-like" class="text-decoration-none text-warning">
-                    <i class="bi bi-bookmark-heart-fill"></i>
-                    <span class="like-count">99</span>
-                </a>
-            </h3>
-        </div>
-
-
         <!-- 본문 끝 -->
         <!--페이지 수정 부분 끝-->
-
     </th:block>
 </th:block>
