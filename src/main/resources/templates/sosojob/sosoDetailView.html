@@ -4,7 +4,6 @@
     <th:block th:fragment="content">
         <link th:href="@{/css/board/sosojob/sosoMain.css}" rel="stylesheet">
         <script th:inline="javascript" th:src="@{/js/board/sosojob/sosojob.js}"></script>
-
         <!-- Page content-->
         <div class="container mt-5">
             <div class="row">
@@ -24,6 +23,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div style="margin-bottom: 50px;">
                         <button class="btn btn-primary" id="button-send" type="button">문의하기</button>
                         <button class="btn btn-primary" id="button-buy" type="button" >구매하기</button>
@@ -67,6 +67,7 @@
                                             구매하시겠습니까?
                                         </span>
                                     </div>
+
                                     <button type="button" class="buy_btn" style="margin-bottom: 30px;">구매하기</button>
                                 </div>
                             </form>
@@ -81,12 +82,16 @@
                         <!-- Post header-->
                         <header class="mb-4">
                             <!-- Post categories-->
+
                             <a class="cate" href="#!" >[[${read.categoryName}]]</a>
                             <!-- Post title-->
+                            <input id="soso_no" type="hidden" th:value="${read.categoryNo}">
+                            <input type="hidden" id="writer_no" th:value="${read.mno}">
+                            <input type="hidden" id="total_ddun" th:value="${buyerTotalDdun}">
                             <h1 class="text-width fw-bolder mb-1 sell_title" name="title">[[${read.title}]]</h1>
                             <div>
                                 <img th:src="@{/assets/coins.png}" width="19">
-                                <span>[[${read.ddun}]]</span>
+                                <span id="ddun">[[${read.ddun}]]</span>
                             </div>
                             <!-- Post meta content-->
                             <div class="text-width text-muted fst-italic mb-2">

@@ -258,3 +258,16 @@ boardInfo{
   border-top-right-radius: 0.2rem;
   border-bottom-right-radius: 0.2rem;
 }
+
+/* content 출력 수정 */
+.content-text>p>br{
+    display:none;
+}
+.content-text>p{
+    margin-bottom:0;
+}
+
+/* content text */
+.summerContent{
+    list-style:none;
+}

@@ -5,16 +5,13 @@ import com.ds.antddun.dto.PageRequestDTO;
 import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.entity.JayuBoard;
 import com.ds.antddun.entity.Member;
-import lombok.extern.log4j.Log4j2;
-
-import java.util.List;
 public interface JayuBoardService {
 
     Long register(JayuBoardDTO jayuBoardDTO, Member member);
 
     JayuBoardDTO read(Long jayuNo);
 
-//    List<JayuBoard> findAll();
+    PageResultDTO<JayuBoardDTO,JayuBoard>  getList(PageRequestDTO requestDTO);
 
 
     default JayuBoardDTO entityToDTO(JayuBoard jayuBoard) {
@@ -38,6 +35,4 @@ public interface JayuBoardService {
                 .build();
         return jayuBoard;
     }
-
-    PageResultDTO<JayuBoardDTO,JayuBoard>  getList(PageRequestDTO requestDTO);
 }
