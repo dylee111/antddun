@@ -39,12 +39,12 @@
         <div >
             <a th:href="@{/member/sosojob/register}">글쓰기</a>
             <h1 ></h1>
-            <div class="slick-card" th:each="cateValue : ${cate.dtoList}">
+            <div class="slick-card" th:each="cateValue : ${mvData.dtoList}">
                 <article>
                     <img class="cate-thumbnail" th:src="@{https://dummyimage.com/230x160/000/fff}"/>
                     <div clss="content-container">
                         <div><span class="tag_c" th:text="${cateValue.categoryName}"></span></div>
-                        <adiv class="title"><a th:href="@{/member/sosojob/list/read(sosoNo = ${cateValue.sosoNo} )}">[[${cateValue.title}]]</a><div>
+                        <div class="title"><a th:href="@{/member/sosojob/list/read(sosoNo = ${cateValue.sosoNo} )}">[[${cateValue.title}]]</a></div>
                         <div >[[${cateValue.content}]]</div>
                         <div class="ddun-box">
                         <span><img class="img coin" th:src="@{/assets/coins.png}" width="12">
@@ -58,29 +58,30 @@
                 </article>
             </div>
         </div>
-<!--        <nav aria-label="Page navigation example">-->
-<!--            &lt;!&ndash;    페이지 번호     &ndash;&gt;-->
-<!--            <ul class="pagination h-100 justify-content-center align-items-center">-->
-<!--                <li class="page-item" th:if="${boardList.prev}">-->
-<!--                    <a class="page-link" th:href="@{/qna/list(page=${boardList.start - 1},-->
+        <nav aria-label="Page navigation example">
+            <!--    페이지 번호     -->
+            <ul class="pagination h-100 justify-content-center align-items-center">
+                <li class="page-item" th:if="${mvData.prev}">
+<!--                    <a class="page-link" th:href="@{/member/list(page=${boardList.start - 1},-->
 <!--                type=${pageRequestDTO.type},-->
-<!--                keyword = ${pageRequestDTO.keyword} ) }" tabindex="-1">이전</a>-->
-<!--                </li>-->
+<!--                keyword = ${pageRequestDTO.keyword} ) }" tabindex="-1">이전</a>                    -->
+                    <a class="page-link" th:href="@{'/member/sosojob/list/'+${cateNum}(page=${mvData.start - 1}" tabindex="-1">이전</a>
+                </li>
 
-<!--                <li th:class=" 'page-item '+ ${boardList.page == page?'active':''} "-->
-<!--                    th:each="page: ${boardList.pageList}">-->
+                <li th:class=" 'page-item '+ ${mvData.page == page?'active':''} "
+                    th:each="page: ${mvData.pageList}">
 <!--                    <a class="page-link" th:href="@{/qna/list(page = ${page}, type=${pageRequestDTO.type},-->
 <!--                keyword = ${pageRequestDTO.keyword})}">-->
-<!--                        [[${page}]]-->
-<!--                    </a>-->
-<!--                </li>-->
+                    <a th:each="cateNo : ${cateNum}" th:value="${page}" class="page-link" th:href="@{'/member/sosojob/sosoList/'+${cateNo}(page=${page})}">
+                        [[${page}]]
+                    </a>
+                </li>
 
-<!--                <li class="page-item" th:if="${boardList.next}">-->
-<!--                    <a class="page-link" th:href="@{/qna/list(page= ${boardList.end + 1}, type=${pageRequestDTO.type}-->
-<!--                , keyword = ${pageRequestDTO.keyword} )}">다음</a>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </nav>-->
+                <li class="page-item" th:if="${mvData.next}">
+                    <a class="page-link" th:href="@{'/member/sosojob/sosoList/'+${cateNum}(page= ${mvData.end + 1}">다음</a>
+                </li>
+            </ul>
+        </nav>
         <script>
             $(document).ready(function() {
                 var cateNo = $(".cate-li").val();
@@ -93,6 +94,9 @@
 
                 });
 
+                $(".page-link").click(function() {
+                    alert($(".page-link").val());
+                });
 
             });
 

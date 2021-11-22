@@ -255,45 +255,45 @@
                             <div id="page">
                                 <div class="row">
                                     <div class="column small-11 small-centered">
-                                        <section class="visual">
-                                            <div class="slick-card" th:onclick="location.href='sosojob/it'">
-                                                <span>IT</span>
-                                                <img class="cate-thumbnail" th:src="@{assets/sosojob_cate/it.jpg}"/>
+                                        <section class="visual" >
+                                            <div class="slick-card" th:each="sosoCateList : ${sosoCateList}">
+                                                <span><a th:href="@{'/member/sosojob/sosoList/' + ${sosoCateList.cateNo}}">[[${sosoCateList.sosoCateName}]]</a></span>
+                                                <img class="cate-thumbnail" th:src="@{'assets/sosojob_cate/'+${sosoCateList.cateNo}+'.jpg'}"/>
                                             </div>
-                                            <div class="slick-card" th:onclick="location.href='sosojob/design'">
-                                                <span>디자인·설계</span>
-                                                <img class="cate-thumbnail"
-                                                     th:src="@{assets/sosojob_cate/design.jpg}"/>
-                                            </div>
-                                            <div class="slick-card" th:onclick="location.href='sosojob/media'">
-                                                <span>미디어</span>
-                                                <img class="cate-thumbnail" th:src="@{assets/sosojob_cate/media.jpg}"/>
-                                            </div>
-                                            <div class="slick-card" th:onclick="location.href='sosojob/translate'">
-                                                <span>번역</span>
-                                                <img class="cate-thumbnail"
-                                                     th:src="@{assets/sosojob_cate/translate.jpg}"/>
-                                            </div>
-                                            <div class="slick-card" th:onclick="location.href='sosojob/document'">
-                                                <span>문서작업</span>
-                                                <img class="cate-thumbnail"
-                                                     th:src="@{assets/sosojob_cate/document.jpg}"/>
-                                            </div>
-                                            <div class="slick-card" th:onclick="location.href='sosojob/marketing'">
-                                                <span>마케팅</span>
-                                                <img class="cate-thumbnail"
-                                                     th:src="@{assets/sosojob_cate/marketing.jpg}"/>
-                                            </div>
-                                            <div class="slick-card" th:onclick="location.href='sosojob/work'">
-                                                <span>취업·이직</span>
-                                                <img class="cate-thumbnail"
-                                                     th:src="@{assets/sosojob_cate/resume.jpg}"/>
-                                            </div>
-                                            <div class="slick-card" th:onclick="location.href='sosojob/edu'">
-                                                <span>실무교육</span>
-                                                <img class="cate-thumbnail"
-                                                     th:src="@{assets/sosojob_cate/edu.jpg}"/>
-                                            </div>
+<!--                                            <div class="slick-card" th:onclick="location.href='sosojob/design'">-->
+<!--                                                <span>디자인·설계</span>-->
+<!--                                                <img class="cate-thumbnail"-->
+<!--                                                     th:src="@{assets/sosojob_cate/2.jpg}"/>-->
+<!--                                            </div>-->
+<!--                                            <div class="slick-card" th:onclick="location.href='sosojob/media'">-->
+<!--                                                <span>미디어</span>-->
+<!--                                                <img class="cate-thumbnail" th:src="@{assets/sosojob_cate/3.jpg}"/>-->
+<!--                                            </div>-->
+<!--                                            <div class="slick-card" th:onclick="location.href='sosojob/translate'">-->
+<!--                                                <span>번역</span>-->
+<!--                                                <img class="cate-thumbnail"-->
+<!--                                                     th:src="@{assets/sosojob_cate/4.jpg}"/>-->
+<!--                                            </div>-->
+<!--                                            <div class="slick-card" th:onclick="location.href='sosojob/document'">-->
+<!--                                                <span>문서작업</span>-->
+<!--                                                <img class="cate-thumbnail"-->
+<!--                                                     th:src="@{assets/sosojob_cate/5.jpg}"/>-->
+<!--                                            </div>-->
+<!--                                            <div class="slick-card" th:onclick="location.href='sosojob/marketing'">-->
+<!--                                                <span>마케팅</span>-->
+<!--                                                <img class="cate-thumbnail"-->
+<!--                                                     th:src="@{assets/sosojob_cate/6.jpg}"/>-->
+<!--                                            </div>-->
+<!--                                            <div class="slick-card" th:onclick="location.href='sosojob/work'">-->
+<!--                                                <span>취업·이직</span>-->
+<!--                                                <img class="cate-thumbnail"-->
+<!--                                                     th:src="@{assets/sosojob_cate/7.jpg}"/>-->
+<!--                                            </div>-->
+<!--                                            <div class="slick-card" th:onclick="location.href='sosojob/edu'">-->
+<!--                                                <span>실무교육</span>-->
+<!--                                                <img class="cate-thumbnail"-->
+<!--                                                     th:src="@{assets/sosojob_cate/8.jpg}"/>-->
+<!--                                            </div>-->
                                         </section>
                                     </div>
                                 </div>
