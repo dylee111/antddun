@@ -22,6 +22,7 @@ public class SosoBoardDTO {
     private String job;
     private Long mno; // username
     private String firstName;
+    private String lastName;
     private int experience;
     private int ddun;
 

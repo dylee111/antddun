@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -101,8 +102,16 @@ public class SosoBoardController {
         return "/sosojob/sosojobMain";
     }
 
-    @GetMapping("/sosojob/list/{category}")
-    public String cateList(@PathVariable("category") int categoryNo, Model model) {
+    @GetMapping("/sosojob/sosoList/{category}")
+    public ModelAndView cateList(@PathVariable("category") int categoryNo, Model model) {
+        ModelAndView mv = new ModelAndView();
+
+        mv.addObject("mvData", sosoJobService.getList(categoryNo));
+        mv.setViewName("sosojob/sosoList");
+
+        log.info("NEXT"+sosoJobService.getList(categoryNo).isNext());
+        log.info("getDtoList"+sosoJobService.getList(categoryNo).getDtoList());
+        log.info("getEnd"+sosoJobService.getList(categoryNo).getEnd());
 
         List<SosoCategory> list = cateService.getCateList(); // 카테고리 리스트(cateNo / cateName)
         List<Integer> cateNoList = new ArrayList<>(); // 카테고리 No. 담기 위한 LIST
@@ -113,10 +122,11 @@ public class SosoBoardController {
                 sosoJobService.getListByCategory(list.get(categoryNo - 1).getSosoCateName()));
         cateNoList.add(categoryNo);
 
-        model.addAttribute("cate", sosoJobService.getList(categoryNo));
+//        model.addAttribute("cate", sosoJobService.getList(categoryNo));
         model.addAttribute("cateName", list);
+        model.addAttribute("cateNum", cateNoList);
 
-        return "/sosojob/sosoList";
+        return mv;
     }
 
     @GetMapping("/sosojob/list/read")

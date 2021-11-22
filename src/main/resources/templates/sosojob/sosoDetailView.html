@@ -3,39 +3,96 @@
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
     <th:block th:fragment="content">
         <link th:href="@{/css/board/sosojob/sosoMain.css}" rel="stylesheet">
+        <script th:inline="javascript" th:src="@{/js/board/sosojob/sosojob.js}"></script>
         <!-- Page content-->
         <div class="container mt-5">
             <div class="row">
                 <!-- Side widgets-->
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <!-- Search widget-->
-                    <div class="card mb-4">
-                        <div class="card-header">판매자 정보</div>
+                    <div class="card mb-4" style="min-height: 350px;">
+                        <div class="card-header seller_title">판매자 정보</div>
                         <div class="card-body">
                             <div class="input-group">
-                                <div class="flex-shrink-0"><img class="rounded-circle"
-                                                                src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                                                alt="..."/></div>
-                                <!--판매자 정보-->
-                                <div id="writer-name" ><span>[[${read.job}]] [[${read.experience}]]년차 [[${read.firstName}]]개미</span></div>
+                                <div class="user_box">
+                                    <img th:src="@{'/assets/user_img/'+${read.experience}+'.png'}" class="user_img_s"/>
+                                    <!--판매자 정보-->
+                                    <div id="writer-name"><span class="seller_info">[[${read.job}]] [[${read.experience}]]년차 [[${read.lastName}]]개미</span></div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary" id="button-buy" type="button">구매하기</button>
+
+                    <div style="margin-bottom: 50px;">
+                        <button class="btn btn-primary" id="button-send" type="button">문의하기</button>
+                        <button class="btn btn-primary" id="button-buy" type="button" >구매하기</button>
+                    </div>
+
+                    <div class="card-body bg-white mt-0 shadow send_container" style="display: none;">
+                        <div>
+                            <img th:src="@{/assets/close.png}" class="btn_close"/>
+                        </div>
+                        <div>
+                            <p class="soso_title">문의하기</p>
+                        </div>
+                        <div style="margin-top: 30px; text-align: center;">
+                            <form th:action="@{/member/messenger/register}" th:method="post">
+                                <!--내용-->
+                                <div class="form-group">
+                                    <input id="msg_title" type="text" placeholder="제목을 입력하세요"/>
+                                    <textarea id="summernote" class="msg_context" name="summernote"></textarea>
+                                </div>
+                                <div style="text-align: right; width: 90%; margin-top: 5px;">
+                                    <button type="button" class="submit_btn" style="margin-bottom: 30px;">전송</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-body bg-white mt-0 shadow buy_container" style="display: none;">
+                        <div>
+                            <img th:src="@{/assets/close.png}" class="btn_close"/>
+                        </div>
+                        <div>
+                            <p class="soso_title">구매하기</p>
+                        </div>
+                        <div style="margin-top: 30px; text-align: center;">
+                            <form th:action="@{/member/messenger/register}" th:method="post">
+                                <!--내용-->
+                                <div class="form-group">
+                                    <div>
+                                        <span class="buy_alert" th:each="read : ${read}">
+                                            [[${read.lastName}]]개미님의 재능을<br>
+                                            <span class="buy_ddun">[[${read.ddun}]]뚠</span>에<br>
+                                            구매하시겠습니까?
+                                        </span>
+                                    </div>
+                                    <button type="button" class="buy_btn" style="margin-bottom: 30px;">구매하기</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="dim" style="display: none;"></div>
+
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-9">
                     <!-- Post content-->
                     <article>
                         <!-- Post header-->
                         <header class="mb-4">
+                            <!-- Post categories-->
+                            <a class="cate" href="#!" >[[${read.categoryName}]]</a>
                             <!-- Post title-->
-                            <h1 class="text-width fw-bolder mb-1" name="title">[[${read.title}]]</h1><span>[[${read.ddun}]]뚠</span>
+
+                            <h1 class="text-width fw-bolder mb-1 sell_title" name="title">[[${read.title}]]</h1>
+                            <div>
+                                <img th:src="@{/assets/coins.png}" width="19">
+                                <span>[[${read.ddun}]]</span>
+                            </div>
                             <!-- Post meta content-->
                             <div class="text-width text-muted fst-italic mb-2">
                                 [[${#temporals.format(read.regDate, 'yyyy/MM/dd')}]]
                             </div>
-                            <!-- Post categories-->
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!" >[[${read.categoryName}]]</a>
                         </header>
                         <!-- Preview image figure-->
                         <div>

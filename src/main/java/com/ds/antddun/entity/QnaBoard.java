@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"member","jobList", "qnaLikes"})
+@ToString(exclude = {"member","jobList"})
 @Data
 @SequenceGenerator(name = "QNA_SEQ_GEN", sequenceName = "QNA_SEQ", initialValue = 1, allocationSize = 1)
 public class QnaBoard extends BaseEntity {

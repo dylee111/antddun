@@ -7,15 +7,17 @@ import java.util.List;
 
 public interface QnaService {
 
+    //목록 조회
+    PageResultDTO<QnaBoardDTO, Object[]> getListByCate(int jno, PageRequestDTO requestDTO);
 
-    PageResultDTO<QnaBoardDTO, Object[]> getList(PageRequestDTO requestDTO);
+    //목록 전체 조회
+    PageResultDTO<QnaBoardDTO, Object[]> getListAll(PageRequestDTO requestDTO);
 
+    //게시물 등록
     Long register(QnaBoardDTO qnaBoardDTO, Member member);
 
-//    QnaBoardDTO getBoard(int qnaNo);
-
-//    List<JobList> getListByJob(String job);
-//    List<JobList> getListByJobNo (int jno);
+    //게시물 조회
+    QnaBoardDTO getBoard(Long qnaNo);
 
     void modify();
 
@@ -38,8 +40,7 @@ public interface QnaService {
     }
 
 
-
-    default QnaBoardDTO entityToDTO(QnaBoard qnaBoard, Long likesCnt /*, Long reviewCnt*/) {
+    default QnaBoardDTO entityToDTO(QnaBoard qnaBoard, Long likesCnt) {
 
         QnaBoardDTO dto = QnaBoardDTO.builder()
                 .qnaNo(qnaBoard.getQnaNo())
@@ -53,8 +54,8 @@ public interface QnaService {
                 .modDate(qnaBoard.getModDate())
                 .ddun(qnaBoard.getDdun())
                 .build();
-
         dto.setLikesCnt(likesCnt.intValue());
+
         System.out.println("entityToDto>>>>"+dto);
 
         return dto;
