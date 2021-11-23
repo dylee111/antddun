@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface JayuBoardRepository extends JpaRepository<JayuBoard, Long>{
 
-    //    @Query("select j from JayuBoard j where jayu_category = :jayuCateNo ")
     @Query(value = "select * from jayu_board where jayu_category_jayu_cate_no=:jayuCateNo ", nativeQuery = true)
     Page<JayuBoard> getListByCate(int jayuCateNo, Pageable pageable);
 

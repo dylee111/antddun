@@ -4,17 +4,17 @@ import com.ds.antddun.dto.JayuBoardDTO;
 import com.ds.antddun.dto.PageRequestDTO;
 import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.entity.JayuBoard;
+import com.ds.antddun.entity.JayuCategory;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.repository.JayuBoardRepository;
+import com.ds.antddun.repository.JayuCateRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -23,13 +23,20 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class JayuBoardServiceImpl implements JayuBoardService{
 
-    @Autowired
-    private JayuBoardRepository jayuBoardRepository;
+    private final JayuBoardRepository jayuBoardRepository;
+
+    private final JayuCateRepository jayuCateRepository;
 
     @Override
     public Long register(JayuBoardDTO jayuBoardDTO, Member member){
+
+        JayuCategory cateName = jayuCateRepository.findById(jayuBoardDTO.getJayuCateNo()).get();
+
+        log.info("getJayuCateNo"+ jayuBoardDTO.getJayuCateNo());
+        log.info("dto"+jayuBoardDTO);
         JayuBoard jayuBoard = dtoToEntity(jayuBoardDTO);
         jayuBoard.setMember(member);
+        jayuBoard.setJayuCategory(cateName);
         jayuBoardRepository.save(jayuBoard);
         return jayuBoard.getJayuNo();
     }
@@ -39,12 +46,6 @@ public class JayuBoardServiceImpl implements JayuBoardService{
         Optional<JayuBoard> result = jayuBoardRepository.findById(jayuNo);
         return result.isPresent()?entityToDTO(result.get()):null;
     }
-
-//    @Override
-//    public List<JayuBoard> findAll() {
-//        List<JayuBoard> jayuBoards = jayuBoardRepository.findAll();
-//        return jayuBoards;
-//    }
 
     //게시물 목록
     @Override

@@ -6,7 +6,6 @@
         <link th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
         <!-- 페이지 css/ js 추가 -->
         <link rel="stylesheet" th:href="@{/css/board/jayu/register.css}">
-        <script th:src="@{/js/board/jayu/register.js}"></script>
 
         <!-- summernote css/ js -->
         <script th:src="@{/js/board/summernote/custom.js}"></script>
@@ -23,10 +22,10 @@
                 <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
                 <!--카테고리-->
                 <div class="option">
-                    <select class="category" name="category">
+                    <select class="category" name="jayuCateNo">
+                        <option th:each="cateList : ${cateList}" th:value="${cateList.jayuCateNo}">[[${cateList.jayuCateName}]]</option>
                     </select>
                 </div>
-
                 <!--펑예-->
                 <div class="option">
                     <label class="peong">💣펑예</label>

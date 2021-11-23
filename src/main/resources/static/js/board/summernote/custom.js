@@ -68,7 +68,8 @@ function sendImg(file, el) {
 				processData : false,
 				success : function(url) {
 					$(el).summernote('insertImage', url, function($image) {
-					    $image.css('width', "25%");
+					    alert(url);
+					    $image.css('width', "50%");
                     });
                },
                 error: function(data) {

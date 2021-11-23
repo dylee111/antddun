@@ -5,17 +5,26 @@
         <!--페이지 수정 부분 시작-->
         <!-- 페이지 css/ js 추가 -->
         <link rel="stylesheet" th:href="@{/css/board/jayu/register.css}">
-        <script th:src="@{/js/board/jayu/register.js}"></script>
 
         <!-- 본문 시작 -->
         <div class="content">
             <div class="form-group">
-                <!--카테고리 & 펑예-->
-                <div>
-                    <span class="peong_simple">💣</span>
-                    <span class="cate" th:utext="${jayuBoardDTO.category}" ></span>
+                <!--카테고리-->
+                <div class="option">
+                    <span class="cate cate_line">[[${jayuBoardDTO.jayuCateName}]]</span>
                 </div>
 
+                <!--펑예-->
+                <div class="option">
+                    <label class="peong">💣펑예</label>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                    <div class="alert_tip">ⓘ
+                        <span class="tooltiptext">익일 자정에 펑! 삭제됩니다.</span>
+                    </div>
+                </div>
                 <!-- 제목 -->
                 <div class="title" name="title" th:utext="${jayuBoardDTO.title}"></div>
 
