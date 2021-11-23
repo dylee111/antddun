@@ -31,6 +31,7 @@ public class QnaLikesController {
     public JSONObject addLikes(@PathVariable Long qnaNo, @AuthenticationPrincipal PrincipalDetails principal)  {
 
         Long mno = principal.getMember().getMno();
+
         int likesCnt = qnaLikesRepository.countLikes(qnaNo);
         log.info("likesCnt>>>>>>>>>>>>"+ likesCnt);
 

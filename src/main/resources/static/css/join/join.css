@@ -42,7 +42,7 @@
         border: 1px solid rgb(220,220,220);
         height: 50px;
         padding: 0;
-        line-height: 48px;
+        line-height: 42px;
         border-radius: 5px;
    }
 
@@ -61,7 +61,7 @@
    input {
         border: none;
         width: 330px;
-        height: 43px;
+        height: 42px;
         vertical-align: middle;
         padding-right: 10px;
         padding-left: 20px;
@@ -71,7 +71,7 @@
    .time {
         border: none;
         width: 185px;
-        height: 43px;
+        height: 42px;
         vertical-align: middle;
         padding-right: 10px;
         padding-left: 20px;

@@ -5,6 +5,7 @@ import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.entity.AntMemberRoleSet;
 import com.ds.antddun.entity.Member;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface MemberService {
@@ -72,7 +73,6 @@ public interface MemberService {
                 .salary(memberDTO.getSalary())
                 .startTime(memberDTO.getStartTime())
                 .endTime(memberDTO.getEndTime())
-                .createDate(memberDTO.getCreateDate())
                 .fromSocial(true)
                 .build();
         return member;
