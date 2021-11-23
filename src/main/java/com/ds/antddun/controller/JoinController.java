@@ -1,19 +1,24 @@
 package com.ds.antddun.controller;
 
+import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.JobListDTO;
 import com.ds.antddun.dto.MemberDTO;
+import com.ds.antddun.entity.JobList;
 import com.ds.antddun.entity.Member;
+import com.ds.antddun.repository.MemberRepository;
 import com.ds.antddun.service.JobListService;
 import com.ds.antddun.service.MemberService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @Log4j2
@@ -25,10 +30,27 @@ public class JoinController {
     private MemberService memberService;
 
     @Autowired
+    private MemberRepository memberRepository;
+
+    @Autowired
     private JobListService jobListService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    //소셜 로그인 추가정보 기입
+    @GetMapping("/member/socialJoin")
+    public void social (Model model, @AuthenticationPrincipal PrincipalDetails principal) {
+        List<JobList> jobList = jobListService.getList();
+        model.addAttribute("jobList", jobList);
+        model.addAttribute("member", principal.getMember());
+    }
+
+    @PostMapping("/member/socialJoinComplete")
+    public String socialjoinComplete(MemberDTO memberDTO, JobListDTO jobListDTO) {
+        memberService.socialJoin(memberDTO,jobListDTO);
+        return "redirect:/member/welcome";
+    }
 
 
     @ResponseBody
@@ -86,8 +108,6 @@ public class JoinController {
 
         return "/member/welcome";
     }
-
-    // select가 필요 -> 어떤 식으로 mno를 받아오지???ㅏ
 
     @GetMapping("/joinWelcome")
     public String welcomeMsg(Member member, Model model) {

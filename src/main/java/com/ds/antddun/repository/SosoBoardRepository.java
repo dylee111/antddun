@@ -30,8 +30,8 @@ public interface SosoBoardRepository extends JpaRepository<SosoJobBoard, Long> {
 
     @Query("SELECT sj, sc, m " +
             " FROM SosoJobBoard sj, SosoCategory sc, Member m " +
-            " WHERE sj.category=sc.cateNo " +
-            " AND sj.member=m.mno " +
+            " WHERE sj.category.cateNo=sc.cateNo " +
+            " AND sj.member.mno=m.mno " +
             " AND sj.sosoNo=:sosoNo ")
     Optional<SosoJobBoard> readBySosoNo(Long sosoNo);
 

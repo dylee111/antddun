@@ -3,12 +3,9 @@ package com.ds.antddun.controller;
 import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.dto.MemberWishListDTO;
+import com.ds.antddun.entity.Ddun;
 import com.ds.antddun.entity.MemberWishList;
-import com.ds.antddun.entity.SosoCategory;
-import com.ds.antddun.service.JobListService;
-import com.ds.antddun.service.MemberService;
-import com.ds.antddun.service.SosoCateService;
-import com.ds.antddun.service.WishListService;
+import com.ds.antddun.service.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,10 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/")
@@ -41,18 +35,21 @@ public class MemberController {
     private WishListService wishListService;
 
     @Autowired
+    private DdunService ddunService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("")
     public String main(Model model, @AuthenticationPrincipal PrincipalDetails principal) {
-
+            // index sosojob slick
+            model.addAttribute("sosoCateList", sosoCateService.getCateList());
         if (principal != null) {
 
             List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
 
             model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
             model.addAttribute("member", principal.getMember());
-            model.addAttribute("sosoCateList", sosoCateService.getCateList());
 
             if (wishLists.size() != 0) {
                 model.addAttribute("wishListIndex", wishLists.get(0));
@@ -64,6 +61,13 @@ public class MemberController {
 
     @GetMapping("/member/mypage/info")
     public String userinfo(Model model, @AuthenticationPrincipal PrincipalDetails principal, MemberDTO memberDTO) {
+        List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
+
+        model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
+        if (wishLists.size() != 0) {
+            model.addAttribute("wishListIndex", wishLists.get(0));
+        }
+
         model.addAttribute("member", principal.getMember());
         model.addAttribute("jobList", jobListService.getList());
         return "member/mypage/info";
@@ -75,12 +79,19 @@ public class MemberController {
     }
 
     @GetMapping("/member/mypage/wallet")
-    public String userwallet(Model model, @AuthenticationPrincipal PrincipalDetails principal, MemberWishListDTO memberWishListDTO) {
-        List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
+    public String userWallet(Model model, @AuthenticationPrincipal PrincipalDetails principal) {
+        Long mno = principal.getMember().getMno();
+
+        log.info("WALLET"+mno);
+        List<MemberWishList> wishLists = wishListService.getListByMno(mno);
+        List<Ddun> ddunList = ddunService.getListBymno(mno);
+        Long totalDdun = ddunService.totalAmountByMno(mno);
 
         if (principal != null) {
             model.addAttribute("member", principal.getMember());
             model.addAttribute("jobList", jobListService.getList());
+            model.addAttribute("ddunList", ddunList);
+            model.addAttribute("totalDdun", totalDdun);
             if (wishLists.size() != 0) {
                 model.addAttribute("wishList", wishLists);
                 model.addAttribute("wishListIndex", wishLists.get(0));
