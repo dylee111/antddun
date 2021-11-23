@@ -1,18 +1,15 @@
 package com.ds.antddun.controller;
 
 import com.ds.antddun.config.auth.PrincipalDetails;
-import com.ds.antddun.dto.JayuBoardDTO;
 import com.ds.antddun.dto.PageRequestDTO;
-import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.dto.QnaBoardDTO;
 import com.ds.antddun.entity.JobList;
-import com.ds.antddun.entity.QnaBoard;
-import com.ds.antddun.entity.SosoCategory;
-import com.ds.antddun.entity.SosoJobBoard;
+import com.ds.antddun.entity.MemberWishList;
 import com.ds.antddun.repository.QnaBoardRepository;
 import com.ds.antddun.repository.QnaLikesRepository;
 import com.ds.antddun.service.JobListService;
 import com.ds.antddun.service.QnaService;
+import com.ds.antddun.service.WishListService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -21,14 +18,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @Log4j2
@@ -46,14 +38,27 @@ public class QnaBoardController {
     @Autowired
     private QnaLikesRepository qnaLikesRepository;
 
+    @Autowired
+    private WishListService wishListService;
+
 
     //리스트 출력
     @GetMapping("/qna/list")
-    public String allList(Model model, PageRequestDTO pageRequestDTO) {
+    public String allList(Model model, PageRequestDTO requestDTO, @AuthenticationPrincipal PrincipalDetails principal) {
+
+        //위시리스트
+        if (principal != null) {
+            List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
+            model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
+            if (wishLists.size() != 0) {
+                model.addAttribute("wishListIndex", wishLists.get(0));
+            }
+        }
 
         List<JobList> list = jobListService.getList();
         model.addAttribute("jobList", list);
-        model.addAttribute("boardList", qnaService.getListAll(pageRequestDTO));
+        model.addAttribute("boardList", qnaService.getListAll(requestDTO));
+        log.info("whe"+qnaService.getListAll(requestDTO));
 
         return "/qna/list";
     }
@@ -61,7 +66,16 @@ public class QnaBoardController {
 
     //카테고리 별 리스트 출력
     @GetMapping("/qna/list/{jno}")
-    public String cateList(@PathVariable int jno, Model model, PageRequestDTO requestDTO) {
+    public String cateList(@PathVariable int jno, Model model, PageRequestDTO requestDTO, @AuthenticationPrincipal PrincipalDetails principal) {
+
+        //위시리스트
+        if (principal != null) {
+            List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
+            model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
+            if (wishLists.size() != 0) {
+                model.addAttribute("wishListIndex", wishLists.get(0));
+            }
+        }
 
         List<JobList> list = jobListService.getList(); // 카테고리 리스트(cateNo / cateName)
         log.info("boardList>>>>"+qnaService.getListByCate(jno, requestDTO));
@@ -78,21 +92,18 @@ public class QnaBoardController {
 
         if (principal == null) {return "redirect:/login";}
 
+        //위시리스트
+        List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
+
+        model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
+        if (wishLists.size() != 0) {
+            model.addAttribute("wishListIndex", wishLists.get(0));
+        }
+
         model.addAttribute("jobList", jobListService.getList());
         return "/qna/registerForm";
     }
 
-
-/*
-    //글 등록
-    @PostMapping("/member/qna/register")
-    public ModelAndView register(QnaBoardDTO qnaBoardDTO,
-                           @AuthenticationPrincipal PrincipalDetails principal) {
-        Long qnaNo = qnaService.register(qnaBoardDTO, principal.getMember());
-        ModelAndView mav = new ModelAndView("redirect:/member/qna/read/" + qnaNo);
-        return mav;
-    }
-*/
 
     //글 등록
     @PostMapping("/member/qna/register")
@@ -110,10 +121,15 @@ public class QnaBoardController {
                        @AuthenticationPrincipal PrincipalDetails principal, Model model){
 
         if (principal == null) { return "redirect:/login"; }
-
-        log.info("qnaNonono"+qnaNo);
         model.addAttribute("boardList", qnaService.getBoard(qnaNo));
-        log.info("QNA>>>>>"+qnaService.getBoard(qnaNo));
+
+        //위시리스트
+        List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
+
+        model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
+        if (wishLists.size() != 0) {
+            model.addAttribute("wishListIndex", wishLists.get(0));
+        }
 
         return "/qna/read";
     }

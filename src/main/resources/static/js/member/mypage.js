@@ -28,14 +28,15 @@ $(document).ready(function() {
 
 }); // document.ready end
 
-//위시 리스트
+//위시 리스트 D-Day
 $(document).ready(function() {
+    var earn = parseInt($('#earn').text());
+    var monthly = (earn * 10000 / 12) - (earn * 10000  * 0.009);
+
     $(".wish_cal").keyup(function(){
-        var earn = parseInt($('#earn').text());
         var price = parseInt($("#input_price").val()) == NaN ? 0 : parseInt($("#input_price").val());
         var rate = parseInt($("#input_rate").val()) == NaN ? 0 : parseInt($("#input_rate").val());
 
-        var monthly = (earn * 10000 / 12) - (earn * 10000  * 0.009);
         var wishDay = parseInt(Math.ceil(price / (monthly * rate * 0.01)));
 
         if ($("#input_rate").val() != "" && $("#input_rate").val() != ""){
@@ -43,45 +44,114 @@ $(document).ready(function() {
         }
     });
 
-//    price.keyup(function(){
-//        if (price.val() != "" && rate.val() != ""){
-//            day.val(parseInt(wishDay));
-//        }
-//    });
+    $("#price0").keyup(function(){
+        var price0 = parseInt($("#price0").val()) == NaN ? 0 : parseInt($("#price0").val());
+        var rate0 = parseInt($("#rate0").val()) == NaN ? 0 : parseInt($("#rate0").val());
+
+        var wishDay0 = parseInt(Math.ceil(price0 / (monthly * rate0 * 0.01)));
+
+        if ($("#price0").val() != "" && $("#price0").val() != ""){
+                $("#dDay0").val(parseInt(wishDay0));
+        }
+    });
+    $("#rate0").keyup(function(){
+        var price0 = parseInt($("#price0").val()) == NaN ? 0 : parseInt($("#price0").val());
+        var rate0 = parseInt($("#rate0").val()) == NaN ? 0 : parseInt($("#rate0").val());
+
+        var wishDay0 = parseInt(Math.ceil(price0 / (monthly * rate0 * 0.01)));
+
+        if ($("#price0").val() != "" && $("#price0").val() != ""){
+                $("#dDay0").val(parseInt(wishDay0));
+        }
+    });
+
+    $("#price1").keyup(function(){
+        var price1 = parseInt($("#price1").val()) == NaN ? 0 : parseInt($("#price1").val());
+        var rate1 = parseInt($("#rate1").val()) == NaN ? 0 : parseInt($("#rate1").val());
+
+        var wishDay1 = parseInt(Math.ceil(price1 / (monthly * rate1 * 0.01)));
+
+        if ($("#price1").val() != "" && $("#price1").val() != ""){
+                $("#dDay1").val(parseInt(wishDay1));
+        }
+    });
+    $("#rate1").keyup(function(){
+        var price1 = parseInt($("#price1").val()) == NaN ? 0 : parseInt($("#price1").val());
+        var rate1 = parseInt($("#rate1").val()) == NaN ? 0 : parseInt($("#rate1").val());
+
+        var wishDay1 = parseInt(Math.ceil(price1 / (monthly * rate1 * 0.01)));
+
+        if ($("#price1").val() != "" && $("#price1").val() != ""){
+                $("#dDay1").val(parseInt(wishDay1));
+        }
+    });
+
+    $("#price2").keyup(function(){
+        var price2 = parseInt($("#price2").val()) == NaN ? 0 : parseInt($("#price2").val());
+        var rate2 = parseInt($("#rate2").val()) == NaN ? 0 : parseInt($("#rate2").val());
+
+        var wishDay2 = parseInt(Math.ceil(price2 / (monthly * rate2 * 0.01)));
+
+        if ($("#price2").val() != "" && $("#price2").val() != ""){
+                $("#dDay2").val(parseInt(wishDay2));
+        }
+    });
+    $("#rate2").keyup(function(){
+        var price2 = parseInt($("#price2").val()) == NaN ? 0 : parseInt($("#price2").val());
+        var rate2 = parseInt($("#rate2").val()) == NaN ? 0 : parseInt($("#rate2").val());
+
+        var wishDay2 = parseInt(Math.ceil(price2 / (monthly * rate2 * 0.01)));
+
+        if ($("#price2").val() != "" && $("#price2").val() != ""){
+                $("#dDay2").val(parseInt(wishDay2));
+        }
+    });
 });
 
+//위시리스트 수정 & 삭제
 $(document).ready(function() {
     const wishListArr = new Array();
     const priceArr = new Array();
     const rateArr = new Array();
+    const dDayArr = new Array();
 
     const wishList = $(".input_pd").val();
-    const price = $(".input_cost").val();
-    const rate = $(".input_per").val();
-
     const btnUpdate = $('.wish_update');
 
     var count = 0;
     /* 수정 버튼 이벤트 */
+    $('#dDay0').on('click', function(){
+        console.log($('#dDay0').val());
+    });
+
     $('#btn-update0').on('click', function(){
         count++;
         if(count == 1){
-        console.log(count);
+            console.log(count);
+
             $('#price0').removeAttr("readonly");
             $('#rate0').removeAttr("readonly");
             $('#list0').removeAttr("readonly");
+            $(this).css("filter", "brightness(1)");
+            $('#list0').focus();
         } else if(count == 2) {
-                console.log(count);
-
+            console.log(count);
+            $(this).css("filter", "brightness(0)");
             alert("돌아감");
             var wno = $("#wno0").val();
             console.log(wno);
+
+            console.log("수정시 dDay0 : "+$('#dDay0').val());
+            var tmp = $('#dDay0').val();
+            console.log("tmp:"+tmp)
             var wishList = {
                 wno: wno,
                 wishList: $("#list0").val(),
                 price: $("#price0").val(),
-                rate: $("#rate0").val()
+                rate: $("#rate0").val(),
+                dDay: $("#dDay0").val()
             }
+            console.log("wishList : "+JSON.stringify(wishList));
 
             $.ajax({
                 url: '/antddun/member/mypage/wishlist/modify/' + wno,
@@ -96,21 +166,22 @@ $(document).ready(function() {
                         $('#list0').attr("readonly");
                         count = 0;
                     }
+                self.location.reload();
                 }
             })
         } // count == 2
     }); // modify() end
-
     $('#btn-update1').on('click', function(){
         count++;
         if(count == 1){
-        console.log(count);
             $('#price1').removeAttr("readonly");
             $('#rate1').removeAttr("readonly");
             $('#list1').removeAttr("readonly");
+            $(this).css("filter", "brightness(1)");
+            $('#list1').focus();
         } else if(count == 2) {
                 console.log(count);
-
+            $(this).css("filter", "brightness(0)");
             alert("돌아감");
             var wno = $("#wno1").val();
             console.log(wno);
@@ -118,7 +189,8 @@ $(document).ready(function() {
                 wno: wno,
                 wishList: $("#list1").val(),
                 price: $("#price1").val(),
-                rate: $("#rate1").val()
+                rate: $("#rate1").val(),
+                dDay: $("#dDay1").val()
             }
 
             $.ajax({
@@ -134,11 +206,11 @@ $(document).ready(function() {
                         $('#list1').attr("readonly");
                         count = 0;
                     }
+                self.location.reload();
                 }
             })
         } // count == 2
     });
-  
     $('#btn-update2').on('click', function(){
         count++;
         if(count == 1){
@@ -146,9 +218,11 @@ $(document).ready(function() {
             $('#price2').removeAttr("readonly");
             $('#rate2').removeAttr("readonly");
             $('#list2').removeAttr("readonly");
+            $(this).css("filter", "brightness(1)");
+            $('#list2').focus();
         } else if(count == 2) {
                 console.log(count);
-
+            $(this).css("filter", "brightness(0)");
             alert("돌아감");
             var wno = $("#wno2").val();
             console.log(wno);
@@ -156,7 +230,8 @@ $(document).ready(function() {
                 wno: wno,
                 wishList: $("#list2").val(),
                 price: $("#price2").val(),
-                rate: $("#rate2").val()
+                rate: $("#rate2").val(),
+                dDay: $("#dDay2").val()
             }
 
             $.ajax({
@@ -172,6 +247,7 @@ $(document).ready(function() {
                         $('#list2').attr("readonly");
                         count = 0;
                     }
+                self.location.reload();
                 }
             })
         } // count == 2
@@ -187,6 +263,7 @@ $(document).ready(function() {
                 if(result == "delete") {
                     alert(wno + "삭제 OK");
                 }
+            self.location.reload();
             }
         })
     }); // end
@@ -199,6 +276,7 @@ $(document).ready(function() {
                 if(result == "delete") {
                     alert(wno + "삭제 OK");
                 }
+            self.location.reload();
             }
         })
     }); // end
@@ -211,52 +289,56 @@ $(document).ready(function() {
                 if(result == "delete") {
                     alert(wno + "삭제 OK");
                 }
+            self.location.reload();
             }
         })
-    }); // end    /* 저장 버튼 */
+    }); // end
 
+    /* 저장 버튼 */
     $("#btn-wishSave").click(function(e) {
         e.preventDefault();
         wishListSave();
     });
-        /* 회원 정보 수정 */
-        $("#btn_member_modify").click(function(){
-            var infoMno = $("#myMno").val();
-            var myInfo = {
-                mno: infoMno,
-                username: $("#username").val(),
-                password: $("#password").val(),
-                phoneNum: $("#phoneNum").val(),
-                job: $(".job").val(),
-                experience: $(".experience").val(),
-                salary: $("#salary").val(),
-                startTime: $(".startTime").val(),
-                endTime: $(".endTime").val()
-            }
-            alert(infoMno);
-            alert(myInfo);
 
-            $.ajax({
-                url: '/antddun/member/mypage/info/modify/' + infoMno,
-                method: 'put',
-                data: JSON.stringify(myInfo),
-                contentType: 'application/json; charset=utf-8',
-                success: function(result) {
-                    if(result === 'MemberModify') {
-                        alert("수정완료"+ infoMno);
-                    }
+    /* 회원 정보 수정 */
+    $("#btn_member_modify").click(function(){
+        var infoMno = $("#myMno").val();
+        var myInfo = {
+            mno: infoMno,
+            username: $("#username").val(),
+            password: $("#password").val(),
+            phoneNum: $("#phoneNum").val(),
+            job: $(".job").val(),
+            experience: $(".experience").val(),
+            salary: $("#salary").val(),
+            startTime: $(".startTime").val(),
+            endTime: $(".endTime").val()
+        }
+        alert(infoMno);
+        alert(myInfo);
+
+        $.ajax({
+            url: '/antddun/member/mypage/info/modify/' + infoMno,
+            method: 'put',
+            data: JSON.stringify(myInfo),
+            contentType: 'application/json; charset=utf-8',
+            success: function(result) {
+                if(result === 'MemberModify') {
+                    alert("수정완료"+ infoMno);
                 }
-            })
-        });
+            }
+        })
+    });
 }); // document.ready2 end
 
-        const wishListArr = new Array();
-        const priceArr = new Array();
-        const rateArr = new Array();
+    const wishListArr = new Array();
+    const priceArr = new Array();
+    const rateArr = new Array();
+    const dDayArr = new Array();
 
-        const wishList = $(".input_pd").val();
-        const price = $(".input_cost").val();
-        const rate = $(".input_per").val();
+    const wishList = $(".input_pd").val();
+    const price = $(".input_cost").val();
+    const rate = $(".input_per").val();
 
     const btnUpdate = $('.wish_update');
 
@@ -271,9 +353,14 @@ $(document).ready(function() {
         $("input[name=rate]").each(function(index, r) {
             rateArr.push($(r).val());
         });
+        $("input[name=dDay]").each(function(index, d) {
+            dDayArr.push($(d).val());
+        });
+
         console.log(wishListArr);
         console.log(priceArr);
         console.log(rateArr);
+        console.log(dDayArr);
 
         $.ajax({
             url: '/antddun/member/mypage/wishlist/save',
@@ -284,7 +371,7 @@ $(document).ready(function() {
                   wishList: $("#input_list").val(),
                   price: $("#input_price").val(),
                   rate: $("#input_rate").val(),
-                  dDay: $("#input_day").val()
+                  dDay: $("#input_day").val(),
             },
             success: function(data) {
                 if(data < 3) {
@@ -293,7 +380,7 @@ $(document).ready(function() {
                     alert("위시 리스트는 3개만 작성가능");
                     return false;
                 }
-
+                self.location.reload();
             },
             error: function(data) {
                 console.log(data);

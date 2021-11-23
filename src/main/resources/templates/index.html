@@ -87,7 +87,7 @@
                             <div id="user_nav">
                                 <ul class="user_ul">
                                     <li class="user_li li_left">알림<span th:name="a" class="alert_new">3</span></li>
-                                    <li class="user_li li_center">쪽지<span th:name="b" class="alert_new">11</span></li>
+                                    <li class="user_li li_center">쪽지<span th:name="b" class="alert_new">2</span></li>
                                     <li class="user_li li_right"><img th:src="@{assets/lock.png}" style="width: 20px"/>
                                     </li>
                                 </ul>
@@ -100,22 +100,23 @@
                                 <tbody>
                                 <tr>
                                     <td class="alert" th:name="@{#}">
-                                        <span>딩동 알림이 왔어요~!</span>
+                                        <span><strong>'AJAX 페이지 html 불러...'</strong> 에</span>
+                                        <span>답글이 달렸습니다.</span>
+                                        <span style="color:lightgrey; float: right;">21.11.24</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="alert" th:name="@{#}">
-                                        <span>딩동 알림이 왔어요~!</span>
+                                        <span><strong>'노트북 구입시 외장 그래...'</strong> 에</span>
+                                        <span>새 댓글이 달렸습니다.</span>
+                                        <span style="color:lightgrey; float: right;">21.11.23</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="alert" th:name="@{#}">
-                                        <span>딩동 알림이 왔어요~!</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="alert" th:name="@{#}">
-                                        <span>딩동 알림이 왔어요~!</span>
+                                        <span><strong>'개발자 고수님들 질문드...'</strong> 에</span>
+                                        <span>답글이 달렸습니다.</span>
+                                        <span style="color:lightgrey; float: right;">21.11.23</span>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -126,23 +127,17 @@
                             <table class="alert_tb" style="table-layout: fixed">
                                 <tbody>
                                 <tr>
-                                    <td class="alert" th:name="@{#}">
-                                        <span>딩동 알림이 왔어요~!</span>
+                                    <td class="alert">
+                                        <strong><a th:href="@{/member/messenger}">[디자인 3년차 이개미]</a></strong><br>
+                                        <span><a th:href="@{/member/messenger}">수정작업은 총 3번 가능합니다...</a></span>
+                                        <span style="color:lightgrey;  float: right;">21.11.25</span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="alert" th:name="@{#}">
-                                        <span>딩동 알림이 왔어요~!</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="alert" th:name="@{#}">
-                                        <span>딩동 알림이 왔어요~!</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="alert" th:name="@{#}">
-                                        <span>딩동 알림이 왔어요~!</span>
+                                    <td class="alert">
+                                        <strong><a th:href="@{/member/messenger}">[디자인 6년차 박개미]</a></strong><br>
+                                        <span><a th:href="@{/member/messenger}">문의주신 내용을 바탕으로 초안...</a></span>
+                                        <span style="color:lightgrey;  float: right;">21.11.25</span>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -304,13 +299,13 @@
                     <section class="card margin_bottom2">
                         <div class="card-header">
                             <h3 class="boardlist">QnA</h3>
-                            <span class="more"><a th:href="@{/QnA/list}">더보기</a></span>
+                            <span class="more"><a th:href="@{/qna/list}">더보기</a></span>
                         </div>
                         <div class="card-body">
                             <table class="table" style="table-layout: fixed">
                                 <tbody>
                                 <tr>
-                                    <td class="category"><span class="tag_b" th:name="@{#}">웹개발</span></td>
+                                    <td class="category"><span class="tag_b" th:name="@{#}">IT</span></td>
                                     <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
                                         <a th:name="@{#}" th:src="@{#}">Spring webflux와 mvc를 사용하는 경우 성능어떻게 될까요??</a>
                                     </td>
@@ -318,6 +313,50 @@
                                     </td>
                                     <td class="data" th:name="@{#}"><img th:src="@{assets/eye.png}" width="20"> 67</td>
                                     <td class="data" th:name="@{#}"><img th:src="@{assets/messenger.png}" width="18"> 5
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="category"><span class="tag_b" th:name="@{#}">마케팅</span></td>
+                                    <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+                                        <a th:name="@{#}" th:src="@{#}">페이스북 광고 최대한 현명하게 잠시 중단 하는 방법이 궁금합니다.</a>
+                                    </td>
+                                    <td class="data" th:name="@{#}"><img th:src="@{assets/coins.png}" width="19"> 300
+                                    </td>
+                                    <td class="data" th:name="@{#}"><img th:src="@{assets/eye.png}" width="20"> 213</td>
+                                    <td class="data" th:name="@{#}"><img th:src="@{assets/messenger.png}" width="18"> 6
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="category"><span class="tag_b" th:name="@{#}">영업·유통</span></td>
+                                    <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+                                        <a th:name="@{#}" th:src="@{#}">유통관리사 2급 준비하려고 하는데 질문드려요!</a>
+                                    </td>
+                                    <td class="data" th:name="@{#}"><img th:src="@{assets/coins.png}" width="19"> 50
+                                    </td>
+                                    <td class="data" th:name="@{#}"><img th:src="@{assets/eye.png}" width="20"> 63</td>
+                                    <td class="data" th:name="@{#}"><img th:src="@{assets/messenger.png}" width="18"> 2
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="category"><span class="tag_b" th:name="@{#}">IT</span></td>
+                                    <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+                                        <a th:name="@{#}" th:src="@{#}">프론트와 백엔드 따로 둘때 header의 referer</a>
+                                    </td>
+                                    <td class="data" th:name="@{#}"><img th:src="@{assets/coins.png}" width="19"> 90
+                                    </td>
+                                    <td class="data" th:name="@{#}"><img th:src="@{assets/eye.png}" width="20"> 101</td>
+                                    <td class="data" th:name="@{#}"><img th:src="@{assets/messenger.png}" width="18"> 2
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="category"><span class="tag_b" th:name="@{#}">미디어</span></td>
+                                    <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+                                        <a th:name="@{#}" th:src="@{#}">프레임수와 셔터스피드, 영상 사이즈 질문드립니다!!</a>
+                                    </td>
+                                    <td class="data" th:name="@{#}"><img th:src="@{assets/coins.png}" width="19"> 50
+                                    </td>
+                                    <td class="data" th:name="@{#}"><img th:src="@{assets/eye.png}" width="20"> 54</td>
+                                    <td class="data" th:name="@{#}"><img th:src="@{assets/messenger.png}" width="18"> 1
                                     </td>
                                 </tr>
                                 </tbody>
@@ -328,7 +367,7 @@
                     <section class="card margin_bottom2">
                         <div class="card-header">
                             <h3 class="boardlist">내일이면 사라져요!</h3>
-                            <span class="more"><a th:href="@{/jayu/peong}">더보기</a></span>
+                            <span class="more"><a th:href="@{/jayu/list}">더보기</a></span>
                         </div>
                         <div class="card-body">
                             <table class="table" style="table-layout: fixed">
@@ -336,15 +375,52 @@
                                 <tr>
                                     <td class="peong" th:name="@{#}">💣</td>
                                     <td class="category"><span class="tag_b" th:name="@{#}">소곤소곤</span></td>
-                                    <td class="title"
-                                        style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
-                                        <a th:name="@{#}" th:src="@{#}">Spring webflux와 mvc를 사용하는 경우 성능어떻게 될까요??</a>
+                                    <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+                                        <a th:name="@{#}" th:src="@{#}">이거 무슨뜻인지 도저히 이해안가지 않아?</a>
                                     </td>
-                                    <td class="data" th:name="@{#}"><img th:src="@{assets/heart_0.png}" width="19"> 150
+                                    <td class="data"><img th:src="@{assets/heart_1.png}" width="19"> 42</td>
+                                    <td class="data"><img th:src="@{assets/eye.png}" width="20"> 429</td>
+                                    <td class="data"><img th:src="@{assets/messenger.png}" width="18"> 62</td>
+                                </tr>
+                                <tr>
+                                    <td class="peong" th:name="@{#}">💣</td>
+                                    <td class="category"><span class="tag_b" th:name="@{#}">취직·이직</span></td>
+                                    <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+                                        <a th:name="@{#}" th:src="@{#}">취준생 조언 좀 해주시면 감사하겠습니다</a>
                                     </td>
-                                    <td class="data" th:name="@{#}"><img th:src="@{assets/eye.png}" width="20"> 67</td>
-                                    <td class="data" th:name="@{#}"><img th:src="@{assets/messenger.png}" width="18"> 5
+                                    <td class="data"><img th:src="@{assets/heart_0.png}" width="19"> 91</td>
+                                    <td class="data"><img th:src="@{assets/eye.png}" width="20"> 135</td>
+                                    <td class="data"><img th:src="@{assets/messenger.png}" width="18"> 3</td>
+                                </tr>
+                                <tr>
+                                    <td class="peong" th:name="@{#}">💣</td>
+                                    <td class="category"><span class="tag_b" th:name="@{#}">소근소근</span></td>
+                                    <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+                                        <a th:name="@{#}" th:src="@{#}">오늘 정말 짜증나요ㅠㅠㅠㅠ</a>
                                     </td>
+                                    <td class="data"><img th:src="@{assets/heart_0.png}" width="19"> 91</td>
+                                    <td class="data"><img th:src="@{assets/eye.png}" width="20"> 286</td>
+                                    <td class="data"><img th:src="@{assets/messenger.png}" width="18"> 42</td>
+                                </tr>
+                                <tr>
+                                    <td class="peong" th:name="@{#}">💣</td>
+                                    <td class="category"><span class="tag_b" th:name="@{#}">연애</span></td>
+                                    <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+                                        <a th:name="@{#}" th:src="@{#}">보통 사귀고 얼마만에 첫위기가와?</a>
+                                    </td>
+                                    <td class="data"><img th:src="@{assets/heart_1.png}" width="19"> 45</td>
+                                    <td class="data"><img th:src="@{assets/eye.png}" width="20"> 256</td>
+                                    <td class="data"><img th:src="@{assets/messenger.png}" width="18"> 7</td>
+                                </tr>
+                                <tr>
+                                    <td class="peong" th:name="@{#}">💣</td>
+                                    <td class="category"><span class="tag_b" th:name="@{#}">JOB담</span></td>
+                                    <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+                                        <a th:name="@{#}" th:src="@{#}">내가 너무 안일한걸까,, 다른사람들은 어떄?</a>
+                                    </td>
+                                    <td class="data"><img th:src="@{assets/heart_0.png}" width="19"> 35</td>
+                                    <td class="data"><img th:src="@{assets/eye.png}" width="20"> 294</td>
+                                    <td class="data"><img th:src="@{assets/messenger.png}" width="18"> 10</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -354,7 +430,7 @@
                     <section class="card margin_bottom2">
                         <div class="card-header">
                             <h3 class="boardlist">자유 게시판</h3>
-                            <span class="more"><a th:href="@{/jayu/List}">더보기</a></span>
+                            <span class="more"><a th:href="@{/jayu/list}">더보기</a></span>
                         </div>
                         <div class="card-body">
                             <table class="table" style="table-layout: fixed">
@@ -363,11 +439,51 @@
                                     <td class="peong" th:name="@{#}">💣</td>
                                     <td class="category"><span class="tag_b" th:name="@{#}">소곤소곤</span></td>
                                     <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
-                                        <a th:name="@{#}" th:src="@{#}">Spring webflux와 mvc를 사용하는 경우 성능어떻게 될까요??</a>
+                                        <a th:name="@{#}" th:src="@{#}">이거 무슨뜻인지 도저히 이해안가지 않아?</a>
                                     </td>
-                                    <td class="data"><img th:src="@{assets/heart_0.png}" width="19"> 150</td>
-                                    <td class="data"><img th:src="@{assets/eye.png}" width="20"> 67</td>
-                                    <td class="data"><img th:src="@{assets/messenger.png}" width="18"> 5</td>
+                                    <td class="data"><img th:src="@{assets/heart_1.png}" width="19"> 42</td>
+                                    <td class="data"><img th:src="@{assets/eye.png}" width="20"> 429</td>
+                                    <td class="data"><img th:src="@{assets/messenger.png}" width="18"> 62</td>
+                                </tr>
+                                <tr>
+                                    <td class="peong" th:name="@{#}"></td>
+                                    <td class="category"><span class="tag_b" th:name="@{#}">연애</span></td>
+                                    <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+                                        <a th:name="@{#}" th:src="@{#}">좋아하는 이성 직장 동료가 오늘 아파서 결근했는데..</a>
+                                    </td>
+                                    <td class="data"><img th:src="@{assets/heart_1.png}" width="19"> 43</td>
+                                    <td class="data"><img th:src="@{assets/eye.png}" width="20"> 886</td>
+                                    <td class="data"><img th:src="@{assets/messenger.png}" width="18"> 45</td>
+                                </tr>
+                                <tr>
+                                    <td class="peong" th:name="@{#}">💣</td>
+                                    <td class="category"><span class="tag_b" th:name="@{#}">취직·이직</span></td>
+                                    <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+                                        <a th:name="@{#}" th:src="@{#}">취준생 조언 좀 해주시면 감사하겠습니다</a>
+                                    </td>
+                                    <td class="data"><img th:src="@{assets/heart_0.png}" width="19"> 91</td>
+                                    <td class="data"><img th:src="@{assets/eye.png}" width="20"> 135</td>
+                                    <td class="data"><img th:src="@{assets/messenger.png}" width="18"> 3</td>
+                                </tr>
+                                <tr>
+                                    <td class="peong" th:name="@{#}"></td>
+                                    <td class="category"><span class="tag_b" th:name="@{#}">재태크</span></td>
+                                    <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+                                        <a th:name="@{#}" th:src="@{#}">이상한 잡코인으로 대박 노리지 마세요 제발..!😇</a>
+                                    </td>
+                                    <td class="data"><img th:src="@{assets/heart_0.png}" width="19"> 54</td>
+                                    <td class="data"><img th:src="@{assets/eye.png}" width="20"> 561</td>
+                                    <td class="data"><img th:src="@{assets/messenger.png}" width="18"> 54</td>
+                                </tr>
+                                <tr>
+                                    <td class="peong" th:name="@{#}"></td>
+                                    <td class="category"><span class="tag_b" th:name="@{#}">소곤소곤</span></td>
+                                    <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+                                        <a th:name="@{#}" th:src="@{#}">요즘 시대에 상사가 이렇게 꼰대일수가 있음??</a>
+                                    </td>
+                                    <td class="data"><img th:src="@{assets/heart_1.png}" width="19"> 42</td>
+                                    <td class="data"><img th:src="@{assets/eye.png}" width="20"> 629</td>
+                                    <td class="data"><img th:src="@{assets/messenger.png}" width="18"> 72</td>
                                 </tr>
                                 </tbody>
                             </table>

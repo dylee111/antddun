@@ -47,9 +47,13 @@ public class JoinController {
     }
 
     @PostMapping("/member/socialJoinComplete")
-    public String socialjoinComplete(MemberDTO memberDTO, JobListDTO jobListDTO) {
+    public String socialjoinComplete( @AuthenticationPrincipal PrincipalDetails principal,
+                                      MemberDTO memberDTO, JobListDTO jobListDTO, Model model) {
         memberService.socialJoin(memberDTO,jobListDTO);
-        return "redirect:/member/welcome";
+        model.addAttribute("member",principal.getMember());
+        model.addAttribute("firstName",principal.getMember().getFirstName());
+        model.addAttribute("lastName",principal.getMember().getLastName());
+        return "redirect:/joinWelcome";
     }
 
 

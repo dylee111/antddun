@@ -57,6 +57,11 @@ class SosoJobServiceImplTest {
     }
 
     @Test
+    void 글하나읽기() {
+        System.out.println(sosoBoardRepository.readBySosoNo(10L));
+    }
+
+    @Test
     void page() {
 
         PageResultDTO<SosoBoardDTO, SosoJobBoard> resultDTO = sosoJobService.getList(1);
@@ -76,7 +81,6 @@ class SosoJobServiceImplTest {
     void paging() {
         System.out.println(sosoJobService.getList(1).getPage());
         System.out.println(sosoJobService.getList(1).getTotalPage());
-
     }
 
 }

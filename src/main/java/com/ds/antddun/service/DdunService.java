@@ -25,6 +25,7 @@ public interface DdunService {
                 .DdunId(ddunDTO.getDdunId())
                 .inputAmount(ddunDTO.getInputAmount())
                 .outputAmount(ddunDTO.getOutputAmount())
+                .content(ddunDTO.getContent())
                 .member(Member.builder().mno(ddunDTO.getMember()).build())
                 .build();
         return ddun;

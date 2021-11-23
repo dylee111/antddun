@@ -22,6 +22,7 @@ public class Ddun {
 
     private Long inputAmount;
     private Long outputAmount;
+    private String content;
 
     @CreationTimestamp
     private Timestamp chargeDate;

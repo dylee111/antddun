@@ -14,20 +14,8 @@
     padding: 0px 5px 0px 5px !important;
 }
 
-#likebtn {
-    background: lightblue;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    font-weight: bold;
-}
-
-.liked{
+#likeBtn.liked{
     background: pink;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    font-weight: bold;
 }
 
 
