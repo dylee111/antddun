@@ -25,24 +25,17 @@
                 <table class="table" style="table-layout: fixed">
                     <tbody>
                     <tr>
-                        <td>
-                            <strong class="sender">이름</strong>
-                            <span class="send_date">2021.11.12</span>
-                            <span class="send_message">제가 구구절절 궁금한게 많은데요.... 문의를 해도 괜찮을지 모르겠어요^_ㅠ</span>
+                        <td id="lee">
+                            <strong class="sender">이하니</strong>
+                            <span class="send_date">2021.11.25</span>
+                            <span class="send_message">뷰티 브랜드 상세페이지 디자인 작업 요청 문의드립니다.</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <strong class="sender">이름</strong>
-                            <span class="send_date">2021.11.12</span>
-                            <span class="send_message">제가 구구절절 궁금한게 많은데요.... 문의를 해도 괜찮을지 모르겠어요^_ㅠ</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong class="sender">이름</strong>
-                            <span class="send_date">2021.11.12</span>
-                            <span class="send_message">제가 구구절절 궁금한게 많은데요.... 문의를 해도 괜찮을지 모르겠어요^_ㅠ</span>
+                        <td id="park">
+                            <strong class="sender">박두철</strong>
+                            <span class="send_date">2021.11.25</span>
+                            <span class="send_message">뷰티 브랜드 로고 작업을 의뢰드립니다.</span>
                         </td>
                     </tr>
                     </tbody>
@@ -53,48 +46,171 @@
         <!--홈 우측 : 게시물 리스트-->
         <div class="col-lg-9">
             <div class="content_border">
-                <div class="margin_bottom">
-                    <input type="button" class="check_btn button--primary button--with-icon" value="거래 중" />
-                    <span class="send_title">단가 문의드립니다.</span>
-                </div>
+                <div id="mail_lee">
+                    <div class="margin_bottom">
+                        <input type="button" class="check_btn button--primary button--with-icon" style="margin-right:10px;" value="거래 중" />
+                        <span class="send_title">
+                        뷰티 브랜드 상세페이지 디자인 작업 요청 문의드립니다.
+                    </span>
+                    </div>
 
-                <div class="mail">
-                    <div class="sender_info">
-                        <div style="height: 45px;">
-                            <strong class="sender">김본명 </strong>
-                            <span>(<span>abc@ds.com</span>)</span>
-                            <span class="send_time">2021.11.12 오후 12:32</span>
+                    <div class="mail">
+                        <div class="sender_info">
+                            <div style="height: 45px;">
+                                <strong class="sender">
+                                    <span th:text="${member.lastName}"></span>
+                                    <span th:text="${member.firstName}"></span>
+                                </strong>
+                                <span>(<span th:text="${member.username}"></span>)</span>
+                                <span class="send_time">2021.11.19 오후 12:32</span>
+                            </div>
+                        </div>
+                        <div class="send_msg">
+                            <p>디자이너님, 안녕하세요.<br>
+                                ㅇㅇ브랜드 브랜드 담당자 ㅇㅇ입니다.<br>
+                                디자이너님께 쪽지를 보낸 이유는 상세페이지 디자인 의뢰를 문의드리기 위해서 입니다.<br>
+                                <br>
+                                저희 ㅇㅇ브랜드는 자연 성분으로 만들어진 비건 화장품 브랜드입니다.<br>
+                                자연주의에 맞게 원재료가 시각적으로 강조되면서도 심플하고 고급스러운 느낌의 상세페이지를 희망하고 있습니다.<br>
+                                레퍼런스로는 <span style="color:blue; text-decoration: underline;">이니스프리</span>를 참고해주시길 바랍니다!<br>
+                                <br>
+                                책정하신 뚠은 상세페이지 1건당 가격으로 인지하고있습니다만,<br>
+                                혹시 10건 이상 요청드릴 경우 가격도 동일하게 70,000뚠 * 10건 = 700,000원일지 문의드립니다.<br>
+                                <br>
+                                그럼 답변 부탁드립니다:)<br>
+                                감사합니다.<br>
+                            </p>
                         </div>
                     </div>
-                    <div class="send_msg">
-                        <p> 담당자님, 비즈니스 프로필을 최신 상태로 유지하세요. Google 검색 및 지도에서 내 비즈니스를 찾는 사람들이
-                            신규 고객으로 전환될 수 있습니다. 이제 더 쉽게 내 비즈니스 프로필을 관리할 수 있습니다.</p>
+                    <div class="mail">
+                        <div class="sender_info">
+                            <div style="height: 45px;">
+                                <strong class="sender">이하니 </strong>
+                                <span>(<span>hanieee@ds.com</span>)</span>
+                                <span class="send_time">2021.11.20 오전 09:15</span>
+                            </div>
+                        </div>
+                        <div class="send_msg">
+                            <p>
+                                담당자님, 안녕하세요!<br>
+                                먼저 의뢰주셔서 감사합니다:)<br>
+                                <br>
+                                가격의 경우 건당으로 책정되어있어 말씀주신 금액으로 생각해주시면 됩니다.<br>
+                                제가 알고있기로 해당 플랫폼에서 거래자가 가격을 수정할 수 없는 것으로 알고있습니다ㅜ..<br>
+                                <br>
+                                디자인의 경우 조금 더 참고할 만한 레퍼런스가 있을까요?<br>
+                                여러가지 안을 주시면 참고하여 작업하기 좋을 것 같습니다!<br>
+                                추가적으로 문의드리고 싶은 것이 있습니다.<br>
+                                1. 작업 일정은 어느정도로 예상하고 계실까요?<br>
+                                2. 제가 초안부터 잡고 들어가야하는지, 혹은 러프안이 있는지 궁금합니다!<br>
+                                <br>
+                                만약 러프안이 없다면 작업 전에 충분한 미팅 후 작업에 들어가는 것이 작업시간도 지연되지 않을 듯 합니다.<br>
+                                <br>
+                                그럼 확인 부탁드립니다!<br>
+                                감사합니다.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mail">
+                        <div class="sender_info">
+                            <div style="height: 45px;">
+                                <strong class="sender">
+                                    <span th:text="${member.lastName}"></span>
+                                    <span th:text="${member.firstName}"></span>
+                                </strong>
+                                <span>(<span th:text="${member.username}"></span>)</span>
+                                <span class="send_time">2021.11.24 오후 04:19</span>
+                            </div>
+                        </div>
+                        <div class="send_msg">
+                            <p>디자이너님, 안녕하세요.<br>
+                                ㅇㅇ브랜드 브랜드 담당자 ㅇㅇ입니다.<br>
+                                디자이너님께 쪽지를 보낸 이유는 상세페이지 디자인 의뢰를 문의드리기 위해서 입니다.<br>
+                                <br>
+                                저희 ㅇㅇ브랜드는 자연 성분으로 만들어진 비건 화장품 브랜드입니다.<br>
+                                자연주의에 맞게 원재료가 시각적으로 강조되면서도 심플하고 고급스러운 느낌의 상세페이지를 희망하고 있습니다.<br>
+                                레퍼런스로는 <span style="color:blue; text-decoration: underline;">이니스프리</span>를 참고해주시길 바랍니다!<br>
+                                <br>
+                                책정하신 뚠은 상세페이지 1건당 가격으로 인지하고있습니다만,<br>
+                                혹시 10건 이상 요청드릴 경우 가격도 동일하게 70,000뚠 * 10건 = 700,000원일지 문의드립니다.<br>
+                                <br>
+                                그럼 답변 부탁드립니다:)<br>
+                                감사합니다.<br>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mail">
+                        <div class="sender_info">
+                            <div style="height: 45px;">
+                                <strong class="sender">이하니 </strong>
+                                <span>(<span>hanieee@ds.com</span>)</span>
+                                <span class="send_time">2021.11.25 오전 11:48</span>
+                            </div>
+                        </div>
+                        <div class="send_msg">
+                            <p>
+                                수정작업은 총 3번 가능합니다.<br>
+                                (상세페이지 건당 3번으로 생각해주시면 됩니다!)<br>
+                                <br>
+                                그럼, 추가적인 문의사항이 있다면 말씀주세요!<br>
+                                감사합니다.
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="mail">
-                    <div class="sender_info">
-                        <div style="height: 45px;">
-                            <strong class="sender">김본명 </strong>
-                            <span>(<span>abc@ds.com</span>)</span>
-                            <span class="send_time">2021.11.12 오후 12:32</span>
+                <div id="mail_park" style="display:none;">
+                    <div class="margin_bottom">
+                        <input type="button" class="check_btn button--primary button--with-icon" style="margin-right:10px;" value="거래 중" />
+                        <span class="send_title">
+                        뷰티 브랜드 로고 작업을 의뢰드립니다.
+                    </span>
+                    </div>
+
+                    <div class="mail">
+                        <div class="sender_info">
+                            <div style="height: 45px;">
+                                <strong class="sender">
+                                    <span th:text="${member.lastName}"></span>
+                                    <span th:text="${member.firstName}"></span>
+                                </strong>
+                                <span>(<span th:text="${member.username}"></span>)</span>
+                                <span class="send_time">2021.11.21 오후 01:21</span>
+                            </div>
+                        </div>
+                        <div class="send_msg">
+                            <p>디자이너님, 안녕하세요.<br>
+                                ㅇㅇ브랜드 브랜드 담당자 ㅇㅇ입니다.<br>
+                                디자이너님께 쪽지를 보낸 이유는 상세페이지 디자인 의뢰를 문의드리기 위해서 입니다.<br>
+                                <br>
+                                저희 ㅇㅇ브랜드는 자연 성분으로 만들어진 비건 화장품 브랜드입니다.<br>
+                                자연주의에 맞게 원재료가 시각적으로 강조되면서도 심플하고 고급스러운 느낌의 상세페이지를 희망하고 있습니다.<br>
+                                레퍼런스로는 <span style="color:blue; text-decoration: underline;">이니스프리</span>를 참고해주시길 바랍니다!<br>
+                                <br>
+                                책정하신 뚠은 상세페이지 1건당 가격으로 인지하고있습니다만,<br>
+                                혹시 10건 이상 요청드릴 경우 가격도 동일하게 70,000뚠 * 10건 = 700,000원일지 문의드립니다.<br>
+                                <br>
+                                그럼 답변 부탁드립니다:)<br>
+                                감사합니다.<br>
+                            </p>
                         </div>
                     </div>
-                    <div class="send_msg">
-                        <p> 담당자님, 비즈니스 프로필을 최신 상태로 유지하세요. Google 검색 및 지도에서 내 비즈니스를 찾는 사람들이
-                            신규 고객으로 전환될 수 있습니다. 이제 더 쉽게 내 비즈니스 프로필을 관리할 수 있습니다.</p>
-                    </div>
-                </div>
-                <div class="mail">
-                    <div class="sender_info">
-                        <div style="height: 45px;">
-                            <strong class="sender">김본명 </strong>
-                            <span>(<span>abc@ds.com</span>)</span>
-                            <span class="send_time">2021.11.12 오후 12:32</span>
+                    <div class="mail">
+                        <div class="sender_info">
+                            <div style="height: 45px;">
+                                <strong class="sender">박두철 </strong>
+                                <span>(<span>designerdc@ds.com</span>)</span>
+                                <span class="send_time">2021.11.25 오전 09:42</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="send_msg">
-                        <p> 담당자님, 비즈니스 프로필을 최신 상태로 유지하세요. Google 검색 및 지도에서 내 비즈니스를 찾는 사람들이
-                            신규 고객으로 전환될 수 있습니다. 이제 더 쉽게 내 비즈니스 프로필을 관리할 수 있습니다.</p>
+                        <div class="send_msg">
+                            <p>
+                                문의주신 내용을 바탕으로 초안 첨부하여 드립니다.<br>
+                                총 5개의 시안으로 보내드리니 가장 적합한 것을 2개 정도 픽해주시면 수정작업시 참고하도록 하겠습니다!<br>
+                                <br>
+                                그럼, 추가적인 문의사항이 있다면 말씀주세요!<br>
+                                감사합니다.
+                            </p>
+                        </div>
                     </div>
                 </div>
 

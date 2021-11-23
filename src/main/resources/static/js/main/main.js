@@ -44,41 +44,44 @@ $(document).ready(function() {
 
     <!-- Hourly Wage JS -->
     $(document).ready(function() {
-        <!--현재 시간-->
-        var nowTime = new Date().getHours();
-        var hours = new Date().getHours()*60;
-        var minutes = new Date().getMinutes();
-        var now = hours + minutes;
+        timer = setInterval(function(){
+            <!--현재 시간-->
+            var nowTime = new Date().getHours();
+            var hours = new Date().getHours()*60;
+            var minutes = new Date().getMinutes();
+            var now = hours + minutes;
 
-        <!--출근 시간-->
-        var startTime = $('#startTime').text();
-        var startHour = parseInt(startTime.substring(0,2));
-        var startHours = parseInt(startTime.substring(0,2))*60;
-        var startMinutes = parseInt(startTime.substring(3,5));
-        var start = startHours + startMinutes;
+            <!--출근 시간-->
+            var startTime = $('#startTime').text();
+            var startHour = parseInt(startTime.substring(0,2));
+            var startHours = parseInt(startTime.substring(0,2))*60;
+            var startMinutes = parseInt(startTime.substring(3,5));
+            var start = startHours + startMinutes;
 
-        <!--퇴근 시간-->
-        var endTime = $('#endTime').text();
-        var endHour = parseInt(endTime.substring(0,2));
-        var endHours = parseInt(endTime.substring(0,2))*60;
-        var endMinutes = parseInt(endTime.substring(3,5));
-        var end = endHours + endMinutes;
+            <!--퇴근 시간-->
+            var endTime = $('#endTime').text();
+            var endHour = parseInt(endTime.substring(0,2));
+            var endHours = parseInt(endTime.substring(0,2))*60;
+            var endMinutes = parseInt(endTime.substring(3,5));
+            var end = endHours + endMinutes;
 
-        <!--시급 계산-->
-        var salary = $('#salary').text();
-        var earn = parseInt(salary) * 10000;
-        var workTime = ((endHours - startHours) + (endMinutes - startMinutes)) / 60;
-        var hourlyWage = Math.floor(((earn / 12) - (earn * 0.009)) / 20 / workTime);
+            <!--시급 계산-->
+            var salary = $('#salary').text();
+            var earn = parseInt(salary) * 10000;
+            var workTime = ((endHours - startHours) + (endMinutes - startMinutes)) / 60;
+            var hourlyWage = Math.floor(((earn / 12) - (earn * 0.009)) / 20 / workTime);
 
-        var nowWage = (nowTime - startHour) * hourlyWage;
-        var reset = "근무시간이 아닙니다.";
+            var nowWage = (nowTime - startHour) * hourlyWage;
+            var reset = "근무시간이 아닙니다.";
 
-        if( nowTime > startHour-1 && nowTime < endHour+1) {
-            var result = nowWage.toLocaleString();
-            $('#daily_earn').text(result+" 원");
-        } else {
-            $('#daily_earn').text(reset);
-        }
+            if( nowTime > startHour-1 && nowTime < endHour+1) {
+                var result = nowWage.toLocaleString();
+                $('#daily_earn').text(result+" 원");
+                console.log(result+" 원");
+            } else {
+                $('#daily_earn').text(reset);
+            }
+        }, 1000);
     });
 
 //    let run = setInterval(function(){
