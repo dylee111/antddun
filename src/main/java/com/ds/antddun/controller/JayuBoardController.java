@@ -5,8 +5,10 @@ import com.ds.antddun.dto.JayuBoardDTO;
 import com.ds.antddun.dto.PageRequestDTO;
 import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.entity.JayuBoard;
+import com.ds.antddun.entity.JayuCategory;
 import com.ds.antddun.entity.MemberWishList;
 import com.ds.antddun.service.JayuBoardService;
+import com.ds.antddun.service.JayuCateService;
 import com.ds.antddun.service.WishListService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class JayuBoardController {
 
     @Autowired
     private WishListService wishListService;
+
+    @Autowired
+    private JayuCateService jayuCateService;
 
 
     //게시글 작성
@@ -110,5 +115,16 @@ public class JayuBoardController {
         }
 
         return "/jayu/list";
+    }
+
+    //카테고리 목록
+    @GetMapping("jayu/list/jayuCateNo={jayuCateNo}")
+    public String cateList(Model model, PageRequestDTO pageRequestDTO, @PathVariable int jayuCateNo, @AuthenticationPrincipal PrincipalDetails principal) {
+        log.info("jayuCateNo"+jayuCateNo);
+        PageResultDTO<JayuBoardDTO, JayuBoard> jayuList = jayuBoardService.getListByCate(jayuCateNo, pageRequestDTO);
+        log.info("List>>>"+ jayuList);
+
+
+        return "/qna/list";
     }
 }

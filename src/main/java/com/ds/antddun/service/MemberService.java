@@ -1,17 +1,11 @@
 package com.ds.antddun.service;
 
-import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.JobListDTO;
 import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.entity.AntMemberRoleSet;
-import com.ds.antddun.entity.JobList;
 import com.ds.antddun.entity.Member;
-import com.ds.antddun.entity.MemberWishList;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 public interface MemberService {
     public List<Member> getList();
@@ -21,7 +15,7 @@ public interface MemberService {
     Long join(MemberDTO memberDTO, JobListDTO jobListDTO);
 
     //소셜로그인 후 추가 정보 기입
-    void socialJoin(@AuthenticationPrincipal PrincipalDetails principalDetails,MemberDTO memberDTO, JobListDTO jobListDTO);
+    void socialJoin(MemberDTO memberDTO, JobListDTO jobListDTO);
 
     int idCheck(String username) throws Exception;
 
@@ -61,6 +55,27 @@ public interface MemberService {
                 .salary(member.getSalary())
                 .build();
         return memberDTO;
+    }
+
+    //소셜 로그인 후 추가정보 업데이트
+    default Member socialDtoToEntity(MemberDTO memberDTO) {
+
+        Member member = Member.builder()
+                .mno(memberDTO.getMno())
+                .username(memberDTO.getUsername())
+                .password(memberDTO.getPassword())
+                .firstName(memberDTO.getFirstName())
+                .lastName(memberDTO.getLastName())
+                .phoneNum(memberDTO.getPhoneNum())
+                .role(AntMemberRoleSet.USER)
+                .experience(memberDTO.getExperience())
+                .salary(memberDTO.getSalary())
+                .startTime(memberDTO.getStartTime())
+                .endTime(memberDTO.getEndTime())
+                .createDate(memberDTO.getCreateDate())
+                .fromSocial(true)
+                .build();
+        return member;
     }
 
 

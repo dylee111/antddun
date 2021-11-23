@@ -1,6 +1,5 @@
 package com.ds.antddun.service;
 
-import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.JobListDTO;
 import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.entity.AntMemberRoleSet;
@@ -11,15 +10,11 @@ import com.ds.antddun.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -47,9 +42,12 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Long join(MemberDTO memberDTO, JobListDTO jobListDTO) {
 
+        log.info("why"+memberDTO);
+
         memberDTO.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
 
         JobList jobList = jobListRepository.findById(jobListDTO.getJno()).get();
+        log.info("wtf?"+jobList);
 
         return memberRepository.save(Member.builder()
                 .mno(memberDTO.getMno())
@@ -153,30 +151,17 @@ public class MemberServiceImpl implements MemberService {
         return result;
     }
 
+    @Transactional
     @Override
-    public void socialJoin(@AuthenticationPrincipal PrincipalDetails principalDetails, MemberDTO memberDTO, JobListDTO jobListDTO) {
-        log.info("herehrer"+memberDTO);
-        log.info("dddd"+principalDetails);
+    public void socialJoin( MemberDTO memberDTO, JobListDTO jobListDTO) {
 
-        JobList jobList = jobListRepository.findById(Integer.parseInt(memberDTO.getJob())).get();
-        log.info("S.MODIFY.J >>> " + jobList);
+        JobList jobList = jobListRepository.getById(jobListDTO.getJno());
 
-        memberRepository.save(Member.builder()
-                .mno(principalDetails.getMember().getMno())
-                .password(principalDetails.getMember().getPassword())
-                .username(principalDetails.getMember().getUsername())
-                .phoneNum(principalDetails.getMember().getPhoneNum())
-                .firstName(principalDetails.getMember().getFirstName())
-                .lastName(principalDetails.getMember().getLastName())
-                .job(jobList)
-                .experience(memberDTO.getExperience())
-                .salary(memberDTO.getSalary())
-                .role(AntMemberRoleSet.USER)
-                .startTime(memberDTO.getStartTime())
-                .endTime(memberDTO.getEndTime())
-                .fromSocial(true)
-                .createDate(memberDTO.getCreateDate())
-                .build());
+        Member member = socialDtoToEntity(memberDTO);
+        member.setMno(memberDTO.getMno()); //update되도록 mno알려주기
+        member.setJob(jobList); //Member에 setter 추가해줌
+
+        memberRepository.save(member);
     }
 
 

@@ -56,4 +56,17 @@ public class JayuBoardServiceImpl implements JayuBoardService{
         return new PageResultDTO<>(result, fn);
     }
 
+
+    //카테고리 별 게시물 목록
+    @Override
+    public PageResultDTO<JayuBoardDTO, JayuBoard> getListByCate(int jayuCateNo, PageRequestDTO pageRequestDTO){
+        Pageable pageable = pageRequestDTO.getPageable(Sort.by("regDate").descending());
+        log.info(">>>>>jayuCateNo"+jayuCateNo);
+        Page<JayuBoard> result = jayuBoardRepository.getListByCate(jayuCateNo, pageable);
+        log.info("getListByCateresult" + result);
+        Function<JayuBoard, JayuBoardDTO> fn = (entity -> entityToDTO(entity));
+
+        return new PageResultDTO<>(result, fn);
+    }
+
 }
