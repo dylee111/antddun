@@ -36,12 +36,12 @@
                         <div>
                             <p class="soso_title">문의하기</p>
                         </div>
-                        <div style="margin-top: 30px; text-align: center;">
-                            <form th:action="@{/member/messenger/register}" th:method="post">
+                        <div style="margin-top: 30px; text-align:register center;">
+                            <form th:action="@{'/member/messenger/sendMessage/' + ${read.mno}}" th:method="post">
                                 <!--내용-->
                                 <div class="form-group">
-                                    <input id="msg_title" type="text" placeholder="제목을 입력하세요"/>
-                                    <textarea id="summernote" class="msg_context" name="summernote"></textarea>
+                                    <input type="text" id="title_msg" name="msgTitle"  placeholder="제목을 입력하세요"/>
+                                    <textarea id="summernote" name="msgContent" class="msg_context"></textarea>
                                 </div>
                                 <div style="text-align: right; width: 90%; margin-top: 5px;">
                                     <button type="button" class="submit_btn" style="margin-bottom: 30px;">전송</button>
@@ -57,7 +57,6 @@
                             <p class="soso_title">구매하기</p>
                         </div>
                         <div style="margin-top: 30px; text-align: center;">
-                            <form th:action="@{/member/messenger/register}" th:method="post">
                                 <!--내용-->
                                 <div class="form-group">
                                     <div>
@@ -70,7 +69,6 @@
 
                                     <button type="button" class="buy_btn" style="margin-bottom: 30px;">구매하기</button>
                                 </div>
-                            </form>
                         </div>
                     </div>
                     <div class="dim" style="display: none;"></div>
@@ -85,7 +83,7 @@
 
                             <a class="cate" href="#!" >[[${read.categoryName}]]</a>
                             <!-- Post title-->
-                            <input id="soso_no" type="hidden" th:value="${read.categoryNo}">
+                            <input id="soso_no" type="hidden" th:value="${read.sosoNo}">
                             <input type="hidden" id="writer_no" th:value="${read.mno}">
                             <input type="hidden" id="total_ddun" th:value="${buyerTotalDdun}">
                             <h1 class="text-width fw-bolder mb-1 sell_title" name="title">[[${read.title}]]</h1>

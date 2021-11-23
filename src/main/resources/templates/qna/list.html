@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+<th:block th:replace="~{/layout/basicList :: setContent(~{this::content})}">
     <th:block th:fragment="content">
 
         <!--페이지 수정 부분 시작-->
@@ -25,48 +25,58 @@
             <div class="post-body attach-img-pre">
 
                 <div class="leftSection">
-                    <!-- 카테고리, 뚠 -->
+
                     <span id="qnaNo" hidden th:text="${boardList.qnaNo}"></span>
-                    <button th:id="likebtn" >좋아요</button>
 
+                    <!-- 카테고리, 뚠 -->
                     <span class="smallDdun" th:text="${boardList.ddun}"></span>
-
                     <span class="smallCategory" th:text="${boardList.job}"></span>
                     <!-- 제목 + 글 -->
                     <div class="post-content">
                         <h3><a th:href="@{'/member/qna/read/' + ${boardList.qnaNo}}" th:text="${boardList.title}"></a></h3>
-                        <a class="content-text" href="#post" th:utext="${boardList.content}"></a>
+                        <a class="content-text" th:href="@{'/member/qna/read/' + ${boardList.qnaNo}}"
+                           th:utext="${boardList.content}"></a>
                     </div>
 
                 </div>
 
-                <div class="rightSection">
-                    <a href="#post">
-                        <img class="imgTest" style="display:inline-block;
-                    background:lightgray; width:8rem; height:8rem;" src="" alt="">
-                        <!--           <img th:if="${dto.imageDTOList.size() > 0 && dto.imageDTOList[0].path != null}"
-                                        th:src="|/display?fileName=${dto.imageDTOList[0].getThumbnailURL()}|">-->
+ <!--               <div class="rightSection">
+                    <a th:href="@{'/member/qna/read/' + ${boardList.qnaNo}}">
+                        <img class="imgTest" style="display:inline-block; background:lightgray; width:8rem; height:8rem;" src="" alt="">
+                        &lt;!&ndash;
+                        <img th:if="${dto.imageDTOList.size() > 0 && dto.imageDTOList[0].path != null}"
+                                        th:src="|/display?fileName=${dto.imageDTOList[0].getThumbnailURL()}|">&ndash;&gt;
                     </a>
-                </div>
+                </div>-->
             </div>
 
             <!-- 사용자 정보   -->
             <div class="boardInfo">
-                <!--   세 번째 영역 -->
                 <div class="leftSection">
                     <div class="" ><a class="nickName" href="#post">[[${boardList.writer}]]</a></div>
 
                     <div class="wrapInfo">
-                        <a class="views" href="#post"><img th:src="@{/assets/eye.png}" width="24px;"> [[${boardList.viewCnt}]]</a>
-                        <a class="like"><img th:src="@{/assets/heart.png}" width="20px;"><span id="likesCnt">[[${boardList.likesCnt}]]</span></a>
-                        <a class="cmt" href="#post"><img th:src="@{/assets/messenger.png}" width="19"> [[${boardList.viewCnt}]]</a>
+                        <a class="views" th:href="@{'/member/qna/read/' + ${boardList.qnaNo}}">
+                            <img th:src="@{/assets/eye.png}" width="24px;"> [[${boardList.viewCnt}]]
+                        </a>
+
+                        <a class="like">
+                            <img style="cursor:pointer;" th:src="@{/assets/heart_0.png}" width="20px;"
+                                 th:id="likeBtn">&nbsp;<span id="likesCnt">[[${boardList.LikesCnt}]]</span>
+                        </a>
+
+                        <a class="cmt" th:href="@{'/member/qna/read/' + ${boardList.qnaNo}}">
+                            <img th:src="@{/assets/messenger.png}" width="19"> [[${boardList.viewCnt}]]
+                        </a>
                     </div>
 
                 </div>
 
                 <!--   네 번째 영역 -->
                 <div class="rightSection">
-                    <a href="#post" class="regDate" th:text="${#temporals.format(boardList.regDate, 'yy-MM-dd')}"></a>
+                    <a th:href="@{'/member/qna/read/' + ${boardList.qnaNo}}" class="regDate"
+                       th:text="${#temporals.format(boardList.regDate, 'yy-MM-dd')}">
+                    </a>
                 </div>
 
             </div>
@@ -85,7 +95,7 @@
 
                 <li th:class=" 'page-item '+ ${boardList.page == page?'active':''} "
                     th:each="page: ${boardList.pageList}">
-                    <a class="page-link" th:href="@{/qna/list/ (page = ${page}, type=${pageRequestDTO.type},
+                    <a class="page-link"  th:href="@{'/qna/list/'(id=${jobList.jno})(page = ${page}, type=${pageRequestDTO.type},
                 keyword = ${pageRequestDTO.keyword})}">
                         [[${page}]]
                     </a>

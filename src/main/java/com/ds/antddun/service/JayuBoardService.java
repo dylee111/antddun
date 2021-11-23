@@ -13,6 +13,8 @@ public interface JayuBoardService {
 
     PageResultDTO<JayuBoardDTO,JayuBoard>  getList(PageRequestDTO requestDTO);
 
+    //카테고리 목록 조회
+    PageResultDTO<JayuBoardDTO, JayuBoard> getListByCate(int jayuCateNo, PageRequestDTO pageRequestDTO);
 
     default JayuBoardDTO entityToDTO(JayuBoard jayuBoard) {
         JayuBoardDTO jayuBoardDTO = JayuBoardDTO.builder()
