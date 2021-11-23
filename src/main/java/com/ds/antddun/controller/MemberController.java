@@ -123,7 +123,8 @@ public class MemberController {
     @ResponseBody
     @PutMapping("/member/mypage/wishlist/modify/{wno}")
     public ResponseEntity<String> modifyWishList(@RequestBody MemberWishListDTO memberWishListDTO,
-                                                 @AuthenticationPrincipal PrincipalDetails principalDetails, HttpServletRequest request) {
+                                                 @AuthenticationPrincipal PrincipalDetails principalDetails,
+                                                 HttpServletRequest request) {
 
         log.info("DDAY>>>"+request.getParameter("dDay"));
         wishListService.modify(memberWishListDTO, principalDetails.getMember());

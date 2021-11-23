@@ -1,5 +1,6 @@
 package com.ds.antddun.repository;
 
+import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,5 +16,8 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
 //            " AND msg.sendMember.mno=:sendMno ")
     @Query(value = "SELECT * FROM message WHERE receive_member_mno=:mno OR send_member_mno=:mno ", nativeQuery = true)
     List<Message> getMsgListByMno(@Param("mno") Long receiverMno);
+
+    @Query("SELECT DISTINCT(msg.sendMember) FROM Message msg WHERE msg.receiveMember.mno=:receiver ")
+    List<Member> distinctSender(Long receiver);
 
 }
