@@ -11,7 +11,7 @@
         <!-- 본문 시작 -->
         <div class="subNav-body">
             <nav class="nav nav-underline" aria-label="Secondary navigation">
-                <a class="subNav" th:href="@{/jayu/list/}">전체</a><a th:each="cateList : ${cateList}" class="subNav" th:href="@{'/jayu/list/jayuCateNo=' + ${cateList.jayuCateNo}}">
+                <a class="subNav" th:href="@{/jayu/list/}">전체</a><a th:each="cateList : ${cateList}" class="subNav" th:href="@{'/jayu/list/jayuCateNo=' + ${cateList.jayuCateNo}(page = ${page})}">
                 [[${cateList.jayuCateName}]]
             </a>
             </nav>
@@ -71,15 +71,14 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination h-100 justify-content-center align-items-center">
                 <li class="page-item" th:if="${jayuList.prev}">
-                    <a class="page-link" th:href="@{/qna/list(page=${jayuList.start - 1},
+                    <a class="page-link" th:href="@{/jayu/list(page=${jayuList.start - 1},
                 type=${pageRequestDTO.type},
                 keyword = ${pageRequestDTO.keyword} ) }" tabindex="-1">이전</a>
                 </li>
 
                 <li th:class=" 'page-item '+ ${jayuList.page == page?'active':''} "
                     th:each="page: ${jayuList.pageList}">
-                    <a class="page-link" th:href="@{/jayu/list(page = ${page}, type=${pageRequestDTO.type},
-                keyword = ${pageRequestDTO.keyword})}">
+                    <a class="page-link" th:each="cateList : ${cateList}" th:href="@{'/jayu/list/jayuCateNo=' + ${cateList.jayuCateNo}(page = ${page})}">
                         [[${page}]]
                     </a>
                 </li>
