@@ -142,16 +142,14 @@ $(document).ready(function() {
             console.log(wno);
 
             console.log("수정시 dDay0 : "+$('#dDay0').val());
-            var tmp = $('#dDay0').val();
-            console.log("tmp:"+tmp)
+            var tmp = parseInt($('#dDay0').val());
             var wishList = {
                 wno: wno,
                 wishList: $("#list0").val(),
                 price: $("#price0").val(),
                 rate: $("#rate0").val(),
-                dDay: $("#dDay0").val()
+                dDay: $("#dDay0").val(tmp)
             }
-            console.log("wishList : "+JSON.stringify(wishList));
 
             $.ajax({
                 url: '/antddun/member/mypage/wishlist/modify/' + wno,
