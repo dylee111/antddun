@@ -214,7 +214,15 @@
   }
 
   #input_day {
-    width: 25%;
+    width: 35%;
+    height: 25px;
+    border: none;
+    text-align: center;
+    font-size: 15px;
+  }
+
+  .wish_day {
+    width: 35%;
     height: 25px;
     border: none;
     text-align: center;
@@ -267,14 +275,16 @@
   }
 
   .my_ddun_wrap {
-    display: inline-block;
+    display: inline;
     width: 30%;
     height: 60px;
   }
 
   .my_ddun {
-    display: inline-block;
+    display: inline;
     width: 100%;
+    font-size: 20px;
+
   }
 
   .mypage_sub {
