@@ -47,12 +47,9 @@ public class JoinController {
     }
 
     @PostMapping("/member/socialJoinComplete")
-    public String socialjoinComplete(@AuthenticationPrincipal PrincipalDetails principalDetails,MemberDTO memberDTO, JobListDTO jobListDTO) {
-        log.info("jnojno"+jobListDTO.getJno());
-        log.info("memberdto>>>>"+memberDTO);
-        memberService.socialJoin(principalDetails,memberDTO, jobListDTO);
-
-        return "redirect:/";
+    public String socialjoinComplete(MemberDTO memberDTO, JobListDTO jobListDTO) {
+        memberService.socialJoin(memberDTO,jobListDTO);
+        return "redirect:/member/welcome";
     }
 
 
