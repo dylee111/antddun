@@ -1,5 +1,6 @@
 package com.ds.antddun.repository;
 
+import com.ds.antddun.entity.JobList;
 import com.ds.antddun.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

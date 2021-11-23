@@ -3,6 +3,7 @@ package com.ds.antddun.controller;
 import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.JobListDTO;
 import com.ds.antddun.dto.MemberDTO;
+import com.ds.antddun.entity.JobList;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.repository.MemberRepository;
 import com.ds.antddun.service.JobListService;
@@ -17,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @Log4j2
@@ -38,16 +40,16 @@ public class JoinController {
 
     //소셜 로그인 추가정보 기입
     @GetMapping("/member/socialJoin")
-    public void social (Model model, @AuthenticationPrincipal PrincipalDetails principal, MemberDTO memberDTO ) {
+    public void social (Model model, @AuthenticationPrincipal PrincipalDetails principal) {
+        List<JobList> jobList = jobListService.getList();
+        model.addAttribute("jobList", jobList);
         model.addAttribute("member", principal.getMember());
     }
 
     @PostMapping("/member/socialJoinComplete")
     public String socialjoinComplete(MemberDTO memberDTO, JobListDTO jobListDTO) {
-        log.info("memberdto>>>>"+memberDTO);
-        memberService.socialJoin(memberDTO, jobListDTO);
-
-        return "redirect:/";
+        memberService.socialJoin(memberDTO,jobListDTO);
+        return "redirect:/member/welcome";
     }
 
 

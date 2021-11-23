@@ -58,7 +58,7 @@
                                         <td>
 <!--                                            <button id="day_btn">확인</button>-->
                                             <span id="show_day">D -</span>
-                                            <input type="text" id="input_day" name="dday" readonly>
+                                            <input type="text" id="input_day" name="dDay" readonly>
                                         </td>
 
                                         <td>
@@ -78,9 +78,9 @@
                                         <td style="width: 30%;"><input th:id="'list'+${index.index}" class="input_pd" name="wishList" th:value="${wishList.wishList}" th:placeholder="${wishList.wishList}" readonly></td>
                                         <td style="width: 15%;"><input th:id="'price'+${index.index}" class="input_cost" name="price" th:value="${wishList.price}" th:placeholder="${wishList.price}" readonly></td>
                                         <td style="width: 15%;"><input th:id="'rate'+${index.index}" class="input_per" name="rate" th:value="${wishList.rate}" th:placeholder="${wishList.rate}" readonly>%</td>
-                                        <td style="width: 13%;" >D-[[${wishList.dDay}]]<span class="wish_day"></span></td>
+                                        <td style="width: 13%;" >D-<input th:id="'dDay'+${index.index}" class="wish_day" name="dDay" th:value="${wishList.dDay}" th:placeholder="${wishList.dDay}" readonly/></td>
                                         <td style="width: 12%;">
-                                            <img th:id="'btn-update'+${index.index}" class="btn-image wish_update" th:src="@{/assets/wishlist/update.png}" style="width:15px;">
+                                            <img th:id="'btn-update'+${index.index}" class="btn-image wish_update" th:src="@{/assets/wishlist/update.png}" style="width:15px; filter: brightness(0);">
                                             <img th:id="'btn-delete'+${index.index}" class="btn-image wish_delete" th:src="@{/assets/wishlist/delete.png}" style="width:15px;">
                                         </td>
                                     </tr>
@@ -119,12 +119,8 @@
                         <div class="center my_margin">
                             <div>
                                 <div class="my_ddun_wrap">
-                                    <span class="my_ddun">이번 달 적립</span>
-                                    <span class="my_ddun"><strong>540</strong>뚠</span>
-                                </div>
-                                <div class="my_ddun_wrap">
                                     <span class="my_ddun">보유 뚠</span>
-                                    <span class="my_ddun"><strong>[[${totalDdun}]]</strong>뚠</span>
+                                    <span class="my_ddun"><strong style="font-size: 24px; font-weight: bold;">[[${totalDdun}]]</strong>뚠</span>
                                 </div>
                             </div>
 
@@ -133,12 +129,10 @@
                                 <table class="wish_table margin_top">
                                     <thead>
                                     <tr>
-                                        <td style="width:10%;">일자</td>
-                                        <td style="width:40%;">상세 내용</td>
-                                        <td style="width:15%;">입금</td>
-                                        <td style="width:15%;">출금</td>
-                                        <td style="width:20%;">남은 뚠</td>
-
+                                        <td style="width:15%;">일자</td>
+                                        <td style="width:45%;">상세 내용</td>
+                                        <td style="width:20%;">입금</td>
+                                        <td style="width:20%;">출금</td>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -147,7 +141,6 @@
                                         <td>[[${ddunList.content}]]</td>
                                         <td>[[${ddunList.inputAmount}]]</td>
                                         <td>[[${ddunList.outputAmount}]]</td>
-                                        <td>[[${totalDdun}]]</td>
                                     </tr>
                                     </tbody>
                                 </table>

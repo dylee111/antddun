@@ -9,6 +9,16 @@ $(document).ready(function() {
         }
     });
 
+    //거래자와의 쪽지 보이기
+    $('#park').click(function(){
+        $('#mail_lee').hide();
+        $('#mail_park').show();
+    });
+    $('#lee').click(function(){
+        $('#mail_lee').show();
+        $('#mail_park').hide();
+    });
+
     //거래중/거래완료 버튼
     $('.button--primary').click(function(){
         if($('.button--primary').css("background", "rgb(255, 214, 51)") == true) {
