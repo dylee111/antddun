@@ -66,7 +66,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         String sendUrl = "";
         if (roleList.contains("USER") && fromSocial) sendUrl = "/";
         if (roleList.contains("ADMIN") && fromSocial) sendUrl = "/admin";
-        if (roleList.contains("SOCIAL") && fromSocial ) sendUrl = "/antddun/member/socialJoin";
+        if (roleList.contains("SOCIAL") && fromSocial ) sendUrl = "/member/socialJoin";
         log.info("sendUrl: "+sendUrl);
         redirectStrategy.sendRedirect(request, response, sendUrl);
     }

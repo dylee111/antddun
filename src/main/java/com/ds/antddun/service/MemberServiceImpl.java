@@ -1,5 +1,6 @@
 package com.ds.antddun.service;
 
+import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.JobListDTO;
 import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.entity.AntMemberRoleSet;
@@ -10,6 +11,7 @@ import com.ds.antddun.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -152,10 +154,29 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void socialJoin(MemberDTO memberDTO, JobListDTO jobListDTO) {
-        JobList jobList = jobListRepository.findById(jobListDTO.getJno()).get();
-        Member member = socialDtoToEntity(memberDTO);
-        memberRepository.save(member);
+    public void socialJoin(@AuthenticationPrincipal PrincipalDetails principalDetails, MemberDTO memberDTO, JobListDTO jobListDTO) {
+        log.info("herehrer"+memberDTO);
+        log.info("dddd"+principalDetails);
+
+        JobList jobList = jobListRepository.findById(Integer.parseInt(memberDTO.getJob())).get();
+        log.info("S.MODIFY.J >>> " + jobList);
+
+        memberRepository.save(Member.builder()
+                .mno(principalDetails.getMember().getMno())
+                .password(principalDetails.getMember().getPassword())
+                .username(principalDetails.getMember().getUsername())
+                .phoneNum(principalDetails.getMember().getPhoneNum())
+                .firstName(principalDetails.getMember().getFirstName())
+                .lastName(principalDetails.getMember().getLastName())
+                .job(jobList)
+                .experience(memberDTO.getExperience())
+                .salary(memberDTO.getSalary())
+                .role(AntMemberRoleSet.USER)
+                .startTime(memberDTO.getStartTime())
+                .endTime(memberDTO.getEndTime())
+                .fromSocial(true)
+                .createDate(memberDTO.getCreateDate())
+                .build());
     }
 
 
