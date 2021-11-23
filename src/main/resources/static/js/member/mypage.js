@@ -137,25 +137,27 @@ $(document).ready(function() {
         } else if(count == 2) {
             console.log(count);
             $(this).css("filter", "brightness(0)");
-            alert("돌아감");
             var wno = $("#wno0").val();
             console.log(wno);
 
             console.log("수정시 dDay0 : "+$('#dDay0').val());
-            var tmp = parseInt($('#dDay0').val());
-            var wishList = {
+            var tmp = $('#dDay0').val();
+            console.log("tmp:"+tmp)
+            var wishLists = {
                 wno: wno,
                 wishList: $("#list0").val(),
                 price: $("#price0").val(),
                 rate: $("#rate0").val(),
-                dDay: $("#dDay0").val(tmp)
+                dDay: $("#dDay0").val()
             }
+            console.log("wishList : "+JSON.stringify(wishLists));
 
             $.ajax({
                 url: '/antddun/member/mypage/wishlist/modify/' + wno,
                 method: 'put',
-                data: JSON.stringify(wishList),
+                dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(wishLists),
                 success: function(result) {
                     if(result === 'modify') {
                         alert("수정완료"+ wno);
@@ -369,7 +371,7 @@ $(document).ready(function() {
                   wishList: $("#input_list").val(),
                   price: $("#input_price").val(),
                   rate: $("#input_rate").val(),
-                  dDay: $("#input_day").val(),
+                  dDay: $("#input_day").val()
             },
             success: function(data) {
                 if(data < 3) {

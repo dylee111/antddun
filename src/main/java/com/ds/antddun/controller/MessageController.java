@@ -29,16 +29,13 @@ public class MessageController {
 
     @GetMapping("/messenger")
     public String messenger(Model model, @AuthenticationPrincipal PrincipalDetails principal) {
-        List<Message> msgList = messageService.getMsgListByMno(principal.getMember().getMno());
-        List<Member> memberList = new ArrayList<>();
 
-        for (int i = 0; i < msgList.size(); i++) {
-            memberList.add(memberList.get(i));
-        }
-        log.info("MEMBERLIST >>> " + memberList);
+        List<Member> senderList = messageService.distinctSender(principal.getMember().getMno());
+        log.info("SENDER >>> " + senderList);
         if (principal != null) {
             model.addAttribute("member", principal.getMember());
             model.addAttribute("msgList", messageService.getMsgListByMno(principal.getMember().getMno()));
+            model.addAttribute("senderList", senderList);
         }
         return "member/messenger";
     }

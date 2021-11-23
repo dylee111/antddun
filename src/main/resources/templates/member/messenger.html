@@ -24,13 +24,9 @@
 
                 <table class="table" style="table-layout: fixed">
                     <tbody>
-                    <tr th:each="msgList : ${msgList}" >
+                    <tr th:each="senderList : ${senderList}" >
                         <td >
-                            <strong class="sender" th:if="${msgList.receiveMember.mno} != ${member.mno}">[[${msgList.receiveMember.lastName}]][[${msgList.receiveMember.firstName}]]</strong>
-                            <strong class="sender" th:if="${msgList.receiveMember.mno} == ${member.mno}">[[${msgList.sendMember.lastName}]][[${msgList.sendMember.firstName}]]</strong>
-                            <span class="send_date">[[${msgList.sendTime}]]</span>
-                            <span class="send_message">[[${msgList.msgContent}]]</span>
-
+                            <strong class="sender" >[[${senderList.lastName}]][[${senderList.firstName}]]</strong>
                         </td>
                     </tr>
 <!--                    <tr>-->
@@ -63,140 +59,26 @@
                     </span>
                     </div>
 
-                    <div class="mail">
+                    <div class="mail" th:each="msgList :${msgList}">
                         <div class="sender_info">
-                            <div style="height: 45px;">
+                            <div  style="height: 45px;">
                                 <strong class="sender">
-                                    <span th:text="${member.lastName}"></span>
-                                    <span th:text="${member.firstName}"></span>
+                                    <div>[[${msgList.sendMember.lastName}]][[${msgList.sendMember.firstName}]]</div>
                                 </strong>
-                                <span>(<span th:text="${member.username}"></span>)</span>
-                                <span class="send_time">2021.11.19 오후 12:32</span>
+                                <span>(<span th:text="${msgList.sendMember.username}"></span>)</span>
+                                <span class="send_time" th:text="${msgList.sendTime}"></span>
                             </div>
                         </div>
                         <div class="send_msg">
-                            <p>디자이너님, 안녕하세요.<br>
-                                ㅇㅇ브랜드 브랜드 담당자 ㅇㅇ입니다.<br>
-                                디자이너님께 쪽지를 보낸 이유는 상세페이지 디자인 의뢰를 문의드리기 위해서 입니다.<br>
-                                <br>
-                                저희 ㅇㅇ브랜드는 자연 성분으로 만들어진 비건 화장품 브랜드입니다.<br>
-                                자연주의에 맞게 원재료가 시각적으로 강조되면서도 심플하고 고급스러운 느낌의 상세페이지를 희망하고 있습니다.<br>
-                                레퍼런스로는 <span style="color:blue; text-decoration: underline;">이니스프리</span>를 참고해주시길 바랍니다!<br>
-                                <br>
-                                책정하신 뚠은 상세페이지 1건당 가격으로 인지하고있습니다만,<br>
-                                혹시 10건 이상 요청드릴 경우 가격도 동일하게 70,000뚠 * 10건 = 700,000원일지 문의드립니다.<br>
-                                <br>
-                                그럼 답변 부탁드립니다:)<br>
-                                감사합니다.<br>
+                            <p th:text="${msgList.msgContent}">
                             </p>
+                            <p th:text="${msgList.receiveMember.username}"></p>
+                            <p th:text="${msgList.sendMember.username}"></p>
+                            <p th:text="${msgList.sendMember.firstName}"></p>
+                            <p th:text="${msgList.receiveMember.firstName}"></p>
                         </div>
-                    </div>
-                    <div class="send_msg" th:each="msgList : ${msgList}">
-                        <p> [[${msgList.receiveMember}]]
-
-                    </div>
-                    <div class="mail">
-                        <div class="sender_info">
-                            <div style="height: 45px;">
-                                <strong class="sender">
-                                    <span th:text="${member.lastName}"></span>
-                                    <span th:text="${member.firstName}"></span>
-                                </strong>
-                                <span>(<span th:text="${member.username}"></span>)</span>
-                                <span class="send_time">2021.11.24 오후 04:19</span>
-                            </div>
-                        </div>
-                        <div class="send_msg">
-                            <p>디자이너님, 안녕하세요.<br>
-                                ㅇㅇ브랜드 브랜드 담당자 ㅇㅇ입니다.<br>
-                                디자이너님께 쪽지를 보낸 이유는 상세페이지 디자인 의뢰를 문의드리기 위해서 입니다.<br>
-                                <br>
-                                저희 ㅇㅇ브랜드는 자연 성분으로 만들어진 비건 화장품 브랜드입니다.<br>
-                                자연주의에 맞게 원재료가 시각적으로 강조되면서도 심플하고 고급스러운 느낌의 상세페이지를 희망하고 있습니다.<br>
-                                레퍼런스로는 <span style="color:blue; text-decoration: underline;">이니스프리</span>를 참고해주시길 바랍니다!<br>
-                                <br>
-                                책정하신 뚠은 상세페이지 1건당 가격으로 인지하고있습니다만,<br>
-                                혹시 10건 이상 요청드릴 경우 가격도 동일하게 70,000뚠 * 10건 = 700,000원일지 문의드립니다.<br>
-                                <br>
-                                그럼 답변 부탁드립니다:)<br>
-                                감사합니다.<br>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="mail">
-                        <div class="sender_info">
-                            <div style="height: 45px;">
-                                <strong class="sender">이하니 </strong>
-                                <span>(<span>hanieee@ds.com</span>)</span>
-                                <span class="send_time">2021.11.25 오전 11:48</span>
-                            </div>
-                        </div>
-                        <div class="send_msg">
-                            <p>
-                                수정작업은 총 3번 가능합니다.<br>
-                                (상세페이지 건당 3번으로 생각해주시면 됩니다!)<br>
-                                <br>
-                                그럼, 추가적인 문의사항이 있다면 말씀주세요!<br>
-                                감사합니다.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div id="mail_park" style="display:none;">
-                    <div class="margin_bottom">
-                        <input type="button" class="check_btn button--primary button--with-icon" style="margin-right:10px;" value="거래 중" />
-                        <span class="send_title">
-                        뷰티 브랜드 로고 작업을 의뢰드립니다.
-                    </span>
                     </div>
 
-                    <div class="mail">
-                        <div class="sender_info">
-                            <div style="height: 45px;">
-                                <strong class="sender">
-                                    <span th:text="${member.lastName}"></span>
-                                    <span th:text="${member.firstName}"></span>
-                                </strong>
-                                <span>(<span th:text="${member.username}"></span>)</span>
-                                <span class="send_time">2021.11.21 오후 01:21</span>
-                            </div>
-                        </div>
-                        <div class="send_msg">
-                            <p>디자이너님, 안녕하세요.<br>
-                                ㅇㅇ브랜드 브랜드 담당자 ㅇㅇ입니다.<br>
-                                디자이너님께 쪽지를 보낸 이유는 상세페이지 디자인 의뢰를 문의드리기 위해서 입니다.<br>
-                                <br>
-                                저희 ㅇㅇ브랜드는 자연 성분으로 만들어진 비건 화장품 브랜드입니다.<br>
-                                자연주의에 맞게 원재료가 시각적으로 강조되면서도 심플하고 고급스러운 느낌의 상세페이지를 희망하고 있습니다.<br>
-                                레퍼런스로는 <span style="color:blue; text-decoration: underline;">이니스프리</span>를 참고해주시길 바랍니다!<br>
-                                <br>
-                                책정하신 뚠은 상세페이지 1건당 가격으로 인지하고있습니다만,<br>
-                                혹시 10건 이상 요청드릴 경우 가격도 동일하게 70,000뚠 * 10건 = 700,000원일지 문의드립니다.<br>
-                                <br>
-                                그럼 답변 부탁드립니다:)<br>
-                                감사합니다.<br>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="mail">
-                        <div class="sender_info">
-                            <div style="height: 45px;">
-                                <strong class="sender">박두철 </strong>
-                                <span>(<span>designerdc@ds.com</span>)</span>
-                                <span class="send_time">2021.11.25 오전 09:42</span>
-                            </div>
-                        </div>
-                        <div class="send_msg">
-                            <p>
-                                문의주신 내용을 바탕으로 초안 첨부하여 드립니다.<br>
-                                총 5개의 시안으로 보내드리니 가장 적합한 것을 2개 정도 픽해주시면 수정작업시 참고하도록 하겠습니다!<br>
-                                <br>
-                                그럼, 추가적인 문의사항이 있다면 말씀주세요!<br>
-                                감사합니다.
-                            </p>
-                        </div>
-                    </div>
-                </div>
 
                 <div id="mail_write">
                     <form th:action="@{/member/messenger/register}" th:method="post">
