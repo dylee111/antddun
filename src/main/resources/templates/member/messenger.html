@@ -24,27 +24,28 @@
 
                 <table class="table" style="table-layout: fixed">
                     <tbody>
-                    <tr>
-                        <td>
-                            <strong class="sender">이름</strong>
-                            <span class="send_date">2021.11.12</span>
-                            <span class="send_message">제가 구구절절 궁금한게 많은데요.... 문의를 해도 괜찮을지 모르겠어요^_ㅠ</span>
+                    <tr th:each="msgList : ${msgList}" >
+                        <td >
+                            <strong class="sender" th:if="${msgList.receiveMember.mno} != ${member.mno}">[[${msgList.receiveMember.lastName}]][[${msgList.receiveMember.firstName}]]</strong>
+                            <strong class="sender" th:if="${msgList.receiveMember.mno} == ${member.mno}">[[${msgList.sendMember.lastName}]][[${msgList.sendMember.firstName}]]</strong>
+                            <span class="send_date">[[${msgList.sendTime}]]</span>
+                            <span class="send_message">[[${msgList.msgContent}]]</span>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <strong class="sender">이름</strong>
-                            <span class="send_date">2021.11.12</span>
-                            <span class="send_message">제가 구구절절 궁금한게 많은데요.... 문의를 해도 괜찮을지 모르겠어요^_ㅠ</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong class="sender">이름</strong>
-                            <span class="send_date">2021.11.12</span>
-                            <span class="send_message">제가 구구절절 궁금한게 많은데요.... 문의를 해도 괜찮을지 모르겠어요^_ㅠ</span>
-                        </td>
-                    </tr>
+<!--                    <tr>-->
+<!--                        <td>-->
+<!--                            <strong class="sender">이름</strong>-->
+<!--                            <span class="send_date">2021.11.12</span>-->
+<!--                            <span class="send_message">제가 구구절절 궁금한게 많은데요.... 문의를 해도 괜찮을지 모르겠어요^_ㅠ</span>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>-->
+<!--                            <strong class="sender">이름</strong>-->
+<!--                            <span class="send_date">2021.11.12</span>-->
+<!--                            <span class="send_message">제가 구구절절 궁금한게 많은데요.... 문의를 해도 괜찮을지 모르겠어요^_ㅠ</span>-->
+<!--                        </td>-->
+<!--                    </tr>-->
                     </tbody>
                 </table>
             </div>
@@ -66,9 +67,8 @@
                             <span class="send_time">2021.11.12 오후 12:32</span>
                         </div>
                     </div>
-                    <div class="send_msg">
-                        <p> 담당자님, 비즈니스 프로필을 최신 상태로 유지하세요. Google 검색 및 지도에서 내 비즈니스를 찾는 사람들이
-                            신규 고객으로 전환될 수 있습니다. 이제 더 쉽게 내 비즈니스 프로필을 관리할 수 있습니다.</p>
+                    <div class="send_msg" th:each="msgList : ${msgList}">
+                        <p> [[${msgList.receiveMember}]]
                     </div>
                 </div>
                 <div class="mail">
