@@ -4,42 +4,51 @@
     <th:block th:fragment="content">
         <!--페이지 수정 부분 시작-->
         <!-- 페이지 css/ js 추가 -->
-        <link rel="stylesheet" th:href="@{/css/board/qnaStyles/.css}">
+        <link rel="stylesheet" th:href="@{/css/board/qna/read.css}">
+        <script th:src="@{/js/board/qna/like.js}"></script>
+        <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
 
         <!-- 본문 시작 -->
         <div class="content">
-
-            <!--제목-->
             <div class="form-group">
-                <input type="text" class="form-control" name="title" readonly
-                       th:value="${boardList.title}">
-            </div>
 
-            <!--내용-->
-            <div class="form-group">
-                <div name="content" th:utext="${boardList.content}"></div>
-            </div>
+                <!-- 카테고리 -->
+                <div>
+                    <span id="qnaNo" hidden th:text="${boardList.qnaNo}"></span>
+                    <span class="cate" th:text="${boardList.job}" ></span>
+                </div>
 
-            <!--작성자-->
-            <div class="form-group">
-                <input type="text" class="form-control" name="writer"
-                       th:value="${boardList.writer}" readonly>
-            </div>
+                <h3 th:text="${boardList.title}"></h3>
 
-            <!--등록일자-->
-            <div class="form-group">
-                <input type="text" class="form-control" name="regDate" readonly
-                       th:value="${#temporals.format(boardList.regDate,'yyyy/MM/dd HH:mm:ss')}">
+                <div style="width:100%;">
+                    <!-- 작성자 -->
+                    <div class="writer" name="writer" th:utext="${boardList.writer}"></div>
+
+                    <!-- 날짜 -->
+                    <div class="dateTime">
+                        <span>등록일:
+                            <span name="regDate" th:utext="${#temporals.format(boardList.regDate,'yyyy/MM/dd HH:mm:ss')}"
+                                  style="margin-right: 15px;"></span>
+                        </span>
+                        <span>수정일:
+                            <span name="modDate" th:utext="${#temporals.format(boardList.modDate,'yyyy/MM/dd HH:mm:ss')}"></span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 본문 -->
+                <hr>
+                <div class="content_height" name="content" th:utext="${boardList.content}"></div>
+
             </div>
 
             <!--좋아요 개수-->
-                <div>[[${boardList.likesCnt}]]개</div>
+            <a class="like">
+                <img style="cursor:pointer;" th:src="@{/assets/heart_0.png}" width="20px;"
+                     th:id="likeBtn">&nbsp;<span id="likesCnt">[[${boardList.LikesCnt}]]</span>
+            </a>
 
-            <!-- 수정일자-->
-            <div class="form-group">
-                <input type="text" class="form-control" name="modDate" readonly
-                       th:value="${#temporals.format(boardList.modDate,'yyyy/MM/dd HH:mm:ss')}">
-            </div>
+
             <a th:href="@{/qna/list}">
                 <button class="btn btn-primary">목록보기</button>
             </a>
