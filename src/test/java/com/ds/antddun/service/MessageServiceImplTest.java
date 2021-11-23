@@ -28,4 +28,9 @@ class MessageServiceImplTest {
         }
         System.out.println(result2);
     }
+
+    @Test
+    void 발신자중복제거() {
+        System.out.println(messageRepository.distinctSender(35L));
+    }
 }

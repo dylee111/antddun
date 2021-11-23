@@ -15,6 +15,8 @@ public interface MessageService {
 
     List<Message> getMsgListByMno(Long mno);
 
+    List<Member> distinctSender(Long sender);
+
     default Message dtoToEntity(MessageDTO messageDTO, Member sender, Member receiver) {
         Message message = Message.builder()
                 .msgNo(messageDTO.getMsgNo())

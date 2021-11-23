@@ -42,4 +42,11 @@ public class MessageServiceImpl implements MessageService{
 
         return result;
     }
+
+    @Override
+    public List<Member> distinctSender(Long sender) {
+        List<Member> result = messageRepository.distinctSender(sender);
+
+        return result;
+    }
 }
