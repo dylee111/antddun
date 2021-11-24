@@ -11,7 +11,8 @@
         <!-- 본문 시작 -->
         <div class="subNav-body">
             <nav class="nav nav-underline" aria-label="Secondary navigation">
-                <a class="subNav" th:href="@{/jayu/list/all}">전체</a><a th:each="cateList : ${cateList}" class="subNav"
+                <a class="subNav" th:href="@{/jayu/list/all}">전체</a>
+                <a th:each="cateList : ${cateList}" class="subNav"
                         th:onclick="|javascript:getCateList(${cateList.jayuCateNo},'1')|">
                 [[${cateList.jayuCateName}]]
             </a>

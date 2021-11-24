@@ -2,33 +2,33 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="~{/layout/basicList :: setContent(~{this::content})}">
     <th:block th:fragment="content">
-        <!--페이지 수정 부분 시작-->
 
+        <!--페이지 수정 부분 시작-->
         <!-- 페이지 css/ js 추가 -->
         <link th:href="@{/css/board/qna/qnaStyles.css}" rel="stylesheet" />
+        <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
+        <script th:src="@{/js/board/qna/likes.js}"></script>
+
+
 
         <!-- 본문 시작 -->
         <div class="subNav-body">
             <nav class="nav nav-underline" aria-label="Secondary navigation">
-                <a class="subNav"
-                   th:href="@{/qna/list/all/}">전체</a>
-
-                <a th:each="jobList : ${jobList}" class="subNav" th:onclick="|javascript:getjobList(${jobList.jno},'1')|">[[${jobList.job}]]
+                <a th:classappend="${#httpServletRequest.requestURI} == '/antddun/qna/list/' ? 'subNav_on' : 'subNav'" th:href="@{/qna/list/}">전체 </a>
+                <a th:classappend="${#httpServletRequest.requestURI} == '/antddun/qna/list/'+${jobList.jno} ? 'subNav_on' : 'subNav'" th:each="jobList : ${jobList}" th:href="@{'/qna/list/' + ${jobList.jno}}">
+                    [[${jobList.job}]]
                 </a>
             </nav>
         </div>
 
-        <a th:href="@{/member/qna/registerForm}">
-            <button class="btn btn-primary" style="float: right; margin-top: -130px;">글 쓰기</button>
-        </a>
-
         <!-- 게시물 -->
         <div class="card qnaCardList" th:each="boardList : ${boardList.dtoList}">
+
             <div class="post-body attach-img-pre">
 
                 <div class="leftSection">
 
-                    <span id="qnaNo" hidden th:text="${boardList.qnaNo}"></span> <!--qnaNo 넘겨줄 때 필요-->
+                    <span id="qnaNo" hidden th:text="${boardList.qnaNo}"></span>
 
                     <!-- 카테고리, 뚠 -->
                     <span class="cate" th:text="${boardList.job}"></span>
@@ -39,18 +39,16 @@
                         <a class="content-text" th:href="@{'/member/qna/read/' + ${boardList.qnaNo}}"
                            th:utext="${boardList.content}"></a>
                     </div>
+                </div>
 
-                </div>
-<!--
-                <div class="rightSection">
-                   <a th:href="@{'/member/qna/read/' + ${boardList.qnaNo}}">
-                       <img class="imgTest" style="display:inline-block; background:lightgray; width:8rem; height:8rem;" src="" alt="">
-                       &lt;!&ndash;
-                       <img th:if="${dto.imageDTOList.size() > 0 && dto.imageDTOList[0].path != null}"
-                                       th:src="|/display?fileName=${dto.imageDTOList[0].getThumbnailURL()}|">&ndash;&gt;
-                   </a>
-                </div>
--->
+ <!--               <div class="rightSection">
+                    <a th:href="@{'/member/qna/read/' + ${boardList.qnaNo}}">
+                        <img class="imgTest" style="display:inline-block; background:lightgray; width:8rem; height:8rem;" src="" alt="">
+                        &lt;!&ndash;
+                        <img th:if="${dto.imageDTOList.size() > 0 && dto.imageDTOList[0].path != null}"
+                                        th:src="|/display?fileName=${dto.imageDTOList[0].getThumbnailURL()}|">&ndash;&gt;
+                    </a>
+                </div>-->
             </div>
 
             <!-- 사용자 정보   -->
@@ -63,7 +61,23 @@
                             <img th:src="@{/assets/eye.png}" width="24px;"> [[${boardList.viewCnt}]]
                         </a>
 
+<!--
+                        리스트에서 하트 누르는 거 보류..
+                        <img th:if="${boardList.LikesCnt != 1}"  th:src="@{/assets/heart_0.png}" width="20px;" />
+                        <img th:if="${boardList.LikesCnt == 1}"  th:src="@{/assets/heart_1.png}" width="20px;" />
+
+                        <a class="like" id="likeBtn" >
+                            <img style="cursor:pointer;"  th:src="@{/assets/heart_0.png}" width="20px;">
+                            &nbsp;<span id="likesCnt">[[${boardList.LikesCnt}]]</span>
+                        </a>
+
                         <a class="like">
+                        <span th:if="${qnaCheck} == null "><img th:src="@{/assets/heart_0.png}" width="20px;"th:id="likeBtn"></span>
+                        <span th:if="${qnaCheck} != null"><img th:src="@{/assets/heart_1.png}" width="20px;"th:id="likeBtn"></span>
+                        </a>
+-->
+
+                       <a class="like">
                             <img th:src="@{/assets/heart_0.png}" width="25px;">&nbsp;[[${boardList.LikesCnt}]]
                         </a>
 
@@ -86,43 +100,42 @@
         </div> <!-- cardList end -->
 
 
-        <!--    페이지 번호     -->
         <nav aria-label="Page navigation example">
+            <!--    페이지 번호     -->
             <ul class="pagination h-100 justify-content-center align-items-center">
                 <li class="page-item" th:if="${boardList.prev}">
-                    <a class="page-link" th:href="@{/qna/list(cate=${pageRequestDTO.cate}, page=${boardList.start - 1},
-                keyword = ${pageRequestDTO.keyword})}" tabindex="-1">이전</a>
+                    <a class="page-link" th:href="@{/qna/list/(page=${boardList.start - 1},
+                type=${pageRequestDTO.type},
+                keyword = ${pageRequestDTO.keyword} ) }" tabindex="-1">이전</a>
                 </li>
 
                 <li th:class=" 'page-item '+ ${boardList.page == page?'active':''} "
                     th:each="page: ${boardList.pageList}">
-                    <a class="page-link" th:href="@{/qna/list(cate=${pageRequestDTO.cate}, page = ${page},
+                    <a class="page-link"  th:href="@{'/qna/list/'(id=${jobList.jno})(page = ${page}, type=${pageRequestDTO.type},
                 keyword = ${pageRequestDTO.keyword})}">
                         [[${page}]]
                     </a>
                 </li>
 
                 <li class="page-item" th:if="${boardList.next}">
-                    <a class="page-link" th:href="@{/qna/list(cate=${pageRequestDTO.cate},page= ${boardList.end + 1},
-                keyword = ${pageRequestDTO.keyword})}">다음</a>
+                    <a class="page-link" th:href="@{/qna/list/ (page= ${boardList.end + 1}, type=${pageRequestDTO.type}
+                , keyword = ${pageRequestDTO.keyword} )}">다음</a>
                 </li>
             </ul>
         </nav>
+
+        <a th:href="@{/member/qna/registerForm}" class="write">글쓰기</a>
+
         <!-- 본문 끝 -->
         <!--페이지 수정 부분 끝-->
 
-        <script th:inline="javascript">
-            function getjobList(jno, page, keyword){
-                var contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
 
-                /*[+
-                var urlword = contextPath + [[@{/qna/list}]] +
-                    "?cate=" +jno
-                     + "&page=" + page + "&keyword=" + keyword;
-                +]*/
-
-                location.href=urlword;
-            }
+        <script type="text/javascript" th:inline="javascript">
+        var msg = $.parseJSON('[[ ${msg} ]]');
+        var url = "@{/assets/coins.png}";
+        var heart0 = [[ ${msg} ]]
         </script>
+        <script th:src="@{/js/board/qna/like.js}"></script>
+
     </th:block>
 </th:block>
