@@ -26,8 +26,8 @@ public class QnaBoardDTO {
     private String job;
     private String writer;
     private int ddun;
-    private int ViewCnt;
-    private int LikesCnt;
+    private int viewCnt;
+    private int likesCnt;
 
     private LocalDateTime regDate;
     private LocalDateTime modDate;

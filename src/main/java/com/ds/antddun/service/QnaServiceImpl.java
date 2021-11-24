@@ -59,6 +59,7 @@ public class QnaServiceImpl implements QnaService {
                 (QnaBoard) arr[0],
                 (Long) arr[1])
         );
+        log.info("wdddh"+ fn);
         return new PageResultDTO<>(result, fn);
     }
 
@@ -88,10 +89,7 @@ public class QnaServiceImpl implements QnaService {
 
     @Override
     public QnaBoardDTO getBoard(Long qnaNo) {
-        log.info("qnaNONONO"+ qnaNo);
         List<Object[]> result = qnaBoardRepository.getBoardWithAllByQnaNo(qnaNo);
-        log.info("resultqnaNONONO"+ qnaNo);
-        log.info("resultresult"+result);
 
         QnaBoard qnaBoard = (QnaBoard) result.get(0)[0];
         Long likesCnt = (Long) result.get(0)[1];
