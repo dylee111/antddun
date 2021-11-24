@@ -7,6 +7,8 @@
         <!-- 페이지 css/ js 추가 -->
         <link th:href="@{/css/board/qna/qnaStyles.css}" rel="stylesheet" />
         <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
+        <script th:src="@{/js/board/qna/likes.js}"></script>
+
 
 
         <!-- 본문 시작 -->
@@ -28,8 +30,8 @@
                     <span id="qnaNo" hidden th:text="${boardList.qnaNo}"></span>
 
                     <!-- 카테고리, 뚠 -->
+                    <span class="cate" th:text="${boardList.job}"></span>
                     <span class="smallDdun" th:text="${boardList.ddun}"></span>
-                    <span class="smallCategory" th:text="${boardList.job}"></span>
                     <!-- 제목 + 글 -->
                     <div class="post-content">
                         <h3><a th:href="@{'/member/qna/read/' + ${boardList.qnaNo}}" th:text="${boardList.title}"></a></h3>
@@ -59,16 +61,24 @@
                             <img th:src="@{/assets/eye.png}" width="24px;"> [[${boardList.viewCnt}]]
                         </a>
 
-<!--                        <img th:if="${boardList.LikesCnt != 1}"  th:src="@{/assets/heart_0.png}" width="20px;" />
+<!--
+                        리스트에서 하트 누르는 거 보류..
+                        <img th:if="${boardList.LikesCnt != 1}"  th:src="@{/assets/heart_0.png}" width="20px;" />
                         <img th:if="${boardList.LikesCnt == 1}"  th:src="@{/assets/heart_1.png}" width="20px;" />
 
-                        <div>
-                            <img id="likes">
-                        </div>-->
+                        <a class="like" id="likeBtn" >
+                            <img style="cursor:pointer;"  th:src="@{/assets/heart_0.png}" width="20px;">
+                            &nbsp;<span id="likesCnt">[[${boardList.LikesCnt}]]</span>
+                        </a>
 
                         <a class="like">
-                            <img style="cursor:pointer;" th:src="@{/assets/heart_0.png}" width="20px;"
-                                 id="likeBtn">&nbsp;<span id="likesCnt">[[${boardList.LikesCnt}]]</span>
+                        <span th:if="${qnaCheck} == null "><img th:src="@{/assets/heart_0.png}" width="20px;"th:id="likeBtn"></span>
+                        <span th:if="${qnaCheck} != null"><img th:src="@{/assets/heart_1.png}" width="20px;"th:id="likeBtn"></span>
+                        </a>
+-->
+
+                       <a class="like">
+                            <img th:src="@{/assets/heart_0.png}" width="25px;">&nbsp;[[${boardList.LikesCnt}]]
                         </a>
 
                         <a class="cmt" th:href="@{'/member/qna/read/' + ${boardList.qnaNo}}">
