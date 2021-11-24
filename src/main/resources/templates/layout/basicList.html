@@ -68,12 +68,14 @@
 
         <div class="container-main container">
             <div id="search-wrap" style="margin-bottom: 20px;">
-                <form action="/jayu/list/all" method="get">
+                <form th:action="@{/jayu/list/all}" method="get" id="searchForm">
                     <div style="display: flex; margin-right: 90px;">
+                        <input type="hidden" name="page" value="1">
                         <input type="text" id="search-bar" name="keyword" th:value="${pageRequestDTO.keyword}"/>
-                        <button type="submit" class="searchButton">
+                        <button type="button" class="searchButton">
                             <i class="fa fa-search"></i>
                         </button>
+                        </input>
                     </div>
                 </form>
             </div>
@@ -87,7 +89,6 @@
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright ⓒ개미는뚠뚠 2021</p></div>
         </footer>
-
     </div>
 
     </body>

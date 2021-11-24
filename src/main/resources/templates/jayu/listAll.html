@@ -96,6 +96,7 @@
 
         <script th:inline="javascript">
            var contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
+           //카테고리 페이지 이동
            function getCateList(jayuCateNo, page){
                 /*[+
                 var cateurl = contextPath + [[@{/jayu/list}]] +
@@ -105,6 +106,7 @@
                 location.href=cateurl;
             }
 
+           //게시물 조회
            function read(jayuNo, page, keyword){
                 /*[+
                 var readurl = contextPath + [[@{/member/jayu/read}]] +
@@ -114,6 +116,11 @@
                 location.href=readurl;
             }
 
+           //검색
+           var searchForm = $("#searchForm");
+           $('.searchButton').click(function(e){
+                searchForm.submit();
+           });
         </script>
     </th:block>
 </th:block>
