@@ -2,6 +2,7 @@ package com.ds.antddun.entity;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -15,6 +16,7 @@ import java.util.Set;
 @ToString
 @Getter
 @Setter
+@DynamicUpdate
 @SequenceGenerator(name="MEMBER_SEQ_GEN",sequenceName = "MEMBER_SEQ", initialValue = 1, allocationSize = 1)
 //@DynamicInsert // INSERT 시 Null인 값을 제외
 public class Member {

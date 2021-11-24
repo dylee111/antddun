@@ -12,5 +12,17 @@ import org.springframework.data.domain.Sort;
 @AllArgsConstructor
 @Data
 public class SosoPageRequestDTO {
-    Pageable twentyElements = PageRequest.of(0, 12);
+    private int page;
+    private int size;
+    private String type;
+    private String keyword;
+
+    public SosoPageRequestDTO() {
+        page = 1;
+        size = 12;
+    }
+
+    public Pageable getPageable(Sort sort) {
+        return PageRequest.of(page - 1, size, sort.descending());
+    } // getPageable()
 } // class End.

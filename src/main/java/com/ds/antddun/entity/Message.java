@@ -2,6 +2,7 @@ package com.ds.antddun.entity;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.annotation.Nullable;
@@ -14,6 +15,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Getter
 @ToString(exclude = {"sendMember", "receiveMember"})
+@DynamicUpdate
 @SequenceGenerator(name="MESSAGE_SEQ_GEN",sequenceName = "MESSAGE_SEQ", initialValue = 1, allocationSize = 1)
 public class Message {
     @Id

@@ -61,26 +61,26 @@ class SosoJobServiceImplTest {
         System.out.println(sosoBoardRepository.readBySosoNo(10L));
     }
 
-    @Test
-    void page() {
-
-        PageResultDTO<SosoBoardDTO, SosoJobBoard> resultDTO = sosoJobService.getList(1);
-        System.out.println(resultDTO.isNext());
-        System.out.println(resultDTO.getPage());
-        for (SosoBoardDTO sosoBoardDTO : resultDTO.getDtoList()) {
-            System.out.println(sosoBoardDTO);
-        }
-    }
+//    @Test
+//    void page() {
+//
+//        PageResultDTO<SosoBoardDTO, SosoJobBoard> resultDTO = sosoJobService.getList(1);
+//        System.out.println(resultDTO.isNext());
+//        System.out.println(resultDTO.getPage());
+//        for (SosoBoardDTO sosoBoardDTO : resultDTO.getDtoList()) {
+//            System.out.println(sosoBoardDTO);
+//        }
+//    }
 
     @Test
     void 카테고리로드() {
         System.out.println(sosoCateService.getCateList().get(0));
     }
 
-    @Test
-    void paging() {
-        System.out.println(sosoJobService.getList(1).getPage());
-        System.out.println(sosoJobService.getList(1).getTotalPage());
-    }
+//    @Test
+//    void paging() {
+//        System.out.println(sosoJobService.getList(1).getPage());
+//        System.out.println(sosoJobService.getList(1).getTotalPage());
+//    }
 
 }
