@@ -41,7 +41,7 @@
                                 <!--내용-->
                                 <div class="form-group">
                                     <input type="text" id="title_msg" name="msgTitle"  placeholder="제목을 입력하세요"/>
-                                    <textarea id="summernote" name="msgContent" class="msg_context"></textarea>
+                                    <textarea name="msgContent" class="msg_context"></textarea>
                                 </div>
                                 <div style="text-align: right; width: 90%; margin-top: 5px;">
                                     <button type="button" class="submit_btn" style="margin-bottom: 30px;">전송</button>
@@ -78,7 +78,7 @@
                     <!-- Post content-->
                     <article style="padding: 0 20px;">
                         <!-- Post header-->
-                        <header class="mb-4">
+                        <header class="mb-4" style="width: 97%;">
                             <!-- Post categories-->
 
                             <a class="cate" href="#!" >[[${read.categoryName}]]</a>
@@ -90,7 +90,7 @@
                                 <div class="title_wrap">
                                     <h1 class="fw-bolder mb-1 sell_title" name="title">[[${read.title}]]</h1>
                                 </div>
-                                <div class="ddun_wrap" style="width:20%;">
+                                <div class="ddun_wrap">
                                     <img th:src="@{/assets/coins.png}" width="19">
                                     <span id="ddun">[[${read.ddun}]]</span>
                                 </div>
