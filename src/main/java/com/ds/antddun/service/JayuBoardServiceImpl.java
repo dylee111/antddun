@@ -66,6 +66,7 @@ public class JayuBoardServiceImpl implements JayuBoardService{
 
     private BooleanBuilder getSearch(PageRequestDTO pageRequestDTO) {
         String keyword = pageRequestDTO.getKeyword();
+        log.info("keyword>>>>>"+keyword);
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         QJayuBoard qJayuBoard = QJayuBoard.jayuBoard;
         //jayuNo > 0 조건만 생성
@@ -79,8 +80,10 @@ public class JayuBoardServiceImpl implements JayuBoardService{
 
         //검색조건 작성
         BooleanBuilder conditionBuilder = new BooleanBuilder();
+        conditionBuilder.or(qJayuBoard.title.contains(keyword));
 
-        return conditionBuilder.or(qJayuBoard.title.contains(keyword));
+        booleanBuilder.and(conditionBuilder);
+        return booleanBuilder;
     }
 
 
