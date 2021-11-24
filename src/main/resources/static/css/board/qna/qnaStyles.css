@@ -7,26 +7,28 @@
     padding: 20px;
 }
 
+.cate {
+    padding: 0 7px;
+    color: #919191;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid #e0e0e0;
+}
+
+
 .smallDdun {
-    background: orange !important;
-    color: white !important;
-    border-radius:4px !important;
-    padding: 0px 5px 0px 5px !important;
+    padding: 0 7px;
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    background: #ffb400;
+    border: 2px solid #ffb732;
 }
 
-.like_on{
-    background: pink;
-}
-
-
-
-
-.smallCategory {
-    background: gray !important;
-    color: white !important;
-    border-radius:4px !important;
-    padding: 0px 5px 0px 5px !important;
-}
 
 .subNav {
     font-size: 1em !important;

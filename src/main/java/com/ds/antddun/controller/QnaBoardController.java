@@ -10,8 +10,10 @@ import com.ds.antddun.entity.QnaLikes;
 import com.ds.antddun.repository.QnaBoardRepository;
 import com.ds.antddun.repository.QnaLikesRepository;
 import com.ds.antddun.service.JobListService;
+import com.ds.antddun.service.QnaLikesService;
 import com.ds.antddun.service.QnaService;
 import com.ds.antddun.service.WishListService;
+import com.nimbusds.jose.shaded.json.JSONObject;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -36,6 +38,9 @@ public class QnaBoardController {
 
     @Autowired
     private QnaService qnaService;
+
+    @Autowired
+    private QnaLikesService qnaLikeService;
 
     @Autowired
     private QnaLikesRepository qnaLikesRepository;
@@ -66,6 +71,7 @@ public class QnaBoardController {
         return "/qna/list";
 
     }
+
 
 
     //카테고리 별 리스트 출력
@@ -125,7 +131,12 @@ public class QnaBoardController {
                        @AuthenticationPrincipal PrincipalDetails principal, Model model){
 
         if (principal == null) { return "redirect:/login"; }
+
+        //게시판 정보
         model.addAttribute("boardList", qnaService.getBoard(qnaNo));
+
+        //좋아요 체크 유무
+        model.addAttribute("qnaCheck", qnaLikeService.checkLikes(qnaNo,principal.getMember().getMno())); //null 또는 qnalikes
 
         //위시리스트
         List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
