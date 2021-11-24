@@ -29,7 +29,7 @@
 }
 
 .subNav {
-    font-size: 1em !important;
+    font-size: 1.5em !important;
     color: gray;
     font-weight: bold;
     margin-right: 20px;
@@ -39,7 +39,7 @@
 }
 
 .subNav_on{
-    font-size: 1.5em !important;
+    font-size: 2em !important;
     color: #f9c74f;
     font-weight: bold;
     margin-right: 20px;

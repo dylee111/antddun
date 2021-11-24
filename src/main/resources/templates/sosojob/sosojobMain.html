@@ -15,31 +15,31 @@
     <style>
 
     </style>
-        <div class="main-container" >
+        <div class="main-container">
             <section class="card mg_bottom"  th:each="map, mapValue : ${category}" style="margin-bottom:15px;">
-                <div class="card-header" >
+                <div class="card-header">
                     <h3 class="boardlist"  th:text=${map.key}></h3>
-                    <span class="more" th:each="cateNum : ${cateNoList}" ><a class="category-page" th:href="@{'/member/sosojob/sosoList/' + ${cateNum}}" >더보기</a></span>
-<!--                    <span class="more"><a th:href="@{/sosojob/list/미디어}">더보기</a></span>-->
+                    <span class="more" th:each="cateNum : ${cateNoList}">
+                        <a th:href="@{'/member/sosojob/sosoList/' + ${cateNum}}">더보기</a>
+                    </span>
                 </div>
                 <div class="card-body" >
                     <div id="page" >
                         <div class="row">
                             <div class="column small-11 small-centered" >
                                 <section class="visual" th:src="@{/assets/sosojob_cate/it.jpeg}">
-                                    <div class="slick-card" th:each="cateValue : ${map.value}">
+                                    <div class="slick-card" th:each="cateValue : ${map.value}" style="width: 201px; height: 250px;">
                                         <article >
                                             <img class="cate-thumbnail" th:src="@{https://dummyimage.com/230x160/000/fff}"/>
-                                            <div clss="content-container">
-                                                <div><span class="tag_c" th:text="${cateValue.category.sosoCateName}" ></span></div>
-                                                <div class="title"><span th:text="${cateValue.title}"></span></div>
-                                                <div class="ddun-box">
-                                                    <span><img class="img coin" th:src="@{/assets/coins.png}" width="12">
-                                                        <span class="price" th:text="${cateValue.ddun}"></span><span>뚠</span></span>
-                                                </div>
-
-                                                <div class="star-box">
-                                                    <span><img class="img heart" th:src="@{/assets/heart.png}" width="12">5.0작성자</span>
+                                            <div clss="content-container" style="text-align: left; margin-top: 12px;">
+                                                <div><span class="tag_cm" th:text="${cateValue.category.sosoCateName}" ></span></div>
+                                                <div class="title" style="margin-top: 10px;"><span th:text="${cateValue.title}"></span></div>
+                                                <div style="margin: 10px 18px 0 0; text-align: right;">
+                                                    <span>
+                                                        <img class="img coin" th:src="@{/assets/coins.png}" width="14">
+                                                        <span class="price" th:text="${cateValue.ddun}" style="font-size: 0.9rem; font-weight: 900;"></span>
+                                                        <span> 뚠</span>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </article>
