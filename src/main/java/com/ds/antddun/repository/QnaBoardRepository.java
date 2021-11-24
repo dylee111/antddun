@@ -1,15 +1,14 @@
 package com.ds.antddun.repository;
 
-import com.ds.antddun.dto.QnaBoardDTO;
 import com.ds.antddun.entity.QnaBoard;
-import com.ds.antddun.entity.SosoJobBoard;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface QnaBoardRepository extends JpaRepository<QnaBoard, Long> {
 
@@ -34,6 +33,11 @@ public interface QnaBoardRepository extends JpaRepository<QnaBoard, Long> {
             "WHERE qna.qnaNo=:qnaNo "+
             "GROUP BY qna.qnaNo " )
     List<Object[]> getBoardWithAllByQnaNo(Long qnaNo);
+
+    @Transactional
+    @Modifying
+    @Query("update QnaBoard set viewCnt = viewCnt + 1 where qnaNo=:qnaNo")
+    void updateViewCnt(Long qnaNo);
 
 
 }

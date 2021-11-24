@@ -47,14 +47,10 @@ public class MessageController {
     public void sendMsg(@PathVariable("mno") Long mno,
                         MessageDTO messageDTO,
                         @AuthenticationPrincipal PrincipalDetails principalDetails, HttpServletRequest http) {
-        log.info("SEND MESSAGE>>>>>>>>>>>>>>>>>>>>>>>");
-        log.info("TITLE>>> " + http.getParameter("msgTitle"));
-        log.info("Content>>> " + http.getParameter("msgContent"));
-        log.info("MNO" + mno);
+
         messageDTO.setTitle(http.getParameter("msgTitle"));
         messageDTO.setContent(http.getParameter("msgContent"));
-        log.info("C.CONTENT" + messageDTO.getContent());
-        log.info("C.TITLE" + messageDTO.getTitle());
+
 
         Member receiver = Member.builder().mno(mno).build();
 
@@ -66,8 +62,14 @@ public class MessageController {
     public ResponseEntity<List<Message>> getListByMno(@PathVariable("mno") Long mno,
                                                       @AuthenticationPrincipal PrincipalDetails principalDetails) {
         List<Message> result = messageService.getMessageListByMno(principalDetails.getMember().getMno(), mno);
-        log.info("RESULT>>>" + result);
-        log.info("MNO>>>" + mno);
+
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @PostMapping("/messenger/tradeCheck")
+    public ResponseEntity<String> tradeCheck(@RequestParam("trade")int tradeCheck, MessageDTO messageDTO) {
+        messageService.tradeCheck(tradeCheck, messageDTO);
+
+        return new ResponseEntity<>("tradeChange", HttpStatus.OK);
     }
 }

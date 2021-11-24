@@ -44,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
+                .successHandler(new LoginSuccessHandler("/"))
                 .failureUrl("/login?error")
                 .permitAll()
                 .and()// ↓ ↓ 소셜 로그인

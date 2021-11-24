@@ -17,7 +17,7 @@ public interface MessageService {
 
     List<Member> distinctSender(Long sender);
 
-    Long tradeCheck(Long msgNo);
+    Long tradeCheck(int tradeCheck, MessageDTO messageDTO);
 
     default Message dtoToEntity(MessageDTO messageDTO, Member sender, Member receiver) {
         Message message = Message.builder()

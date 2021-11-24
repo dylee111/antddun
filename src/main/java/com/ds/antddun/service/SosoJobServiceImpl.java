@@ -3,6 +3,7 @@ package com.ds.antddun.service;
 import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.dto.SosoBoardDTO;
 import com.ds.antddun.dto.SosoCategoryDTO;
+import com.ds.antddun.dto.SosoPageRequestDTO;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.SosoCategory;
 import com.ds.antddun.entity.SosoJobBoard;
@@ -62,9 +63,9 @@ public class SosoJobServiceImpl implements SosoJobService {
     * Paging
     * */
     @Override
-    public PageResultDTO<SosoBoardDTO, SosoJobBoard> getList(int category) {
+    public PageResultDTO<SosoBoardDTO, SosoJobBoard> getList(int category, SosoPageRequestDTO sosoPageRequestDTO) {
 
-        Pageable pageable = PageRequest.of(0, 10, Sort.by("regDate").descending());
+        Pageable pageable = sosoPageRequestDTO.getPageable(Sort.by("regDate").descending());
 
         Page<SosoJobBoard> result = sosoBoardRepository.findAllByCategory(category, pageable);
 

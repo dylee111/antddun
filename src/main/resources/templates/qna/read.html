@@ -5,13 +5,17 @@
         <!--페이지 수정 부분 시작-->
         <!-- 페이지 css/ js 추가 -->
 
+
         <link rel="stylesheet" th:href="@{/css/board/qna/read.css}">
         <script th:src="@{/js/board/qna/likes.js}"></script>
         <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
 
         <!-- 본문 시작 -->
+        <form action="" method="">
+
         <div class="content">
             <div class="form-group">
+
 
                 <!-- 카테고리 -->
                 <div>
@@ -57,9 +61,9 @@
                     <span id="likesCnt" class="smallText">[[${boardList.likesCnt}]]</span>
                     <span id="viewCnt" class="smallText">&nbsp조회수&nbsp[[${boardList.ViewCnt}]]</span>
                 </div>
-                <div class="rightSection smallText" th:if="${qnaCheck} != null" >
-                    <span>삭제 | </span>
-                    <span>수정</span>
+                <div class="rightSection smallText" th:if="${checkUser} == true" >
+                    <span class="removeBtn">삭제 | </span>
+                    <span class="modifyBtn">수정</span>
                 </div>
 <!--                <div class="rightSection smallText" th:if="${selfCheck} != null" >
                     <span th:href="@{/qna/board/delete}">삭제</span>
@@ -67,16 +71,34 @@
                 </div>-->
             </div>
 
-
-
-
             <hr>
 
-            <div class="listGo" th:href="@{/qna/list}">
-                <button class="btn btn-primary">목록보기</button>
+            <div class="listGo">
+                <a class="btn btn-primary" onclick='javascript:window.history.back()'>뒤로가기</a>
             </div>
 
         </div>
+        </form>
+
+
+        <script th:inline="javascript">
+var contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
+
+      var actionForm = $("form");
+      $(".removeBtn").click(function(){
+          if(!confirm("삭제하시겠습니까?")){
+          return;
+        }
+        actionForm.attr("action", "contextPath + /qna/remove").attr("method","post");
+        actionForm.submit();
+      });
+      $(".modifyBtn").click(function(){
+        if(!confirm("수정하시겠습니까?")){
+          return;
+        }
+        actionForm.attr("action", " contextPath + /qna/modify").attr("method","post").submit();
+      });
+</script>
         <!-- 본문 끝 -->
         <!--페이지 수정 부분 끝-->
     </th:block>

@@ -67,5 +67,29 @@ $(document).ready(function() {
         $('.dim').hide();
     });
 
+    // 댓글 관련
+
+    // 댓글 등록
+    $("#btn_reply").click(function() {
+        console.log($(".form-control").val());
+        var replyData = {
+            sosoNo: sosoNo,
+            replyText: $(".form-control").val()
+        }
+
+        $.ajax({
+            url: "/antddun/member/sosojob/list/replySave",
+            method: "POST",
+            dataType: "json",
+            data: JSON.stringify(replyData),
+            contentType: 'application/json; charset=utf-8',
+            success: function() {
+                alert("댓글 등록 성공");
+                self.location.reload();
+            }
+
+        }) // ajax end.
+    });
+
 
 }); // end.

@@ -91,6 +91,7 @@ $(document).ready(function() {
 
     } // loadJSONData() end.
 
+    // 답장 보내기
     $(document).on('click','.reply_btn', function() {
         var title = $("#send_title");
         var content = $("#summernote");
@@ -110,6 +111,22 @@ $(document).ready(function() {
         }); // ajax end.
         loadJSONData(replyMno);
 
+    });
+    $('input:radio[name="trade"]').click(function() {
+        var tradeCheck = $('input:radio[name="trade"]:checked').val();
+
+        $.ajax({
+            url: "/antddun/member/messenger/tradeCheck",
+            dataType: 'text',
+            data: {
+                trade: tradeCheck
+            },
+            success: function(data) {
+                if(data === "tradeChange") {
+                    alert("거래 변경 OK");
+                }
+            }
+        });
     });
 
 }); // document end.
