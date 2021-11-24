@@ -26,33 +26,46 @@
   background-color: #111;
 }
 </style>
-<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+<th:block th:replace="~{/layout/basicList :: setContent(~{this::content})}">
     <th:block th:fragment="content">
         <link th:href="@{/css/board/sosojob/sosoMain.css}" rel="stylesheet">
+        <link th:href="@{/css/board/qna/qnaStyles.css}" rel="stylesheet" />
+
         <!-- 본문 시작 -->
-        <div class="subNav-body">
+        <a th:href="@{/member/sosojob/register}">
+            <button class="btn-primary btn" style="float: right; margin-top: -60px; font-family: 'ELAND_Choice_M';">
+                글쓰기
+            </button>
+        </a>
+
+        <div class="subNav-body" style="margin: 0 18px;">
             <nav class="nav nav-underline" aria-label="Secondary navigation">
-                <a th:each="categoryName : ${cateName}" class="subNav" href="#">[[${categoryName.sosoCateName}]]</a>
+                <a class="subNav" th:each="categoryName : ${cateName}" href="#">[[${categoryName.sosoCateName}]]</a>
             </nav>
         </div>
 
         <div >
-            <a th:href="@{/member/sosojob/register}">글쓰기</a>
-            <h1 ></h1>
-            <div class="slick-card" th:each="cateValue : ${mvData.dtoList}">
+            <div class="slick-card" style="width: 300px; height: 380px; display: inline-block;" th:each="cateValue : ${mvData.dtoList}">
                 <article>
                     <img class="cate-thumbnail" th:src="@{https://dummyimage.com/230x160/000/fff}"/>
                     <div clss="content-container">
-                        <div><span class="tag_c" th:text="${cateValue.categoryName}"></span></div>
-                        <div class="title"><a th:href="@{/member/sosojob/list/read(sosoNo = ${cateValue.sosoNo} )}">[[${cateValue.title}]]</a></div>
-                        <div >[[${cateValue.content}]]</div>
-                        <div class="ddun-box">
-                        <span><img class="img coin" th:src="@{/assets/coins.png}" width="12">
-                        <span class="price" th:text="${cateValue.ddun}"></span><span>뚠</span></span>
+                        <div style="display: table;">
+                            <span class="tag_c" th:text="${cateValue.categoryName}"></span>
                         </div>
-
+                        <div class="title">
+                            <a th:href="@{/member/sosojob/list/read(sosoNo = ${cateValue.sosoNo} )}">[[${cateValue.title}]]</a>
+                        </div>
+                        <div class="context">
+                            <span>[[${cateValue.content}]]</span>
+                        </div>
+                        <div class="ddun-box">
+                            <span><img class="img coin" th:src="@{/assets/coins.png}" width="12">
+                            <span class="price" th:text="${cateValue.ddun}"></span><span>뚠</span></span>
+                        </div>
                         <div class="star-box">
-                            <span><img style="img heart" th:src="@{/assets/heart.png}" width="12">5.0<span >[[${cateValue.job}]] [[${cateValue.experience}]]년차 [[${cateValue.firstName}]]개미</span></span>
+                            <span>
+                                <span>[[${cateValue.job}]] [[${cateValue.experience}]]년차 [[${cateValue.firstName}]]개미</span>
+                                </span>
                         </div>
                     </div>
                 </article>

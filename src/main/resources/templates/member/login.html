@@ -38,7 +38,7 @@
                 <label for="password" onkeyup="enterkey();">비밀번호</label>
             </div>
 
-           <div class="notice">
+            <div class="notice">
                 <span th:if="${param.error}">*아이디와 비밀번호를 확인해주세요.</span>
                 <span th:if="${param.logout}">*로그아웃 되었습니다.</span>
             </div>
@@ -46,13 +46,13 @@
             <a id="btnSubmit" class="btn" type="submit" >로그인</a>
             <a id="btnNaver" class="btn" type="button" th:href="@{/oauth2/authorization/naver}">NAVER 로그인</a>
 
-
 <!--
             <div class="social">
                 <a class="btn_social" th:href="@{/oauth2/authorization/google}">Google 로그인</a><br>
                 <a class="btn_social" th:href="@{/oauth2/authorization/facebook}">Facebook 로그인</a><br>
             </div>
 -->
+
 
             <div id="content">
                 <ul class="find">

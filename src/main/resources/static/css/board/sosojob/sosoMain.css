@@ -4,11 +4,18 @@ article {
 }
 
 .title {
-    font-size: 0.8rem;
-    margin-left: 10px;
-    height: 40px;
+    font-size: 1.2rem;
+    margin-left: 19px;
+    margin-top: -10px;
     overflow-x: hidden;
     overflow-y: hidden;
+}
+
+.context {
+    text-align: left;
+    margin-left: 19px;
+    margin-top: -15px;
+    font-size: 0.9rem;
 }
 
 .content-container {
@@ -25,29 +32,28 @@ article {
 }
 
 .ddun-box {
-    float: right;
-    margin-right: 10px;
+    text-align: right;
+    margin-right: 19px;
+    margin-top: -20px;
+    font-size: 1rem;
 }
 .star-box {
     float: right;
-    margin-right: 10px;
+    margin-right: 19px;
+    margin-top: -20px;
+    font-size: 0.9rem;
 }
 
 .tag_c {
-    margin: 3px 3px 5px 5px;
-    font-size: 10px;
-    padding-top: 4px;
+    margin: 15px;
+    font-size: 13px;
+    padding: 5px 10px;
     border-radius: 5px;
     height: 20px;
-    width: 65px;
     color: #919191;
     border: 2px solid #e0e0e0;
     text-align: center;
-    line-height: 8px;
-}
-
-.text-width {
-    width: 900px;
+    display: inline;
 }
 
 article {
@@ -140,7 +146,6 @@ article {
         width: 100%;
         font-size: 1.1rem;
         font-family: 'ELAND_Choice_M';
-        margin-bottom: 40px;
     }
 
   .submit_btn {
@@ -196,12 +201,10 @@ article {
 }
 
 .seller_info {
-font-family: 'ELAND_Choice_M';
+    font-family: 'ELAND_Choice_M';
     font-weight: bold;
-    font-size: 1.2rem;
-    margin-left: 45px;
-    line-height: 50px;
-}
+    font-size: 1rem;
+    line-height: 50px;}
 
 .user_img_s {
     display: block;
@@ -213,17 +216,35 @@ font-family: 'ELAND_Choice_M';
 /* 게시글 */
 .sell_title{
     font-family: 'ELAND_Choice_M';
-    font-size: 2rem;
-    display: inline;
-    margin-left: 10px;
+    font-size: 1.6rem;
+    display: inline-block;
 }
 
 .cate {
     color: #919191;
     border-radius: 5px;
-    font-size: 1.5rem;
+    font-size: 0.8rem;
     font-weight: bold;
     text-align: center;
     border: 2px solid #e0e0e0;
-    padding: 3px 10px;
+    padding: 5px 10px;
+}
+
+.title_wrap {
+    width: 87%;
+    display: inline-block;
+}
+
+.ddun_wrap {
+    display: inline-block;
+    font-size: 1.2rem;
+}
+
+#writer-name {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.sell_date {
+    text-align: right;
+    font-size: 0.8rem;
 }
