@@ -3,8 +3,6 @@ package com.ds.antddun.service;
 import com.ds.antddun.dto.*;
 import com.ds.antddun.entity.*;
 
-import java.util.List;
-
 public interface QnaService {
 
     //목록 조회
@@ -50,7 +48,7 @@ public interface QnaService {
                 .jno(qnaBoard.getJobList().getJno())
                 .job(qnaBoard.getJobList().getJob())
                 .regDate(qnaBoard.getRegDate())
-                .ViewCnt(qnaBoard.getViewCnt())
+                .viewCnt(qnaBoard.getViewCnt())
                 .modDate(qnaBoard.getModDate())
                 .ddun(qnaBoard.getDdun())
                 .build();

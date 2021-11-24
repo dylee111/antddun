@@ -14,7 +14,7 @@
     padding: 0px 5px 0px 5px !important;
 }
 
-#likeBtn.liked{
+.like_on{
     background: pink;
 }
 

@@ -2,9 +2,11 @@ package com.ds.antddun.controller;
 
 import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.PageRequestDTO;
+import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.dto.QnaBoardDTO;
 import com.ds.antddun.entity.JobList;
 import com.ds.antddun.entity.MemberWishList;
+import com.ds.antddun.entity.QnaLikes;
 import com.ds.antddun.repository.QnaBoardRepository;
 import com.ds.antddun.repository.QnaLikesRepository;
 import com.ds.antddun.service.JobListService;
@@ -44,7 +46,8 @@ public class QnaBoardController {
 
     //리스트 출력
     @GetMapping("/qna/list")
-    public String allList(Model model, PageRequestDTO requestDTO, @AuthenticationPrincipal PrincipalDetails principal) {
+    public String allList(Model model, PageRequestDTO requestDTO, QnaBoardDTO qnaBoardDTO,
+                          @AuthenticationPrincipal PrincipalDetails principal) {
 
         //위시리스트
         if (principal != null) {
@@ -57,10 +60,11 @@ public class QnaBoardController {
 
         List<JobList> list = jobListService.getList();
         model.addAttribute("jobList", list);
-        model.addAttribute("boardList", qnaService.getListAll(requestDTO));
-        log.info("whe"+qnaService.getListAll(requestDTO));
+        PageResultDTO<QnaBoardDTO, Object[]> getListAll = qnaService.getListAll(requestDTO);
+        model.addAttribute("boardList", getListAll);
 
         return "/qna/list";
+
     }
 
 

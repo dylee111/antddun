@@ -6,9 +6,8 @@
         <!--페이지 수정 부분 시작-->
         <!-- 페이지 css/ js 추가 -->
         <link th:href="@{/css/board/qna/qnaStyles.css}" rel="stylesheet" />
-        <script th:src="@{/js/board/qna/like.js}"></script>
-
         <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
+
 
         <!-- 본문 시작 -->
         <div class="subNav-body">
@@ -60,9 +59,16 @@
                             <img th:src="@{/assets/eye.png}" width="24px;"> [[${boardList.viewCnt}]]
                         </a>
 
+<!--                        <img th:if="${boardList.LikesCnt != 1}"  th:src="@{/assets/heart_0.png}" width="20px;" />
+                        <img th:if="${boardList.LikesCnt == 1}"  th:src="@{/assets/heart_1.png}" width="20px;" />
+
+                        <div>
+                            <img id="likes">
+                        </div>-->
+
                         <a class="like">
                             <img style="cursor:pointer;" th:src="@{/assets/heart_0.png}" width="20px;"
-                                 th:id="likeBtn">&nbsp;<span id="likesCnt">[[${boardList.LikesCnt}]]</span>
+                                 id="likeBtn">&nbsp;<span id="likesCnt">[[${boardList.LikesCnt}]]</span>
                         </a>
 
                         <a class="cmt" th:href="@{'/member/qna/read/' + ${boardList.qnaNo}}">
@@ -112,5 +118,14 @@
 
         <!-- 본문 끝 -->
         <!--페이지 수정 부분 끝-->
+
+
+        <script type="text/javascript" th:inline="javascript">
+        var msg = $.parseJSON('[[ ${msg} ]]');
+        var url = "@{/assets/coins.png}";
+        var heart0 = [[ ${msg} ]]
+        </script>
+        <script th:src="@{/js/board/qna/like.js}"></script>
+
     </th:block>
 </th:block>
