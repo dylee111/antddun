@@ -7,7 +7,7 @@
         <link rel="stylesheet" th:href="@{/css/board/summernote/summernote-lite.css}">
         <link rel="stylesheet" th:href="@{/css/board/summernote/custom.css}">
 
-        <script th:src="@{/js/member/messenger.js}"></script>
+        <script th:inline="javascript" th:src="@{/js/member/messenger.js}"></script>
         <script th:src="@{/js/board/summernote/summernote-lite.js}"></script>
         <script th:src="@{/js/board/summernote/custom1.js}"></script>
         <script th:src=" @{https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js}"></script>
@@ -22,11 +22,15 @@
                     <option>거래 완료</option>
                 </select>
 
+                <!--쪽지 수신자 리스트-->
                 <table class="table" style="table-layout: fixed">
                     <tbody>
                     <tr th:each="senderList : ${senderList}" >
-                        <td >
-                            <strong class="sender" >[[${senderList.lastName}]][[${senderList.firstName}]]</strong>
+                        <td class="msg_sender" th:value="${senderList.mno}">
+                            <input type="hidden" class="sender_mno" th:value="${senderList.mno}">
+                            <strong class="sender">[[${senderList.lastName}]][[${senderList.firstName}]]</strong>
+                            <div><input type="radio" name="trade">거래 중</div>
+                            <div><input type="radio" name="trade">거래 완료</div>
                         </td>
                     </tr>
 <!--                    <tr>-->
@@ -58,37 +62,38 @@
                         뷰티 브랜드 상세페이지 디자인 작업 요청 문의드립니다.
                     </span>
                     </div>
-
+                    <div id="mail-box">
                     <div class="mail" th:each="msgList :${msgList}">
                         <div class="sender_info">
+                            <input type="hidden" class="msgMno" th:value="${msgList.sendMember.mno}"/>
                             <div  style="height: 45px;">
                                 <strong class="sender">
                                     <div>[[${msgList.sendMember.lastName}]][[${msgList.sendMember.firstName}]]</div>
+
                                 </strong>
                                 <span>(<span th:text="${msgList.sendMember.username}"></span>)</span>
                                 <span class="send_time" th:text="${msgList.sendTime}"></span>
                             </div>
                         </div>
                         <div class="send_msg">
-                            <p th:text="${msgList.msgContent}">
-                            </p>
-                            <p th:text="${msgList.receiveMember.username}"></p>
-                            <p th:text="${msgList.sendMember.username}"></p>
-                            <p th:text="${msgList.sendMember.firstName}"></p>
-                            <p th:text="${msgList.receiveMember.firstName}"></p>
+                            <p th:text="${msgList.msgContent}"></p>
                         </div>
                     </div>
-
+                    </div>
 
                 <div id="mail_write">
                     <form th:action="@{/member/messenger/register}" th:method="post">
+                        <!--제목-->
+                        <div class="form-group">
+                            <input type="text" id="send_title" name="msgTitle">
+                        </div>
                         <!--내용-->
                         <div class="form-group">
-                            <textarea id="summernote" name="summernote"></textarea>
+                            <textarea id="summernote" name="msgContent"></textarea>
                         </div>
 
                         <!--작성완료 버튼-->
-                        <button type="submit" class="reply reply_btn" style="float: right; margin: 1rem 0 3rem 0;">답장하기</button>
+                        <button type="button" class="reply reply_btn" style="float: right; margin: 1rem 0 3rem 0;">답장하기</button>
                     </form>
                 </div>
             </div>

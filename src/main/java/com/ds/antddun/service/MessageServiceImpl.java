@@ -18,12 +18,16 @@ import java.util.List;
 public class MessageServiceImpl implements MessageService{
 
     private final MessageRepository messageRepository;
-
+    /* 회원 간 주고 받은 메세지 목록 */
     @Override
-    public List<MessageDTO> getMessageList(Message message) {
-        return null;
+    public List<Message> getMessageListByMno(Long firstMember, Long secondMember) {
+
+        List<Message> result = messageRepository.getList(firstMember, secondMember);
+
+        return result;
     }
 
+    /* 메세지 전송 */
     @Override
     public Long sendMsg(MessageDTO messageDTO, Member sender, Member receiver) {
         messageDTO.setSendMno(sender.getMno());
@@ -35,6 +39,7 @@ public class MessageServiceImpl implements MessageService{
         return messageRepository.save(message).getMsgNo();
     }
 
+    /* 회원 전체 메세지 목록 */
     @Override
     public List<Message> getMsgListByMno(Long mno) {
 
@@ -43,10 +48,16 @@ public class MessageServiceImpl implements MessageService{
         return result;
     }
 
+    /* 메시지 중복 제외 */
     @Override
     public List<Member> distinctSender(Long sender) {
         List<Member> result = messageRepository.distinctSender(sender);
 
         return result;
+    }
+
+    @Override
+    public Long tradeCheck(Long msgNo) {
+        return null;
     }
 }

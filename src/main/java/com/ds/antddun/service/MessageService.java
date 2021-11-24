@@ -9,13 +9,15 @@ import java.util.List;
 
 public interface MessageService {
 
-    List<MessageDTO> getMessageList(Message message);
+    List<Message> getMessageListByMno(Long firstMember, Long secondMember);
 
     Long sendMsg(MessageDTO messageDTO, Member sender, Member receiver);
 
     List<Message> getMsgListByMno(Long mno);
 
     List<Member> distinctSender(Long sender);
+
+    Long tradeCheck(Long msgNo);
 
     default Message dtoToEntity(MessageDTO messageDTO, Member sender, Member receiver) {
         Message message = Message.builder()

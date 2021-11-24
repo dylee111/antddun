@@ -25,9 +25,9 @@ public class Message {
     @Column(nullable = false)
     private String msgContent;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Member sendMember;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Member receiveMember;
 
     private boolean trade;
