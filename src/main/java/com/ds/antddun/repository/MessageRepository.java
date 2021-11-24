@@ -20,4 +20,10 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
     @Query("SELECT DISTINCT(msg.sendMember) FROM Message msg WHERE msg.receiveMember.mno=:receiver ")
     List<Member> distinctSender(Long receiver);
 
+    @Query("SELECT msg " +
+            " FROM Message msg " +
+            " WHERE (msg.sendMember.mno=:firstMember OR msg.receiveMember.mno=:firstMember) " +
+            " AND (msg.sendMember.mno=:secondMember OR msg.receiveMember.mno=:secondMember) ")
+    List<Message> getList(@Param("firstMember") Long firstMember, @Param("secondMember") Long secondMember);
+
 }

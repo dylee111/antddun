@@ -56,6 +56,7 @@ public class SosoBoardController {
 
         model.addAttribute("category", getCateList);
         model.addAttribute("cateNoList", cateNoList);
+        model.addAttribute("cateName", list);
 
         return "sosojob/sosojobMain";
     }
@@ -109,10 +110,6 @@ public class SosoBoardController {
         mv.addObject("mvData", sosoJobService.getList(categoryNo));
         mv.setViewName("sosojob/sosoList");
 
-        log.info("NEXT"+sosoJobService.getList(categoryNo).isNext());
-        log.info("getDtoList"+sosoJobService.getList(categoryNo).getDtoList());
-        log.info("getEnd"+sosoJobService.getList(categoryNo).getEnd());
-
         List<SosoCategory> list = cateService.getCateList(); // 카테고리 리스트(cateNo / cateName)
         List<Integer> cateNoList = new ArrayList<>(); // 카테고리 No. 담기 위한 LIST
 
@@ -121,7 +118,6 @@ public class SosoBoardController {
         getCateList.put(list.get(categoryNo - 1).getSosoCateName(),
                 sosoJobService.getListByCategory(list.get(categoryNo - 1).getSosoCateName()));
         cateNoList.add(categoryNo);
-
 //        model.addAttribute("cate", sosoJobService.getList(categoryNo));
         model.addAttribute("cateName", list);
         model.addAttribute("cateNum", cateNoList);
