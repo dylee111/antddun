@@ -25,28 +25,22 @@
                 <!--쪽지 수신자 리스트-->
                 <table class="table" style="table-layout: fixed">
                     <tbody>
-                    <tr th:each="senderList : ${senderList}" >
-                        <td class="msg_sender" th:value="${senderList.mno}">
-                            <input type="hidden" class="sender_mno" th:value="${senderList.mno}">
-                            <strong class="sender">[[${senderList.lastName}]][[${senderList.firstName}]]</strong>
-                            <div><input type="radio" name="trade">거래 중</div>
-                            <div><input type="radio" name="trade">거래 완료</div>
-                        </td>
-                    </tr>
-<!--                    <tr>-->
-<!--                        <td>-->
-<!--                            <strong class="sender">이름</strong>-->
-<!--                            <span class="send_date">2021.11.12</span>-->
-<!--                            <span class="send_message">제가 구구절절 궁금한게 많은데요.... 문의를 해도 괜찮을지 모르겠어요^_ㅠ</span>-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td>-->
-<!--                            <strong class="sender">이름</strong>-->
-<!--                            <span class="send_date">2021.11.12</span>-->
-<!--                            <span class="send_message">제가 구구절절 궁금한게 많은데요.... 문의를 해도 괜찮을지 모르겠어요^_ㅠ</span>-->
-<!--                        </td>-->
-<!--                    </tr>-->
+                        <tr th:each="senderList : ${senderList}" >
+                            <td class="msg_sender" th:value="${senderList.mno}">
+                                <input type="hidden" class="sender_mno" th:value="${senderList.mno}">
+                                <strong class="sender">[[${senderList.lastName}]][[${senderList.firstName}]]</strong>
+                                <div class="form_toggle">
+                                    <div class="form_toggle-item item-1">
+                                        <input id="fid-1" type="radio" name="trade" value="off" checked>
+                                        <label for="fid-1">거래중</label>
+                                    </div>
+                                    <div class="form_toggle-item item-2">
+                                        <input id="fid-2" type="radio" name="trade" value="on">
+                                        <label for="fid-2">완료</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -85,7 +79,7 @@
                     <form th:action="@{/member/messenger/register}" th:method="post">
                         <!--제목-->
                         <div class="form-group">
-                            <input type="text" id="send_title" name="msgTitle">
+                            <input type="text" id="send_title" name="msgTitle" class="title_input">
                         </div>
                         <!--내용-->
                         <div class="form-group">

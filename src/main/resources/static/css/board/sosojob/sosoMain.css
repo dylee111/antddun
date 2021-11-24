@@ -83,7 +83,7 @@ article {
         position: fixed;
         left: 50%;
         top: 60%;
-        z-index: 1;
+        z-index: 3;
         transform: translate(-50%, -50%)
     }
 
@@ -103,7 +103,7 @@ article {
         position: fixed;
         left: 0;
         top: 0;
-        z-index: 0;
+        z-index: 2;
         height: 100%;
         width: 100%;
         background: rgba(0,0,0,0.6);
@@ -139,9 +139,9 @@ article {
     }
 
     .msg_context {
-        margin-top: 15px;
         width: 80%;
         height: 240px;
+        margin: 2% 10%;
     }
 
     #button-send{
@@ -242,7 +242,7 @@ article {
 }
 
 .title_wrap {
-    width: 87%;
+    width: 90%;
     display: inline-block;
 }
 
