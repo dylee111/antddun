@@ -164,7 +164,7 @@
                     } else if(data == 0) {
                         idResult.html("사용 가능한 아이디입니다.");
                         idResult.css("color","blue");
-                        return true;77
+                        return true;
                     }
                 }
             }) // ajax end.

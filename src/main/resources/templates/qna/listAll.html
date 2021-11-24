@@ -10,8 +10,7 @@
         <!-- 본문 시작 -->
         <div class="subNav-body">
             <nav class="nav nav-underline" aria-label="Secondary navigation">
-                <a class="subNav"
-                   th:href="@{/qna/list/all/}">전체</a>
+                <a class="subNav_on" th:href="@{/qna/list/all/}">전체</a>
 
                 <a th:each="jobList : ${jobList}" class="subNav" th:onclick="|javascript:getjobList(${jobList.jno},'1')|">[[${jobList.job}]]
                 </a>
@@ -41,16 +40,16 @@
                     </div>
 
                 </div>
-<!--
-                <div class="rightSection">
-                   <a th:href="@{'/member/qna/read/' + ${boardList.qnaNo}}">
-                       <img class="imgTest" style="display:inline-block; background:lightgray; width:8rem; height:8rem;" src="" alt="">
-                       &lt;!&ndash;
-                       <img th:if="${dto.imageDTOList.size() > 0 && dto.imageDTOList[0].path != null}"
-                                       th:src="|/display?fileName=${dto.imageDTOList[0].getThumbnailURL()}|">&ndash;&gt;
-                   </a>
-                </div>
--->
+                <!--
+                                <div class="rightSection">
+                                   <a th:href="@{'/member/qna/read/' + ${boardList.qnaNo}}">
+                                       <img class="imgTest" style="display:inline-block; background:lightgray; width:8rem; height:8rem;" src="" alt="">
+                                       &lt;!&ndash;
+                                       <img th:if="${dto.imageDTOList.size() > 0 && dto.imageDTOList[0].path != null}"
+                                                       th:src="|/display?fileName=${dto.imageDTOList[0].getThumbnailURL()}|">&ndash;&gt;
+                                   </a>
+                                </div>
+                -->
             </div>
 
             <!-- 사용자 정보   -->
@@ -84,27 +83,24 @@
             </div>
 
         </div> <!-- cardList end -->
-
-
         <!--    페이지 번호     -->
         <nav aria-label="Page navigation example">
             <ul class="pagination h-100 justify-content-center align-items-center">
                 <li class="page-item" th:if="${boardList.prev}">
-                    <a class="page-link" th:href="@{/qna/list(cate=${pageRequestDTO.cate}, page=${boardList.start - 1},
+                    <a class="page-link" th:href="@{/qna/list/all(page=${boardList.start - 1},
                 keyword = ${pageRequestDTO.keyword})}" tabindex="-1">이전</a>
                 </li>
 
                 <li th:class=" 'page-item '+ ${boardList.page == page?'active':''} "
                     th:each="page: ${boardList.pageList}">
-                    <a class="page-link" th:href="@{/qna/list(cate=${pageRequestDTO.cate}, page = ${page},
-                keyword = ${pageRequestDTO.keyword})}">
+                    <a class="page-link" th:href="@{/qna/list/all/(page = ${page})}">
                         [[${page}]]
                     </a>
                 </li>
 
                 <li class="page-item" th:if="${boardList.next}">
-                    <a class="page-link" th:href="@{/qna/list(cate=${pageRequestDTO.cate},page= ${boardList.end + 1},
-                keyword = ${pageRequestDTO.keyword})}">다음</a>
+                    <a class="page-link" th:href="@{/qna/list/all(page= ${boardList.end + 1},
+                    keyword = ${pageRequestDTO.keyword})}">다음</a>
                 </li>
             </ul>
         </nav>
@@ -112,13 +108,12 @@
         <!--페이지 수정 부분 끝-->
 
         <script th:inline="javascript">
-            function getjobList(jno, page, keyword){
+           function getjobList(jno, page, keyword){
                 var contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
 
                 /*[+
                 var urlword = contextPath + [[@{/qna/list}]] +
-                    "?cate=" +jno
-                     + "&page=" + page + "&keyword=" + keyword;
+                    "?cate=" +jno + "&page=" + page + "&keyword=" + keyword;
                 +]*/
 
                 location.href=urlword;

@@ -11,7 +11,8 @@
         <link th:href="@{/css/main/styles.css}" rel="stylesheet"/>
         <link th:href="@{/css/main/main.css}" rel="stylesheet">
         <link th:href="@{/css/main/slick.css}" rel="stylesheet">
-        <link th:href="@{//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css}" type="text/css" rel="stylesheet">
+        <link th:href="@{//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css}" type="text/css"
+              rel="stylesheet">
 
         <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
         <script type="text/javascript"
@@ -46,11 +47,14 @@
             <nav class="navbar navbar-expand-md navbar-light bg-primary">
                 <div class="container">
                     <a id="logo" class="navbar-brand" th:href="@{/}">개미는 뚠뚠</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation"><span
+                            class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mb-lg-0">
                             <li><a class="nav-link nav_li" th:href="@{/sosojob/main}">소소한JOB</a></li>
-                            <li><a class="nav-link nav_li" th:href="@{/qna/list}">QnA</a></li>
+                            <li><a class="nav-link nav_li" th:href="@{/qna/list/all}">QnA</a></li>
                             <li><a class="nav-link nav_li" th:href="@{/jayu/list/all}">자유게시판</a></li>
                         </ul>
                     </div>
@@ -64,12 +68,14 @@
 
         <div class="container-main container">
             <div id="search-wrap" style="margin-bottom: 20px;">
-                <div style="display: flex; margin-right: 90px;">
-                    <input type="text" id="search-bar" />
-                    <button type="submit" class="searchButton">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </div>
+                <form action="/jayu/list/all" method="get">
+                    <div style="display: flex; margin-right: 90px;">
+                        <input type="text" id="search-bar" name="keyword" th:value="${pageRequestDTO.keyword}"/>
+                        <button type="submit" class="searchButton">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
 
             <div class="row">

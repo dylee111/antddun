@@ -15,13 +15,12 @@
     <style>
 
     </style>
-        <div class="main-container">
-            <section class="card mg_bottom"  th:each="map, mapValue : ${category}" style="margin-bottom:15px;">
-                <div class="card-header">
+        <div class="main-container" >
+            <section class="card mg_bottom"  th:each="map : ${category}" style="margin-bottom:15px;">
+                <div class="card-header"  >
                     <h3 class="boardlist"  th:text=${map.key}></h3>
-                    <span class="more" th:each="cateNum : ${cateNoList}">
-                        <a th:href="@{'/member/sosojob/sosoList/' + ${cateNum}}">더보기</a>
-                    </span>
+                    <span class="more"  th:each="cateName : ${cateName}" th:if="${map.key} == ${cateName.sosoCateName}"><a class="category-page"  th:href="@{'/member/sosojob/sosoList/' + ${cateName.cateNo}}" >더보기</a></span>
+<!--                    <span class="more"><a th:href="@{/sosojob/list/미디어}">더보기</a></span>-->
                 </div>
                 <div class="card-body" >
                     <div id="page" >

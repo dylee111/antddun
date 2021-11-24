@@ -62,17 +62,17 @@ public class JayuBoardController {
     public String register(JayuBoardDTO jayuBoardDTO, RedirectAttributes redirectAttributes, @AuthenticationPrincipal PrincipalDetails principal){
         log.info("register.....");
         Long jayuNo = jayuBoardService.register(jayuBoardDTO, principal.getMember());
+//        redirectAttributes.addFlashAttribute("jayuNo", jayuNo);
         redirectAttributes.addFlashAttribute("jayuNo", jayuNo);
 
 
-        return "redirect:/member/jayu/read/jayuNo=" + jayuNo+ "";
+        return "redirect:/member/jayu/read?jayuNo="+jayuNo;
     }
 
     //게시글 조회
-    @GetMapping("/member/jayu/read/jayuNo={jayuNo}")
-    public String read(Model model, @PathVariable Long jayuNo, @AuthenticationPrincipal PrincipalDetails principal,
+    @GetMapping("/member/jayu/read/")
+    public String read(Long jayuNo, Model model, @AuthenticationPrincipal PrincipalDetails principal,
                        @ModelAttribute("pageRequestDTO") PageRequestDTO pageRequestDTO) {
-
         if (principal == null) {return "redirect:/login";}
 
         JayuBoardDTO jayuBoardDTO = jayuBoardService.read(jayuNo);

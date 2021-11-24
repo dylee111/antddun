@@ -6,10 +6,9 @@ import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.dto.QnaBoardDTO;
 import com.ds.antddun.entity.JobList;
 import com.ds.antddun.entity.MemberWishList;
-import com.ds.antddun.entity.QnaLikes;
 import com.ds.antddun.repository.QnaBoardRepository;
-import com.ds.antddun.repository.QnaLikesRepository;
 import com.ds.antddun.service.JobListService;
+import com.ds.antddun.service.QnaLikesService;
 import com.ds.antddun.service.QnaService;
 import com.ds.antddun.service.WishListService;
 import lombok.extern.log4j.Log4j2;
@@ -38,16 +37,16 @@ public class QnaBoardController {
     private QnaService qnaService;
 
     @Autowired
-    private QnaLikesRepository qnaLikesRepository;
+    private QnaLikesService qnaLikeService;
 
     @Autowired
     private WishListService wishListService;
 
 
     //리스트 출력
-    @GetMapping("/qna/list")
-    public String allList(Model model, PageRequestDTO requestDTO, QnaBoardDTO qnaBoardDTO,
-                          @AuthenticationPrincipal PrincipalDetails principal) {
+    @GetMapping("/qna/list/all")
+    public String allList(Model model, PageRequestDTO requestDTO, @AuthenticationPrincipal PrincipalDetails principal) {
+
 
         //위시리스트
         if (principal != null) {
@@ -60,17 +59,19 @@ public class QnaBoardController {
 
         List<JobList> list = jobListService.getList();
         model.addAttribute("jobList", list);
+
         PageResultDTO<QnaBoardDTO, Object[]> getListAll = qnaService.getListAll(requestDTO);
         model.addAttribute("boardList", getListAll);
 
-        return "/qna/list";
+        return "/qna/listAll";
 
     }
 
 
+
     //카테고리 별 리스트 출력
-    @GetMapping("/qna/list/{jno}")
-    public String cateList(@PathVariable int jno, Model model, PageRequestDTO requestDTO, @AuthenticationPrincipal PrincipalDetails principal) {
+    @GetMapping("/qna/list")
+    public String cateList(Model model, PageRequestDTO requestDTO, @AuthenticationPrincipal PrincipalDetails principal) {
 
         //위시리스트
         if (principal != null) {
@@ -81,10 +82,12 @@ public class QnaBoardController {
             }
         }
 
-        List<JobList> list = jobListService.getList(); // 카테고리 리스트(cateNo / cateName)
-        log.info("boardList>>>>"+qnaService.getListByCate(jno, requestDTO));
+        PageResultDTO<QnaBoardDTO, Object[]> boardList = qnaService.getListByCate(requestDTO.getCate(), requestDTO);
+        model.addAttribute("boardList", boardList);
+
+        //카테고리
+        List<JobList> list = jobListService.getList();
         model.addAttribute("jobList", list);
-        model.addAttribute("boardList", qnaService.getListByCate(jno, requestDTO)); //jno로 구분된 리스트들
 
         return "/qna/list";
     }
@@ -92,19 +95,20 @@ public class QnaBoardController {
 
     //게시물 작성 양식
     @GetMapping("/member/qna/registerForm")
-    public String register(QnaBoardDTO qnaBoardDTO, @AuthenticationPrincipal PrincipalDetails principal,Model model) {
+    public String register(@AuthenticationPrincipal PrincipalDetails principal,Model model) {
 
+        //로그인 후 이용가능
         if (principal == null) {return "redirect:/login";}
 
-        //위시리스트
         List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
-
         model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
         if (wishLists.size() != 0) {
             model.addAttribute("wishListIndex", wishLists.get(0));
         }
 
+        //카테고리
         model.addAttribute("jobList", jobListService.getList());
+
         return "/qna/registerForm";
     }
 
@@ -124,8 +128,14 @@ public class QnaBoardController {
     public String read(@PathVariable Long qnaNo,
                        @AuthenticationPrincipal PrincipalDetails principal, Model model){
 
+        //로그인 후 이용가능
         if (principal == null) { return "redirect:/login"; }
+
+        //게시판 정보
         model.addAttribute("boardList", qnaService.getBoard(qnaNo));
+
+        //좋아요 체크 유무
+        model.addAttribute("qnaCheck", qnaLikeService.checkLikes(qnaNo,principal.getMember().getMno())); //null 또는 qnalikes
 
         //위시리스트
         List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());

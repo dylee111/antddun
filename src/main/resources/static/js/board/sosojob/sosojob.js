@@ -40,6 +40,7 @@ $(document).ready(function() {
             },
             success: function(data) {
                 alert("메세지 전송 성공");
+                self.location.reload();
             }
         }); // ajax end.
     });
