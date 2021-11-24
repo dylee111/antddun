@@ -11,7 +11,7 @@
         <!-- 본문 시작 -->
         <div class="subNav-body">
             <nav class="nav nav-underline" aria-label="Secondary navigation">
-                <a class="subNav" th:href="@{/jayu/list/all/}">전체</a><a th:each="cateList : ${cateList}" class="subNav"
+                <a class="subNav" th:href="@{/jayu/list/all}">전체</a><a th:each="cateList : ${cateList}" class="subNav"
                         th:onclick="|javascript:getCateList(${cateList.jayuCateNo},'1')|">
                 [[${cateList.jayuCateName}]]
             </a>
@@ -72,21 +72,20 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination h-100 justify-content-center align-items-center">
                 <li class="page-item" th:if="${jayuList.prev}">
-                    <a class="page-link" th:href="@{/jayu/list(cate=${pageRequestDTO.cate}, page=${jayuList.start - 1},
+                    <a class="page-link" th:href="@{/jayu/list/all(page=${jayuList.start - 1},
                 keyword = ${pageRequestDTO.keyword})}" tabindex="-1">이전</a>
                 </li>
 
                 <li th:class=" 'page-item '+ ${jayuList.page == page?'active':''} "
                     th:each="page: ${jayuList.pageList}">
-                    <a class="page-link" th:href="@{/jayu/list(cate=${pageRequestDTO.cate}, page = ${page},
-                keyword = ${pageRequestDTO.keyword})}">
+                    <a class="page-link" th:href="@{/jayu/list/all/(page = ${page})}">
                         [[${page}]]
                     </a>
                 </li>
 
                 <li class="page-item" th:if="${jayuList.next}">
-                    <a class="page-link" th:href="@{/jayu/list(cate=${pageRequestDTO.cate},page= ${jayuList.end + 1},
-                keyword = ${pageRequestDTO.keyword})}">다음</a>
+                    <a class="page-link" th:href="@{/jayu/list/all(page= ${jayuList.end + 1},
+                    keyword = ${pageRequestDTO.keyword})}">다음</a>
                 </li>
             </ul>
         </nav>
@@ -94,13 +93,12 @@
         <!--페이지 수정 부분 끝-->
 
         <script th:inline="javascript">
-            function getCateList(jayuCateNo, page, keyword){
+           function getCateList(jayuCateNo, page, keyword){
                 var contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
 
                 /*[+
                 var urlword = contextPath + [[@{/jayu/list}]] +
-                    "?cate=" +jayuCateNo
-                     + "&page=" + page + "&keyword=" + keyword;
+                    "?cate=" +jayuCateNo + "&page=" + page + "&keyword=" + keyword;
                 +]*/
 
                 location.href=urlword;

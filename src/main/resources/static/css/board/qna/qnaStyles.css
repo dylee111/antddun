@@ -29,7 +29,7 @@
 }
 
 .subNav {
-    font-size: 1.5em !important;
+    font-size: 1em !important;
     color: gray;
     font-weight: bold;
     margin-right: 20px;
@@ -46,10 +46,12 @@
     text-decoration:none;
     line-height:4rem;
     text-overflow: ellipsis;
+    cursor: pointer;
 }
 
 .subNav-body {
   position: relative;
+  max-height:80px;
   z-index: 2;
   overflow-y: hidden;
   width:100%;

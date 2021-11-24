@@ -41,11 +41,11 @@ public class JayuBoardController {
     @GetMapping("/member/jayu/register")
     public String register(Model model, @AuthenticationPrincipal PrincipalDetails principal){
 
-        if (principal == null) {
-            return "redirect:/login";
-        } else {
-            log.info("principal.getMember())" + principal.getMember());
-        }
+        if (principal == null) {return "redirect:/login";}
+
+        //카테고리
+        List<JayuCategory> cateList = jayuCateService.getCateList();
+        model.addAttribute("cateList",cateList);
 
         //위시리스트
         List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
@@ -63,7 +63,8 @@ public class JayuBoardController {
         log.info("register.....");
         Long jayuNo = jayuBoardService.register(jayuBoardDTO, principal.getMember());
         redirectAttributes.addFlashAttribute("jayuNo", jayuNo);
-        log.info(">>>>>"+jayuBoardDTO);
+
+
         return "redirect:/member/jayu/read/jayuNo=" + jayuNo+ "";
     }
 
@@ -72,11 +73,7 @@ public class JayuBoardController {
     public String read(Model model, @PathVariable Long jayuNo, @AuthenticationPrincipal PrincipalDetails principal,
                        @ModelAttribute("pageRequestDTO") PageRequestDTO pageRequestDTO) {
 
-        if (principal == null) {
-            return "redirect:/login";
-        } else {
-            log.info("principal.getMember())" + principal.getMember());
-        }
+        if (principal == null) {return "redirect:/login";}
 
         JayuBoardDTO jayuBoardDTO = jayuBoardService.read(jayuNo);
         model.addAttribute("jayuBoardDTO", jayuBoardDTO);
@@ -93,8 +90,8 @@ public class JayuBoardController {
     }
 
     //게시글 목록
-    @GetMapping("/jayu/list")
-    public String list(Model model, PageRequestDTO pageRequestDTO,  @AuthenticationPrincipal PrincipalDetails principal) {
+    @GetMapping("/jayu/list/all")
+    public String listAll(Model model, PageRequestDTO pageRequestDTO,  @AuthenticationPrincipal PrincipalDetails principal) {
         PageResultDTO<JayuBoardDTO, JayuBoard> jayuList = jayuBoardService.getList(pageRequestDTO);
 
         //summernote 태그 제거
@@ -107,24 +104,50 @@ public class JayuBoardController {
         jayuList.setDtoList((List<JayuBoardDTO>) list);
         model.addAttribute("jayuList",jayuList);
 
+        //카테고리
+        List<JayuCategory> cateList = jayuCateService.getCateList();
+        model.addAttribute("cateList",cateList);
+
         //위시리스트
-        List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
-        model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
-        if (wishLists.size() != 0) {
-            model.addAttribute("wishListIndex", wishLists.get(0));
+        if (principal != null) {
+            List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
+            model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
+            if (wishLists.size() != 0) {
+                model.addAttribute("wishListIndex", wishLists.get(0));
+            }
+        }
+        return "/jayu/listAll";
+    }
+
+    //게시글 카테고리 목록
+    @GetMapping("/jayu/list")
+    public String list(Model model, PageRequestDTO pageRequestDTO,  @AuthenticationPrincipal PrincipalDetails principal) {
+        PageResultDTO<JayuBoardDTO, JayuBoard> jayuList = jayuBoardService.getListByCate(pageRequestDTO.getCate(), pageRequestDTO);
+
+        log.info("pageDTO.CATE"+pageRequestDTO.getCate());
+        //summernote 태그 제거
+        List<JayuBoardDTO> list = jayuList.getDtoList();
+        for (int i = 0; i < list.size(); i++) {
+            JayuBoardDTO tmp = (JayuBoardDTO) list.get(i);
+            tmp.setContent(tmp.getContent().replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", ""));
+            list.set(i, tmp);
+        }
+        jayuList.setDtoList((List<JayuBoardDTO>) list);
+        model.addAttribute("jayuList",jayuList);
+
+        //카테고리
+        List<JayuCategory> cateList = jayuCateService.getCateList();
+        model.addAttribute("cateList",cateList);
+
+        //위시리스트
+        if (principal != null) {
+            List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
+            model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
+            if (wishLists.size() != 0) {
+                model.addAttribute("wishListIndex", wishLists.get(0));
+            }
         }
 
         return "/jayu/list";
-    }
-
-    //카테고리 목록
-    @GetMapping("jayu/list/jayuCateNo={jayuCateNo}")
-    public String cateList(Model model, PageRequestDTO pageRequestDTO, @PathVariable int jayuCateNo, @AuthenticationPrincipal PrincipalDetails principal) {
-        log.info("jayuCateNo"+jayuCateNo);
-        PageResultDTO<JayuBoardDTO, JayuBoard> jayuList = jayuBoardService.getListByCate(jayuCateNo, pageRequestDTO);
-        log.info("List>>>"+ jayuList);
-
-
-        return "/qna/list";
     }
 }

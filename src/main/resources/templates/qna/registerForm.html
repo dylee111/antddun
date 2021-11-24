@@ -3,7 +3,7 @@
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
   <th:block th:fragment="content">
     <!--페이지 수정 부분 시작-->
-
+    <link th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
     <!-- 페이지 css/ js 추가 -->
     <link rel="stylesheet" th:href="@{/css/board/jayu/register.css}">
 

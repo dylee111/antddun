@@ -5,17 +5,26 @@
         <!--페이지 수정 부분 시작-->
         <!-- 페이지 css/ js 추가 -->
         <link rel="stylesheet" th:href="@{/css/board/jayu/register.css}">
-        <script th:src="@{/js/board/jayu/register.js}"></script>
 
         <!-- 본문 시작 -->
         <div class="content">
             <div class="form-group">
-                <!--카테고리 & 펑예-->
-                <div>
-                    <span class="peong_simple">💣</span>
-                    <span class="cate" th:utext="${jayuBoardDTO.category}" ></span>
+                <!--카테고리-->
+                <div class="option">
+                    <span class="cate cate_line">[[${jayuBoardDTO.jayuCateName}]]</span>
                 </div>
 
+                <!--펑예-->
+                <div class="option">
+                    <label class="peong">💣펑예</label>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                    <div class="alert_tip">ⓘ
+                        <span class="tooltiptext">익일 자정에 펑! 삭제됩니다.</span>
+                    </div>
+                </div>
                 <!-- 제목 -->
                 <div class="title" name="title" th:utext="${jayuBoardDTO.title}"></div>
 
@@ -29,7 +38,8 @@
                               style="margin-right: 15px;"></span>
                     </span>
                         <span>수정일:
-                        <span name="modDate" th:utext="${#temporals.format(jayuBoardDTO.modDate,'yyyy/MM/dd HH:mm:ss')}"></span>
+                        <span name="modDate"
+                              th:utext="${#temporals.format(jayuBoardDTO.modDate,'yyyy/MM/dd HH:mm:ss')}"></span>
                     </span>
                     </div>
                 </div>
@@ -38,8 +48,66 @@
                 <hr>
                 <div class="content_height" name="content" th:utext="${jayuBoardDTO.content}"></div>
             </div>
+            <!-- 댓글 -->
+            <section class="mb-5">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <!-- Comment form-->
+                        <form class="mb-4"><textarea class="form-control" rows="3"
+                                                     placeholder="Join the discussion and leave a comment!"></textarea>
+                        </form>
+                        <!-- Comment with nested comments-->
+                        <div class="d-flex mb-4">
+                            <!-- Parent comment-->
+                            <div class="flex-shrink-0"><img class="rounded-circle"
+                                                            src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                                                            alt="..."/></div>
+                            <div class="ms-3">
+                                <div class="fw-bold">Commenter Name</div>
+                                If you're going to lead a space frontier, it has to be government; it'll never be
+                                private enterprise. Because the space frontier is dangerous, and it's expensive, and it
+                                has unquantified risks.
+                                <!-- Child comment 1-->
+                                <div class="d-flex mt-4">
+                                    <div class="flex-shrink-0"><img class="rounded-circle"
+                                                                    src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                                                                    alt="..."/></div>
+                                    <div class="ms-3">
+                                        <div class="fw-bold">Commenter Name</div>
+                                        And under those conditions, you cannot establish a capital-market evaluation of
+                                        that enterprise. You can't get investors.
+                                    </div>
+                                </div>
+                                <!-- Child comment 2-->
+                                <div class="d-flex mt-4">
+                                    <div class="flex-shrink-0"><img class="rounded-circle"
+                                                                    src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                                                                    alt="..."/></div>
+                                    <div class="ms-3">
+                                        <div class="fw-bold">Commenter Name</div>
+                                        When you put money directly to a problem, it makes a good headline.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single comment-->
+                        <div class="d-flex">
+                            <div class="flex-shrink-0"><img class="rounded-circle"
+                                                            src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                                                            alt="..."/></div>
+                            <div class="ms-3">
+                                <div class="fw-bold">Commenter Name</div>
+                                When I look at the universe and all the ways the universe wants to kill us, I find it
+                                hard to reconcile that with statements of beneficence.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-            <a th:href="@{/jayu/list}">
+
+            <a th:href="@{/jayu/list(page=${pageRequestDTO.page}, type=${pageRequestDTO.type},
+    keyword=${pageRequestDTO.keyword})}">
                 <button class="btn btn-primary">목록보기</button>
             </a>
 

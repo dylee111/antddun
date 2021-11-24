@@ -13,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 
 public class JayuCateServiceImpl implements JayuCateService {
+
     private final JayuCateRepository jayuCateRepository;
 
     @Override
@@ -20,6 +21,5 @@ public class JayuCateServiceImpl implements JayuCateService {
         List<JayuCategory> result = jayuCateRepository.findAll();
 
         return result;
-
     }
 }
