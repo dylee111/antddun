@@ -22,36 +22,15 @@ import java.util.function.Consumer;
 @Log4j2
 public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
-    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-
     public LoginSuccessHandler(String defaultTargetUrl) {
         setDefaultTargetUrl(defaultTargetUrl);
     }
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
-
-/*        HttpSession session = request.getSession();
-        if (session != null) {
-            String redirectUrl = (String) session.getAttribute("redirectURI");
-
-            if (redirectUrl != null) {
-                session.removeAttribute("redirectURI");
-                getRedirectStrategy().sendRedirect(request, response, redirectUrl);
-            } else {
-                super.onAuthenticationSuccess(request, response, authentication);
-            }
-        } else {
-            super.onAuthenticationSuccess(request, response, authentication);
-        }*/
-
-
-
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
 
         boolean fromSocial = principalDetails.getMember().isFromSocial();
-        log.info("Need Modify Member?" + fromSocial); //true
-
         List<String> roleList = new ArrayList<>();
 
         principalDetails.getAuthorities().forEach(new Consumer<GrantedAuthority>() {
@@ -63,12 +42,23 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         });
         log.info("getAuthorities: " + roleList);
 
-        String sendUrl = "";
-        if (roleList.contains("USER") && fromSocial) sendUrl = "/";
-        if (roleList.contains("ADMIN") && fromSocial) sendUrl = "/admin";
-        if (roleList.contains("SOCIAL") && fromSocial ) sendUrl = "/member/socialJoin";
-        log.info("sendUrl: "+sendUrl);
-        redirectStrategy.sendRedirect(request, response, sendUrl);
+
+        HttpSession session = request.getSession();
+        if (session != null) {
+            String redirectUrl = (String) session.getAttribute("redirectURI");
+            if (roleList.contains("SOCIAL") && fromSocial ) redirectUrl = "/member/socialJoin";
+
+                    if (redirectUrl != null) {
+                        session.removeAttribute("redirectURI");
+
+                    } else {
+                        super.onAuthenticationSuccess(request, response, authentication);
+                    }
+
+            getRedirectStrategy().sendRedirect(request, response, redirectUrl);
+        }
+
+
     }
 
 }

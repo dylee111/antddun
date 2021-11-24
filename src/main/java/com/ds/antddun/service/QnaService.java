@@ -17,7 +17,7 @@ public interface QnaService {
     //게시물 조회
     QnaBoardDTO getBoard(Long qnaNo);
 
-    void modify();
+    void modify(QnaBoardDTO qnaBoardDTO);
 
     void delete();
 
