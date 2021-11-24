@@ -1,9 +1,6 @@
 package com.ds.antddun.service;
 
-import com.ds.antddun.dto.MemberDTO;
-import com.ds.antddun.dto.PageResultDTO;
-import com.ds.antddun.dto.SosoBoardDTO;
-import com.ds.antddun.dto.SosoCategoryDTO;
+import com.ds.antddun.dto.*;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.SosoCategory;
 import com.ds.antddun.entity.SosoJobBoard;
@@ -23,7 +20,7 @@ public interface SosoJobService {
 
     SosoBoardDTO read(Long sosoNo);
 
-    PageResultDTO<SosoBoardDTO, SosoJobBoard> getList(int category);
+    PageResultDTO<SosoBoardDTO, SosoJobBoard> getList(int category, SosoPageRequestDTO sosoPageRequestDTO);
 
     default SosoBoardDTO entityToDTO(SosoJobBoard sosoJobBoard) {
 

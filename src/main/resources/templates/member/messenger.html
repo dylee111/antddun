@@ -29,8 +29,8 @@
                         <td class="msg_sender" th:value="${senderList.mno}">
                             <input type="hidden" class="sender_mno" th:value="${senderList.mno}">
                             <strong class="sender">[[${senderList.lastName}]][[${senderList.firstName}]]</strong>
-                            <div><input type="radio" name="trade">거래 중</div>
-                            <div><input type="radio" name="trade">거래 완료</div>
+                            <div><input type="radio" name="trade" value="0" checked>거래 중</div>
+                            <div><input type="radio" name="trade" value="1">거래 완료</div>
                         </td>
                     </tr>
 <!--                    <tr>-->

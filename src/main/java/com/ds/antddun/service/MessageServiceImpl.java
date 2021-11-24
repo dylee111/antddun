@@ -57,7 +57,19 @@ public class MessageServiceImpl implements MessageService{
     }
 
     @Override
-    public Long tradeCheck(Long msgNo) {
-        return null;
+    public Long tradeCheck(int tradeCheck, MessageDTO messageDTO) {
+        Message message;
+
+        if (tradeCheck == 0) {
+            messageDTO.setTrade(false);
+            message = Message.builder().trade(messageDTO.isTrade()).build();
+            return message.getMsgNo();
+        } else if(tradeCheck == 1){
+            messageDTO.setTrade(true);
+            message = Message.builder().trade(messageDTO.isTrade()).build();
+            return message.getMsgNo();
+        }
+            return null;
     }
+
 }

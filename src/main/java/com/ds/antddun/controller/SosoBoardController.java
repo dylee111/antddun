@@ -3,10 +3,12 @@ package com.ds.antddun.controller;
 import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.SosoBoardDTO;
 import com.ds.antddun.dto.SosoCategoryDTO;
+import com.ds.antddun.dto.SosoPageRequestDTO;
 import com.ds.antddun.entity.SosoCategory;
 import com.ds.antddun.entity.SosoJobBoard;
 import com.ds.antddun.service.SosoCateService;
 import com.ds.antddun.service.SosoJobService;
+import com.ds.antddun.service.SosoReplyService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -26,7 +27,6 @@ import java.util.Map;
 
 @Controller
 @Log4j2
-@RequestMapping("/member")
 public class SosoBoardController {
 
     @Autowired
@@ -34,6 +34,9 @@ public class SosoBoardController {
 
     @Autowired
     private SosoCateService cateService;
+
+    @Autowired
+    private SosoReplyService sosoReplyService;
 
     /*
      * 메인 페이지
@@ -64,7 +67,7 @@ public class SosoBoardController {
     /*
      * 글 등록
      * */
-    @GetMapping("/sosojob/register")
+    @GetMapping("/member/sosojob/register")
     public String register(Model model) {
 
         model.addAttribute("category", cateService.getCateList());
@@ -72,7 +75,7 @@ public class SosoBoardController {
         return "/sosojob/register";
     }
 
-    @PostMapping("/sosojob/register")
+    @PostMapping("/member/sosojob/register")
     public String register(SosoBoardDTO sosoBoardDTO,
                            SosoCategoryDTO sosoCategoryDTO,
                            @AuthenticationPrincipal PrincipalDetails principal) {
@@ -80,13 +83,13 @@ public class SosoBoardController {
         sosoJobService.register(sosoBoardDTO, sosoCategoryDTO, principal.getMember());
 
 //        return "/sosojob/sosojobMain";
-        return "redirect:/member/sosojob/list/" + (sosoBoardDTO.getCategoryNo()+1);
+        return "redirect:/sosojob/list/" + (sosoBoardDTO.getCategoryNo()+1);
     }
 
     /*
      * 글 수정
      * */
-    @GetMapping("/sosojob/modify")
+    @GetMapping("/member/sosojob/modify")
     public String modify(Model model) {
 
         log.info("CATELIST >>" + cateService.getCateList().toString());
@@ -95,7 +98,7 @@ public class SosoBoardController {
         return "/sosojob/modify";
     }
 
-    @PostMapping("/sosojob/modify")
+    @PostMapping("/member/sosojob/modify")
     public String modify(SosoBoardDTO sosoBoardDTO, @AuthenticationPrincipal PrincipalDetails principal) {
 
 //        sosoJobService.register(sosoBoardDTO, principal.getMember());
@@ -103,34 +106,35 @@ public class SosoBoardController {
         return "/sosojob/sosojobMain";
     }
 
-    @GetMapping("/sosojob/sosoList/{category}")
-    public ModelAndView cateList(@PathVariable("category") int categoryNo, Model model) {
+    @GetMapping("/sosojob/sosoList/sosoCategory={category}")
+    public ModelAndView cateList(@PathVariable("category") int categoryNo, Model model, SosoPageRequestDTO sosoPageRequestDTO) {
         ModelAndView mv = new ModelAndView();
 
-        mv.addObject("mvData", sosoJobService.getList(categoryNo));
+        mv.addObject("mvData", sosoJobService.getList(categoryNo, sosoPageRequestDTO));
         mv.setViewName("sosojob/sosoList");
 
-        List<SosoCategory> list = cateService.getCateList(); // 카테고리 리스트(cateNo / cateName)
+//        List<SosoCategory> list = cateService.getCateList(); // 카테고리 리스트(cateNo / cateName)
         List<Integer> cateNoList = new ArrayList<>(); // 카테고리 No. 담기 위한 LIST
-
-        Map<String, List<SosoJobBoard>> getCateList = new HashMap<>(); // key(카테고리 이름):value(카테고리 별 리스트)
-
-        getCateList.put(list.get(categoryNo - 1).getSosoCateName(),
-                sosoJobService.getListByCategory(list.get(categoryNo - 1).getSosoCateName()));
+//
+//        Map<String, List<SosoJobBoard>> getCateList = new HashMap<>(); // key(카테고리 이름):value(카테고리 별 리스트)
+//
+//        getCateList.put(list.get(categoryNo - 1).getSosoCateName(),
+//                sosoJobService.getListByCategory(list.get(categoryNo - 1).getSosoCateName()));
         cateNoList.add(categoryNo);
 //        model.addAttribute("cate", sosoJobService.getList(categoryNo));
-        model.addAttribute("cateName", list);
+//        model.addAttribute("cateName", list);
         model.addAttribute("cateNum", cateNoList);
 
         return mv;
     }
 
-    @GetMapping("/sosojob/list/read")
+    @GetMapping("/member/sosojob/list/read")
     public String sosoRead(Long sosoNo, Model model) {
 
         SosoBoardDTO sosoBoardDTO = sosoJobService.read(sosoNo);
-        log.info("SOSODTO>>>" + sosoBoardDTO);
+        log.info("SOSODTO>>>" + sosoReplyService.getListBySosoNo(sosoNo));
         model.addAttribute("read", sosoBoardDTO);
+        model.addAttribute("replyList" + sosoReplyService.getListBySosoNo(sosoNo));
         return "/sosojob/sosoDetailView";
     }
 }

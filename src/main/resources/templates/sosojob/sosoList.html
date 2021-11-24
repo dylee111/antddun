@@ -65,20 +65,20 @@
 <!--                    <a class="page-link" th:href="@{/member/list(page=${boardList.start - 1},-->
 <!--                type=${pageRequestDTO.type},-->
 <!--                keyword = ${pageRequestDTO.keyword} ) }" tabindex="-1">이전</a>                    -->
-                    <a class="page-link" th:href="@{'/member/sosojob/list/'+${cateNum}(page=${mvData.start - 1}" tabindex="-1">이전</a>
+                    <a class="page-link" th:href="@{'/sosojob/list/sosoCategory='+${cateNum}(page=${mvData.start - 1}" tabindex="-1">이전</a>
                 </li>
 
                 <li th:class=" 'page-item '+ ${mvData.page == page?'active':''} "
                     th:each="page: ${mvData.pageList}">
 <!--                    <a class="page-link" th:href="@{/qna/list(page = ${page}, type=${pageRequestDTO.type},-->
 <!--                keyword = ${pageRequestDTO.keyword})}">-->
-                    <a th:each="cateNo : ${cateNum}" th:value="${page}" class="page-link" th:href="@{'/member/sosojob/sosoList/'+${cateNo}(page=${page})}">
+                    <a th:each="cateNo : ${cateNum}" th:value="${page}" class="page-link" th:href="@{'/sosojob/sosoList/sosoCategory='+${cateNo}(page=${page})}">
                         [[${page}]]
                     </a>
                 </li>
 
                 <li class="page-item" th:if="${mvData.next}">
-                    <a class="page-link" th:href="@{'/member/sosojob/sosoList/'+${cateNum}(page= ${mvData.end + 1}">다음</a>
+                    <a class="page-link" th:href="@{'/sosojob/sosoList/sosoCategory='+${cateNum}(page= ${mvData.end + 1}">다음</a>
                 </li>
             </ul>
         </nav>
