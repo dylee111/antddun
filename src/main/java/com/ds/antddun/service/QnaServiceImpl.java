@@ -1,8 +1,11 @@
 package com.ds.antddun.service;
 
+import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.dto.PageRequestDTO;
 import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.dto.QnaBoardDTO;
+import com.ds.antddun.entity.AntMemberRoleSet;
+import com.ds.antddun.entity.JobList;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.QnaBoard;
 import com.ds.antddun.repository.JobListRepository;
@@ -17,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 @Service
@@ -97,9 +101,19 @@ public class QnaServiceImpl implements QnaService {
         return entityToDTO(qnaBoard, likesCnt);
     }
 
-
     @Override
-    public void modify(){
+    public void modify(QnaBoardDTO qnaBoardDTO) {
+        JobList jobList = jobListRepository.findById(Integer.parseInt(qnaBoardDTO.getJob())).get();
+
+        Optional<QnaBoard> result = qnaBoardRepository.findById(qnaBoardDTO.getQnaNo());
+
+        if (result.isPresent()) {
+            QnaBoard entity = result.get();
+            entity.setTitle(qnaBoardDTO.getTitle());
+            entity.setContent(qnaBoardDTO.getContent());
+            entity.setJobList(jobList);
+            qnaBoardRepository.save(entity);
+        }
     }
 
     @Override

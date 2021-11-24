@@ -131,8 +131,17 @@ public class QnaBoardController {
         //로그인 후 이용가능
         if (principal == null) { return "redirect:/login"; }
 
+        //조회수 추가
+        qnaBoardRepository.updateViewCnt(qnaNo);
+
         //게시판 정보
         model.addAttribute("boardList", qnaService.getBoard(qnaNo));
+
+        //수정 삭제 버튼 보이기
+        Long actualWriter = qnaBoardRepository.getById(qnaNo).getMember().getMno();
+        if (principal.getMember().getMno() == actualWriter) {
+            model.addAttribute("checkUser", true);
+        }
 
         //좋아요 체크 유무
         model.addAttribute("qnaCheck", qnaLikeService.checkLikes(qnaNo,principal.getMember().getMno())); //null 또는 qnalikes
