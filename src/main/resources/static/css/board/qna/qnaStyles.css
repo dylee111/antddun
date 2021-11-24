@@ -46,6 +46,7 @@
     text-decoration:none;
     line-height:4rem;
     text-overflow: ellipsis;
+    cursor: pointer;
 }
 
 .subNav-body {

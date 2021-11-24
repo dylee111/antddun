@@ -90,8 +90,8 @@ public class JayuBoardController {
     }
 
     //게시글 목록
-    @GetMapping("/jayu/list")
-    public String list(Model model, PageRequestDTO pageRequestDTO,  @AuthenticationPrincipal PrincipalDetails principal) {
+    @GetMapping("/jayu/list/all")
+    public String listAll(Model model, PageRequestDTO pageRequestDTO,  @AuthenticationPrincipal PrincipalDetails principal) {
         PageResultDTO<JayuBoardDTO, JayuBoard> jayuList = jayuBoardService.getList(pageRequestDTO);
 
         //summernote 태그 제거
@@ -116,15 +116,23 @@ public class JayuBoardController {
                 model.addAttribute("wishListIndex", wishLists.get(0));
             }
         }
-
-        return "/jayu/list";
+        return "/jayu/listAll";
     }
 
-    //카테고리 목록
-    @GetMapping("jayu/list/jayuCateNo={jayuCateNo}")
-    public String cateList(Model model, PageRequestDTO pageRequestDTO, @PathVariable int jayuCateNo, @AuthenticationPrincipal PrincipalDetails principal) {
+    //게시글 카테고리 목록
+    @GetMapping("/jayu/list")
+    public String list(Model model, PageRequestDTO pageRequestDTO,  @AuthenticationPrincipal PrincipalDetails principal) {
+        PageResultDTO<JayuBoardDTO, JayuBoard> jayuList = jayuBoardService.getListByCate(pageRequestDTO.getCate(), pageRequestDTO);
 
-        PageResultDTO<JayuBoardDTO, JayuBoard> jayuList = jayuBoardService.getListByCate(jayuCateNo, pageRequestDTO);
+        log.info("pageDTO.CATE"+pageRequestDTO.getCate());
+        //summernote 태그 제거
+        List<JayuBoardDTO> list = jayuList.getDtoList();
+        for (int i = 0; i < list.size(); i++) {
+            JayuBoardDTO tmp = (JayuBoardDTO) list.get(i);
+            tmp.setContent(tmp.getContent().replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", ""));
+            list.set(i, tmp);
+        }
+        jayuList.setDtoList((List<JayuBoardDTO>) list);
         model.addAttribute("jayuList",jayuList);
 
         //카테고리
