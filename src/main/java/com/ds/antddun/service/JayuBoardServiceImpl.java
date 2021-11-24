@@ -6,8 +6,11 @@ import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.entity.JayuBoard;
 import com.ds.antddun.entity.JayuCategory;
 import com.ds.antddun.entity.Member;
+import com.ds.antddun.entity.QJayuBoard;
 import com.ds.antddun.repository.JayuBoardRepository;
 import com.ds.antddun.repository.JayuCateRepository;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -43,18 +46,41 @@ public class JayuBoardServiceImpl implements JayuBoardService{
 
     @Override
     public JayuBoardDTO read(Long jayuNo) {
+        log.info("jayuNo>>>>>"+jayuNo);
         Optional<JayuBoard> result = jayuBoardRepository.findById(jayuNo);
+
         return result.isPresent()?entityToDTO(result.get()):null;
     }
 
     //게시물 목록
     @Override
-    public PageResultDTO<JayuBoardDTO,JayuBoard> getList(PageRequestDTO requestDTO){
-        Pageable pageable = requestDTO.getPageable(Sort.by("regDate").descending());
-        Page<JayuBoard> result = jayuBoardRepository.findAll(pageable);
+    public PageResultDTO<JayuBoardDTO,JayuBoard> getList(PageRequestDTO pageRequestDTO){
+        Pageable pageable = pageRequestDTO.getPageable(Sort.by("regDate").descending());
+        //검색조건 처리
+        BooleanBuilder booleanBuilder = getSearch(pageRequestDTO);
+        Page<JayuBoard> result = jayuBoardRepository.findAll(booleanBuilder, pageable);
 
         Function<JayuBoard, JayuBoardDTO> fn = (entity -> entityToDTO(entity));
         return new PageResultDTO<>(result, fn);
+    }
+
+    private BooleanBuilder getSearch(PageRequestDTO pageRequestDTO) {
+        String keyword = pageRequestDTO.getKeyword();
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        QJayuBoard qJayuBoard = QJayuBoard.jayuBoard;
+        //jayuNo > 0 조건만 생성
+        BooleanExpression expression = qJayuBoard.jayuNo.gt(0L); // gno>0 조건만 생성
+        booleanBuilder.and(expression);
+
+        //검색조건이 없는 경우
+        if (keyword == null || keyword.trim().length() == 0) {
+            return booleanBuilder;
+        }
+
+        //검색조건 작성
+        BooleanBuilder conditionBuilder = new BooleanBuilder();
+
+        return conditionBuilder.or(qJayuBoard.title.contains(keyword));
     }
 
 
