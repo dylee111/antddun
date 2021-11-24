@@ -21,9 +21,9 @@ public class Message {
     private Long msgNo;
 
     @Column(nullable = false)
-    private String title;
+    private String msgTitle;
     @Column(nullable = false)
-    private String content;
+    private String msgContent;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Member sendMember;

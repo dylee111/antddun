@@ -13,6 +13,7 @@ public class DdunDTO {
     private Long DdunId;
     private Long inputAmount;
     private Long outputAmount;
+    private String content;
     private LocalDateTime chargeDate;
     private Long member;
 }

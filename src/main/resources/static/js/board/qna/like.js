@@ -40,14 +40,15 @@
    var contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
 
 
-        $('#likebtn').click(function(){
-                likeupdate();
-            });
+    $('#likeBtn').click(function(){
+            likeupdate();
+        });
 
         function likeupdate(){
 
             var qnaNo = $('#qnaNo').text();
             var likesCnt = $('#likesCnt');
+
 
         $.ajax({
             url : contextPath + "/qna/" + qnaNo,
@@ -56,18 +57,19 @@
             dataType: 'JSON',
             success : function(data){
                         if ( data.response == null) { //좋아요 해제 후 db에 있는 개수 반영
-                            //likesCnt.html(JSON.stringify(data.likesCnt));
                             likesCnt.text(JSON.stringify(data.likesCnt));
 
                         } else { //좋아요, db에 있는 개수 반영
-                           // likesCnt.html(JSON.stringify(data.likesCnt));
                             likesCnt.text(JSON.stringify(data.likesCnt));
-                            console.log("좋아요 개수"+JSON.stringify(data.likesCnt));
-                            $('#likebtn').attr('class','liked');
+                            likeBtn.attr("th:src", "@{/assets/coins.png}");
                         }
             },
             error : function(data){
+                console.log(data);
                 alert("로그인 후 이용가능");
+//                window.location.href = 'http://localhost:8080/antddun/login';
+
+
             }
 
             });
@@ -80,11 +82,11 @@
              if (data == "success"){
                 console.log("좋아요" + data);
                 alert("좋아요");
-                $('#likebtn').attr('class','btn-light');
+                $('#likeBtn').attr('class','btn-light');
              }else if(data == "fail"){
                 console.log("좋아요 취소" + data);
                 alert("좋아요 취소");
-                $('#likebtn').attr('class','btn-danger');
+                $('#likeBtn').attr('class','btn-danger');
              }
 
 */

@@ -11,16 +11,19 @@ public interface MessageService {
 
     List<MessageDTO> getMessageList(Message message);
 
-    List<Message> sendMsg();
+    Long sendMsg(MessageDTO messageDTO, Member sender, Member receiver);
 
+    List<Message> getMsgListByMno(Long mno);
 
-    default Message dtoToEntity(MessageDTO messageDTO, Member member, SosoJobBoard sosoJobBoard) {
+    List<Member> distinctSender(Long sender);
+
+    default Message dtoToEntity(MessageDTO messageDTO, Member sender, Member receiver) {
         Message message = Message.builder()
                 .msgNo(messageDTO.getMsgNo())
-                .title(messageDTO.getTitle())
-                .content(messageDTO.getContent())
-                .sendMember(member) // 로그인 회원
-                .receiveMember(sosoJobBoard.getMember()) // sosojob 작성자. 이게 맞나..........
+                .msgTitle(messageDTO.getTitle())
+                .msgContent(messageDTO.getContent())
+                .sendMember(Member.builder().mno(sender.getMno()).build()) // 로그인 회원
+                .receiveMember(Member.builder().mno(receiver.getMno()).build()) // sosojob 작성자
                 .trade(messageDTO.isTrade())
                 .sendTime(messageDTO.getCreateDate())
                 .build();

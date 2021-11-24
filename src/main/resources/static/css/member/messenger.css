@@ -70,8 +70,12 @@
 }
 
 .send_title {
+    width: 90%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 30px;
+    white-space: nowrap;
     display: inline-block;
-    margin-left: 10px;
     font-weight: bold;
     font-size: 25px;
 }

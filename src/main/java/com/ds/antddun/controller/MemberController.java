@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -122,8 +123,10 @@ public class MemberController {
     @ResponseBody
     @PutMapping("/member/mypage/wishlist/modify/{wno}")
     public ResponseEntity<String> modifyWishList(@RequestBody MemberWishListDTO memberWishListDTO,
-                                                 @AuthenticationPrincipal PrincipalDetails principalDetails) {
+                                                 @AuthenticationPrincipal PrincipalDetails principalDetails,
+                                                 HttpServletRequest request) {
 
+        log.info("DDAY>>>"+request.getParameter("dDay"));
         wishListService.modify(memberWishListDTO, principalDetails.getMember());
 
         return new ResponseEntity<>("modify", HttpStatus.OK);

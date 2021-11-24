@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -42,12 +43,8 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Long join(MemberDTO memberDTO, JobListDTO jobListDTO) {
 
-        log.info("why"+memberDTO);
-
         memberDTO.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
-
         JobList jobList = jobListRepository.findById(jobListDTO.getJno()).get();
-        log.info("wtf?"+jobList);
 
         return memberRepository.save(Member.builder()
                 .mno(memberDTO.getMno())
@@ -160,7 +157,6 @@ public class MemberServiceImpl implements MemberService {
         Member member = socialDtoToEntity(memberDTO);
         member.setMno(memberDTO.getMno()); //update되도록 mno알려주기
         member.setJob(jobList); //Member에 setter 추가해줌
-
         memberRepository.save(member);
     }
 
