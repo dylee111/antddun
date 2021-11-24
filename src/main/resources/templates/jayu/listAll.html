@@ -80,7 +80,7 @@
 
                 <li th:class=" 'page-item '+ ${jayuList.page == page?'active':''} "
                     th:each="page: ${jayuList.pageList}">
-                    <a class="page-link" th:href="@{/jayu/list/all/(page = ${page}, keyword = ${pageRequestDTO.keyword})}">
+                    <a class="page-link" th:href="@{/jayu/list/all(page = ${page}, keyword = ${pageRequestDTO.keyword})}">
                         [[${page}]]
                     </a>
                 </li>

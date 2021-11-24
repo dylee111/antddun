@@ -17,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -70,7 +69,7 @@ public class JayuBoardController {
     }
 
     //게시글 조회
-    @GetMapping("/member/jayu/read/")
+    @GetMapping("/member/jayu/read")
     public String read(Long jayuNo, Model model, @AuthenticationPrincipal PrincipalDetails principal,
                        @ModelAttribute("pageRequestDTO") PageRequestDTO pageRequestDTO) {
         if (principal == null) {return "redirect:/login";}

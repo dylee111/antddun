@@ -79,8 +79,10 @@ public class JayuBoardServiceImpl implements JayuBoardService{
 
         //검색조건 작성
         BooleanBuilder conditionBuilder = new BooleanBuilder();
+        conditionBuilder = conditionBuilder.or(qJayuBoard.title.contains(keyword));
 
-        return conditionBuilder.or(qJayuBoard.title.contains(keyword));
+        booleanBuilder.and(conditionBuilder);
+        return booleanBuilder;
     }
 
 
