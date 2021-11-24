@@ -37,10 +37,14 @@ h1{
     text-align: right;
 }
 
+.content{
+    height:100vh !important;
+}
 /* form 스타일 */
 .form-group{
-    margin: 5px 0 20px 0;
+    margin: 60px 0 20px 0;
     font-family: 'ELAND_Choice_M';
+
 }
 .form-control{
      font-family: 'ELAND_Choice_M';
@@ -73,7 +77,7 @@ input:focus {
     color: gray;
     font-size: 13px;
     text-align: end;
-    padding-top: 10px;
+    font-weight: bold;
 }
 
 .coinBox{
