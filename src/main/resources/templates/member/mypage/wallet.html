@@ -78,7 +78,7 @@
                                         <td style="width: 30%;"><input th:id="'list'+${index.index}" class="input_pd" name="wishList" th:value="${wishList.wishList}" th:placeholder="${wishList.wishList}" readonly></td>
                                         <td style="width: 15%;"><input th:id="'price'+${index.index}" class="input_cost" name="price" th:value="${wishList.price}" th:placeholder="${wishList.price}" readonly></td>
                                         <td style="width: 15%;"><input th:id="'rate'+${index.index}" class="input_per" name="rate" th:value="${wishList.rate}" th:placeholder="${wishList.rate}" readonly>%</td>
-                                        <td style="width: 13%;" >D-<input th:id="'dDay'+${index.index}" class="wish_day" name="dDay" th:value="${wishList.dDay}" th:placeholder="${wishList.dDay}" readonly/></td>
+                                        <td style="width: 13%;" >D-<input th:id="'dDay'+${index.index}" class="wish_date" name="dDay" th:value="${wishList.dDay}" th:placeholder="${wishList.dDay}" readonly/></td>
                                         <td style="width: 12%;">
                                             <img th:id="'btn-update'+${index.index}" class="btn-image wish_update" th:src="@{/assets/wishlist/update.png}" style="width:15px; filter: brightness(0);">
                                             <img th:id="'btn-delete'+${index.index}" class="btn-image wish_delete" th:src="@{/assets/wishlist/delete.png}" style="width:15px;">
@@ -119,7 +119,7 @@
                         <div class="center my_margin">
                             <div>
                                 <div class="my_ddun_wrap">
-                                    <span class="my_ddun">보유 뚠</span>
+                                    <span class="my_ddun">보유 뚠</span><br>
                                     <span class="my_ddun"><strong style="font-size: 24px; font-weight: bold;">[[${totalDdun}]]</strong>뚠</span>
                                 </div>
                             </div>
