@@ -14,7 +14,7 @@
     padding: 0px 5px 0px 5px !important;
 }
 
-#likeBtn.liked{
+.like_on{
     background: pink;
 }
 
@@ -34,7 +34,17 @@
     font-weight: bold;
     margin-right: 20px;
     text-decoration:none;
-    line-height:5rem;
+    line-height:4rem;
+    text-overflow: ellipsis;
+}
+
+.subNav_on{
+    font-size: 1.5em !important;
+    color: #f9c74f;
+    font-weight: bold;
+    margin-right: 20px;
+    text-decoration:none;
+    line-height:4rem;
     text-overflow: ellipsis;
 }
 

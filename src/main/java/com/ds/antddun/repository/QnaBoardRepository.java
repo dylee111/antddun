@@ -20,9 +20,6 @@ public interface QnaBoardRepository extends JpaRepository<QnaBoard, Long> {
     Page<Object[]> getListPage(Pageable pageable);
 
 
-/*    @Query(value="SELECT * FROM qna_board qna, job_list jl WHERE qna.job_list_jno = jl.jno AND qna.job_list_jno=:jno ",
-           countQuery = "SELECT count(*) FROM qna_board qna, job_list jl WHERE qna.job_list_jno = jl.jno AND qna.job_list_jno=:jno ",
-           nativeQuery = true)*/
     @Query("SELECT qna, COUNT(likes.qnaBoard.qnaNo) " +
             "FROM QnaBoard qna LEFT OUTER JOIN QnaLikes likes " +
             "ON likes.qnaBoard.qnaNo = qna.qnaNo " +
