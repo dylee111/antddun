@@ -8,10 +8,10 @@
         <div class="container mt-5">
             <div class="row">
                 <!-- Side widgets-->
-                <div class="col-lg-3">
+                <div class="col-lg-3" style="padding: 0 20px;">
                     <!-- Search widget-->
-                    <div class="card mb-4" style="min-height: 350px;">
-                        <div class="card-header seller_title">판매자 정보</div>
+                    <div class="card mb-4" style="min-height: 370px;">
+                        <div class="card-header seller_title" style="text-align: center;">판매자 정보</div>
                         <div class="card-body">
                             <div class="input-group">
                                 <div class="user_box">
@@ -19,14 +19,14 @@
                                     <!--판매자 정보-->
                                     <div id="writer-name"><span class="seller_info">[[${read.job}]] [[${read.experience}]]년차 [[${read.lastName}]]개미</span></div>
 
+                                    <div style="margin-bottom: 50px;">
+                                        <button class="btn btn-primary" id="button-send" type="button">문의하기</button>
+                                        <button class="btn btn-primary" id="button-buy" type="button" >구매하기</button>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div style="margin-bottom: 50px;">
-                        <button class="btn btn-primary" id="button-send" type="button">문의하기</button>
-                        <button class="btn btn-primary" id="button-buy" type="button" >구매하기</button>
                     </div>
 
                     <div class="card-body bg-white mt-0 shadow send_container" style="display: none;">
@@ -76,7 +76,7 @@
                 </div>
                 <div class="col-lg-9">
                     <!-- Post content-->
-                    <article>
+                    <article style="padding: 0 20px;">
                         <!-- Post header-->
                         <header class="mb-4">
                             <!-- Post categories-->
@@ -86,14 +86,18 @@
                             <input id="soso_no" type="hidden" th:value="${read.sosoNo}">
                             <input type="hidden" id="writer_no" th:value="${read.mno}">
                             <input type="hidden" id="total_ddun" th:value="${buyerTotalDdun}">
-                            <h1 class="text-width fw-bolder mb-1 sell_title" name="title">[[${read.title}]]</h1>
-                            <div>
-                                <img th:src="@{/assets/coins.png}" width="19">
-                                <span id="ddun">[[${read.ddun}]]</span>
+                            <div style="width: 100%; margin-top: 15px;">
+                                <div class="title_wrap">
+                                    <h1 class="fw-bolder mb-1 sell_title" name="title">[[${read.title}]]</h1>
+                                </div>
+                                <div class="ddun_wrap" style="width:20%;">
+                                    <img th:src="@{/assets/coins.png}" width="19">
+                                    <span id="ddun">[[${read.ddun}]]</span>
+                                </div>
                             </div>
                             <!-- Post meta content-->
-                            <div class="text-width text-muted fst-italic mb-2">
-                                [[${#temporals.format(read.regDate, 'yyyy/MM/dd')}]]
+                            <div class="text-muted mb-2 sell_date">
+                                [[${#temporals.format(read.regDate, 'yyyy-mm-dd HH:mm:ss')}]]
                             </div>
                         </header>
                         <!-- Preview image figure-->
@@ -103,18 +107,14 @@
                         </figure>
                         <!-- Post content-->
                         <section class="mb-5">
-                            <div class="card bg-light">
-                                <div class="card-body">
-                                    <!-- Comment form-->
-                                    <h1>[[${read.content}]]</h1>
-                                </div>
-                            </div>
+                            <!-- Comment form-->
+                            <p>[[${read.content}]]</p>
                         </section >
                         </div>
                     </article>
                     <!-- Comments section-->
                     <section class="mb-5">
-                        <div class="card bg-light">
+                        <div class="card bg-light" style="width: 92%; margin: 0 auto;">
                             <div class="card-body">
                                 <!-- Comment form-->
                                 <form class="mb-4"><textarea class="form-control" rows="3"

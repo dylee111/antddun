@@ -3893,11 +3893,13 @@ textarea.form-control-lg {
 }
 
 .nav {
-  display: flex;
-  flex-wrap: wrap;
-  padding-left: 0;
-  margin-bottom: 0;
-  list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    max-height: 70px;
+    margin-bottom: 0;
+    list-style: none;
+    font-size: 10px;
 }
 
 .nav-link {

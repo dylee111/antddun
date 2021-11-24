@@ -13,7 +13,8 @@
         <!-- 본문 시작 -->
         <div class="subNav-body">
             <nav class="nav nav-underline" aria-label="Secondary navigation">
-                <a class="subNav" th:href="@{/qna/list/}">전체 </a><a th:each="jobList : ${jobList}" class="subNav" th:href="@{'/qna/list/' + ${jobList.jno}}">
+                <a th:classappend="${#httpServletRequest.requestURI} == '/antddun/qna/list/' ? 'subNav_on' : 'subNav'" th:href="@{/qna/list/}">전체 </a>
+                <a th:classappend="${#httpServletRequest.requestURI} == '/antddun/qna/list/'+${jobList.jno} ? 'subNav_on' : 'subNav'" th:each="jobList : ${jobList}" th:href="@{'/qna/list/' + ${jobList.jno}}">
                     [[${jobList.job}]]
                 </a>
             </nav>
@@ -37,7 +38,6 @@
                         <a class="content-text" th:href="@{'/member/qna/read/' + ${boardList.qnaNo}}"
                            th:utext="${boardList.content}"></a>
                     </div>
-
                 </div>
 
  <!--               <div class="rightSection">
