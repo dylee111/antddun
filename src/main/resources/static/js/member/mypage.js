@@ -182,7 +182,6 @@ $(document).ready(function() {
         } else if(count == 2) {
                 console.log(count);
             $(this).css("filter", "brightness(0)");
-            alert("돌아감");
             var wno = $("#wno1").val();
             console.log(wno);
             var wishList = {
@@ -223,7 +222,6 @@ $(document).ready(function() {
         } else if(count == 2) {
                 console.log(count);
             $(this).css("filter", "brightness(0)");
-            alert("돌아감");
             var wno = $("#wno2").val();
             console.log(wno);
             var wishList = {
@@ -314,8 +312,6 @@ $(document).ready(function() {
             startTime: $(".startTime").val(),
             endTime: $(".endTime").val()
         }
-        alert(infoMno);
-        alert(myInfo);
 
         $.ajax({
             url: '/antddun/member/mypage/info/modify/' + infoMno,

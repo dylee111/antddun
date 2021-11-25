@@ -49,11 +49,6 @@
                     </div>
                 </div>
             </section>
-            <div th:each="soso : ${soso}" >
-                <span>[[${soso.experience}]]년차</span>
-                <span>[[${soso.firstName}]]개미</span>
-                <span>[[${soso.job.job}]]</span>
-            </div>
         </div>
         <script>
             <!--WishList CLose JS-->
@@ -90,16 +85,6 @@
                 filtered = false;
               }
             });
-
-<!--            $(document).ready(function() {-->
-
-<!--                $(".more").on('click', function() {-->
-<!--                    .ajax({-->
-<!--                        type: 'GET',-->
-<!--                        url:-->
-<!--                    })-->
-<!--                });-->
-<!--            });-->
 
         </script>
 
