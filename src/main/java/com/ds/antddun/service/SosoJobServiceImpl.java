@@ -50,8 +50,18 @@ public class SosoJobServiceImpl implements SosoJobService {
     }
 
     @Override
-    public void modify() {
+    public void modify(SosoBoardDTO sosoBoardDTO) {
+        Optional<SosoJobBoard> result = sosoBoardRepository.findById(sosoBoardDTO.getSosoNo());
 
+        if (result.isPresent()) {
+            SosoJobBoard sosoJobBoard = result.get();
+
+            sosoJobBoard.setTitle(sosoBoardDTO.getTitle());
+            sosoJobBoard.setContent(sosoBoardDTO.getContent());
+            sosoJobBoard.setDdun(sosoBoardDTO.getDdun());
+
+            sosoBoardRepository.save(sosoJobBoard);
+        }
     }
 
     @Override

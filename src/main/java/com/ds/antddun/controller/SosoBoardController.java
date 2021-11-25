@@ -1,6 +1,7 @@
 package com.ds.antddun.controller;
 
 import com.ds.antddun.config.auth.PrincipalDetails;
+import com.ds.antddun.dto.PageRequestDTO;
 import com.ds.antddun.dto.SosoBoardDTO;
 import com.ds.antddun.dto.SosoCategoryDTO;
 import com.ds.antddun.dto.SosoPageRequestDTO;
@@ -15,10 +16,10 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -91,19 +92,27 @@ public class SosoBoardController {
     /*
      * 글 수정
      * */
-    @GetMapping("/member/sosojob/modify")
-    public String modify(Model model) {
+    @GetMapping("/member/sosojob/modify/sosoNo={sosoNo}")
+    public String modify(@PathVariable("sosoNo")Long sosoNo, SosoBoardDTO sosoBoardDTO,
+                         PageRequestDTO pageRequestDTO, Model model) {
 
-        log.info("CATELIST >>" + cateService.getCateList().toString());
+        sosoBoardDTO = sosoJobService.read(sosoNo);
         model.addAttribute("category", cateService.getCateList());
+        model.addAttribute("modify", sosoBoardDTO);
 
-        return "/sosojob/modify";
+
+        return "redirect:/member/sosojob/modify/sosoNo="+sosoNo;
     }
 
-    @PostMapping("/member/sosojob/modify")
-    public String modify(SosoBoardDTO sosoBoardDTO, @AuthenticationPrincipal PrincipalDetails principal) {
+    @PostMapping("/member/sosojob/modify/sosoNo={sosoNo}")
+    public String modify(@PathVariable("sosoNo")Long sosoNo, SosoBoardDTO sosoBoardDTO) {
 
-//        sosoJobService.register(sosoBoardDTO, principal.getMember());
+        sosoBoardDTO.setSosoNo(sosoNo);
+        sosoBoardDTO.setTitle(sosoBoardDTO.getTitle());
+        sosoBoardDTO.setContent(sosoBoardDTO.getContent());
+        sosoBoardDTO.setCategoryName(sosoBoardDTO.getCategoryName());
+        sosoBoardDTO.setDdun(sosoBoardDTO.getDdun());
+        sosoJobService.modify(sosoBoardDTO);
 
         return "/sosojob/sosojobMain";
     }
@@ -127,12 +136,15 @@ public class SosoBoardController {
     }
 
     @GetMapping("/member/sosojob/list/read")
-    public String sosoRead(Long sosoNo, Model model) {
+    public String sosoRead(Long sosoNo, Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 
         SosoBoardDTO sosoBoardDTO = sosoJobService.read(sosoNo);
         log.info("SOSODTO>>>" + sosoReplyService.getListBySosoNo(sosoNo));
+        log.info("member>>>" + principalDetails.getMember().getMno());
+        log.info("read>>>" + sosoBoardDTO.getMno());
         model.addAttribute("read", sosoBoardDTO);
-        model.addAttribute("replyList" + sosoReplyService.getListBySosoNo(sosoNo));
+        model.addAttribute("writer", principalDetails.getMember().getMno());
+        model.addAttribute("replyList" , sosoReplyService.getListBySosoNo(sosoNo));
         return "/sosojob/sosoDetailView";
     }
 }

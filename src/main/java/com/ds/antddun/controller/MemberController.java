@@ -136,11 +136,13 @@ public class MemberController {
     @PutMapping("/member/mypage/info/modify/{mno}")
     public ResponseEntity<String> modifyMember(@RequestBody MemberDTO memberDTO, @AuthenticationPrincipal PrincipalDetails principalDetails) {
         log.info("MODIFY MEMBER>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
         memberDTO.setFirstName(principalDetails.getMember().getFirstName());
         memberDTO.setUsername(principalDetails.getUsername());
         memberDTO.setLastName(principalDetails.getMember().getLastName());
         memberDTO.setRole(principalDetails.getMember().getRole().toString());
         memberDTO.setCreateDate(principalDetails.getMember().getCreateDate());
+
         log.info("MODIFY >>> " + memberDTO);
 
         memberService.modifyMember(memberDTO);

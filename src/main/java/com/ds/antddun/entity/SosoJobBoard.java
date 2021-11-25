@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
@@ -16,6 +17,7 @@ import javax.persistence.*;
 @ToString(exclude = "member")
 @Getter
 @Setter
+@DynamicUpdate
 @SequenceGenerator(name = "SOSOJOB_SEQ_GEN", sequenceName = "SOSOJOB_SEQ", initialValue = 1, allocationSize = 1)
 public class SosoJobBoard extends BaseEntity {
     @Id

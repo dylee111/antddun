@@ -111,6 +111,8 @@
                             <p>[[${read.content}]]</p>
                         </section >
                         </div>
+                        <button th:if="${writer} == ${read.mno}">삭제</button>
+                        <button th:if="${writer} == ${read.mno}"><a th:href="@{'/member/sosojob/modify/sosoNo='+ ${read.sosoNo}}">수정</a></button>
                     </article>
                     <!-- Comments section-->
                     <section class="mb-5">
@@ -123,13 +125,14 @@
                                     <input type="button" id="btn_reply" value="작성하기">
                                 </form>
                                 <!-- Comment with nested comments-->
+                                <div th:each="replyList : ${replyList}">
                                 <div class="d-flex mb-4" >
                                     <!-- Parent comment-->
                                     <div class="flex-shrink-0">
                                         <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..."/>
                                     </div>
-                                    <div class="ms-3" th:each="replyList : ${replyList}">
-                                        <div class="fw-bold" >[[${replyList.member.job}]] [[${replyList.member.experience}]]년차 [[${replyList.member.lastName}]]개미</div>
+                                    <div class="ms-3" >
+                                        <div class="fw-bold" >[[${replyList.member.job.job}]] [[${replyList.member.experience}]]년차 [[${replyList.member.lastName}]]개미</div>
                                         [[${replyList.replyText}]]
                                         <!-- Child comment 1-->
 <!--                                        <div class="d-flex mt-4">-->
@@ -145,6 +148,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                                 <!-- Single comment-->
 
                         </div>
