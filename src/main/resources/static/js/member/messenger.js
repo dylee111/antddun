@@ -2,13 +2,17 @@ $(document).ready(function() {
     var replyMno = 0;
     //Messeage Show/Hide
     $('.send_msg').last().css("display", "block");
+    $('.sender_info').last().css("background", "#fafafa");
+    $('.sender_info').last().css("border-radius", "5px");
     // ajax 호출 후, click 이벤트 적용이 되지 않아 수정.
     $(document).on("click",'.sender_info', function(){
-
         if($(this).next().css("display") == "none") {
             $(this).next().css("display", "block");
+            $(this).css("background", "#fafafa");
+            $(this).css("border-radius", "5px");
         } else {
             $(this).next().css("display", "none");
+            $(this).css("background", "none");
         }
         replyMno = $(this).children(".msgMno").val();
         console.log("보내기"+replyMno);
@@ -25,19 +29,13 @@ $(document).ready(function() {
     });
 
     //거래중/거래완료 버튼
-    $('.button--primary').click(function(){
-        if($('.button--primary').css("background", "rgb(255, 214, 51)") == true) {
-            $('.button--with-icon').css("color", "lightgray");
-            $('.button--primary').css("box-shadow", "0 3px 0 0 lightgray");
+    $('.trade_btn').click(function(){
+        if($(this).text() == '거래 중') {
+            $(this).css("background", "lightgray");
+            $(this).text('완료');
         } else {
-            $('.button--with-icon').css("color", "white");
-            $('.button--primary').css("box-shadow", "0 3px 0 0 #b89300");
-            $('.button--primary').css("background", "#ffd633");
-            $('.button--primary').val("완료");
-        }
-
-        if($('.button--primary').css("background", "#ffd633") == true) {
-
+            $(this).css("background", "rgb(255, 214, 51)");
+            $(this).text('거래 중');
         }
     });
 
@@ -71,15 +69,19 @@ $(document).ready(function() {
                 str += '<div class="mail">' ;
                 str += '<div class="sender_info">';
                 str += '<input type="hidden" class="msgMno" value="'+msg.sendMember.mno+'"/>'
-                str += '<div style="height: 45px;">';
-                str += '<strong class="sender">';
-                str += '<div>'+msg.sendMember.lastName + msg.sendMember.firstName+'</div> </strong>';
+                str += '<div  class="sender_wrap">';
+                str += '<span class="send_title2">'+msg.msgTitle+'</span>';
+                str += '<div class="send_info">';
+                str += '<strong>'+msg.sendMember.lastName + msg.sendMember.firstName+'</strong>';
                 str += '<span>(<span>'+msg.sendMember.username+'</span>)</span>';
                 str += '<span class="send_time">'+formatTime(msg.sendTime)+'</span>';
                 str += '</div>';
                 str += '</div>';
+                str += '</div>';
                 str += '<div class="send_msg">';
+                str += '<div class="msg_wrap">';
                 str += '<p>'+msg.msgContent+'</p>'
+                str += '</div>';
                 str += '</div>';
                 str += '</div>';
                 str += '</div>';

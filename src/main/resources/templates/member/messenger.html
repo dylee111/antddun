@@ -29,16 +29,8 @@
                             <td class="msg_sender" th:value="${senderList.mno}">
                                 <input type="hidden" class="sender_mno" th:value="${senderList.mno}">
                                 <strong class="sender">[[${senderList.lastName}]][[${senderList.firstName}]]</strong>
-                                <div class="form_toggle">
-                                    <div class="form_toggle-item item-1">
-
-                                        <input id="fid-1" type="radio" th:name="'trade'+${senderList.mno}" checked>
-                                        <label for="fid-1" th:class="fid-1">거래중</label>
-                                    </div>
-                                    <div class="form_toggle-item item-2">
-                                        <input id="fid-2" type="radio" th:name="'trade'+${senderList.mno}">
-                                        <label for="fid-2" th:class="fid-2">완료</label>
-                                    </div>
+                                <div>
+                                    <button class="trade_btn">거래 중</button>
                                 </div>
                             </td>
                         </tr>
@@ -55,21 +47,26 @@
                         <div class="mail" th:each="msgList :${msgList}">
                             <div class="sender_info">
                                 <input type="hidden" class="msgMno" th:value="${msgList.sendMember.mno}"/>
-                                <div  style="height: 45px;">
-                                    <strong class="sender">
-                                        <div>[[${msgList.sendMember.lastName}]][[${msgList.sendMember.firstName}]]</div>
-
-                                    </strong>
-                                    <span>(<span th:text="${msgList.sendMember.username}"></span>)</span>
-                                    <span class="send_time" th:text="${msgList.sendTime}"></span>
+                                <div class="sender_wrap">
+                                    <span class="send_title2">[[${msgList.msgTitle}]]</span>
+                                    <div class="send_info">
+                                        <strong>
+                                            [[${msgList.sendMember.lastName}]][[${msgList.sendMember.firstName}]]
+                                        </strong>
+                                        <span>(<span th:text="${msgList.sendMember.username}"></span>)</span>
+                                        <span class="send_time" th:text="${msgList.sendTime}"></span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="send_msg">
-                                <p th:utext="${msgList.msgContent}"></p>
+                                <div class="msg_wrap">
+                                    <p th:utext="${msgList.msgContent}"></p>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div id="mail_write">
+                        <h4 id="msg_title">📮 쪽지 보내기</h4>
                         <form th:action="@{/member/messenger/register}" th:method="post">
                             <!--제목-->
                             <div class="form-group">
