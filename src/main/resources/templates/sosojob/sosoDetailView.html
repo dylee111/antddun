@@ -4,6 +4,8 @@
     <th:block th:fragment="content">
         <link th:href="@{/css/board/sosojob/sosoMain.css}" rel="stylesheet">
         <script th:inline="javascript" th:src="@{/js/board/sosojob/sosojob.js}"></script>
+        <script th:src="@{/js/board/summernote/custom1.js}"></script>
+
         <!-- Page content-->
         <div class="container">
             <div class="row">
@@ -41,7 +43,7 @@
                                 <!--내용-->
                                 <div class="form-group">
                                     <input type="text" id="title_msg" name="msgTitle"  placeholder="제목을 입력하세요"/>
-                                    <textarea name="msgContent" class="msg_context"></textarea>
+                                    <textarea id="summernote" name="msgContent" class="msg_context"></textarea>
                                 </div>
                                 <div style="text-align: right; width: 90%; margin-top: 5px;">
                                     <button type="button" class="submit_btn" style="margin-bottom: 30px;">전송</button>

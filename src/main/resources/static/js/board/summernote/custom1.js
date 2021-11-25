@@ -9,6 +9,7 @@ $(document).ready(function() {
     focus : true,
     minHeight : null,
     maxHeight : null,
+    dialogsInBody: true,
     toolbar : toolbar,
 
     toolbar: [
@@ -31,9 +32,41 @@ $(document).ready(function() {
     callbacks : {
        onImageUpload : function(files, editor, welEditable) {
              for (var i = 0; i < files.length; i++) {
-                 sendFile(files[i], this);
+                 sendImg(files[i], this);
              }
        }
     }
   });
 });
+
+//확장자 및 사이즈 확인
+function checkExtension(fileName){
+    var input = fileName.name;
+    if (input.match(/(.png|.jpg|.jpeg|.gif|.bmp|.PNG|.JPG|.JPEG|.GIF|.BMP)$/)){
+        return true;
+    }
+    else alert("이미지 파일만 첨부할 수 있어요.");
+}
+
+//이미지 업로드
+function sendImg(file, el) {
+			var form_data = new FormData();
+			form_data.append('file', file);
+			$.ajax({
+				data : form_data,
+				type : 'POST',
+				url : '/antddun/image',
+				enctype : 'multipart/form-data',
+				cache : false,
+				contentType: false,
+				processData : false,
+				success : function(url) {
+					$(el).summernote('insertImage', url, function($image) {
+					    $image.css('width', "50%");
+                    });
+               },
+                error: function(data) {
+                        alert("1MB이하 파일만 첨부할 수 있어요.");
+                     }
+			});
+}
