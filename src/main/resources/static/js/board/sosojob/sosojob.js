@@ -5,7 +5,7 @@ $(document).ready(function() {
     var buyerDdun = parseInt($("#total_ddun").val);
 
     var title = $("#title_msg");
-    var content = $("#summernote");
+    var content = $(".msg_context");
 
     // 구매 버튼
     $(".buy_btn").click(function() {

@@ -78,42 +78,6 @@
 
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
         <script th:inline="javascript">
-
-         $(document).ready(function() {
-            var actionForm = $("form");
-            var contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
-
-
-            $(".removeBtn").click(function(){
-                  if(!confirm("삭제하시겠습니까?")){
-                  return;
-                }
-
-                    actionForm.attr("action", contextPath + "/member/qna/remove").attr("method","post");
-                    actionForm.submit();
-                });
-
-            $(".modifyBtn").click(function(){
-                if(!confirm("수정하시겠습니까?")){
-                  return;
-                }
-                actionForm.attr("action", contextPath + "/member/qna/modifyForm").attr("method","get").submit();
-            });
-
-
-
-
-                /*[+
-                var readurl = contextPath + [[@{/member/qna/read}]] +
-                    "?qnaNo=" +qnaNo + "&page=" + page + "&keyword=" + keyword;
-                +]*/
-
-                location.href=readurl;
-        });
-        </script>
-
-
-
         <!-- 본문 끝 -->
         <!--페이지 수정 부분 끝-->
     </th:block>

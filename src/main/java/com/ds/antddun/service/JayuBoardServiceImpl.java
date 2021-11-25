@@ -98,5 +98,4 @@ public class JayuBoardServiceImpl implements JayuBoardService{
 
         return new PageResultDTO<>(result, fn);
     }
-
 }
