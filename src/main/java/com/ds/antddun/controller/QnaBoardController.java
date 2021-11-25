@@ -17,6 +17,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -68,10 +69,9 @@ public class QnaBoardController {
     }
 
 
-
     //카테고리 별 리스트 출력
     @GetMapping("/qna/list")
-    public String cateList(Model model, PageRequestDTO requestDTO, @AuthenticationPrincipal PrincipalDetails principal) {
+    public String cateList(Model model, PageRequestDTO requestDTO, Long qnaNo, @AuthenticationPrincipal PrincipalDetails principal) {
 
         //위시리스트
         if (principal != null) {
@@ -95,10 +95,12 @@ public class QnaBoardController {
 
     //게시물 작성 양식
     @GetMapping("/member/qna/registerForm")
-    public String register(@AuthenticationPrincipal PrincipalDetails principal,Model model) {
+    public String register(@AuthenticationPrincipal PrincipalDetails principal, Model model) {
 
         //로그인 후 이용가능
-        if (principal == null) {return "redirect:/login";}
+        if (principal == null) {
+            return "redirect:/login";
+        }
 
         List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
         model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
@@ -119,17 +121,18 @@ public class QnaBoardController {
                            @AuthenticationPrincipal PrincipalDetails principal) {
         Long qnaNo = qnaService.register(qnaBoardDTO, principal.getMember());
         redirectAttributes.addFlashAttribute("qnaNo", qnaNo);
-        return "redirect:/member/qna/read/" + qnaNo;
+        return "redirect:/member/qna/read?qnaNo=" + qnaNo;
     }
 
 
     //게시판 조회
-    @GetMapping("/member/qna/read/{qnaNo}")
-    public String read(@PathVariable Long qnaNo,
-                       @AuthenticationPrincipal PrincipalDetails principal, Model model){
+    @GetMapping("/member/qna/read")
+    public String read(Long qnaNo, @AuthenticationPrincipal PrincipalDetails principal, Model model) {
 
         //로그인 후 이용가능
-        if (principal == null) { return "redirect:/login"; }
+        if (principal == null) {
+            return "redirect:/login";
+        }
 
         //조회수 추가
         qnaBoardRepository.updateViewCnt(qnaNo);
@@ -144,7 +147,7 @@ public class QnaBoardController {
         }
 
         //좋아요 체크 유무
-        model.addAttribute("qnaCheck", qnaLikeService.checkLikes(qnaNo,principal.getMember().getMno())); //null 또는 qnalikes
+        model.addAttribute("qnaCheck", qnaLikeService.checkLikes(qnaNo, principal.getMember().getMno())); //null 또는 qnalikes
 
         //위시리스트
         List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
@@ -155,6 +158,42 @@ public class QnaBoardController {
         }
 
         return "/qna/read";
+    }
+
+
+    //게시물 수정 폼
+    @GetMapping("/member/qna/modifyForm")
+    public String modifyForm(Long qnaNo, Model model ){
+
+        //카테고리
+        model.addAttribute("jobList", jobListService.getList());
+        //게시판 정보
+        model.addAttribute("boardList", qnaService.getBoard(qnaNo));
+
+        return "/qna/modifyForm";
+    }
+
+    //게시물 수정
+    @PostMapping("/member/qna/modify")
+    public String modifyBoard(QnaBoardDTO qnaBoardDTO, RedirectAttributes redirectAttributes, @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
+                              @AuthenticationPrincipal PrincipalDetails principal) {
+        log.info("postmodify................");
+        log.info("dto:::"+ qnaBoardDTO);
+        qnaService.modify(qnaBoardDTO);
+
+        Long qnaNo = qnaBoardDTO.getQnaNo();
+        int page = requestDTO.getPage();
+
+        return "redirect:/member/qna/read?qnaNo=" + qnaNo + "&page=" + page ;
+    }
+
+
+    @PostMapping("/member/qna/remove")
+    public String removeBoard(Long qnaNo, RedirectAttributes redirectAttributes) {
+        log.info("ddddddddd"+ qnaNo);
+        qnaService.delete(qnaNo);
+        redirectAttributes.addFlashAttribute("noti","삭제");
+        return "/qna/list/all";
     }
 
 

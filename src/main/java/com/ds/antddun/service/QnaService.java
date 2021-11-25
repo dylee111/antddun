@@ -17,9 +17,9 @@ public interface QnaService {
     //게시물 조회
     QnaBoardDTO getBoard(Long qnaNo);
 
+    //게시물 수정, 삭제
     void modify(QnaBoardDTO qnaBoardDTO);
-
-    void delete();
+    void delete(Long qnaNo);
 
 
     default QnaBoard dtoToEntity(QnaBoardDTO qnaBoardDTO) {
@@ -32,8 +32,8 @@ public interface QnaService {
                 .ddun(qnaBoardDTO.getDdun())
                 .viewCnt(qnaBoardDTO.getViewCnt())
                 .build();
-
         System.out.println("dtoToEntity>>"+qnaBoardDTO);
+
         return entity;
     }
 
@@ -53,7 +53,6 @@ public interface QnaService {
                 .ddun(qnaBoard.getDdun())
                 .build();
         dto.setLikesCnt(likesCnt.intValue());
-
         System.out.println("entityToDto>>>>"+dto);
 
         return dto;
