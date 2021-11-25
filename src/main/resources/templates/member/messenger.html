@@ -31,12 +31,13 @@
                                 <strong class="sender">[[${senderList.lastName}]][[${senderList.firstName}]]</strong>
                                 <div class="form_toggle">
                                     <div class="form_toggle-item item-1">
-                                        <input th:id="'fid-'+${(idx.index+1)*2+1}" type="radio" name="trade" value="off" checked>
-                                        <label th:for="'fid-'+${(idx.index+1)*2+1}">거래중</label>
+
+                                        <input id="fid-1" type="radio" th:name="'trade'+${senderList.mno}" checked>
+                                        <label for="fid-1" th:class="fid-1">거래중</label>
                                     </div>
                                     <div class="form_toggle-item item-2">
-                                        <input th:id="'fid-'+${(idx.index+1)*2}" type="radio" name="trade" value="on">
-                                        <label th:for="'fid-'+${(idx.index+1)*2}">완료</label>
+                                        <input id="fid-2" type="radio" th:name="'trade'+${senderList.mno}">
+                                        <label for="fid-2" th:class="fid-2">완료</label>
                                     </div>
                                 </div>
                             </td>
@@ -50,45 +51,39 @@
         <div class="col-lg-9">
             <div class="content_border">
                 <div id="mail_lee">
-                    <div class="margin_bottom">
-                        <input type="button" class="check_btn button--primary button--with-icon" style="margin-right:10px;" value="거래 중" />
-                        <span class="send_title">
-                        뷰티 브랜드 상세페이지 디자인 작업 요청 문의드립니다.
-                    </span>
-                    </div>
                     <div id="mail-box">
-                    <div class="mail" th:each="msgList :${msgList}">
-                        <div class="sender_info">
-                            <input type="hidden" class="msgMno" th:value="${msgList.sendMember.mno}"/>
-                            <div  style="height: 45px;">
-                                <strong class="sender">
-                                    <div>[[${msgList.sendMember.lastName}]][[${msgList.sendMember.firstName}]]</div>
+                        <div class="mail" th:each="msgList :${msgList}">
+                            <div class="sender_info">
+                                <input type="hidden" class="msgMno" th:value="${msgList.sendMember.mno}"/>
+                                <div  style="height: 45px;">
+                                    <strong class="sender">
+                                        <div>[[${msgList.sendMember.lastName}]][[${msgList.sendMember.firstName}]]</div>
 
-                                </strong>
-                                <span>(<span th:text="${msgList.sendMember.username}"></span>)</span>
-                                <span class="send_time" th:text="${msgList.sendTime}"></span>
+                                    </strong>
+                                    <span>(<span th:text="${msgList.sendMember.username}"></span>)</span>
+                                    <span class="send_time" th:text="${msgList.sendTime}"></span>
+                                </div>
+                            </div>
+                            <div class="send_msg">
+                                <p th:utext="${msgList.msgContent}"></p>
                             </div>
                         </div>
-                        <div class="send_msg">
-                            <p th:text="${msgList.msgContent}"></p>
-                        </div>
                     </div>
+                    <div id="mail_write">
+                        <form th:action="@{/member/messenger/register}" th:method="post">
+                            <!--제목-->
+                            <div class="form-group">
+                                <input type="text" id="send_title" name="msgTitle" class="title_input">
+                            </div>
+                            <!--내용-->
+                            <div class="form-group">
+                                <textarea id="summernote" name="msgContent" class="msg_context"></textarea>
+                            </div>
+
+                            <!--작성완료 버튼-->
+                            <button type="button" class="reply reply_btn" style="float: right; margin: 1rem 0 3rem 0;">답장하기</button>
+                        </form>
                     </div>
-
-                <div id="mail_write">
-                    <form th:action="@{/member/messenger/register}" th:method="post">
-                        <!--제목-->
-                        <div class="form-group">
-                            <input type="text" id="send_title" name="msgTitle" class="title_input">
-                        </div>
-                        <!--내용-->
-                        <div class="form-group">
-                            <textarea id="summernote" name="msgContent"></textarea>
-                        </div>
-
-                        <!--작성완료 버튼-->
-                        <button type="button" class="reply reply_btn" style="float: right; margin: 1rem 0 3rem 0;">답장하기</button>
-                    </form>
                 </div>
             </div>
         </div>
