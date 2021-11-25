@@ -1,10 +1,8 @@
 package com.ds.antddun.service;
 
-import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.dto.PageRequestDTO;
 import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.dto.QnaBoardDTO;
-import com.ds.antddun.entity.AntMemberRoleSet;
 import com.ds.antddun.entity.JobList;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.QnaBoard;
@@ -35,6 +33,9 @@ public class QnaServiceImpl implements QnaService {
 
     @Autowired
     private QnaBoardRepository qnaBoardRepository;
+
+    @Autowired
+    private QnaLikesService qnaLikesService;
 
     //게시물 등록
     @Transactional
@@ -103,7 +104,7 @@ public class QnaServiceImpl implements QnaService {
 
     @Transactional
     @Override
-    public void modify(QnaBoardDTO qnaBoardDTO) {
+    public void modify(QnaBoardDTO qnaBoardDTO, Member member) {
         log.info("jnooo"+qnaBoardDTO.getJno());
         log.info("jobbb"+qnaBoardDTO.getJob());
         JobList jobList = jobListRepository.findById(qnaBoardDTO.getJno()).get();
@@ -114,14 +115,17 @@ public class QnaServiceImpl implements QnaService {
             QnaBoard entity = result.get();
             entity.setTitle(qnaBoardDTO.getTitle());
             entity.setContent(qnaBoardDTO.getContent());
+            entity.setMember(member);
             entity.setJobList(jobList);
+            entity.setDdun(qnaBoardDTO.getDdun());
             qnaBoardRepository.save(entity);
         }
     }
 
     @Transactional
     @Override
-    public void delete(Long qnaNo) {
+    public void delete(Long qnaNo, Long mno) {
+        qnaLikesService.deleteLikes(qnaNo, mno);
         qnaBoardRepository.deleteById(qnaNo);
     }
 

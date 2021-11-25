@@ -3,6 +3,7 @@
 <th:block th:replace="~{/layout/basicB :: setContent(~{this::content})}">
     <th:block th:fragment="content">
         <link th:href="@{/css/join/join.css}" rel="stylesheet" />
+        <script th:src="@{/js/join/socialJoin.js}"></script>
 
         <section class="mg_bottom join_container">
             <div class="join_div">
@@ -20,7 +21,20 @@
                         <input th:value="${member.lastName}" name="lastName">
                         <input th:value="${member.phoneNum}" name="phoneNum" >
                     </div>
-
+                    <div th:if="${member.phoneNum}==null">
+                        <div class="reg_label">
+                            <label for="phoneNum">전화번호</label>
+                            <span class="resultBox mobileCheckResult"></span>
+                        </div>
+                        <br>
+                        <div id="phone-box">
+                            <div class="phoneNum-box">
+                                <input type="text" name="phoneNum" id="phoneNum" placeholder="- 없이 입력" maxlength="11"
+                                       onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
+                            </div>
+                            <button type="button" id="btnPhone" class="phoneAuthBtn a_white">인증</button>
+                        </div>
+                    </div>
 
                     <div class="reg_label">
                         <label>직무 선택</label><br>

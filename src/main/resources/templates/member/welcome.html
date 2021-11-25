@@ -1,25 +1,30 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<th:block th:replace="~{/layout/basicB :: setContent(~{this::content})}">
-    <th:block th:fragment="content">
+<html lang="ko" dir="ltr" xmlns:th="http://www.thymeleaf.org">
 
-        <head>
-            <meta charset="UTF-8">
-            <title>환영합니다.</title>
-        </head>
+<head>
+    <meta charset="utf-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <link th:href="@{/css/join/join.css}" rel="stylesheet"/>
 
-        <body>
-            <section class="card mg_bottom">
-                <div class="join_container">
-                    <div id="title">개미는 뚠뚠</div>
-                       <h3>가입을 환영합니다! 다시 로그인 해주세요!</h3>
-                    </div>
-                    <a th:href="@{/}">메인으로</a>
-                </div>
-            </section>
-        </body>
+    <title>WELCOME</title>
 
+</head>
 
-    </th:block>
-</th:block>
+<body>
+
+<div th:fragment="content">
+    <meta name="viewport"
+          content="width=device-width, height=device-height, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+
+    <div class="outBox">
+         <img class="welcomeImage" th:src="@{/assets/welcome.png}">
+        <div class="comment">개미는 뚠뚠에 오신 것을 환영합니다! :)</div>
+        <a class="reLogin" th:href="@{/}">메인으로💨</a>
+    </div>
+
+</div>
+
+</body>
 </html>
