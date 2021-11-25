@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+    <th:block th:fragment="content">
+        <!--페이지 수정 부분 시작-->
+        <link th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
+        <!-- 페이지 css/ js 추가 -->
+        <link rel="stylesheet" th:href="@{/css/board/jayu/register.css}">
+
+        <!-- summernote css/ js -->
+        <link rel="stylesheet" th:href="@{/css/board/summernote/summernote-lite.css}">
+        <link rel="stylesheet" th:href="@{/css/board/summernote/custom.css}">
+        <script th:src="@{/js/board/summernote/summernote-lite.js}"></script>
+        <script th:src="@{/js/board/summernote/custom.js}"></script>
+        <!-- summernote 한글 적용 -->
+        <script th:src=" @{https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js}"></script>
+
+        <!-- 본문 시작 -->
+        <div class="content">
+
+            <form th:action="@{/member/qna/modify}" method="post">
+                <input id="qnaNo" name="qnaNo" type="hidden" th:value="${boardList.qnaNo}">
+
+                <!-- 카테고리 -->
+                <div>
+                    <span class="cate" name="job" th:text="${boardList.job}" ></span>
+                </div>
+
+                <!--제목-->
+                <div class="form-group">
+                    <input type="text" id="title"
+                           th:value="${boardList.title}" class="form-control" name="title" required >
+                </div>
+
+                <!--내용-->
+                <div class="form-group">
+                    <textarea id="summernote" th:utext="${boardList.content}"
+                              class="content" required name="content"></textarea>
+                </div>
+
+                <!--뚠-->
+                <div class="form-group">
+                    <img th:src="@{/assets/coins.png}" width="25rem">
+                    <input id="ddun" name="ddun" type="text" th:value="${boardList.ddun}"> 뚠</input>
+                </div>
+
+                <!--작성완료 버튼-->
+                <button type="submit" class="btn btn-save btn-primary" >등록</button>
+            </form>
+
+        </div>
+
+    </th:block>
+</th:block>
+
+</html>

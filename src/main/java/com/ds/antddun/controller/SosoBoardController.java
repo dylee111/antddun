@@ -15,6 +15,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -52,7 +53,8 @@ public class SosoBoardController {
 
         for (int i = 0; i < list.size(); i++) {
             getCateList.put(list.get(i).getSosoCateName(),
-                    sosoJobService.getListByCategory(list.get(i).getSosoCateName()));
+                    sosoJobService.getListLimit(list.get(i).getCateNo()));
+//                    sosoJobService.getListByCategory(list.get(i).getSosoCateName()));
 
             cateNoList.add(list.get(i).getCateNo());
         }
@@ -83,7 +85,7 @@ public class SosoBoardController {
         sosoJobService.register(sosoBoardDTO, sosoCategoryDTO, principal.getMember());
 
 //        return "/sosojob/sosojobMain";
-        return "redirect:/sosojob/list/" + (sosoBoardDTO.getCategoryNo()+1);
+        return "redirect:/sosojob/sosoList/sosoCategory=" + (sosoBoardDTO.getCategoryNo()+1);
     }
 
     /*
@@ -113,16 +115,12 @@ public class SosoBoardController {
         mv.addObject("mvData", sosoJobService.getList(categoryNo, sosoPageRequestDTO));
         mv.setViewName("sosojob/sosoList");
 
-//        List<SosoCategory> list = cateService.getCateList(); // 카테고리 리스트(cateNo / cateName)
+        List<SosoCategory> list = cateService.getCateList(); // 카테고리 리스트(cateNo / cateName)
         List<Integer> cateNoList = new ArrayList<>(); // 카테고리 No. 담기 위한 LIST
-//
-//        Map<String, List<SosoJobBoard>> getCateList = new HashMap<>(); // key(카테고리 이름):value(카테고리 별 리스트)
-//
-//        getCateList.put(list.get(categoryNo - 1).getSosoCateName(),
-//                sosoJobService.getListByCategory(list.get(categoryNo - 1).getSosoCateName()));
+
         cateNoList.add(categoryNo);
-//        model.addAttribute("cate", sosoJobService.getList(categoryNo));
-//        model.addAttribute("cateName", list);
+
+        model.addAttribute("cateList", list);
         model.addAttribute("cateNum", cateNoList);
 
         return mv;

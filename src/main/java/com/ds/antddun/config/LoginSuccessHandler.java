@@ -1,13 +1,9 @@
 package com.ds.antddun.config;
 
 import com.ds.antddun.config.auth.PrincipalDetails;
-import com.ds.antddun.config.oauth.PrincipalOauth2UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.web.DefaultRedirectStrategy;
-import org.springframework.security.web.RedirectStrategy;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 import javax.servlet.ServletException;
@@ -42,22 +38,20 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         });
         log.info("getAuthorities: " + roleList);
 
-
         HttpSession session = request.getSession();
         if (session != null) {
             String redirectUrl = (String) session.getAttribute("redirectURI");
             if (roleList.contains("SOCIAL") && fromSocial ) redirectUrl = "/member/socialJoin";
 
-                    if (redirectUrl != null) {
-                        session.removeAttribute("redirectURI");
+            if (redirectUrl != null) {
+                session.removeAttribute("redirectURI");
 
-                    } else {
-                        super.onAuthenticationSuccess(request, response, authentication);
-                    }
+            } else {
+                super.onAuthenticationSuccess(request, response, authentication);
+            }
 
             getRedirectStrategy().sendRedirect(request, response, redirectUrl);
         }
-
 
     }
 

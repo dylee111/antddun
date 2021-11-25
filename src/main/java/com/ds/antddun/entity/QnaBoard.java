@@ -26,7 +26,7 @@ public class QnaBoard extends BaseEntity {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 99900)
     private String content;
 
     @ColumnDefault("0")
