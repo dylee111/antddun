@@ -1,6 +1,6 @@
  $(document).ready(function() {
     var contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
-    var qnaNo = $('#qnaNo').text();
+    var qnaNo = $('#qnaNo').val();
     var likesCnt = $('#likesCnt');
 
 

@@ -36,14 +36,15 @@
 
 
 .subNav {
-    font-size: 1.5em !important;
+    font-size: 20px !important;
     color: gray;
-    font-weight: bold;
+    /* font-weight: bold; */
     margin-right: 20px;
     text-decoration:none;
     line-height:4rem;
     text-overflow: ellipsis;
     cursor: pointer;
+    font-family: 'ELAND_Choice_M';
 }
 
 .subNav_on{
@@ -185,6 +186,11 @@ boardInfo{
     font-size: 1em;
     color: black;
     margin-right:10px;
+}
+
+.wrapInfo {
+    display: inline-block;
+    padding-top: 3px;
 }
 
 .regDate {

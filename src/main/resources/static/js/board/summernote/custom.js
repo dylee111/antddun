@@ -55,20 +55,18 @@ function checkExtension(fileName){
 
 //이미지 업로드
 function sendImg(file, el) {
-            var contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
 			var form_data = new FormData();
 			form_data.append('file', file);
 			$.ajax({
 				data : form_data,
 				type : 'POST',
-				url : contextPath+'/image',
+				url : '/antddun/image',
 				enctype : 'multipart/form-data',
 				cache : false,
 				contentType: false,
 				processData : false,
 				success : function(url) {
 					$(el).summernote('insertImage', url, function($image) {
-					    alert(url);
 					    $image.css('width', "50%");
                     });
                },

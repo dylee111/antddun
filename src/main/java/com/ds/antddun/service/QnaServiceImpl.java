@@ -101,9 +101,12 @@ public class QnaServiceImpl implements QnaService {
         return entityToDTO(qnaBoard, likesCnt);
     }
 
+    @Transactional
     @Override
     public void modify(QnaBoardDTO qnaBoardDTO) {
-        JobList jobList = jobListRepository.findById(Integer.parseInt(qnaBoardDTO.getJob())).get();
+        log.info("jnooo"+qnaBoardDTO.getJno());
+        log.info("jobbb"+qnaBoardDTO.getJob());
+        JobList jobList = jobListRepository.findById(qnaBoardDTO.getJno()).get();
 
         Optional<QnaBoard> result = qnaBoardRepository.findById(qnaBoardDTO.getQnaNo());
 
@@ -116,9 +119,10 @@ public class QnaServiceImpl implements QnaService {
         }
     }
 
+    @Transactional
     @Override
-    public void delete() {
-
+    public void delete(Long qnaNo) {
+        qnaBoardRepository.deleteById(qnaNo);
     }
 
 
