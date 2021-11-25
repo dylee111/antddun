@@ -25,12 +25,13 @@
                 <!--쪽지 수신자 리스트-->
                 <table class="table" style="table-layout: fixed">
                     <tbody>
-                        <tr th:each="senderList : ${senderList}" >
+                        <tr th:each="senderList, idx : ${senderList}" >
                             <td class="msg_sender" th:value="${senderList.mno}">
                                 <input type="hidden" class="sender_mno" th:value="${senderList.mno}">
                                 <strong class="sender">[[${senderList.lastName}]][[${senderList.firstName}]]</strong>
                                 <div class="form_toggle">
                                     <div class="form_toggle-item item-1">
+
                                         <input id="fid-1" type="radio" th:name="'trade'+${senderList.mno}" checked>
                                         <label for="fid-1" th:class="fid-1">거래중</label>
                                     </div>

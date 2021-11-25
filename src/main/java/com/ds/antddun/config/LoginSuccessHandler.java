@@ -43,16 +43,15 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
             String redirectUrl = (String) session.getAttribute("redirectURI");
             if (roleList.contains("SOCIAL") && fromSocial ) redirectUrl = "/member/socialJoin";
 
-                    if (redirectUrl != null) {
-                        session.removeAttribute("redirectURI");
+            if (redirectUrl != null) {
+                session.removeAttribute("redirectURI");
 
-                    } else {
-                        super.onAuthenticationSuccess(request, response, authentication);
-                    }
+            } else {
+                super.onAuthenticationSuccess(request, response, authentication);
+            }
 
             getRedirectStrategy().sendRedirect(request, response, redirectUrl);
         }
-
 
     }
 

@@ -92,6 +92,11 @@ public class SosoJobServiceImpl implements SosoJobService {
     }
 
     @Override
+    public List<SosoJobBoard> getListLimit(int categoryNo) {
+        return sosoBoardRepository.getListByCategoryLimit(categoryNo);
+    }
+
+    @Override
     public SosoBoardDTO read(Long sosoNo) {
         Optional<SosoJobBoard> result = sosoBoardRepository.readBySosoNo(sosoNo);
 
