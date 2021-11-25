@@ -16,6 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -45,12 +47,19 @@ public class JoinController {
     }
 
     @PostMapping("/member/socialJoinComplete")
-    public String socialjoinComplete( @AuthenticationPrincipal PrincipalDetails principal,
+    public String socialjoinComplete(HttpServletRequest request, @AuthenticationPrincipal PrincipalDetails principal,
                                       MemberDTO memberDTO, JobListDTO jobListDTO, Model model) {
         memberService.socialJoin(memberDTO,jobListDTO);
         model.addAttribute("member",principal.getMember());
         model.addAttribute("firstName",principal.getMember().getFirstName());
         model.addAttribute("lastName",principal.getMember().getLastName());
+
+
+        HttpSession session = request.getSession();
+        System.out.println(session.getId());
+        session.invalidate();
+
+
         return "redirect:/joinWelcome";
     }
 
