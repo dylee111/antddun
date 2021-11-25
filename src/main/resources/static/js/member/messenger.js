@@ -2,6 +2,7 @@ $(document).ready(function() {
     var replyMno = 0;
     //Messeage Show/Hide
     $('.send_msg').last().css("display", "block");
+
     $('.sender_info').last().css("background", "#fafafa");
     $('.sender_info').last().css("border-radius", "5px");
     // ajax 호출 후, click 이벤트 적용이 되지 않아 수정.

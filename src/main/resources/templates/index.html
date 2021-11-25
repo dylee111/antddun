@@ -36,7 +36,9 @@
                         <strong class="impact"><span class="wish_day" th:text="${wishListIndex.dDay}"></span>일</strong> 남았습니다. ✨
                     </span>
                     <span id="no_wish" class="impact" style="display: none;">
-                        <strong class="impact">메인 위시리스트를 등록해주세요.</strong>📝
+                        <a th:href="@{/member/mypage/wallet}">
+                            <strong class="impact">메인 위시리스트를 등록해주세요.</strong>📝
+                        </a>
                     </span>
                 <img th:src="@{assets/close.png}" class="wish_close"/>
             </div>
@@ -171,7 +173,9 @@
                             </table>
                         </div>
                         <div id="no_goal" class="margin_bottom" style="display: none;">
-                            <strong>등록된 위시리스트가<br>없습니다.</strong>
+                            <a th:href="@{/member/mypage/wallet}">
+                                <strong>등록된 위시리스트가<br>없습니다.</strong>
+                            </a>
                         </div>
                     </div>
 
