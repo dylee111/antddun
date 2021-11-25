@@ -83,7 +83,7 @@ article {
         position: fixed;
         left: 50%;
         top: 60%;
-        z-index: 3;
+        z-index: 100;
         transform: translate(-50%, -50%)
     }
 
@@ -95,7 +95,7 @@ article {
         position: fixed;
         left: 45%;
         top: 60%;
-        z-index: 1;
+        z-index: 100;
         transform: translate(-50%, -50%)
     }
 
@@ -103,7 +103,7 @@ article {
         position: fixed;
         left: 0;
         top: 0;
-        z-index: 2;
+        z-index: 99;
         height: 100%;
         width: 100%;
         background: rgba(0,0,0,0.6);
