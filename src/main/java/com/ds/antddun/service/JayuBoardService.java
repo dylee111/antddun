@@ -26,6 +26,7 @@ public interface JayuBoardService {
                 .title(jayuBoard.getTitle())
                 .content(jayuBoard.getContent())
                 .writer(jayuBoard.getMember().getJob().getJob() + " " +jayuBoard.getMember().getExperience()+"년차 " + jayuBoard.getMember().getLastName() +"개미")
+                .viewCnt(jayuBoard.getViewCnt())
                 .regDate(jayuBoard.getRegDate())
                 .modDate(jayuBoard.getModDate())
                 .build();
@@ -39,6 +40,7 @@ public interface JayuBoardService {
                 .jayuCategory(jayuCategory)
                 .title(jayuBoardDTO.getTitle())
                 .content(jayuBoardDTO.getContent())
+                .viewCnt(jayuBoardDTO.getViewCnt())
                 .build();
         return jayuBoard;
     }

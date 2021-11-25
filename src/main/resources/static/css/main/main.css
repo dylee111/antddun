@@ -198,7 +198,7 @@ strong.impact {
     display: inline-flex;
     flex-direction: row;
     flex-wrap: wrap;
-    border: 3px solid #F9C74F;
+    border: 4px solid #F9C74F;
     border-radius: 15px;
     width:100%;
 }

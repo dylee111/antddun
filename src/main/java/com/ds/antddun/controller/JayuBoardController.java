@@ -7,6 +7,7 @@ import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.entity.JayuBoard;
 import com.ds.antddun.entity.JayuCategory;
 import com.ds.antddun.entity.MemberWishList;
+import com.ds.antddun.repository.JayuBoardRepository;
 import com.ds.antddun.service.JayuBoardService;
 import com.ds.antddun.service.JayuCateService;
 import com.ds.antddun.service.WishListService;
@@ -35,6 +36,9 @@ public class JayuBoardController {
     @Autowired
     private JayuCateService jayuCateService;
 
+    @Autowired
+    private JayuBoardRepository jayuBoardRepository;
+
 
     //게시글 작성
     @GetMapping("/member/jayu/register")
@@ -61,7 +65,6 @@ public class JayuBoardController {
     public String register(JayuBoardDTO jayuBoardDTO, RedirectAttributes redirectAttributes, @AuthenticationPrincipal PrincipalDetails principal){
         log.info("register.....");
         Long jayuNo = jayuBoardService.register(jayuBoardDTO, principal.getMember());
-//        redirectAttributes.addFlashAttribute("jayuNo", jayuNo);
         redirectAttributes.addFlashAttribute("jayuNo", jayuNo);
 
 
@@ -74,9 +77,19 @@ public class JayuBoardController {
                        @ModelAttribute("pageRequestDTO") PageRequestDTO pageRequestDTO) {
         if (principal == null) {return "redirect:/login";}
 
+        //조회수 추가
+        jayuBoardRepository.updateViewCnt(jayuNo);
+
+        //게시판 정보
         JayuBoardDTO jayuBoardDTO = jayuBoardService.read(jayuNo);
         model.addAttribute("jayuBoardDTO", jayuBoardDTO);
         log.info("read......");
+
+        //수정 삭제 버튼 보이기
+        Long actualWriter = jayuBoardRepository.getById(jayuNo).getMember().getMno();
+        if (principal.getMember().getMno() == actualWriter) {
+            model.addAttribute("checkUser", true);
+        }
 
         //위시리스트
         List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
@@ -91,9 +104,9 @@ public class JayuBoardController {
     //게시글 목록
     @GetMapping("/jayu/list/all")
     public String listAll(Model model, PageRequestDTO pageRequestDTO,  @AuthenticationPrincipal PrincipalDetails principal) {
+        //summernote 태그 제거, 게시판 정보
         PageResultDTO<JayuBoardDTO, JayuBoard> jayuList = jayuBoardService.getList(pageRequestDTO);
 
-        //summernote 태그 제거
         List<JayuBoardDTO> list = jayuList.getDtoList();
         for (int i = 0; i < list.size(); i++) {
             JayuBoardDTO tmp = (JayuBoardDTO) list.get(i);
@@ -121,10 +134,10 @@ public class JayuBoardController {
     //게시글 카테고리 목록
     @GetMapping("/jayu/list")
     public String list(Model model, PageRequestDTO pageRequestDTO,  @AuthenticationPrincipal PrincipalDetails principal) {
+        //summernote 태그 제거, 게시판 정보
         PageResultDTO<JayuBoardDTO, JayuBoard> jayuList = jayuBoardService.getListByCate(pageRequestDTO.getCate(), pageRequestDTO);
-
         log.info("pageDTO.CATE"+pageRequestDTO.getCate());
-        //summernote 태그 제거
+
         List<JayuBoardDTO> list = jayuList.getDtoList();
         for (int i = 0; i < list.size(); i++) {
             JayuBoardDTO tmp = (JayuBoardDTO) list.get(i);

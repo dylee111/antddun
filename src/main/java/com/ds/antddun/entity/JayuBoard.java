@@ -22,6 +22,8 @@ public class JayuBoard extends BaseEntity{
     @Column(nullable = false, length = 99900)
     private String content;
 
+    @ColumnDefault("0")
+    private int viewCnt;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Member member;
