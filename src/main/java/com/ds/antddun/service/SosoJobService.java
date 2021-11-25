@@ -11,7 +11,7 @@ public interface SosoJobService {
 
     Long register(SosoBoardDTO sosoBoardDTO, SosoCategoryDTO sosoCategoryDTO, Member member);
 
-    void modify();
+    void modify(SosoBoardDTO sosoBoardDTO);
 
     void delete();
 

@@ -19,25 +19,26 @@
         <!-- 본문 시작 -->
         <div class="content">
 
-            <form th:action="@{/member/sosojob/modify}" th:method="post">
+            <form th:action="@{'/member/sosojob/modify/sosoNo='+${modify.sosoNo}}" th:method="post" th:each="modify : ${modify}">
 
                 <!--카테고리-->
                 <div class="option">
                     <select class="category" name="cateNo">
+                        <option selected="selected">[[${modify.categoryName}]]</option>
                         <option th:each="category : ${category}" th:value="${category.cateNo}">[[${category.sosoCateName}]]</option>
                     </select>
                 </div>
 
                 <!--제목-->
                 <div class="form-group">
-                    <input type="text" id="title" class="form-control" name="title" required placeholder="제목을 입력해주세요">
+                    <input type="text" id="title" class="form-control" name="title" th:value="${modify.title}"  placeholder="제목을 입력해주세요">
 
                 </div>
 
                 <!--내용-->
                 <div class="form-group">
 
-                    <textarea id="summernote" class="content"  name="content" ></textarea>
+                    <textarea id="summernote" class="content" name="content" th:text="${modify.content}" ></textarea>
 
                 </div>
 
@@ -47,7 +48,7 @@
                     <img th:src="@{/assets/coins.png}" width="25rem">
                     <input type="text" id="ddun" class="form-control ddun" name="ddun"
                            onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-                           placeholder="150" required> <label class="ddun"> 뚠</label>
+                           placeholder="150" th:value="${modify.ddun}"> <label class="ddun"> 뚠</label>
 
                 </div>
 
@@ -62,23 +63,6 @@
                 <button type="button" class="btn btn-delete btn-primary">삭제</button>
             </form>
         </div>
-        <script>
-<!--            $(document).ready(function() {-->
-
-
-<!--                const title = $("#title");-->
-<!--                const content = $(".content");-->
-<!--                const ddun = $("#ddun");-->
-
-<!--                const categoryArr = ["IT","디자인·설계","미디어","번역","문서작업","마케팅","취업·이직","실무교육"];-->
-
-<!--                for(var i = 0; i < categoryArr.length; i++){-->
-<!--                    $(".category").append("<option value="+categoryArr[i]+">" + categoryArr[i] + "</option>");-->
-<!--                }-->
-<!--            });-->
-
-
-        </script>
         <!-- 본문 끝 -->
         <!--페이지 수정 부분 끝-->
     </th:block>
