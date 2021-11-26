@@ -271,3 +271,14 @@ article {
 .form-control.reply{
     width: 93%;
 }
+
+.smallText{
+    color: gray;
+    font-size: 13px;
+    text-align: end;
+    font-weight: bold;
+}
+
+.pointer{
+    cursor:pointer;
+}

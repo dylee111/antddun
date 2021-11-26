@@ -26,7 +26,7 @@ public class SosoJobBoard extends BaseEntity {
 
     @Column(nullable = false)
     private String title;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 99000)
     private String content;
 
     private int cnt;
