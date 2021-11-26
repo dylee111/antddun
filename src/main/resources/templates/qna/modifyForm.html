@@ -21,9 +21,13 @@
             <form th:action="@{/member/qna/modify}" method="post">
                 <input id="qnaNo" name="qnaNo" type="hidden" th:value="${boardList.qnaNo}">
 
-                <!-- 카테고리 -->
-                <div>
-                    <span class="cate" name="job" th:text="${boardList.job}" ></span>
+                <!--카테고리-->
+                <div class="option">
+                    <select class="category" name="jno">
+                        <option th:each="jobList : ${jobList}"
+                                th:value="${jobList.jno}" name="jno" th:selected="${jobList.jno}==${boardList.jno}">
+                            [[${jobList.job}]]</option>
+                    </select>
                 </div>
 
                 <!--제목-->
@@ -35,21 +39,21 @@
                 <!--내용-->
                 <div class="form-group">
                     <textarea id="summernote" th:utext="${boardList.content}"
-                              class="content" required name="content"></textarea>
+                              class="content" name="content" required></textarea>
                 </div>
 
                 <!--뚠-->
                 <div class="form-group">
                     <img th:src="@{/assets/coins.png}" width="25rem">
-                    <input id="ddun" name="ddun" type="text" th:value="${boardList.ddun}"> 뚠</input>
+                    <input id="ddun" name="ddun" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" required
+                           type="text" th:value="${boardList.ddun}"> 뚠</input>
                 </div>
 
                 <!--작성완료 버튼-->
-                <button type="submit" class="btn btn-save btn-primary" >등록</button>
+                <button type="submit" class="btn btn-save btn-primary" >수정</button>
             </form>
 
         </div>
-
     </th:block>
 </th:block>
 

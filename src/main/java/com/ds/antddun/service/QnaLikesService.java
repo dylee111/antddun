@@ -7,7 +7,7 @@ public interface QnaLikesService {
 
     void addLikes(Long qnaNo, Long mno);
 
-    void unLikes(Long qnaNo, Long mno);
+    void deleteLikes(Long qnaNo, Long mno);
 
     QnaLikes checkLikes(Long qnaNo, Long mno);
 

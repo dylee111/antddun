@@ -16,10 +16,11 @@ public interface QnaLikesRepository extends JpaRepository<QnaLikes, Long> {
     @Query(value = "INSERT INTO QNA_LIKES (QNA_NO, MNO) VALUES(:qnaNo, :mno) ", nativeQuery = true)
     void addLikes(Long qnaNo, Long mno);
 
+
     //좋아요 삭제
     @Modifying
     @Query(value = "DELETE FROM QNA_LIKES WHERE QNA_NO = :qnaNo AND MNO = :mno ", nativeQuery = true)
-    void unLikes(Long qnaNo, Long mno);
+    void deleteLikes(Long qnaNo, Long mno);
 
     //좋아요 개수 세기
     @Query("SELECT COUNT(ql.qnaBoard.qnaNo) FROM QnaLikes ql WHERE ql.qnaBoard.qnaNo = :qnaNo ")

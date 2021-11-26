@@ -41,9 +41,6 @@ h1{
     text-align: right;
 }
 
-.content{
-    height:100vh !important;
-}
 /* form 스타일 */
 .form-group{
     margin: 60px 0 20px 0;

@@ -18,8 +18,8 @@ public interface QnaService {
     QnaBoardDTO getBoard(Long qnaNo);
 
     //게시물 수정, 삭제
-    void modify(QnaBoardDTO qnaBoardDTO);
-    void delete(Long qnaNo);
+    void modify(QnaBoardDTO qnaBoardDTO, Member mno);
+    void delete(Long qnaNo, Long mno);
 
 
     default QnaBoard dtoToEntity(QnaBoardDTO qnaBoardDTO) {

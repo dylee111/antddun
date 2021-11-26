@@ -38,7 +38,7 @@ public class QnaLikesController {
 
         QnaLikes target = qnaLikeService.checkLikes(qnaNo, mno);
         if(target != null){ //있으면!!
-            qnaLikeService.unLikes(qnaNo, mno); //좋아요 해제 (row 삭제)
+            qnaLikeService.deleteLikes(qnaNo, mno); //좋아요 해제 (row 삭제)
             result.put("response", null);
             result.put("likesCnt", qnaLikesRepository.countLikes(qnaNo));
             return result;

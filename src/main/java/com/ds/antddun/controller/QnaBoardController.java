@@ -5,6 +5,7 @@ import com.ds.antddun.dto.PageRequestDTO;
 import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.dto.QnaBoardDTO;
 import com.ds.antddun.entity.JobList;
+import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.MemberWishList;
 import com.ds.antddun.repository.QnaBoardRepository;
 import com.ds.antddun.service.JobListService;
@@ -18,7 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -130,9 +130,7 @@ public class QnaBoardController {
     public String read(Long qnaNo, @AuthenticationPrincipal PrincipalDetails principal, Model model) {
 
         //로그인 후 이용가능
-        if (principal == null) {
-            return "redirect:/login";
-        }
+        if (principal == null) { return "redirect:/login";}
 
         //조회수 추가
         qnaBoardRepository.updateViewCnt(qnaNo);
@@ -162,24 +160,25 @@ public class QnaBoardController {
 
 
     //게시물 수정 폼
-    @GetMapping("/member/qna/modifyForm")
-    public String modifyForm(Long qnaNo, Model model ){
+    @GetMapping("/qna/modifyForm" )
+    public void modifyForm(Long qnaNo, Model model ){
+        log.info("lklklk"+qnaNo);
 
         //카테고리
         model.addAttribute("jobList", jobListService.getList());
         //게시판 정보
         model.addAttribute("boardList", qnaService.getBoard(qnaNo));
 
-        return "/qna/modifyForm";
+      //  return "qna/modifyForm";
     }
 
     //게시물 수정
     @PostMapping("/member/qna/modify")
-    public String modifyBoard(QnaBoardDTO qnaBoardDTO, RedirectAttributes redirectAttributes, @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
+    public String modifyBoard(QnaBoardDTO qnaBoardDTO, @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
                               @AuthenticationPrincipal PrincipalDetails principal) {
         log.info("postmodify................");
         log.info("dto:::"+ qnaBoardDTO);
-        qnaService.modify(qnaBoardDTO);
+        qnaService.modify(qnaBoardDTO, principal.getMember());
 
         Long qnaNo = qnaBoardDTO.getQnaNo();
         int page = requestDTO.getPage();
@@ -188,12 +187,13 @@ public class QnaBoardController {
     }
 
 
-    @PostMapping("/member/qna/remove")
-    public String removeBoard(Long qnaNo, RedirectAttributes redirectAttributes) {
-        log.info("ddddddddd"+ qnaNo);
-        qnaService.delete(qnaNo);
-        redirectAttributes.addFlashAttribute("noti","삭제");
-        return "/qna/list/all";
+    @GetMapping("/member/qna/remove")
+    public String removeBoard(QnaBoardDTO qnaBoardDTO, RedirectAttributes redirectAttributes,@AuthenticationPrincipal PrincipalDetails principal) {
+        Long qnaNo = qnaBoardDTO.getQnaNo();
+        Long mno = principal.getMember().getMno();
+        log.info("ddddddddd"+ qnaNo + "mnoooo" + mno);
+        qnaService.delete(qnaNo, mno);
+        return "redirect:/qna/list/all";
     }
 
 

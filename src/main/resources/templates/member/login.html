@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
@@ -46,12 +47,18 @@
             <a id="btnSubmit" class="btn" type="submit" >로그인</a>
             <a id="btnNaver" class="btn" type="button" th:href="@{/oauth2/authorization/naver}">NAVER 로그인</a>
 
-<!--
             <div class="social">
+
                 <a class="btn_social" th:href="@{/oauth2/authorization/google}">Google 로그인</a><br>
                 <a class="btn_social" th:href="@{/oauth2/authorization/facebook}">Facebook 로그인</a><br>
             </div>
--->
+
+            <div>
+                <button class='btn-social-login' style='background:#D93025'><i class="xi-2x xi-google"></i></button>
+                <button class='btn-social-login' style='background:#4267B2'><i class="xi-2x xi-facebook"></i></button>
+                <button class='btn-social-login' style='background:#1FC700'><i class="xi-2x xi-naver"></i></button>
+            </div>
+
 
 
             <div id="content">

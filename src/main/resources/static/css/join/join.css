@@ -245,8 +245,53 @@
         margin-bottom: 20px;
    }
 
-   /* WISH LIST */
+   /* welcome */
 
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ELAND_Choice_M';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/ELAND_Choice_M.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.outBox {
+  position: absolute;
+  left: 45%;
+  top: 40%;
+  margin-left: -200px;
+  margin-top: -95px;
+}
+
+.welcomeImage {
+    width: 20%;
+    margin-left: 40%;
+}
+
+.comment{
+  text-align: center;
+  color:black !important;
+  font-family: 'yg-jalnan', sans-serif;
+  font-size: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.reLogin{
+  font-family: 'ELAND_Choice_M', sans-serif;
+  font-size: 20px;
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  margin-left: 42.5%;
+  cursor: pointer;
+}
 
 
 
