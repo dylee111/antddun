@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().sameOrigin(); // H2 DB 접근 권한 설정
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/user/**").authenticated()
+                .antMatchers("/member/**").authenticated()
                 .antMatchers("/manager/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().permitAll()
