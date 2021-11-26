@@ -40,9 +40,7 @@ public class SosoBoardController {
     @Autowired
     private SosoReplyService sosoReplyService;
 
-    /*
-     * 메인 페이지
-     * */
+    /*메인 페이지*/
     @GetMapping("/sosojob/main")
     public String mainRead(Model model,
                            @AuthenticationPrincipal PrincipalDetails principalDetails) {
@@ -67,9 +65,7 @@ public class SosoBoardController {
         return "sosojob/sosojobMain";
     }
 
-    /*
-     * 글 등록
-     * */
+    /*글 등록*/
     @GetMapping("/member/sosojob/register")
     public String register(Model model) {
 
@@ -89,21 +85,20 @@ public class SosoBoardController {
         return "redirect:/sosojob/sosoList/sosoCategory=" + (sosoBoardDTO.getCategoryNo()+1);
     }
 
-    /*
-     * 글 수정
-     * */
+    /* 글 수정 화면 */
     @GetMapping("/member/sosojob/modify/sosoNo={sosoNo}")
-    public String modify(@PathVariable("sosoNo")Long sosoNo, SosoBoardDTO sosoBoardDTO,
+    public ModelAndView modify(@PathVariable("sosoNo")Long sosoNo, SosoBoardDTO sosoBoardDTO,
                          PageRequestDTO pageRequestDTO, Model model) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sosojob/modify");
 
         sosoBoardDTO = sosoJobService.read(sosoNo);
-        model.addAttribute("category", cateService.getCateList());
-        model.addAttribute("modify", sosoBoardDTO);
+        mv.addObject("category", cateService.getCateList());
+        mv.addObject("modify", sosoBoardDTO);
 
-
-        return "redirect:/member/sosojob/modify/sosoNo="+sosoNo;
+        return mv;
     }
-
+    /* 글 수정 */
     @PostMapping("/member/sosojob/modify/sosoNo={sosoNo}")
     public String modify(@PathVariable("sosoNo")Long sosoNo, SosoBoardDTO sosoBoardDTO) {
 
@@ -114,9 +109,10 @@ public class SosoBoardController {
         sosoBoardDTO.setDdun(sosoBoardDTO.getDdun());
         sosoJobService.modify(sosoBoardDTO);
 
-        return "/sosojob/sosojobMain";
+        return "redirect:/member/sosojob/list/read?sosoNo="+sosoNo;
     }
 
+    /* 카테고리 별 리스트 */
     @GetMapping("/sosojob/sosoList/sosoCategory={category}")
     public ModelAndView cateList(@PathVariable("category") int categoryNo, Model model, SosoPageRequestDTO sosoPageRequestDTO) {
         ModelAndView mv = new ModelAndView();
@@ -135,6 +131,7 @@ public class SosoBoardController {
         return mv;
     }
 
+    /* 글 상세보기 */
     @GetMapping("/member/sosojob/list/read")
     public String sosoRead(Long sosoNo, Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 

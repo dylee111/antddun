@@ -312,16 +312,19 @@ $(document).ready(function() {
             startTime: $(".startTime").val(),
             endTime: $(".endTime").val()
         }
-
+        console.log(myInfo);
         $.ajax({
             url: '/antddun/member/mypage/info/modify/' + infoMno,
-            method: 'put',
+            method: 'post',
             data: JSON.stringify(myInfo),
             contentType: 'application/json; charset=utf-8',
             success: function(result) {
                 if(result === 'MemberModify') {
                     alert("수정완료"+ infoMno);
                 }
+            },
+            error: function(request, status, error) {
+                alert("ERROR>> "+error +" request>> "+request+"\n"+"status>>"+status );
             }
         })
     });

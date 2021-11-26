@@ -26,11 +26,11 @@
   background-color: #111;
 }
 </style>
-<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+
+<th:block th:replace="~{/layout/basicList :: setContent(~{this::content})}">
     <th:block th:fragment="content">
         <link th:href="@{/css/board/sosojob/sosoMain.css}" rel="stylesheet">
         <link th:href="@{/css/board/qna/qnaStyles.css}" rel="stylesheet" />
-        <script th:inline="javascript" th:src="@{/js/board/sosojob/sosoMain.js}"></script>
         <!-- 본문 시작 -->
         <a th:href="@{/member/sosojob/register}">
             <button class="btn-primary btn" style="float: right; margin-top: -60px; font-family: 'ELAND_Choice_M';">
@@ -40,7 +40,7 @@
 
         <div class="subNav-body">
             <nav class="nav nav-underline" aria-label="Secondary navigation">
-                <a th:each="cateList : ${cateList}" class="subNav" th:onclick="|javascript:getCateList(${cateList.cateNo},'1')|">[[${cateList.sosoCateName}]]
+                <a th:each="cateList : ${cateList}" class="subNav" th:href="@{'/sosojob/sosoList/sosoCategory=' + ${cateList.cateNo}}">[[${cateList.sosoCateName}]]
                 </a>
             </nav>
         </div>
@@ -65,7 +65,7 @@
                         </div>
                         <div class="star-box">
                             <span>
-                                <span>[[${cateValue.job}]] [[${cateValue.experience}]]년차 [[${cateValue.firstName}]]개미</span>
+                                <span>[[${cateValue.job}]] [[${cateValue.experience}]]년차 [[${cateValue.lastName}]]개미</span>
                                 </span>
                         </div>
                     </div>

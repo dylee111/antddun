@@ -9,6 +9,7 @@ import com.ds.antddun.service.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -133,7 +134,7 @@ public class MemberController {
     }
 
     @ResponseBody
-    @PutMapping("/member/mypage/info/modify/{mno}")
+    @PostMapping(value = "/member/mypage/info/modify/{mno}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> modifyMember(@RequestBody MemberDTO memberDTO, @AuthenticationPrincipal PrincipalDetails principalDetails) {
         log.info("MODIFY MEMBER>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
@@ -143,7 +144,7 @@ public class MemberController {
         memberDTO.setRole(principalDetails.getMember().getRole().toString());
         memberDTO.setCreateDate(principalDetails.getMember().getCreateDate());
 
-        log.info("MODIFY >>> " + memberDTO);
+            log.info("MODIFY >>> " + memberDTO);
 
         memberService.modifyMember(memberDTO);
 

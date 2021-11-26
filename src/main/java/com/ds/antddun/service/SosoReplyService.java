@@ -12,6 +12,8 @@ public interface SosoReplyService {
 
     List<SosoReply> getListBySosoNo(Long sosoNo);
 
+    void replyModify(String replyText, Long sosoReplyNo);
+
     default SosoReply dtoToEntity(SosoReplyDTO sosoReplyDTO) {
 
         SosoReply sosoReply = SosoReply.builder()
