@@ -15,11 +15,13 @@ public class QnaLikesServiceImpl implements QnaLikesService {
     @Autowired
     private QnaLikesRepository qnaLikesRepository;
 
+    @Transactional
     @Override
     public void addLikes(Long qnaNo, Long mno) {
         qnaLikesRepository.addLikes(qnaNo, mno);
     }
 
+    @Transactional
     @Override
     public void deleteLikes(Long qnaNo, Long mno)  {
         qnaLikesRepository.deleteLikes(qnaNo, mno);

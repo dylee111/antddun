@@ -16,7 +16,7 @@
         });
 
         $.ajax({
-            url : contextPath + "/qna/" + qnaNo,
+            url : contextPath + "/member/qna/" + qnaNo,
             type : 'POST',
             data: qnaNo,
             dataType: 'JSON',

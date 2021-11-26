@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Log4j2
 @RestController //@ResponseBody 안붙여도 됨
-@SessionAttributes("member")
 public class QnaLikesController {
 
     @Autowired
@@ -26,10 +25,11 @@ public class QnaLikesController {
     private QnaLikesRepository qnaLikesRepository;
 
 
-    @PostMapping("/qna/{qnaNo}")
+    @PostMapping("/member/qna/{qnaNo}")
     public JSONObject addLikes(@PathVariable Long qnaNo, @AuthenticationPrincipal PrincipalDetails principal)  {
 
         Long mno = principal.getMember().getMno();
+        log.info("mnodddddddddd"+mno);
 
         int likesCnt = qnaLikesRepository.countLikes(qnaNo);
         log.info("likesCnt>>>>>>>>>>>>"+ likesCnt);

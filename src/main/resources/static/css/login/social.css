@@ -1,0 +1,34 @@
+
+
+
+
+.social .btn {
+    font-size: 80%;
+    border-radius: 0rem;
+    letter-spacing: .1rem;
+    font-weight: bold;
+    padding: 1rem;
+    transition: all 0.2s
+}
+
+.btn-google {
+    color: white;
+    background-color: #ea4335;
+}
+
+.btn-facebook {
+    color: white;
+    background-color: #3b5998;
+    margin-bottom: 25px;
+}
+
+.btn-naver {
+    color: white;
+    background-color: #1FC700;
+    font-size: 15px;
+}
+
+.btn-lg{
+    color:white !important;
+    font-size: 15px;
+}
