@@ -1,7 +1,6 @@
 package com.ds.antddun.service;
 
 import com.ds.antddun.dto.JayuReplyDTO;
-import com.ds.antddun.entity.JayuBoard;
 import com.ds.antddun.entity.JayuReply;
 import com.ds.antddun.repository.JayuReplyRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,8 +11,17 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class JayuReployServiceImpl implements JayuReplyService{
+public class JayuReplyServiceImpl implements JayuReplyService{
+
     private final JayuReplyRepository jayuReplyRepository;
+
+    @Override
+    public List<JayuReply> getReplyByJayuNo(Long jayuNo) {
+
+        List<JayuReply> result = jayuReplyRepository.getReplyListByJayuNo(jayuNo);
+
+        return  result;
+    }
 
     @Override
     public Long register(JayuReplyDTO jayuReplyDTO) {
@@ -21,14 +29,6 @@ public class JayuReployServiceImpl implements JayuReplyService{
         jayuReplyRepository.save(jayuReply);
 
         return jayuReply.getJayuRno();
-    }
-
-
-    @Override
-    public List<JayuReplyDTO> getList(Long jayuNo) {
-        List<JayuReply> result = jayuReplyRepository.getRepliesByJayuBoardOrderByJayuRno(JayuBoard.builder()
-                                                    .jayuNo(jayuNo).build());
-        return result.stream().map(jayuReply -> entityToDTO(jayuReply)).collect(Collectors.toList());
     }
 
     @Override

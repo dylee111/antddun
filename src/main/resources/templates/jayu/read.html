@@ -5,10 +5,14 @@
         <!--페이지 수정 부분 시작-->
         <!-- 페이지 css/ js 추가 -->
         <link rel="stylesheet" th:href="@{/css/board/jayu/register.css}">
-        <link rel="stylesheet" href="/antddun/css/board/qna/read.css">
+        <link rel="stylesheet" th:href="@{/css/board/qna/read.css}">
 
+        <script th:src="@{/js/board/jayu/read.js}"></script>
         <!-- 본문 시작 -->
         <div class="content">
+
+            <!--글번호-->
+            <input id="jayu_no" type="hidden" th:value="${jayuBoardDTO.jayuNo}">
             <div class="form-group">
                 <!--카테고리-->
                 <div class="option">
@@ -52,12 +56,12 @@
 
             <!-- 좋아요, 수정 삭제 -->
             <div style="width:100%; height:30px">
-                <div class="like leftSection" >
+                <div class="like leftSection">
                     <span th:id="likeBtn"><img th:attr="src = @{/assets/heart_1.png}" class="heartImg"></span>
                     <span id="likesCnt" class="smallText">125</span>
                     <span id="viewCnt" class="smallText">&nbsp조회수&nbsp[[${jayuBoardDTO.viewCnt}]]</span>
                 </div>
-                <div class="rightSection smallText pointer" th:if="${checkUser} == true" >
+                <div class="rightSection smallText pointer" th:if="${checkUser} == true">
                     <span class="removeBtn">삭제 | </span>
                     <span class="modifyBtn">수정</span>
                 </div>
@@ -67,60 +71,32 @@
             <section class="mb-5">
                 <div class="card bg-light">
                     <div class="card-body">
-                        <!-- Comment form-->
-                        <form class="mb-4"><textarea class="form-control" rows="3"
-                                                     placeholder="Join the discussion and leave a comment!"></textarea>
-                        </form>
-                        <!-- Comment with nested comments-->
-                        <div class="d-flex mb-4">
-                            <!-- Parent comment-->
-                            <div class="flex-shrink-0"><img class="rounded-circle"
-                                                            src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                                            alt="..."/></div>
-                            <div class="ms-3">
-                                <div class="fw-bold">Commenter Name</div>
-                                If you're going to lead a space frontier, it has to be government; it'll never be
-                                private enterprise. Because the space frontier is dangerous, and it's expensive, and it
-                                has unquantified risks.
-                                <!-- Child comment 1-->
-                                <div class="d-flex mt-4">
-                                    <div class="flex-shrink-0"><img class="rounded-circle"
-                                                                    src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                                                    alt="..."/></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">Commenter Name</div>
-                                        And under those conditions, you cannot establish a capital-market evaluation of
-                                        that enterprise. You can't get investors.
-                                    </div>
-                                </div>
-                                <!-- Child comment 2-->
-                                <div class="d-flex mt-4">
-                                    <div class="flex-shrink-0"><img class="rounded-circle"
-                                                                    src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                                                    alt="..."/></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">Commenter Name</div>
-                                        When you put money directly to a problem, it makes a good headline.
-                                    </div>
-                                </div>
-                            </div>
+                        <!-- 댓글 작성-->
+                        <div class="mb-4"><textarea class="form-control reply" rows="3"
+                                                    placeholder="댓글을 작성하여 지식과 경험을 나눠보세요"></textarea>
                         </div>
-                        <!-- Single comment-->
-                        <div class="d-flex">
-                            <div class="flex-shrink-0"><img class="rounded-circle"
-                                                            src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                                            alt="..."/></div>
-                            <div class="ms-3">
-                                <div class="fw-bold">Commenter Name</div>
-                                When I look at the universe and all the ways the universe wants to kill us, I find it
-                                hard to reconcile that with statements of beneficence.
+                        <button type="button" class="btn btn-primary btn-reply">입력</button>
+                        <!-- 댓글 목록-->
+                        <div th:each="replyList:${replyList}">
+                            <div class="d-flex mb-4">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0"><img class="rounded-circle" height="30px" width="30px"
+                                                                    th:src="@{'/assets/user_img/'+${replyList.member.experience}+'.png'}"
+                                                                    alt="..."/></div>
+                                    <div class="ms-3">
+                                        <div class="fw-bold">[[${replyList.member.job.job}]]
+                                            [[${replyList.member.experience}]]년차 [[${replyList.member.lastName}]]개미
+                                        </div>
+                                        [[${replyList.text}]]
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-                <button class="btn btn-primary" onclick='javascript:window.history.back()'>목록보기</button>
+            <button class="btn btn-primary" onclick='javascript:window.history.back()'>목록보기</button>
 
         </div>
         <!-- 본문 끝 -->
