@@ -259,3 +259,15 @@ article {
     text-align: right;
     font-size: 0.8rem;
 }
+
+.reply-text-box {
+    border: none;
+}
+
+.btn.btn-primary.btn-reply{
+    margin-top: -65px;
+}
+
+.form-control.reply{
+    width: 93%;
+}

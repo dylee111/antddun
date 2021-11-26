@@ -122,20 +122,27 @@
                             <div class="card-body">
                                 <!-- Comment form-->
                                 <form class="mb-4" method="post">
-                                    <textarea class="form-control" rows="3" name="replyText"
-                                                             placeholder="Join the discussion and leave a comment!"></textarea>
-                                    <input type="button" id="btn_reply" value="작성하기">
+                                    <textarea class="form-control reply" rows="3" name="replyText"
+                                                             placeholder="댓글을 작성하여 지식과 경험을 나눠보세요."></textarea>
+                                    <input type="button" class="btn btn-primary btn-reply" id="btn_reply" value="작성하기">
                                 </form>
                                 <!-- Comment with nested comments-->
                                 <div th:each="replyList : ${replyList}">
                                 <div class="d-flex mb-4" >
                                     <!-- Parent comment-->
                                     <div class="flex-shrink-0">
-                                        <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..."/>
+                                        <img class="rounded-circle" height="30px" width="30px"
+                                             th:src="@{'/assets/user_img/'+${replyList.member.experience}+'.png'}"
+                                             alt="..."/>
                                     </div>
+                                    <div class="innerTest">
                                     <div class="ms-3" >
+                                        <input type="hidden" class="reply-no" name="sosoReplyNo" th:value="${replyList.sosoReplyNo}">
+                                        <input type="hidden" class="replier" name="member" th:value="${replyList.member.mno}">
                                         <div class="fw-bold" >[[${replyList.member.job.job}]] [[${replyList.member.experience}]]년차 [[${replyList.member.lastName}]]개미</div>
-                                        [[${replyList.replyText}]]
+                                        <input class="reply-text-box" name="replyText" th:value="${replyList.replyText}" readonly>
+<!--                                        <button class="reply-modify">수정</button>-->
+
                                         <!-- Child comment 1-->
 <!--                                        <div class="d-flex mt-4">-->
 <!--                                            <div class="flex-shrink-0"><img class="rounded-circle"-->
@@ -149,16 +156,17 @@
 <!--                                        </div>-->
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                                 <!-- Single comment-->
 
                         </div>
+                            </div>
                     </section>
                 </div>
             </div>
         </div>
-
 
     </th:block>
 </th:block>

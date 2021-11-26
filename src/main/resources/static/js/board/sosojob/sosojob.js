@@ -6,7 +6,7 @@ $(document).ready(function() {
 
     var title = $("#title_msg");
     var content = $(".msg_context");
-
+    var count = 0;
     // 구매 버튼
     $(".buy_btn").click(function() {
         console.log(ddun);
@@ -91,5 +91,40 @@ $(document).ready(function() {
         }) // ajax end.
     });
 
+    $(".reply-modify").click(function() {
+        var parent = $(this).parent();
+        var replyNo = parent.children(".reply-no").val();
+        var replyText = parent.children(".reply-text-box");
+        var replier = parent.children(".replier");
+        console.log(replyNo);
+        count++;
+        if(count == 1){
+            console.log(count);
+            replyText.removeAttr("readonly");
+            replyText.focus();
+        } else if(count == 2) {
+
+            var replyModify = {
+                sosoReplyNo: replyNo,
+                replyText: replyText.val()
+            }
+
+            $.ajax({
+                url: "/antddun/member/sosojob/list/read/replyModify/"+replyNo,
+                method: "post",
+                data: JSON.stringify(replyModify),
+                contentType: "application/json; charset=utf-8",
+                success: function(result) {
+                    if(result === "replyModify") {
+                        alert("댓글 수정");
+                        self.location.reload();
+                    }
+
+                }
+
+            })
+            count = 0;
+        }
+    });
 
 }); // end.

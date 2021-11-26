@@ -51,11 +51,11 @@ $(document).ready(function() {
     function formatTime(time) {
         var date = new Date(time);
 
-        return date.getFullYear() + "년" +
-            (date.getMonth()+1) + "월" +
-            date.getDate() + "일" +
-            date.getHours() + ":" +
-            date.getMinutes();
+        return date.getFullYear() + "년 " +
+            (date.getMonth()+1 >= 10 ? date.getMonth()+1 : "0"+(date.getMonth()+1)) + "월 " +
+            (date.getDate() >= 10 ? date.getDate() : "0"+date.getDate()) + "일 " +
+            (date.getHours() >= 10 ? date.getHours() : "0"+date.getHours()) + ":" +
+            (date.getMinutes() >= 10 ? date.getMinutes() : "0" + date.getMinutes());
     }
 
 

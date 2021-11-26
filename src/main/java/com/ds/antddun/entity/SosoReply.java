@@ -1,6 +1,8 @@
 package com.ds.antddun.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
@@ -9,7 +11,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString
+@ToString(exclude = {"member", "sosoJobBoard"})
+@DynamicUpdate
 @SequenceGenerator(name="SOSOREPLY_SEQ_GEN",sequenceName = "SOSOREPLY_SEQ", initialValue = 1, allocationSize = 1)
 public class SosoReply extends BaseEntity{
     @Id

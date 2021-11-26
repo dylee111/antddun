@@ -6,6 +6,7 @@ import com.ds.antddun.repository.SosoReplyRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,10 +28,19 @@ public class SosoReplyServiceImpl implements SosoReplyService{
     }
 
     @Override
+    @Transactional
+    public void replyModify(String replyText, Long sosoReplyNo) {
+
+        sosoReplyRepository.replyModify(replyText, sosoReplyNo);
+    }
+
+    @Override
     public List<SosoReply> getListBySosoNo(Long sosoNo) {
 
         List<SosoReply> result = sosoReplyRepository.getReplyListBySosoNo(sosoNo);
 
         return result;
     }
+
+
 }
