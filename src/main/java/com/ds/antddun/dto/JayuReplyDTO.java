@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
 @Data
 public class JayuReplyDTO {
 
-    private Long jayuRno, jayuNo;
+    private Long jayuRno, jayuNo, mno;
 
-    private String text, replyer;
+    private String text;
 
     private LocalDateTime regDate, modDate;
 }

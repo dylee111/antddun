@@ -7,7 +7,8 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class SosoReplyDTO {
+public class
+SosoReplyDTO {
     private Long sosoReplyNo;
     private String replyText;
     private Long mno;

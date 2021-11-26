@@ -113,3 +113,12 @@ input:focus {
     min-height: 5rem;
     margin: 3rem 0;
 }
+
+/* 댓글 */
+.btn.btn-primary.btn-reply{
+    margin-top: -65px;
+}
+
+.form-control.reply{
+    width: 93%;
+}

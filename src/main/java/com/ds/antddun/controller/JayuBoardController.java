@@ -10,6 +10,7 @@ import com.ds.antddun.entity.MemberWishList;
 import com.ds.antddun.repository.JayuBoardRepository;
 import com.ds.antddun.service.JayuBoardService;
 import com.ds.antddun.service.JayuCateService;
+import com.ds.antddun.service.JayuReplyService;
 import com.ds.antddun.service.WishListService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,9 @@ public class JayuBoardController {
 
     @Autowired
     private JayuBoardRepository jayuBoardRepository;
+
+    @Autowired
+    private JayuReplyService jayuReplyService;
 
 
     //게시글 작성
@@ -90,6 +94,9 @@ public class JayuBoardController {
         if (principal.getMember().getMno() == actualWriter) {
             model.addAttribute("checkUser", true);
         }
+
+        //댓글
+        model.addAttribute("replyList",jayuReplyService.getReplyByJayuNo(jayuNo));
 
         //위시리스트
         List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());

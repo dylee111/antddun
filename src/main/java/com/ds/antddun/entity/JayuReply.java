@@ -1,6 +1,7 @@
 package com.ds.antddun.entity;
 
 import lombok.*;
+import org.springframework.security.core.parameters.P;
 
 import javax.persistence.*;
 
@@ -10,15 +11,21 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @ToString(exclude = "jayuBoard")
+@SequenceGenerator(name = "JAYUREPLY_SEQ_GEN", sequenceName = "JAYUREPLY_SEQ", initialValue = 1, allocationSize = 1)
 public class JayuReply extends BaseEntity{
     @Id
-    @SequenceGenerator(name = "JAYUREPLY_SEQ_GEN", sequenceName = "JAYUREPLY_SEQ", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "JAYUREPLY_SEQ")
     private Long jayuRno;
 
     private String text;
 
-    private String replyer;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private JayuBoard jayuBoard;
+
+    public void changeText(String text){
+        this.text=text;
+    }
 }
