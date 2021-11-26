@@ -21,6 +21,14 @@
   text-decoration: none;
 }
 
+.context_ellip{
+    display: block;
+    max-height: 54px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
 /* Change the link color to #111 (black) on hover */
 .cate-li a:hover {
   background-color: #111;
@@ -57,7 +65,7 @@
                             <a th:href="@{/member/sosojob/list/read(sosoNo = ${cateValue.sosoNo} )}">[[${cateValue.title}]]</a>
                         </div>
                         <div class="context">
-                            <span>[[${cateValue.content}]]</span>
+                            <span th:utext="${cateValue.content}" class="context_ellip"/>
                         </div>
                         <div class="ddun-box">
                             <span><img class="img coin" th:src="@{/assets/coins.png}" width="12">

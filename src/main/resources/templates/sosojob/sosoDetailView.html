@@ -59,18 +59,18 @@
                             <p class="soso_title">구매하기</p>
                         </div>
                         <div style="margin-top: 30px; text-align: center;">
-                                <!--내용-->
-                                <div class="form-group">
-                                    <div>
+                            <!--내용-->
+                            <div class="form-group">
+                                <div>
                                         <span class="buy_alert" th:each="read : ${read}">
                                             [[${read.lastName}]]개미님의 재능을<br>
                                             <span class="buy_ddun">[[${read.ddun}]]뚠</span>에<br>
                                             구매하시겠습니까?
                                         </span>
-                                    </div>
-
-                                    <button type="button" class="buy_btn" style="margin-bottom: 30px;">구매하기</button>
                                 </div>
+
+                                <button type="button" class="buy_btn" style="margin-bottom: 30px;">구매하기</button>
+                            </div>
                         </div>
                     </div>
                     <div class="dim" style="display: none;"></div>
@@ -104,14 +104,14 @@
                         </header>
                         <!-- Preview image figure-->
                         <div>
-                        <figure class="mb-4"><img class="img-fluid rounded"
-                                                  src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..."/>
-                        </figure>
-                        <!-- Post content-->
-                        <section class="mb-5">
-                            <!-- Comment form-->
-                            <p>[[${read.content}]]</p>
-                        </section >
+                            <figure class="mb-4"><img class="img-fluid rounded"
+                                                      src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..."/>
+                            </figure>
+                            <!-- Post content-->
+                            <section class="mb-5">
+                                <!-- Comment form-->
+                                <p>[[${read.content}]]</p>
+                            </section >
                         </div>
                         <button th:if="${writer} == ${read.mno}">삭제</button>
                         <button th:if="${writer} == ${read.mno}"><a th:href="@{'/member/sosojob/modify/sosoNo='+ ${read.sosoNo}}">수정</a></button>
@@ -123,46 +123,46 @@
                                 <!-- Comment form-->
                                 <form class="mb-4" method="post">
                                     <textarea class="form-control reply" rows="3" name="replyText"
-                                                             placeholder="댓글을 작성하여 지식과 경험을 나눠보세요."></textarea>
+                                              placeholder="댓글을 작성하여 지식과 경험을 나눠보세요."></textarea>
                                     <input type="button" class="btn btn-primary btn-reply" id="btn_reply" value="작성하기">
                                 </form>
                                 <!-- Comment with nested comments-->
                                 <div th:each="replyList : ${replyList}">
-                                <div class="d-flex mb-4" >
-                                    <!-- Parent comment-->
-                                    <div class="flex-shrink-0">
-                                        <img class="rounded-circle" height="30px" width="30px"
-                                             th:src="@{'/assets/user_img/'+${replyList.member.experience}+'.png'}"
-                                             alt="..."/>
-                                    </div>
-                                    <div class="innerTest">
-                                    <div class="ms-3" >
-                                        <input type="hidden" class="reply-no" name="sosoReplyNo" th:value="${replyList.sosoReplyNo}">
-                                        <input type="hidden" class="replier" name="member" th:value="${replyList.member.mno}">
-                                        <div class="fw-bold" >[[${replyList.member.job.job}]] [[${replyList.member.experience}]]년차 [[${replyList.member.lastName}]]개미</div>
-                                        <input class="reply-text-box" name="replyText" th:value="${replyList.replyText}" readonly>
-<!--                                        <button class="reply-modify">수정</button>-->
-
-                                        <!-- Child comment 1-->
-<!--                                        <div class="d-flex mt-4">-->
-<!--                                            <div class="flex-shrink-0"><img class="rounded-circle"-->
-<!--                                                                            src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"-->
-<!--                                                                            alt="..."/></div>-->
-<!--                                            <div class="ms-3">-->
-<!--                                                <div class="fw-bold">Commenter Name</div>-->
-<!--                                                And under those conditions, you cannot establish a capital-market-->
-<!--                                                evaluation of that enterprise. You can't get investors.-->
-<!--                                            </div>-->
-<!--                                        </div>-->
+                                    <div class="d-flex mb-4" >
+                                        <!-- Parent comment-->
+                                        <div class="flex-shrink-0">
+                                            <img class="rounded-circle" height="30px" width="30px"
+                                                 th:src="@{'/assets/user_img/'+${replyList.member.experience}+'.png'}"
+                                                 alt="..."/>
                                         </div>
-                                    </div>
+                                        <div class="innerTest">
+                                            <div class="ms-3" >
+                                                <input type="hidden" class="reply-no" name="sosoReplyNo" th:value="${replyList.sosoReplyNo}">
+                                                <input type="hidden" class="replier" name="member" th:value="${replyList.member.mno}">
+                                                <div class="fw-bold" >[[${replyList.member.job.job}]] [[${replyList.member.experience}]]년차 [[${replyList.member.lastName}]]개미</div>
+                                                <input class="reply-text-box" name="replyText" th:value="${replyList.replyText}" readonly>
+                                                <!--                                        <button class="reply-modify">수정</button>-->
 
+                                                <!-- Child comment 1-->
+                                                <!--                                        <div class="d-flex mt-4">-->
+                                                <!--                                            <div class="flex-shrink-0"><img class="rounded-circle"-->
+                                                <!--                                                                            src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"-->
+                                                <!--                                                                            alt="..."/></div>-->
+                                                <!--                                            <div class="ms-3">-->
+                                                <!--                                                <div class="fw-bold">Commenter Name</div>-->
+                                                <!--                                                And under those conditions, you cannot establish a capital-market-->
+                                                <!--                                                evaluation of that enterprise. You can't get investors.-->
+                                                <!--                                            </div>-->
+                                                <!--                                        </div>-->
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
-                            </div>
                                 <!-- Single comment-->
 
-                        </div>
                             </div>
+                        </div>
                     </section>
                 </div>
             </div>
