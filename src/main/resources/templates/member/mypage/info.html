@@ -65,14 +65,14 @@
                                     <div class="select_wrap">
                                         <select class="job select_box" style="margin-right: 5px;" name="jno"
                                                 th:each="member: ${member}">
-                                            <option selected="selected" name="jno">[[${member.job.job}]]</option>
+                                            <option selected="selected" name="jno" th:value="${member.job.jno}">[[${member.job.job}]]</option>
                                             <option th:each="dto: ${jobList}" th:value="${dto.jno}" name="jno">
                                                 [[${dto.job}]]
                                             </option>
                                         </select>
                                         <select class="experience select_box" name="experience"
                                                 th:each="member: ${member}">
-                                            <option selected="selected" name="experience">[[${member.experience}]]년차
+                                            <option selected="selected" name="experience" th:value="${member.experience}">[[${member.experience}]]년차
                                             </option>
                                         </select>
                                     </div>
@@ -81,6 +81,7 @@
                                     <div class="input_box">
                                         <input type="text" class="input_earn" id="salary" name="salary"
                                                th:attr="placeholder=${member.salary}"
+                                               th:value="${member.salary}"
                                                onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                                         <div class="earn_unit">
                                             <span>만원</span>

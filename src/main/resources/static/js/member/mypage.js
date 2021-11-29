@@ -319,9 +319,9 @@ $(document).ready(function() {
             data: JSON.stringify(myInfo),
             contentType: 'application/json; charset=utf-8',
             success: function(result) {
-                if(result === 'MemberModify') {
+
                     alert("수정완료"+ infoMno);
-                }
+
             },
             error: function(request, status, error) {
                 alert("ERROR>> "+error +" request>> "+request+"\n"+"status>>"+status );
@@ -447,8 +447,6 @@ $(document).ready(function(){
             document.location.href="/antddun/member/mypage/wallet";
         });
     }); // 아임포트 end;
-
-
 
 });
 
