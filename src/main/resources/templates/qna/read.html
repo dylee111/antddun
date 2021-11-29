@@ -6,6 +6,7 @@
         <!-- 페이지 css/ js 추가 -->
     <link rel="stylesheet" th:href="@{/css/board/qna/read.css}">
     <script th:src="@{/js/board/qna/likes.js}"></script>
+    <script th:src="@{/js/board/qna/read.js}"></script>
     <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
 
         <!-- 본문 시작 -->
@@ -18,6 +19,7 @@
                     <!-- 카테고리 -->
                     <div>
                         <input id="qnaNo" name="qnaNo" type="hidden" th:value="${boardList.qnaNo}">
+                        <input id="mno" name="mno" type="hidden" th:value="${boardList.mno}">
                         <span class="cate" th:text="${boardList.job}" ></span>
                     </div>
 
@@ -64,6 +66,44 @@
                         <span class="modifyBtn" >수정</span>
                     </div>
                 </div>
+
+                <!-- Comments section-->
+                <section class="replySection">
+
+                            <!-- Comment form-->
+                            <form class="mb-4" method="post" >
+                                <div class="leftSection" style="width: 100%; margin-bottom: 40px !important;">
+                                    <textarea class="form-control replyTA" rows="3" required name="replyText"
+                                              placeholder="댓글을 작성하여 지식과 경험을 나눠보세요."></textarea>
+                                    <input type="button" class="btn btn-primary rightSection btn-reply" id="btn_reply" value="등록">
+                                </div>
+                            </form>
+                            <br>
+                            <!-- Comment with nested comments-->
+                            <div th:each="replyList : ${replyList}">
+                                <div class="replyList">
+                                    <!-- Parent comment-->
+                                    <div class="flex-shrink-0">
+                                        <img class="rounded-circle" height="30px" width="30px"
+                                             th:src="@{'/assets/user_img/'+${replyList.member.experience}+'.png'}"
+                                             alt="..."/>
+                                    </div>
+                                    <div class="innerText">
+                                        <div class="ms-3" >
+                                            <input type="hidden" class="reply-no" name="qnaRno" th:value="${replyList.qnaRno}">
+                                            <input type="hidden" class="replier" name="member" th:value="${replyList.member.mno}">
+                                            <div class="replier" >[[${replyList.member.job.job}]] [[${replyList.member.experience}]]년차 [[${replyList.member.lastName}]]개미</div>
+                                            <input class="reply-text-box" name="replyText" th:value="${replyList.replyText}" readonly>
+                                        </div>
+                                        <div>
+                                            <span class="date" th:text="${#temporals.format(boardList.modDate,'yyyy.MM.dd HH:mm')}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                </section>
+                <!--comment end -->
 
                 <hr>
 

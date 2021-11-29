@@ -8,10 +8,7 @@ import com.ds.antddun.entity.JobList;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.MemberWishList;
 import com.ds.antddun.repository.QnaBoardRepository;
-import com.ds.antddun.service.JobListService;
-import com.ds.antddun.service.QnaLikesService;
-import com.ds.antddun.service.QnaService;
-import com.ds.antddun.service.WishListService;
+import com.ds.antddun.service.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -43,6 +40,8 @@ public class QnaBoardController {
     @Autowired
     private WishListService wishListService;
 
+    @Autowired
+    private QnaReplyService qnaReplyService;
 
     //리스트 출력
     @GetMapping("/qna/list/all")
@@ -136,6 +135,7 @@ public class QnaBoardController {
         qnaBoardRepository.updateViewCnt(qnaNo);
 
         //게시판 정보
+        model.addAttribute("replyList", qnaReplyService.getListByQnaNo(qnaNo));
         model.addAttribute("boardList", qnaService.getBoard(qnaNo));
 
         //수정 삭제 버튼 보이기
@@ -162,14 +162,10 @@ public class QnaBoardController {
     //게시물 수정 폼
     @GetMapping("/qna/modifyForm" )
     public void modifyForm(Long qnaNo, Model model ){
-        log.info("lklklk"+qnaNo);
-
         //카테고리
         model.addAttribute("jobList", jobListService.getList());
         //게시판 정보
         model.addAttribute("boardList", qnaService.getBoard(qnaNo));
-
-      //  return "qna/modifyForm";
     }
 
     //게시물 수정
@@ -187,6 +183,7 @@ public class QnaBoardController {
     }
 
 
+    //게시물 삭제
     @GetMapping("/member/qna/remove")
     public String removeBoard(QnaBoardDTO qnaBoardDTO, RedirectAttributes redirectAttributes,@AuthenticationPrincipal PrincipalDetails principal) {
         Long qnaNo = qnaBoardDTO.getQnaNo();
