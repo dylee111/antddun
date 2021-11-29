@@ -2,16 +2,14 @@ package com.ds.antddun.controller;
 
 import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.QnaReplyDTO;
+import com.ds.antddun.dto.SosoReplyDTO;
 import com.ds.antddun.service.QnaReplyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/member/")
@@ -27,12 +25,18 @@ public class QnaReplyController {
 
         return new ResponseEntity<>(qnaRno, HttpStatus.OK);
     }
-/*
-    @PostMapping("/sosojob/list/read/replyModify/{sosoReplyNo}")
-    public ResponseEntity<String> replyModify(@PathVariable("sosoReplyNo") Long sosoReplyNo, @RequestParam("replyText")String replyText) {
-        log.info("NO>>" + sosoReplyNo);
-        log.info("TEXT>>" + replyText);
-        sosoReplyService.replyModify(replyText, sosoReplyNo);
+    @PostMapping("/qna/list/read/replyModify/{qnaRno}")
+    public ResponseEntity<String> replyModify(@PathVariable("qnaRno") Long qnaRno,
+                                              @RequestBody QnaReplyDTO qnaReplyDTO) {
+        log.info("NO>>" + qnaRno);
+        qnaReplyService.replyModify(qnaReplyDTO);
         return new ResponseEntity<>("replyModify", HttpStatus.OK);
-    }*/
+    }
+
+    @DeleteMapping("/qna/list/replyDelete/{qnaRno}")
+    public ResponseEntity<String> replyDelete(@PathVariable("qnaRno") Long qnaRno) {
+        log.info("REPLYNO>>> "+ qnaRno);
+        qnaReplyService.replyDelete(qnaRno);
+        return new ResponseEntity<>("delete", HttpStatus.OK);
+    }
 }

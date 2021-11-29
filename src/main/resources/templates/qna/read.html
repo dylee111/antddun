@@ -94,6 +94,12 @@
                                             <input type="hidden" class="replier" name="member" th:value="${replyList.member.mno}">
                                             <div class="replier" >[[${replyList.member.job.job}]] [[${replyList.member.experience}]]년차 [[${replyList.member.lastName}]]개미</div>
                                             <input class="reply-text-box" name="replyText" th:value="${replyList.replyText}" readonly>
+
+                                            <div class="rightSection smallText pointer" th:if="${checkUser} == true" >
+                                                <span class="reply-modify">삭제 | </span>
+                                                <span class="reply-delete" >수정</span>
+                                            </div>
+
                                         </div>
                                         <div>
                                             <span class="date" th:text="${#temporals.format(boardList.modDate,'yyyy.MM.dd HH:mm')}"></span>

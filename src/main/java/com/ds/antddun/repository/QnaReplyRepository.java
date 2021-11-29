@@ -13,8 +13,9 @@ public interface QnaReplyRepository extends JpaRepository<QnaReply, Long> {
 
    @Query("SELECT reply FROM QnaReply reply WHERE reply.qnaBoard.qnaNo=:qnaNo ")
     List<QnaReply> getReplyListByQnaNo(@Param("qnaNo") Long qnaNo);
-/*
-    @Modifying(clearAutomatically = true)
-    @Query("UPDATE QnaReply reply SET reply.replyText = ?1 WHERE reply.sosoReplyNo= ?2")
-    void replyModify(String replyText, Long qnaReplyNo);*/
+
+    @Modifying
+    @Query("DELETE FROM QnaReply reply WHERE reply.qnaBoard.qnaNo=:qnaNo ")
+    void deleteByQnaNo(@Param("qnaNo")Long qnaNo);
+
 }

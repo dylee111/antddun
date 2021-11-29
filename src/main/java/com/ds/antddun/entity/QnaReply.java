@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Builder
 @Getter
+@Setter
 @ToString(exclude = {"member", "qnaBoard"})
 @AllArgsConstructor
 @NoArgsConstructor

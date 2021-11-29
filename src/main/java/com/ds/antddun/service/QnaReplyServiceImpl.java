@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Log4j2
@@ -38,14 +39,22 @@ public class QnaReplyServiceImpl implements QnaReplyService{
         return result;
     }
 
-/*    @Override
+    @Override
     @Transactional
-    public void replyModify(String replyText, Long sosoReplyNo) {
+    public void replyModify(QnaReplyDTO qnaReplyDTO) {
+        Optional<QnaReply> result = qnaReplyRepository.findById(qnaReplyDTO.getQnaRno());
 
-        qnaReplyRepository.replyModify(replyText, sosoReplyNo);
-    }*/
+        if (result.isPresent()) {
+            QnaReply qnaReply = result.get();
 
+            qnaReply.setReplyText(qnaReplyDTO.getReplyText());
+            qnaReplyRepository.save(qnaReply);
+        }
+    }
 
-
-
+    @Transactional
+    @Override
+    public void replyDelete(Long qnaRno) {
+        qnaReplyRepository.deleteByQnaNo(qnaRno);
+    }
 }

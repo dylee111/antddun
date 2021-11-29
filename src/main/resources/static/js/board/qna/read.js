@@ -98,4 +98,21 @@ $(document).ready(function() {
         }
     });
 
+// 댓글 삭제
+    $(".reply-delete").click(function() {
+        var parent = $(this).parent();
+        var replyNo = parent.children(".reply-no").val();
+
+        $.ajax({
+            url: "/antddun/member/qna/list/replyDelete/" + replyNo,
+            method: "delete",
+            success: function(result) {
+                if(result === "delete"){
+                    alert("댓글이 삭제되었습니다.");
+                    self.location.reload();
+                }
+            }
+        }) // ajax end.
+    }); // reply-modify click event
+
 }); // end.
