@@ -28,7 +28,7 @@
                         <tr th:each="senderList, idx : ${senderList}" >
                             <td class="msg_sender" th:value="${senderList.mno}">
                                 <input type="hidden" class="sender_mno" th:value="${senderList.mno}">
-                                <strong class="sender">[[${senderList.lastName}]][[${senderList.firstName}]]</strong>
+                                <strong class="sender" >[[${senderList.lastName}]][[${senderList.firstName}]]</strong>
                                 <div>
                                     <button class="trade_btn">거래 중</button>
                                 </div>
@@ -49,9 +49,16 @@
                                 <input type="hidden" class="msgMno" th:value="${msgList.sendMember.mno}"/>
                                 <div class="sender_wrap">
                                     <span class="send_title2">[[${msgList.msgTitle}]]</span>
-                                    <div class="send_info">
+                                    <div class="send_info" th:if="${member.mno} != ${msgList.sendMember.mno}">
                                         <strong>
                                             [[${msgList.sendMember.lastName}]][[${msgList.sendMember.firstName}]]
+                                        </strong>
+                                        <span>(<span th:text="${msgList.sendMember.username}"></span>)</span>
+                                        <span class="send_time" th:text="${msgList.sendTime}"></span>
+                                    </div>
+                                    <div class="send_info" th:unless="${member.mno} != ${msgList.sendMember.mno}">
+                                        <strong>
+                                            본인
                                         </strong>
                                         <span>(<span th:text="${msgList.sendMember.username}"></span>)</span>
                                         <span class="send_time" th:text="${msgList.sendTime}"></span>

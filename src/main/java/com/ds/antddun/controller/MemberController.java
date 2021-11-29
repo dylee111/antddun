@@ -135,7 +135,7 @@ public class MemberController {
 
     @ResponseBody
     @PostMapping(value = "/member/mypage/info/modify/{mno}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> modifyMember(@RequestBody MemberDTO memberDTO, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+    public ResponseEntity<MemberDTO> modifyMember(@RequestBody MemberDTO memberDTO, @AuthenticationPrincipal PrincipalDetails principalDetails) {
         log.info("MODIFY MEMBER>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         memberDTO.setFirstName(principalDetails.getMember().getFirstName());
@@ -144,11 +144,11 @@ public class MemberController {
         memberDTO.setRole(principalDetails.getMember().getRole().toString());
         memberDTO.setCreateDate(principalDetails.getMember().getCreateDate());
 
-            log.info("MODIFY >>> " + memberDTO);
+        log.info("MODIFY >>> " + memberDTO);
 
         memberService.modifyMember(memberDTO);
 
-        return new ResponseEntity<>("MemberModify", HttpStatus.OK);
+        return new ResponseEntity<>(memberDTO, HttpStatus.OK);
     }
 
     @PostMapping("/member/mypage")
