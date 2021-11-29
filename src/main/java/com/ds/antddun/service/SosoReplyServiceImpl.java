@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Log4j2
@@ -29,9 +30,16 @@ public class SosoReplyServiceImpl implements SosoReplyService{
 
     @Override
     @Transactional
-    public void replyModify(String replyText, Long sosoReplyNo) {
+    public void replyModify(SosoReplyDTO sosoReplyDTO) {
+        Optional<SosoReply> result = sosoReplyRepository.findById(sosoReplyDTO.getSosoReplyNo());
 
-        sosoReplyRepository.replyModify(replyText, sosoReplyNo);
+        if (result.isPresent()) {
+            SosoReply sosoReply = result.get();
+
+            sosoReply.setReplyText(sosoReplyDTO.getReplyText());
+            sosoReplyRepository.save(sosoReply);
+        }
+
     }
 
     @Override
@@ -42,5 +50,8 @@ public class SosoReplyServiceImpl implements SosoReplyService{
         return result;
     }
 
-
+    @Override
+    public void replyDelete(Long sosoReplyNo) {
+        sosoReplyRepository.deleteById(sosoReplyNo);
+    }
 }

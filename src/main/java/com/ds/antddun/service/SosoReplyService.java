@@ -12,7 +12,9 @@ public interface SosoReplyService {
 
     List<SosoReply> getListBySosoNo(Long sosoNo);
 
-    void replyModify(String replyText, Long sosoReplyNo);
+    void replyModify(SosoReplyDTO sosoReplyDTO);
+
+    void replyDelete(Long sosoReplyNo);
 
     default SosoReply dtoToEntity(SosoReplyDTO sosoReplyDTO) {
 

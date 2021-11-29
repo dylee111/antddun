@@ -102,10 +102,12 @@ public class MemberController {
         return "member/mypage/wallet";
     }
 
+    /* 위시리스트 저장 */
     @ResponseBody
     @PostMapping("/member/mypage/wishlist/save")
     public int saveWishList(MemberWishListDTO wishListDTO, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 
+        // 회원 별 위시리스트 개수 카운트
         int result = wishListService.wishListCnt(principalDetails.getMember().getMno());
         log.info("MNOCNT>>>" + result);
         // 위시리스트 3개까지 작성 가능.
@@ -115,12 +117,14 @@ public class MemberController {
         return result;
     }
 
+    /* 위시리스트 삭제 */
     @DeleteMapping("/member/mypage/wishlist/delete/{wno}")
     public ResponseEntity<String> removeWishList(@PathVariable("wno") Long wno) {
         wishListService.remove(wno);
         return new ResponseEntity<>("delete", HttpStatus.OK);
     }
 
+    /* 위시리스트 수정 */
     @ResponseBody
     @PutMapping("/member/mypage/wishlist/modify/{wno}")
     public ResponseEntity<String> modifyWishList(@RequestBody MemberWishListDTO memberWishListDTO,
@@ -133,11 +137,13 @@ public class MemberController {
         return new ResponseEntity<>("modify", HttpStatus.OK);
     }
 
+    /* 회원 정보 수정 */
     @ResponseBody
     @PostMapping(value = "/member/mypage/info/modify/{mno}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MemberDTO> modifyMember(@RequestBody MemberDTO memberDTO, @AuthenticationPrincipal PrincipalDetails principalDetails) {
         log.info("MODIFY MEMBER>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
+        // 정보 수정란에 없는 정보 저장 (Null 방지)
         memberDTO.setFirstName(principalDetails.getMember().getFirstName());
         memberDTO.setUsername(principalDetails.getUsername());
         memberDTO.setLastName(principalDetails.getMember().getLastName());
@@ -148,6 +154,7 @@ public class MemberController {
 
         memberService.modifyMember(memberDTO);
 
+        // JSON 데이터를 받을 Http Body 타입 일치 필요, String으로 지정 시, parseError 발생
         return new ResponseEntity<>(memberDTO, HttpStatus.OK);
     }
 

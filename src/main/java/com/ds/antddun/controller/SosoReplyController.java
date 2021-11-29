@@ -26,10 +26,16 @@ public class SosoReplyController {
     }
 
     @PostMapping("/sosojob/list/read/replyModify/{sosoReplyNo}")
-    public ResponseEntity<String> replyModify(@PathVariable("sosoReplyNo") Long sosoReplyNo, @RequestParam("replyText")String replyText) {
+    public ResponseEntity<String> replyModify(@PathVariable("sosoReplyNo") Long sosoReplyNo, @RequestBody SosoReplyDTO sosoReplyDTO) {
         log.info("NO>>" + sosoReplyNo);
-        log.info("TEXT>>" + replyText);
-        sosoReplyService.replyModify(replyText, sosoReplyNo);
+        sosoReplyService.replyModify(sosoReplyDTO);
         return new ResponseEntity<>("replyModify", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/sosojob/list/replyDelete/{sosoReplyNo}")
+    public ResponseEntity<String> replyDelete(@PathVariable("sosoReplyNo") Long sosoReplyNo) {
+        log.info("REPLYNO>>> "+ sosoReplyNo);
+        sosoReplyService.replyDelete(sosoReplyNo);
+        return new ResponseEntity<>("delete", HttpStatus.OK);
     }
 }

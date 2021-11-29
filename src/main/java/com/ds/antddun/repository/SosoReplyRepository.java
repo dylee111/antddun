@@ -13,7 +13,8 @@ public interface SosoReplyRepository extends JpaRepository<SosoReply, Long> {
     @Query("SELECT reply FROM SosoReply reply WHERE reply.sosoJobBoard.sosoNo=:sosoNo ")
     List<SosoReply> getReplyListBySosoNo(@Param("sosoNo") Long sosoNo);
 
-    @Modifying(clearAutomatically = true)
-    @Query("UPDATE SosoReply reply SET reply.replyText = ?1 WHERE reply.sosoReplyNo= ?2")
-    void replyModify(String replyText, Long sosoReplyNo);
+    @Modifying
+    @Query("DELETE FROM SosoReply reply WHERE reply.sosoJobBoard.sosoNo=:sosoBoardNo ")
+    void deleteBySosoBoardNo(@Param("sosoBoardNo")Long sosoBoardNo);
+
 }

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -110,6 +111,14 @@ public class SosoBoardController {
         sosoJobService.modify(sosoBoardDTO);
 
         return "redirect:/member/sosojob/list/read?sosoNo="+sosoNo;
+    }
+
+    /* 글 삭제 */
+    @GetMapping("/member/sosojob/delete/{sosoNo}")
+    public String delete(@PathVariable("sosoNo") Long sosoNo, SosoBoardDTO sosoBoardDTO) {
+        sosoJobService.delete(sosoBoardDTO);
+
+        return "redirect:/sosojob/sosoList";
     }
 
     /* 카테고리 별 리스트 */

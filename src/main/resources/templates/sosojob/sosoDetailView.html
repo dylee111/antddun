@@ -99,7 +99,7 @@
                             </div>
                             <!-- Post meta content-->
                             <div class="text-muted mb-2 sell_date">
-                                [[${#temporals.format(read.regDate, 'yyyy-mm-dd HH:mm:ss')}]]
+                                [[${#temporals.format(read.regDate, 'yyyy-MM-dd HH:mm:ss')}]]
                             </div>
                         </header>
                         <!-- Preview image figure-->
@@ -113,7 +113,7 @@
                                 <p>[[${read.content}]]</p>
                             </section >
                         </div>
-                        <button th:if="${writer} == ${read.mno}">삭제</button>
+                        <button id="board-delete" th:if="${writer} == ${read.mno}" ><a th:href="@{'/member/sosojob/delete/'+ ${read.sosoNo}}">삭제</a></button>
                         <button th:if="${writer} == ${read.mno}"><a th:href="@{'/member/sosojob/modify/sosoNo='+ ${read.sosoNo}}">수정</a></button>
                     </article>
                     <!-- Comments section-->
@@ -124,8 +124,10 @@
                                 <form class="mb-4" method="post">
                                     <textarea class="form-control reply" rows="3" name="replyText"
                                               placeholder="댓글을 작성하여 지식과 경험을 나눠보세요."></textarea>
-                                    <input type="button" class="btn btn-primary btn-reply" id="btn_reply" value="작성하기">
                                 </form>
+                                <div>
+                                    <input type="button" class="btn btn-primary btn-reply" id="btn_reply" value="작성하기">
+                                </div>
                                 <!-- Comment with nested comments-->
                                 <div th:each="replyList : ${replyList}">
                                     <div class="d-flex mb-4" >
@@ -141,7 +143,8 @@
                                                 <input type="hidden" class="replier" name="member" th:value="${replyList.member.mno}">
                                                 <div class="fw-bold" >[[${replyList.member.job.job}]] [[${replyList.member.experience}]]년차 [[${replyList.member.lastName}]]개미</div>
                                                 <input class="reply-text-box" name="replyText" th:value="${replyList.replyText}" readonly>
-                                                <!--                                        <button class="reply-modify">수정</button>-->
+                                                <button class="reply-modify" th:if="${writer} == ${replyList.member.mno}" >수정</button>
+                                                <button class="reply-delete" th:if="${writer} == ${replyList.member.mno}" >삭제</button>
 
                                                 <!-- Child comment 1-->
                                                 <!--                                        <div class="d-flex mt-4">-->

@@ -13,7 +13,7 @@ public interface SosoJobService {
 
     void modify(SosoBoardDTO sosoBoardDTO);
 
-    void delete();
+    void delete(SosoBoardDTO sosoBoardDTO);
 
     List<SosoJobBoard> getListByCategory(String category);
     List<SosoJobBoard> getListByCategoryNo(int categoryNo);
