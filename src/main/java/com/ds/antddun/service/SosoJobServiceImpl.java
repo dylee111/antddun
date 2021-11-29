@@ -9,13 +9,16 @@ import com.ds.antddun.entity.SosoCategory;
 import com.ds.antddun.entity.SosoJobBoard;
 import com.ds.antddun.repository.SosoBoardRepository;
 import com.ds.antddun.repository.SosoCategoryRepository;
+import com.ds.antddun.repository.SosoReplyRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +31,9 @@ public class SosoJobServiceImpl implements SosoJobService {
 
     private final SosoBoardRepository sosoBoardRepository;
     private final SosoCategoryRepository sosoCategoryRepository;
+
+    @Autowired
+    private SosoReplyRepository sosoReplyRepository;
 
     /*
     * method : register
@@ -64,9 +70,18 @@ public class SosoJobServiceImpl implements SosoJobService {
         }
     }
 
+    @Transactional
     @Override
-    public void delete() {
+    public void delete(SosoBoardDTO sosoBoardDTO) {
 
+        Optional<SosoJobBoard> sosoJobBoard = sosoBoardRepository.findById(sosoBoardDTO.getSosoNo());
+
+        if (sosoJobBoard.isPresent()) {
+            sosoJobBoard.get().setCategory(null);
+        }
+
+        sosoReplyRepository.deleteBySosoBoardNo(sosoBoardDTO.getSosoNo());
+        sosoBoardRepository.deleteById(sosoBoardDTO.getSosoNo());
     }
 
     /*

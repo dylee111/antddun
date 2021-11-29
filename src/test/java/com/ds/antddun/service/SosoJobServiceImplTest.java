@@ -77,10 +77,10 @@ class SosoJobServiceImplTest {
         System.out.println(sosoCateService.getCateList().get(0));
     }
 
-//    @Test
-//    void paging() {
-//        System.out.println(sosoJobService.getList(1).getPage());
-//        System.out.println(sosoJobService.getList(1).getTotalPage());
-//    }
+    @Test
+    void 글삭제() {
+        sosoBoardRepository.deleteById(161L);
+    }
+
 
 }

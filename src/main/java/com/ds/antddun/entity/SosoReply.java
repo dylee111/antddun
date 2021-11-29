@@ -11,6 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @ToString(exclude = {"member", "sosoJobBoard"})
 @DynamicUpdate
 @SequenceGenerator(name="SOSOREPLY_SEQ_GEN",sequenceName = "SOSOREPLY_SEQ", initialValue = 1, allocationSize = 1)
