@@ -44,17 +44,14 @@
 
         <!--뚠-->
         <div class="form-group">
-
-
           <img th:src="@{/assets/coins.png}" width="25rem">
           <input type="text" id="ddun" class="ddun" name="ddun"
                  onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"
                  placeholder="" required > <label class="ddun"> 뚠</label>
-
-
         </div>
 
         <!--작성완료 버튼-->
+        <hr>
         <button type="submit" class="btn btn-save btn-primary">등록</button>
       </form>
 

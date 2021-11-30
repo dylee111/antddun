@@ -20,6 +20,7 @@ import java.util.List;
 public class QnaBoardDTO {
 
     private Long qnaNo;
+    private Long mno; // username
     private String title;
     private String content;
     private int jno;
@@ -28,6 +29,7 @@ public class QnaBoardDTO {
     private int ddun;
     private int viewCnt;
     private int likesCnt;
+    private int replyCnt;
 
     private LocalDateTime regDate;
     private LocalDateTime modDate;

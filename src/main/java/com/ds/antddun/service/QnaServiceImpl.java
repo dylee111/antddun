@@ -84,6 +84,7 @@ public class QnaServiceImpl implements QnaService {
         Function<Object[], QnaBoardDTO> fn = (arr -> entityToDTO(
                 (QnaBoard) arr[0],
                 (Long) arr[1]
+//                (Long) arr[2]
         ));
         log.info("arr>>"+ fn);
 

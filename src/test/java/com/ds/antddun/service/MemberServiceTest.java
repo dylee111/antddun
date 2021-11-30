@@ -1,6 +1,5 @@
 package com.ds.antddun.service;
 
-import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.entity.JobList;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.repository.JobListRepository;
@@ -10,11 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.stream.IntStream;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class MemberServiceTest {

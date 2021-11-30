@@ -38,10 +38,11 @@ public interface QnaService {
     }
 
 
-    default QnaBoardDTO entityToDTO(QnaBoard qnaBoard, Long likesCnt) {
+    default QnaBoardDTO entityToDTO(QnaBoard qnaBoard, Long likesCnt/*, Long replyCnt*/) {
 
         QnaBoardDTO dto = QnaBoardDTO.builder()
                 .qnaNo(qnaBoard.getQnaNo())
+                .mno(qnaBoard.getMember().getMno())
                 .title(qnaBoard.getTitle())
                 .writer(qnaBoard.getMember().getExperience()+"년차 " + qnaBoard.getMember().getJob().getJob() + " " + qnaBoard.getMember().getLastName() +"개미")
                 .content(qnaBoard.getContent())
@@ -53,6 +54,7 @@ public interface QnaService {
                 .ddun(qnaBoard.getDdun())
                 .build();
         dto.setLikesCnt(likesCnt.intValue());
+//        dto.setReplyCnt(replyCnt.intValue());
         System.out.println("entityToDto>>>>"+dto);
 
         return dto;

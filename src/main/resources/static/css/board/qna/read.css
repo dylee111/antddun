@@ -115,10 +115,57 @@ input:focus {
 }
 
 /* 댓글 */
-.btn.btn-primary.btn-reply{
-    margin-top: -65px;
+
+.innerText{
+    width:100%;
 }
 
-.form-control.reply{
-    width: 93%;
+.btn-reply{
+     margin-left: 88%;
+     margin-top: 15px;
+     width: 75px;
+     padding: 2px;
+}
+
+.replyTA{
+    font-family: 'ELAND_Choice_M';
+    width: 100%;
+}
+
+
+.replySection{
+    width: 100%;
+    margin: 3rem 0px;
+}
+.reply-text-box{
+    resize:none;
+    line-height:30px;
+    overflow-y:hidden;
+    border: none;
+    margin: 0.5rem 0rem;
+    width: 100%;
+    color:#3e3e3eed;
+    font-weight:bold;
+    font-size: 18px;
+    font-family:  'ELAND_Choice_M';
+
+}
+
+.date{
+    float: left;
+    margin-left: 1rem;
+    text-align: end;
+    font-size: 13px;
+    color: gray;
+}
+.replier{
+    font-family:'ELAND_Choice_M';
+}
+
+.replyList {
+    width: 100%;
+    display: flex !important;
+    align-items: baseline;
+    margin-bottom: 1.5rem;
+
 }
