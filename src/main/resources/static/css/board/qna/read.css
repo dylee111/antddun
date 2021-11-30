@@ -148,7 +148,10 @@ input:focus {
     font-weight:bold;
     font-size: 18px;
     font-family:  'ELAND_Choice_M';
+}
 
+textarea:focus {
+    outline: none;
 }
 
 .date{
@@ -165,7 +168,7 @@ input:focus {
 .replyList {
     width: 100%;
     display: flex !important;
-    align-items: baseline;
+    align-items: flex-start;
     margin-bottom: 1.5rem;
 
 }

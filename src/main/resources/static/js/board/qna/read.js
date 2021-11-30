@@ -77,6 +77,9 @@ $(document).ready(function() {
         if(count == 1){
             console.log(count);
             replyText.removeAttr("readonly");
+            replyText.css('border','solid 1px gray');
+            replyText.css('border-radius','5px');
+            replyText.css('cursor','text');
 
             replyText.focus();
         } else if(count == 2) {
