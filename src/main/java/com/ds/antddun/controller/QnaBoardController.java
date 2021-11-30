@@ -136,6 +136,7 @@ public class QnaBoardController {
 
         //게시판 정보
         model.addAttribute("replyList", qnaReplyService.getListByQnaNo(qnaNo));
+        model.addAttribute("preMem", principal.getMember().getMno());
         model.addAttribute("boardList", qnaService.getBoard(qnaNo));
 
         //수정 삭제 버튼 보이기

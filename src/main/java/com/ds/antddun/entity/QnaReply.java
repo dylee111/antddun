@@ -13,7 +13,7 @@ import javax.persistence.*;
 @ToString(exclude = {"member", "qnaBoard"})
 @AllArgsConstructor
 @NoArgsConstructor
-@DynamicUpdate  //개별로 업데이트
+@DynamicUpdate  //변경된 컬럼만 업데이트
 @SequenceGenerator(name="QNAREPLY_SEQ_GEN",sequenceName = "QNAREPLY_SEQ", initialValue = 1, allocationSize = 1)
 public class QnaReply extends BaseEntity{
     @Id
