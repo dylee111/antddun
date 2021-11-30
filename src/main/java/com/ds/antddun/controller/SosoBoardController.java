@@ -116,9 +116,13 @@ public class SosoBoardController {
     /* 글 삭제 */
     @GetMapping("/member/sosojob/delete/{sosoNo}")
     public String delete(@PathVariable("sosoNo") Long sosoNo, SosoBoardDTO sosoBoardDTO) {
+        int categoryNo = sosoBoardDTO.getCategoryNo();
+        log.info("SOSODTO>>>>"+ sosoBoardDTO.getSosoNo());
+        log.info("SOSODTOCATENO>>>>"+ sosoBoardDTO.getCategoryNo());
+        log.info("SOSODTOCATENO>>>>"+ sosoBoardDTO.getContent());
         sosoJobService.delete(sosoBoardDTO);
 
-        return "redirect:/sosojob/sosoList";
+        return "redirect:/sosojob/sosoList/sosoCategory="+categoryNo;
     }
 
     /* 카테고리 별 리스트 */
@@ -148,6 +152,8 @@ public class SosoBoardController {
         log.info("SOSODTO>>>" + sosoReplyService.getListBySosoNo(sosoNo));
         log.info("member>>>" + principalDetails.getMember().getMno());
         log.info("read>>>" + sosoBoardDTO.getMno());
+
+        sosoJobService.updateCnt(sosoNo);
         model.addAttribute("read", sosoBoardDTO);
         model.addAttribute("writer", principalDetails.getMember().getMno());
         model.addAttribute("replyList" , sosoReplyService.getListBySosoNo(sosoNo));

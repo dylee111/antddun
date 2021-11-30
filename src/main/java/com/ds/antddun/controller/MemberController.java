@@ -141,7 +141,6 @@ public class MemberController {
     @ResponseBody
     @PostMapping(value = "/member/mypage/info/modify/{mno}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MemberDTO> modifyMember(@RequestBody MemberDTO memberDTO, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-        log.info("MODIFY MEMBER>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         // 정보 수정란에 없는 정보 저장 (Null 방지)
         memberDTO.setFirstName(principalDetails.getMember().getFirstName());
@@ -149,8 +148,6 @@ public class MemberController {
         memberDTO.setLastName(principalDetails.getMember().getLastName());
         memberDTO.setRole(principalDetails.getMember().getRole().toString());
         memberDTO.setCreateDate(principalDetails.getMember().getCreateDate());
-
-        log.info("MODIFY >>> " + memberDTO);
 
         memberService.modifyMember(memberDTO);
 

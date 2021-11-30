@@ -20,7 +20,9 @@ public interface SosoJobService {
 
     SosoBoardDTO read(Long sosoNo);
 
-    List<SosoJobBoard> getListLimit(int categoryNo);
+    List<SosoJobBoard> getListLimit(int categoryNo); // 등록일자 순으로 10개
+
+    int updateCnt(Long sosoNo);
 
     PageResultDTO<SosoBoardDTO, SosoJobBoard> getList(int category, SosoPageRequestDTO sosoPageRequestDTO);
 
@@ -42,17 +44,6 @@ public interface SosoJobService {
                 .modDate(sosoJobBoard.getModDate())
                 .build();
         return sosoBoardDTO;
-
-//        List<UploadImageDTO> imageDTOList = uploadImageList.stream().map(uploadImage -> {
-//            return UploadImageDTO.builder()
-//                    .imgName(uploadImage.getImgName())
-//                    .path(uploadImage.getPath())
-//                    .uuid(uploadImage.getUuid())
-//                    .build();
-//        }).collect(Collectors.toList());
-
-//        sosoBoardDTO.setImageDTOList(imageDTOList);
-//        sosoBoardDTO.setAvg(avg);
 
     }
 

@@ -40,6 +40,7 @@ public class MemberServiceImpl implements MemberService {
         return username;
     }
 
+    /* 회원가입 */
     @Override
     public Long join(MemberDTO memberDTO, JobListDTO jobListDTO) {
 
@@ -65,6 +66,7 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
+    /* 회원정보 수정 */
     @Transactional
     @Override
     public void modifyMember(MemberDTO memberDTO) {
