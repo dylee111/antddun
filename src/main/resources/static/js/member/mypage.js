@@ -109,20 +109,7 @@ $(document).ready(function() {
 });
 
 //위시리스트 수정 & 삭제
-$(document).ready(function() {
-    const wishListArr = new Array();
-    const priceArr = new Array();
-    const rateArr = new Array();
-    const dDayArr = new Array();
 
-    const wishList = $(".input_pd").val();
-    const btnUpdate = $('.wish_update');
-
-    var count = 0;
-    /* 수정 버튼 이벤트 */
-    $('#dDay0').on('click', function(){
-        console.log($('#dDay0').val());
-    });
 
     $('#btn-update0').on('click', function(){
         count++;
@@ -165,8 +152,8 @@ $(document).ready(function() {
                         $('#rate0').attr("readonly");
                         $('#list0').attr("readonly");
                         count = 0;
+                        self.location.reload();
                     }
-                self.location.reload();
                 }
             })
         } // count == 2
@@ -204,8 +191,8 @@ $(document).ready(function() {
                         $('#rate1').attr("readonly");
                         $('#list1').attr("readonly");
                         count = 0;
+                        self.location.reload();
                     }
-                self.location.reload();
                 }
             })
         } // count == 2
@@ -244,8 +231,8 @@ $(document).ready(function() {
                         $('#rate2').attr("readonly");
                         $('#list2').attr("readonly");
                         count = 0;
+                        self.location.reload();
                     }
-                self.location.reload();
                 }
             })
         } // count == 2

@@ -35,9 +35,7 @@ public class SosoJobServiceImpl implements SosoJobService {
     @Autowired
     private SosoReplyRepository sosoReplyRepository;
 
-    /*
-    * method : register
-    * */
+    /* register */
     @Override
     public Long register(SosoBoardDTO sosoBoardDTO,
                          SosoCategoryDTO sosoCategoryDTO, Member member) {
@@ -55,6 +53,7 @@ public class SosoJobServiceImpl implements SosoJobService {
 
     }
 
+    /* 게시글 수정 */
     @Override
     public void modify(SosoBoardDTO sosoBoardDTO) {
         Optional<SosoJobBoard> result = sosoBoardRepository.findById(sosoBoardDTO.getSosoNo());
@@ -70,6 +69,7 @@ public class SosoJobServiceImpl implements SosoJobService {
         }
     }
 
+    /* 게시글 삭제 */
     @Transactional
     @Override
     public void delete(SosoBoardDTO sosoBoardDTO) {
@@ -97,6 +97,13 @@ public class SosoJobServiceImpl implements SosoJobService {
         Function<SosoJobBoard, SosoBoardDTO> fn = (entity -> entityToDTO(entity));
 
         return new PageResultDTO<>(result, fn);
+    }
+
+    /* 게시글 조회수 */
+    @Override
+    public int updateCnt(Long sosoNo) {
+
+        return sosoBoardRepository.updateCnt(sosoNo);
     }
 
     /*
