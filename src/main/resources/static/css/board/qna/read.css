@@ -115,16 +115,21 @@ input:focus {
 }
 
 /* 댓글 */
+
+.innerText{
+    width:100%;
+}
+
 .btn-reply{
-    margin-top: 55px;
-    width: 75px;
-    padding: 2px;
+     margin-left: 88%;
+     margin-top: 15px;
+     width: 75px;
+     padding: 2px;
 }
 
 .replyTA{
     font-family: 'ELAND_Choice_M';
-    width: 90%; float:left;
-
+    width: 100%;
 }
 
 
@@ -133,6 +138,9 @@ input:focus {
     margin: 3rem 0px;
 }
 .reply-text-box{
+    resize:none;
+    line-height:30px;
+    overflow-y:hidden;
     border: none;
     margin: 0.5rem 0rem;
     width: 100%;

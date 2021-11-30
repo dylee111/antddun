@@ -16,15 +16,18 @@ import org.springframework.web.bind.annotation.*;
 @Log4j2
 @RequiredArgsConstructor
 public class QnaReplyController {
+
     private final QnaReplyService qnaReplyService;
 
     @PostMapping("/qna/list/replySave")
     public ResponseEntity<Long> replyRegister(@RequestBody QnaReplyDTO qnaReplyDTO, @AuthenticationPrincipal PrincipalDetails principal) {
-        qnaReplyDTO.setMno(principal.getMember().getMno());
-        Long qnaRno = qnaReplyService.register(qnaReplyDTO);
 
+        qnaReplyDTO.setMno(principal.getMember().getMno());
+
+        Long qnaRno = qnaReplyService.register(qnaReplyDTO);
         return new ResponseEntity<>(qnaRno, HttpStatus.OK);
     }
+
     @PostMapping("/qna/list/read/replyModify/{qnaRno}")
     public ResponseEntity<String> replyModify(@PathVariable("qnaRno") Long qnaRno,
                                               @RequestBody QnaReplyDTO qnaReplyDTO) {

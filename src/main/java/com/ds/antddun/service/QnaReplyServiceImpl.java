@@ -52,8 +52,8 @@ public class QnaReplyServiceImpl implements QnaReplyService{
         }
     }
 
-    @Transactional
     @Override
+    @Transactional
     public void replyDelete(Long qnaRno) {
         qnaReplyRepository.deleteByQnaNo(qnaRno);
     }

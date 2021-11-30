@@ -5,6 +5,10 @@ $(document).ready(function() {
     var buyerDdun = parseInt($("#total_ddun").val);
     var count = 0;
 
+    var replyTextBox = $(".reply-text-box");
+    var textEleHeight = replyTextBox.prop('scrollHeight');
+    replyTextBox.css('height',textEleHeight)
+
     // 구매 버튼
     $(".buy_btn").click(function() {
         console.log(ddun);
@@ -63,15 +67,17 @@ $(document).ready(function() {
     });
 
     $(".reply-modify").click(function() {
-        var parent = $(this).parent();
+        var parent = $(this).parent().parent();
         var replyNo = parent.children(".reply-no").val();
         var replyText = parent.children(".reply-text-box");
         var replier = parent.children(".replier");
+
         console.log(replyNo);
         count++;
         if(count == 1){
             console.log(count);
             replyText.removeAttr("readonly");
+
             replyText.focus();
         } else if(count == 2) {
 
@@ -100,7 +106,7 @@ $(document).ready(function() {
 
 // 댓글 삭제
     $(".reply-delete").click(function() {
-        var parent = $(this).parent();
+        var parent = $(this).parent().parent();
         var replyNo = parent.children(".reply-no").val();
 
         $.ajax({
@@ -108,11 +114,16 @@ $(document).ready(function() {
             method: "delete",
             success: function(result) {
                 if(result === "delete"){
+                console.log(replyNo); //잘나옴
                     alert("댓글이 삭제되었습니다.");
                     self.location.reload();
                 }
             }
         }) // ajax end.
     }); // reply-modify click event
+
+
+
+
 
 }); // end.
