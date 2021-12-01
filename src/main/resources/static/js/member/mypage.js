@@ -108,8 +108,7 @@ $(document).ready(function() {
     });
 });
 
-//위시리스트 수정 & 삭제
-
+    //위시리스트 수정 & 삭제
 
     $('#btn-update0').on('click', function(){
         count++;

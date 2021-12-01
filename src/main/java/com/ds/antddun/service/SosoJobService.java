@@ -25,8 +25,9 @@ public interface SosoJobService {
     int updateCnt(Long sosoNo);
 
     PageResultDTO<SosoBoardDTO, SosoJobBoard> getList(int category, SosoPageRequestDTO sosoPageRequestDTO);
+    PageResultDTO<SosoBoardDTO, SosoJobBoard> getListByKeyword(int category,String keyword, SosoPageRequestDTO sosoPageRequestDTO);
 
-    default SosoBoardDTO entityToDTO(SosoJobBoard sosoJobBoard) {
+        default SosoBoardDTO entityToDTO(SosoJobBoard sosoJobBoard) {
 
         SosoBoardDTO sosoBoardDTO = SosoBoardDTO.builder()
                 .sosoNo(sosoJobBoard.getSosoNo())
