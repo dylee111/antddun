@@ -45,7 +45,10 @@
                 글쓰기
             </button>
         </a>
-
+        <form th:action="@{/sosojob/list}">
+            <input name="keyword" th:value="${mvData.keyword}">
+            <input type="submit" value="검색">
+        </form>
         <div class="subNav-body">
             <nav class="nav nav-underline" aria-label="Secondary navigation">
                 <a th:each="cateList : ${cateList}" class="subNav" th:href="@{'/sosojob/sosoList/sosoCategory=' + ${cateList.cateNo}}">[[${cateList.sosoCateName}]]

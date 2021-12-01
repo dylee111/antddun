@@ -15,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -125,12 +122,33 @@ public class SosoBoardController {
         return "redirect:/sosojob/sosoList/sosoCategory="+categoryNo;
     }
 
-    /* 카테고리 별 리스트 */
+    /* 카테고리 별 페이징 */
     @GetMapping("/sosojob/sosoList/sosoCategory={category}")
     public ModelAndView cateList(@PathVariable("category") int categoryNo, Model model, SosoPageRequestDTO sosoPageRequestDTO) {
         ModelAndView mv = new ModelAndView();
 
         mv.addObject("mvData", sosoJobService.getList(categoryNo, sosoPageRequestDTO));
+        mv.setViewName("sosojob/sosoList");
+
+        List<SosoCategory> list = cateService.getCateList(); // 카테고리 리스트(cateNo / cateName)
+        List<Integer> cateNoList = new ArrayList<>(); // 카테고리 No. 담기 위한 LIST
+
+        cateNoList.add(categoryNo);
+
+        model.addAttribute("cateList", list);
+        model.addAttribute("cateNum", cateNoList);
+
+        return mv;
+    }
+
+    @GetMapping("/sosojob/sosoList/sosoCategory={category}&keyword={keyword}")
+    public ModelAndView cateListByKeyword(@PathVariable("category") int categoryNo,
+                                          @PathVariable("keyword") String keyword,
+                                          Model model,
+                                          SosoPageRequestDTO sosoPageRequestDTO) {
+        ModelAndView mv = new ModelAndView();
+
+        mv.addObject("mvData", sosoJobService.getListByKeyword(categoryNo, keyword, sosoPageRequestDTO));
         mv.setViewName("sosojob/sosoList");
 
         List<SosoCategory> list = cateService.getCateList(); // 카테고리 리스트(cateNo / cateName)
