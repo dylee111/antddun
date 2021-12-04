@@ -98,13 +98,14 @@ $(document).ready(function() {
     $(document).on('click','.reply_btn', function() {
         var title = $("#send_title");
         var content = $("#summernote");
+
         console.log("replyMno"+replyMno);
         $.ajax({
             url: "/antddun/member/messenger/sendMessage/" + replyMno,
             type: "POST",
             data: {
                 msgTitle: title.val(),
-                msgContent: content.val()
+                msgContent: content.val(),
             },
             success: function(data) {
                 alert("메세지 전송 성공");

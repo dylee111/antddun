@@ -32,7 +32,11 @@ public class Message {
     @ManyToOne(fetch = FetchType.EAGER)
     private Member receiveMember;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private SosoJobBoard board;
+
     private boolean trade;
+    private int msgRead;
 
     @CreationTimestamp
     private Timestamp sendTime;

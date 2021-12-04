@@ -50,7 +50,9 @@ public class MessageController {
 
         messageDTO.setTitle(http.getParameter("msgTitle"));
         messageDTO.setContent(http.getParameter("msgContent"));
-
+        messageDTO.setBoard(Long.valueOf(http.getParameter("board")));
+        log.info("BOARDNO1>>>> " + Long.valueOf(http.getParameter("board")));
+        log.info("BOARDNO2>>>> " + messageDTO.getBoard());
 
         Member receiver = Member.builder().mno(mno).build();
 

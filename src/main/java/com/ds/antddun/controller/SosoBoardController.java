@@ -114,9 +114,7 @@ public class SosoBoardController {
     @GetMapping("/member/sosojob/delete/{sosoNo}")
     public String delete(@PathVariable("sosoNo") Long sosoNo, SosoBoardDTO sosoBoardDTO) {
         int categoryNo = sosoBoardDTO.getCategoryNo();
-        log.info("SOSODTO>>>>"+ sosoBoardDTO.getSosoNo());
-        log.info("SOSODTOCATENO>>>>"+ sosoBoardDTO.getCategoryNo());
-        log.info("SOSODTOCATENO>>>>"+ sosoBoardDTO.getContent());
+
         sosoJobService.delete(sosoBoardDTO);
 
         return "redirect:/sosojob/sosoList/sosoCategory="+categoryNo;
@@ -156,6 +154,7 @@ public class SosoBoardController {
 
         cateNoList.add(categoryNo);
 
+        model.addAttribute("requestDTO", sosoPageRequestDTO);
         model.addAttribute("cateList", list);
         model.addAttribute("cateNum", cateNoList);
 
