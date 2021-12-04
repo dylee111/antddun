@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SosoBoardRepository extends JpaRepository<SosoJobBoard, Long>, QuerydslPredicateExecutor<SosoJobBoard> {
+
     /*카테고리 리스트(이름)*/
     @Query("SELECT sj, sc " +
             " FROM SosoJobBoard sj, SosoCategory sc " +

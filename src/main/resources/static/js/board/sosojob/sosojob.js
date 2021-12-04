@@ -36,10 +36,11 @@ $(document).ready(function() {
             type: "POST",
             data: {
                 msgTitle: title.val(),
-                msgContent: content.val()
+                msgContent: content.val(),
+                board: sosoNo
             },
             success: function(data) {
-                alert("메세지 전송 성공");
+                alert("메세지 전송 성공"+sosoNo);
                 self.location.reload();
             }
         }); // ajax end.

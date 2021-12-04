@@ -45,10 +45,6 @@
                 글쓰기
             </button>
         </a>
-        <form th:action="@{/sosojob/list}">
-            <input name="keyword" th:value="${mvData.keyword}">
-            <input type="submit" value="검색">
-        </form>
         <div class="subNav-body">
             <nav class="nav nav-underline" aria-label="Secondary navigation">
                 <a th:each="cateList : ${cateList}" class="subNav" th:href="@{'/sosojob/sosoList/sosoCategory=' + ${cateList.cateNo}}">[[${cateList.sosoCateName}]]
@@ -60,7 +56,7 @@
             <div class="slick-card" style="width: 300px; height: 380px; display: inline-block;" th:each="cateValue : ${mvData.dtoList}">
                 <article>
                     <img class="cate-thumbnail" th:src="@{https://dummyimage.com/230x160/000/fff}"/>
-                    <div clss="content-container">
+                    <div class="content-container">
                         <div style="display: table;">
                             <span class="tag_c" th:text="${cateValue.categoryName}"></span>
                         </div>
@@ -72,12 +68,13 @@
                         </div>
                         <div class="ddun-box">
                             <span><img class="img coin" th:src="@{/assets/coins.png}" width="12">
-                            <span class="price" th:text="${cateValue.ddun}"></span><span>뚠</span></span>
+                                <span class="price" th:text="${cateValue.ddun}"></span><span>뚠</span>
+                            </span>
                         </div>
                         <div class="star-box">
                             <span>
                                 <span>[[${cateValue.job}]] [[${cateValue.experience}]]년차 [[${cateValue.lastName}]]개미</span>
-                                </span>
+                            </span>
                         </div>
                     </div>
                 </article>

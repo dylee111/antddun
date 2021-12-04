@@ -13,6 +13,8 @@ public class MessageDTO {
     private String content;
     private Long sendMno;
     private Long receiveMno;
+    private Long board;
+    private int msgRead;
     private boolean trade;
     private Timestamp createDate;
 }
