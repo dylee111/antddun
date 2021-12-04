@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     var replyMno = 0;
     //Messeage Show/Hide
     $('.send_msg').last().css("display", "block");
@@ -7,6 +8,8 @@ $(document).ready(function() {
     $('.sender_info').last().css("border-radius", "5px");
     // ajax 호출 후, click 이벤트 적용이 되지 않아 수정.
     $(document).on("click",'.sender_info', function(){
+        var msgNo = $(this).children(".msgNo").val();
+
         if($(this).next().css("display") == "none") {
             $(this).next().css("display", "block");
             $(this).css("background", "#fafafa");
@@ -17,6 +20,16 @@ $(document).ready(function() {
         }
         replyMno = $(this).children(".msgMno").val();
         console.log("보내기"+replyMno);
+
+        $.ajax({
+            url: "/antddun/member/messenger/readCheck/" + msgNo,
+            type: "post",
+            dataType: "JSON",
+            data: {msgNo: msgNo},
+            success: function(data) {
+                alert("수정 성공");
+            }
+        }); // ajax
     });
 
     //거래자와의 쪽지 보이기
@@ -69,6 +82,7 @@ $(document).ready(function() {
 
                 str += '<div class="mail">' ;
                 str += '<div class="sender_info">';
+                str += '<input type="hidden" class="msgNo" value="'+msg.msgNo+'">'
                 str += '<input type="hidden" class="msgMno" value="'+msg.sendMember.mno+'"/>'
                 str += '<div  class="sender_wrap">';
                 str += '<span class="send_title2">'+msg.msgTitle+'</span>';
@@ -116,21 +130,6 @@ $(document).ready(function() {
         loadJSONData(replyMno);
 
     });
-    $('input:radio[name="trade"]').click(function() {
-        var tradeCheck = $('input:radio[name="trade"]:checked').val();
 
-        $.ajax({
-            url: "/antddun/member/messenger/tradeCheck",
-            dataType: 'text',
-            data: {
-                trade: tradeCheck
-            },
-            success: function(data) {
-                if(data === "tradeChange") {
-                    alert("거래 변경 OK");
-                }
-            }
-        });
-    });
 
 }); // document end.

@@ -27,12 +27,13 @@ public class Message {
     @Column(nullable = false)
     private String msgContent;
 
+    // fetchType.Lazy -> JSON 오류 발생(InvalidDefinitionException (엔티티 정보를 가져올 때 시점의 문제가 발생)
     @ManyToOne(fetch = FetchType.EAGER)
     private Member sendMember;
     @ManyToOne(fetch = FetchType.EAGER)
     private Member receiveMember;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private SosoJobBoard board;
 
     private boolean trade;

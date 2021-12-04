@@ -40,6 +40,9 @@ public class MemberController {
     private DdunService ddunService;
 
     @Autowired
+    private MessageService messageService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("")
@@ -50,6 +53,7 @@ public class MemberController {
 
             List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
 
+            model.addAttribute("unreadMsg", messageService.unreadMsg());
             model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
             model.addAttribute("member", principal.getMember());
 
