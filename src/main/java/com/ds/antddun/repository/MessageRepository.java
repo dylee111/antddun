@@ -3,6 +3,7 @@ package com.ds.antddun.repository;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -10,13 +11,11 @@ import java.util.List;
 
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
-//    @Query("SELECT msg, m.mno, m.firstName, m.lastName, m.username " +
-//            " FROM Message msg, Member m " +
-//            " WHERE msg.receiveMember.mno=:receiverMno " +
-//            " AND msg.sendMember.mno=:sendMno ")
+    // 1:1 메시지 리스트
     @Query(value = "SELECT * FROM message WHERE receive_member_mno=:mno OR send_member_mno=:mno ", nativeQuery = true)
     List<Message> getMsgListByMno(@Param("mno") Long receiverMno);
 
+    // 작성자 중복 제거
     @Query("SELECT DISTINCT(msg.sendMember) FROM Message msg WHERE msg.receiveMember.mno=:receiver ")
     List<Member> distinctSender(Long receiver);
 
@@ -26,4 +25,12 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
             " AND (msg.sendMember.mno=:secondMember OR msg.receiveMember.mno=:secondMember) ")
     List<Message> getList(@Param("firstMember") Long firstMember, @Param("secondMember") Long secondMember);
 
+    // 안읽은 메시지 개수 카운트
+    @Query("SELECT COUNT(msg.msgNo) FROM Message msg WHERE msg.msgRead = 0 ")
+    int unreadMsg();
+
+    // 읽은 메시지로 변환
+    @Modifying
+    @Query("UPDATE Message msg SET msg.msgRead = 1 WHERE msg.msgNo=:msgNo ")
+    void readMsgChange(@Param("msgNo") Long msgNo);
 }

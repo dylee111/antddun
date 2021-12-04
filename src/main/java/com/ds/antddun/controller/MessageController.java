@@ -48,30 +48,38 @@ public class MessageController {
                         MessageDTO messageDTO,
                         @AuthenticationPrincipal PrincipalDetails principalDetails, HttpServletRequest http) {
 
+        Long sosoNo = Long.valueOf(http.getParameter("board"));
         messageDTO.setTitle(http.getParameter("msgTitle"));
         messageDTO.setContent(http.getParameter("msgContent"));
-        messageDTO.setBoard(Long.valueOf(http.getParameter("board")));
+        messageDTO.setBoard(sosoNo);
         log.info("BOARDNO1>>>> " + Long.valueOf(http.getParameter("board")));
         log.info("BOARDNO2>>>> " + messageDTO.getBoard());
 
         Member receiver = Member.builder().mno(mno).build();
 
-        messageService.sendMsg(messageDTO, principalDetails.getMember(), receiver);
+        messageService.sendMsg(messageDTO, sosoNo, principalDetails.getMember(), receiver);
     }
 
     @ResponseBody
     @GetMapping(value = "/messenger/{mno}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Message>> getListByMno(@PathVariable("mno") Long mno,
                                                       @AuthenticationPrincipal PrincipalDetails principalDetails) {
-        List<Message> result = messageService.getMessageListByMno(principalDetails.getMember().getMno(), mno);
 
+        List<Message> result = messageService.getMessageListByMno(principalDetails.getMember().getMno(), mno);
+        log.info("MSGLIST>>>" + result);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PostMapping("/messenger/tradeCheck")
-    public ResponseEntity<String> tradeCheck(@RequestParam("trade")int tradeCheck, MessageDTO messageDTO) {
+    public ResponseEntity<String> tradeCheck(@RequestParam("trade") int tradeCheck, MessageDTO messageDTO) {
         messageService.tradeCheck(tradeCheck, messageDTO);
 
         return new ResponseEntity<>("tradeChange", HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @PostMapping("/messenger/readCheck/{msgNo}")
+    public void readCheck(@PathVariable("msgNo") Long msgNo) {
+        messageService.readMsgChange(msgNo);
     }
 }

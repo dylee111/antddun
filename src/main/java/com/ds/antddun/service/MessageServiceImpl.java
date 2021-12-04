@@ -9,6 +9,7 @@ import com.ds.antddun.repository.MessageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -29,12 +30,13 @@ public class MessageServiceImpl implements MessageService{
 
     /* 메세지 전송 */
     @Override
-    public Long sendMsg(MessageDTO messageDTO, Member sender, Member receiver) {
+    public Long sendMsg(MessageDTO messageDTO, Long sosoNo, Member sender, Member receiver) {
+
         messageDTO.setSendMno(sender.getMno());
         messageDTO.setReceiveMno(receiver.getMno());
         log.info("S.CONTENT" + messageDTO.getContent());
         log.info("S.TITLE" + messageDTO.getTitle());
-        Message message = dtoToEntity(messageDTO, sender, receiver);
+        Message message = dtoToEntity(messageDTO, sosoNo, sender, receiver);
 
         return messageRepository.save(message).getMsgNo();
     }
@@ -72,4 +74,15 @@ public class MessageServiceImpl implements MessageService{
             return null;
     }
 
+    /* 안읽은 메시지 */
+    @Override
+    public int unreadMsg() {
+        return messageRepository.unreadMsg();
+    }
+
+    @Transactional
+    @Override
+    public void readMsgChange(Long msgNo) {
+        messageRepository.readMsgChange(msgNo);
+    }
 }
