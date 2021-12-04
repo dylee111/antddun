@@ -61,7 +61,8 @@
                         <span id="likesCnt" class="smallText">[[${boardList.likesCnt}]]</span>
                         <span id="viewCnt" class="smallText">&nbsp조회수&nbsp[[${boardList.ViewCnt}]]</span>
                     </div>
-                    <div class="rightSection smallText pointer" th:if="${checkUser} == true" >
+                    <div class="rightSection smallText pointer" style="text-align: end;"
+                         th:if="${checkUser} == true" >
                         <span class="removeBtn">삭제 | </span>
                         <span class="modifyBtn" >수정</span>
                     </div>
@@ -83,6 +84,12 @@
                                 </div>
                             </form>
                             <br>
+                            <div th:if="${boardList.replyCnt} == 0" class="noneReply">
+                                <img th:src="@{/assets/messenger.png}" >
+                                <div class="smallText">
+                                    아직 댓글이 없습니다.<br>
+                                    첫 번째 댓글을 남겨보세요!  •' - '•)و ✧</div>
+                            </div>
                             <!-- Comment with nested comments-->
                             <div th:each="replyList : ${replyList}">
                                 <div class="replyList">
@@ -93,6 +100,7 @@
                                              alt="..."/>
                                     </div>
                                     <div class="innerText">
+
                                         <div class="ms-3" >
                                             <input type="hidden" class="reply-no" name="qnaRno" th:value="${replyList.qnaRno}">
                                             <input type="hidden" class="replier" name="member" th:value="${replyList.member.mno}">
@@ -117,9 +125,9 @@
 
                 <hr>
 
-                <div class="listGo">
+<!--                <div class="listGo">
                     <a class="btn btn-primary" onclick='javascript:window.history.back();'>뒤로가기</a>
-                </div>
+                </div>-->
 
             </div>
         </form>

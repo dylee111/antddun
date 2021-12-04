@@ -65,20 +65,21 @@ input:focus {
 }
 
 .leftSection{
-        width:80%;
-        float:left;
+    width:80%;
+    float:left;
 }
 
 .rightSection{
-        width:20%;
-        float:right;
+    width:20%;
+    float:right;
+    text-align: end;
 }
 
 .smallText{
     color: gray;
     font-size: 13px;
-    text-align: end;
     font-weight: bold;
+    font-family: 'ELAND_Choice_M';
 }
 
 .coinBox{
@@ -115,6 +116,19 @@ input:focus {
 }
 
 /* 댓글 */
+
+.noneReply{
+    text-align: center;
+    width: 100%;
+    background: #e9ecef42;
+    padding: 45px;
+}
+
+.noneReply > img {
+     width: 50px;
+     margin: 10px 0px;
+     opacity: 0.5;
+}
 
 .innerText{
     width:100%;
