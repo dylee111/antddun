@@ -72,6 +72,8 @@ input:focus {
 .rightSection{
     width:20%;
     float:right;
+}
+.end{
     text-align: end;
 }
 
