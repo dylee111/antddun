@@ -24,13 +24,11 @@ public class QnaReplyServiceImpl implements QnaReplyService{
 
     @Override
     public Long register(QnaReplyDTO qnaReplyDTO) {
-
         QnaReply qnaReply = dtoToEntity(qnaReplyDTO);
-        log.info("dho"+ qnaReplyDTO.getQnaRno());
-
         qnaReplyRepository.save(qnaReply);
         return qnaReply.getQnaRno();
     }
+
 
     @Override
     public List<QnaReply> getListByQnaNo(Long qnaNo) {
@@ -40,24 +38,29 @@ public class QnaReplyServiceImpl implements QnaReplyService{
         return result;
     }
 
-    @Override
     @Transactional
+    @Override
     public void replyModify(QnaReplyDTO qnaReplyDTO) {
         Optional<QnaReply> result = qnaReplyRepository.findById(qnaReplyDTO.getQnaRno());
 
         if (result.isPresent()) {
             QnaReply qnaReply = result.get();
-
+            log.info("wondering"+qnaReply);
             qnaReply.setReplyText(qnaReplyDTO.getReplyText());
             qnaReplyRepository.save(qnaReply);
         }
     }
 
-
-//    @Transactional
+    @Transactional
     @Override
-    public void replyDelete(Long qnaRno) {
-//        qnaReplyRepository.deleteByQnaNo(qnaRno);
-        qnaReplyRepository.deleteAllById(Collections.singleton(qnaRno));
+    public void deleteByQnaRno(Long qnaRno) {
+        qnaReplyRepository.deleteById(qnaRno);
     }
+
+    @Transactional
+    @Override
+    public void deleteByQnaNo(Long qnaNo) {
+        qnaReplyRepository.deleteByQnaNo(qnaNo);
+    }
+
 }

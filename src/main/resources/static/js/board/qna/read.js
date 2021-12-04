@@ -5,9 +5,13 @@ $(document).ready(function() {
     var buyerDdun = parseInt($("#total_ddun").val);
     var count = 0;
 
-    var replyTextBox = $(".reply-text-box");
-    var textEleHeight = replyTextBox.prop('scrollHeight');
-    replyTextBox.css('height',textEleHeight)
+
+    $('textarea').each(function () {
+      this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+    }).on('textarea', function () {
+      this.style.height = 'auto';
+      this.style.height = (this.scrollHeight) + 'px';
+    });
 
     // 구매 버튼
     $(".buy_btn").click(function() {
@@ -42,7 +46,8 @@ $(document).ready(function() {
         $('.dim').hide();
     });
 
-    // 댓글 관련
+
+ /*--------------------------댓글--------------------------*/
 
     // 댓글 등록
     $("#btn_reply").click(function() {
@@ -66,6 +71,7 @@ $(document).ready(function() {
         }) // ajax end.
     });
 
+//댓글 수정
     $(".reply-modify").click(function() {
         var parent = $(this).parent().parent();
         var replyNo = parent.children(".reply-no").val();
@@ -73,7 +79,9 @@ $(document).ready(function() {
         var replier = parent.children(".replier");
 
         console.log(replyNo);
+
         count++;
+
         if(count == 1){
             console.log(count);
             replyText.removeAttr("readonly");
@@ -82,6 +90,7 @@ $(document).ready(function() {
             replyText.css('cursor','text');
 
             replyText.focus();
+
         } else if(count == 2) {
 
             var replyModify = {
@@ -99,9 +108,7 @@ $(document).ready(function() {
                         alert("댓글 수정");
                         self.location.reload();
                     }
-
                 }
-
             })
             count = 0;
         }
@@ -109,12 +116,17 @@ $(document).ready(function() {
 
 // 댓글 삭제
     $(".reply-delete").click(function() {
+
+        if(!confirm("삭제하시겠습니까?")){
+          return;
+        }
+
         var parent = $(this).parent().parent();
         var replyNo = parent.children(".reply-no").val();
 
         $.ajax({
             url: "/antddun/member/qna/list/replyDelete/" + replyNo,
-            method: "delete",
+            method: "post",
             success: function(result) {
                 if(result === "delete"){
                 console.log(replyNo); //잘나옴
@@ -124,9 +136,6 @@ $(document).ready(function() {
             }
         }) // ajax end.
     }); // reply-modify click event
-
-
-
 
 
 }); // end.

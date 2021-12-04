@@ -127,6 +127,12 @@ input:focus {
      padding: 2px;
 }
 
+.replyCnt{
+    font-family: 'ELAND_Choice_M';
+    margin-top: 3rem;
+    font-size: 20px;
+}
+
 .replyTA{
     font-family: 'ELAND_Choice_M';
     width: 100%;
@@ -135,7 +141,7 @@ input:focus {
 
 .replySection{
     width: 100%;
-    margin: 3rem 0px;
+    margin-bottom: 3rem;
 }
 .reply-text-box{
     resize:none;
