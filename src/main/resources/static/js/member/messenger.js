@@ -2,6 +2,9 @@ $(document).ready(function() {
 
     var replyMno = 0;
     var sosoNo = 0;
+    var trade = false;
+
+
     //Messeage Show/Hide
     $('.send_msg').last().css("display", "block");
 
@@ -45,12 +48,14 @@ $(document).ready(function() {
 
     //거래중/거래완료 버튼
     $('.trade_btn').click(function(){
-        if($(this).text() == '거래 중') {
+
+        if(trade == true) {
             $(this).css("background", "lightgray");
             $(this).text('완료');
-        } else {
+        } else if(trade == false){
             $(this).css("background", "rgb(255, 214, 51)");
             $(this).text('거래 중');
+
         }
     });
 

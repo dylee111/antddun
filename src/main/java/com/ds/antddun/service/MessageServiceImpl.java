@@ -85,4 +85,15 @@ public class MessageServiceImpl implements MessageService{
     public void readMsgChange(Long msgNo) {
         messageRepository.readMsgChange(msgNo);
     }
+
+    @Transactional
+    @Override
+    public void changeTradeState(boolean tradeState, Long sosoNo, Long sendMember) {
+        messageRepository.changeTradeState(tradeState, sosoNo, sendMember);
+    }
+
+    @Override
+    public Message groupBySendMember(Long receiveMember) {
+        return null;
+    }
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
@@ -33,4 +34,5 @@ class MessageServiceImplTest {
     void 발신자중복제거() {
         System.out.println(messageRepository.distinctSender(35L));
     }
+
 }
