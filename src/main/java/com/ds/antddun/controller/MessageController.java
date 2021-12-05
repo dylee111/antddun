@@ -38,6 +38,7 @@ public class MessageController {
             model.addAttribute("member", principal.getMember());
             model.addAttribute("msgList", messageService.getMsgListByMno(principal.getMember().getMno()));
             model.addAttribute("senderList", senderList);
+            log.info("MSGLOI>>>>>"+  messageService.getMsgListByMno(principal.getMember().getMno()));
         }
         return "member/messenger";
     }

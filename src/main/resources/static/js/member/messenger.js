@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
     var replyMno = 0;
+    var sosoNo = 0;
     //Messeage Show/Hide
     $('.send_msg').last().css("display", "block");
 
@@ -19,7 +20,7 @@ $(document).ready(function() {
             $(this).css("background", "none");
         }
         replyMno = $(this).children(".msgMno").val();
-        console.log("보내기"+replyMno);
+        sosoNo = $(this).children(".sosoNo").val();
 
         $.ajax({
             url: "/antddun/member/messenger/readCheck/" + msgNo,
@@ -72,6 +73,7 @@ $(document).ready(function() {
             (date.getMinutes() >= 10 ? date.getMinutes() : "0" + date.getMinutes());
     }
 
+    // JSON Data 호출
 
     function loadJSONData(mno) {
         $.getJSON('/antddun/member/messenger/'+mno, function(arr) {
@@ -79,10 +81,11 @@ $(document).ready(function() {
             var str = "";
 
             $.each(arr, function(idx, msg) {
-
+                console.log(msg);
                 str += '<div class="mail">' ;
                 str += '<div class="sender_info">';
                 str += '<input type="hidden" class="msgNo" value="'+msg.msgNo+'">'
+                str += '<input type="hidden" class="sosoNo" value="'+msg.board.sosoNo+'">'
                 str += '<input type="hidden" class="msgMno" value="'+msg.sendMember.mno+'"/>'
                 str += '<div  class="sender_wrap">';
                 str += '<span class="send_title2">'+msg.msgTitle+'</span>';
@@ -113,13 +116,14 @@ $(document).ready(function() {
         var title = $("#send_title");
         var content = $("#summernote");
 
-        console.log("replyMno"+replyMno);
+        console.log("replyMno"+sosoNo);
         $.ajax({
             url: "/antddun/member/messenger/sendMessage/" + replyMno,
             type: "POST",
             data: {
                 msgTitle: title.val(),
                 msgContent: content.val(),
+                board: sosoNo
             },
             success: function(data) {
                 alert("메세지 전송 성공");
