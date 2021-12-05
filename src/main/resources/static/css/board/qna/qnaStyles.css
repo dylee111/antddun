@@ -1,6 +1,10 @@
 @charset "UTF-8";
 
 /* list css */
+.container-main{
+    margin-bottom: 100vh !important;
+}
+
 .card.qnaCardList {
     margin-bottom: 1rem;
     height: 16rem;
@@ -77,16 +81,6 @@
     margin-bottom: 0.5rem;
 }
 
-.post-content > h2 > a{
-    text-decoration:none;
-    color: black;
-    font-weight:bold;
-
-}
-
-.attach-img > a > img{
-}
-
 .leftSection {
     float: left;
     padding: 10px;
@@ -130,11 +124,6 @@
    text-decoration:none;
 }
 
-.post-content > h3 > a {
-    text-decoration:none;
-    color: black;
-    font-weight: bold;
-}
 
 h3{
     text-overflow: ellipsis;
@@ -143,11 +132,18 @@ h3{
     }
 
 .post-content {
-    height: 75px;
     font-family: 'ELAND_Choice_M';
     margin-top: 1em;
     margin-bottom:1em;
     height: 75px;
+}
+
+.post-content > h3 > a {
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .content-text > p > img {
@@ -161,17 +157,15 @@ h3{
 
 .content-text {
     color: #4f4f4f;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: box;
-    max-height: 80px;
     font-size: 1.1em;
-    overflow:hidden;
-    vertical-align:top;
+    overflow: hidden;
     text-overflow: ellipsis;
-    word-break:break-all;
-    -webkit-box-orient:vertical;
-    -webkit-line-clamp:2
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    line-height: 1.2rem;
+    height: 3.6rem;
 }
 
 boardInfo{

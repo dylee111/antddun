@@ -132,6 +132,11 @@ input:focus {
      opacity: 0.5;
 }
 
+.noneReply > div {
+    font-size: 16px !important;
+}
+
+
 .innerText{
     width:100%;
 }
