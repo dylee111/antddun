@@ -32,13 +32,13 @@ public class MessageController {
     @GetMapping("/messenger")
     public String messenger(Model model, @AuthenticationPrincipal PrincipalDetails principal) {
 
-        List<Member> senderList = messageService.distinctSender(principal.getMember().getMno());
-        log.info("SENDER >>> " + senderList);
+//        List<Member> senderList = messageService.distinctSender(principal.getMember().getMno());
+        Message senderList = messageService.groupBySendMember(principal.getMember().getMno());
         if (principal != null) {
             model.addAttribute("member", principal.getMember());
             model.addAttribute("msgList", messageService.getMsgListByMno(principal.getMember().getMno()));
             model.addAttribute("senderList", senderList);
-            log.info("MSGLOI>>>>>"+  messageService.getMsgListByMno(principal.getMember().getMno()));
+            log.info("SENDER >>> " + senderList);
         }
         return "member/messenger";
     }
@@ -78,6 +78,7 @@ public class MessageController {
         return new ResponseEntity<>("tradeChange", HttpStatus.OK);
     }
 
+    // 읽은 메시지 확인
     @ResponseBody
     @PostMapping("/messenger/readCheck/{msgNo}")
     public void readCheck(@PathVariable("msgNo") Long msgNo) {

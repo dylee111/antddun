@@ -19,6 +19,13 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
     @Query("SELECT DISTINCT(msg.sendMember) FROM Message msg WHERE msg.receiveMember.mno=:receiver ")
     List<Member> distinctSender(Long receiver);
 
+    @Query("SELECT msg.sendMember, msg.board, msg.trade " +
+            " FROM Message msg " +
+            " WHERE msg.receiveMember.mno=:receiveMember " +
+            " AND msg.receiveMember != msg.sendMember " +
+            " GROUP BY msg.sendMember, msg.board ")
+    Object groupBySendMember(@Param("receiveMember")Long receiveMember);
+
     @Query("SELECT msg " +
             " FROM Message msg " +
             " WHERE (msg.sendMember.mno=:firstMember OR msg.receiveMember.mno=:firstMember) " +
@@ -33,4 +40,14 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
     @Modifying
     @Query("UPDATE Message msg SET msg.msgRead = 1 WHERE msg.msgNo=:msgNo ")
     void readMsgChange(@Param("msgNo") Long msgNo);
+
+    // 거래중 / 거래완료
+    @Modifying
+    @Query("UPDATE Message msg SET msg.trade=:tradeState WHERE msg.board=:sosoNo AND msg.sendMember=:sendMember ")
+    void changeTradeState(@Param("tradeState") boolean tradeState,
+                          @Param("sosoNo") Long sosoNo,
+                          @Param("sendMember") Long sendMember);
+
 }
+
+

@@ -4,6 +4,7 @@ import com.ds.antddun.dto.MessageDTO;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.Message;
 import com.ds.antddun.entity.SosoJobBoard;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -16,12 +17,15 @@ public interface MessageService {
     List<Message> getMsgListByMno(Long mno);
 
     List<Member> distinctSender(Long sender);
+    Message groupBySendMember(Long receiveMember);
 
     Long tradeCheck(int tradeCheck, MessageDTO messageDTO);
 
     int unreadMsg();
 
     void readMsgChange(Long msgNo);
+
+    void changeTradeState(boolean tradeState, Long sosoNo, Long sendMember);
 
     default Message dtoToEntity(MessageDTO messageDTO, Long sosoNo, Member sender, Member receiver) {
 
