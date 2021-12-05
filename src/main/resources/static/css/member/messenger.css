@@ -210,3 +210,7 @@
     float: right;
     border: none;
 }
+
+.read {
+    color: red;
+}
