@@ -16,7 +16,6 @@ public class PageRequestDTO {
     private int page;
     private int size;
     private int cate;
-    private String type;
     private String keyword;
 
     public PageRequestDTO() {
@@ -26,5 +25,5 @@ public class PageRequestDTO {
 
     public Pageable getPageable(Sort sort) {
         return PageRequest.of(page - 1, size, sort.descending());
-    } // getPageable()
-} // class End.
+    }
+}
