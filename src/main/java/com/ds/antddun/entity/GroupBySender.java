@@ -6,9 +6,9 @@ import lombok.Setter;
 
 
 public interface GroupBySender {
-    Long getSenderMno();
-
+    Long getSendMno();
     Long getBoard();
-
-    String getTrade();
+    String getFirstName();
+    String getLastName();
+    boolean getTrade();
 }

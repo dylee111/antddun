@@ -33,15 +33,17 @@ public class MessageController {
     @GetMapping("/messenger")
     public String messenger(Model model, @AuthenticationPrincipal PrincipalDetails principal) {
 
-//        List<Member> senderList = messageService.distinctSender(principal.getMember().getMno());
-        List<GroupBySender> senderList = messageService.groupBySendMember(principal.getMember().getMno());
+        List<GroupBySender> senderList = messageService.distinctSender(principal.getMember().getMno());
+//        List<GroupBySender> senderList = messageService.groupBySendMember(principal.getMember().getMno());
         if (principal != null) {
             model.addAttribute("member", principal.getMember());
             model.addAttribute("msgList", messageService.getMsgListByMno(principal.getMember().getMno()));
             model.addAttribute("senderList", senderList);
-            log.info("SENDER >>> " + senderList.get(0).getTrade());
-            log.info("SENDER >>> " + senderList.get(0).getSenderMno());
-            log.info("SENDER >>> " + senderList.get(0).getBoard());
+            log.info("SENDER MNO>>>" + senderList.get(0).getSendMno());
+            log.info("SENDER BOARD>>>"+ senderList.get(0).getBoard());
+            log.info("SENDER TRADE>>>"+ senderList.get(0).getTrade());
+            log.info("SENDER TRADE>>>"+ senderList.get(0).getFirstName());
+            log.info("SENDER TRADE>>>"+ senderList.get(0).getLastName());
         }
         return "member/messenger";
     }

@@ -16,7 +16,7 @@ public interface MessageService {
 
     List<Message> getMsgListByMno(Long mno);
 
-    List<Member> distinctSender(Long sender);
+    List<GroupBySender> distinctSender(Long sender);
     List<GroupBySender> groupBySendMember(Long receiveMember);
 
     Long tradeCheck(int tradeCheck, MessageDTO messageDTO);

@@ -17,8 +17,14 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
     List<Message> getMsgListByMno(@Param("mno") Long receiverMno);
 
     // 작성자 중복 제거
-    @Query("SELECT DISTINCT(msg.sendMember) FROM Message msg WHERE msg.receiveMember.mno=:receiver ")
-    List<Member> distinctSender(Long receiver);
+//    @Query("SELECT DISTINCT(msg.sendMember), msg.board, msg.trade FROM Message msg WHERE msg.receiveMember.mno=:receiver ")
+    @Query(value = "SELECT DISTINCT(msg.send_member_mno) as sendMno, msg.board_soso_no as board, msg.trade as trade, m.first_name as firstName, m.last_name as lastName " +
+            " FROM message msg LEFT OUTER JOIN member m " +
+            " WHERE msg.receive_member_mno=:receiver " +
+            " AND msg.receive_member_mno != msg.send_member_mno " +
+            " AND msg.send_member_mno = m.mno "
+    , nativeQuery = true)
+    List<GroupBySender> distinctSender(Long receiver);
 
     @Query("SELECT msg.sendMember, msg.board, msg.trade " +
             " FROM Message msg " +

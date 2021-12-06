@@ -4,18 +4,27 @@ import com.ds.antddun.dto.MessageDTO;
 import com.ds.antddun.entity.GroupBySender;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.Message;
+import com.ds.antddun.entity.QMessage;
 import com.ds.antddun.repository.MessageRepository;
+import com.querydsl.core.types.Projections;
+import com.querydsl.jpa.impl.JPAQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Service
 @Log4j2
 @RequiredArgsConstructor
 public class MessageServiceImpl implements MessageService{
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     private final MessageRepository messageRepository;
     /* 회원 간 주고 받은 메세지 목록 */
@@ -51,8 +60,8 @@ public class MessageServiceImpl implements MessageService{
 
     /* 메시지 중복 제외 */
     @Override
-    public List<Member> distinctSender(Long sender) {
-        List<Member> result = messageRepository.distinctSender(sender);
+    public List<GroupBySender> distinctSender(Long sender) {
+        List<GroupBySender> result = messageRepository.distinctSender(sender);
 
         return result;
     }
@@ -93,8 +102,26 @@ public class MessageServiceImpl implements MessageService{
 
     @Override
     public List<GroupBySender> groupBySendMember(Long receiveMember) {
-        List<GroupBySender> sendMember = messageRepository.groupBySendMember(receiveMember);
 
-        return sendMember;
+        QMessage qMessage = QMessage.message;
+
+        JPAQueryFactory qf = new JPAQueryFactory(entityManager);
+
+        JPAQuery<GroupBySender> query = qf.from(qMessage)
+                .groupBy(qMessage.sendMember).groupBy(qMessage.board)
+                .select(
+                        Projections.bean(
+                                GroupBySender.class,
+                                qMessage.sendMember.as("sendMno"),
+                                qMessage.board.as("board"),
+                                qMessage.trade.as("trade")
+                        )
+
+                )
+                .where(qMessage.sendMember.mno.eq(receiveMember)
+                        .and(qMessage.sendMember.mno.ne(qMessage.receiveMember.mno))
+                );
+
+        return query.fetch();
     }
 }
