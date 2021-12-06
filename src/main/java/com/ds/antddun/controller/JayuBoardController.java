@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -110,10 +111,11 @@ public class JayuBoardController {
 
     //게시글 목록
     @GetMapping("/jayu/list/all")
-    public String listAll(Model model, PageRequestDTO pageRequestDTO,  @AuthenticationPrincipal PrincipalDetails principal) {
+    public String listAll(Model model, PageRequestDTO pageRequestDTO, HttpServletRequest http, @AuthenticationPrincipal PrincipalDetails principal) {
         //summernote 태그 제거, 게시판 정보
         PageResultDTO<JayuBoardDTO, JayuBoard> jayuList = jayuBoardService.getList(pageRequestDTO);
-
+        log.info("pageRequestDOT"+pageRequestDTO);
+        log.info("KEYYYYY"+http.getParameter("keyword"));
         List<JayuBoardDTO> list = jayuList.getDtoList();
         for (int i = 0; i < list.size(); i++) {
             JayuBoardDTO tmp = (JayuBoardDTO) list.get(i);
@@ -140,7 +142,7 @@ public class JayuBoardController {
 
     //게시글 카테고리 목록
     @GetMapping("/jayu/list")
-    public String list(Model model, PageRequestDTO pageRequestDTO,  @AuthenticationPrincipal PrincipalDetails principal) {
+    public String list(Model model, PageRequestDTO pageRequestDTO, @AuthenticationPrincipal PrincipalDetails principal) {
         //summernote 태그 제거, 게시판 정보
         PageResultDTO<JayuBoardDTO, JayuBoard> jayuList = jayuBoardService.getListByCate(pageRequestDTO.getCate(), pageRequestDTO);
         log.info("pageDTO.CATE"+pageRequestDTO.getCate());
