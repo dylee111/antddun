@@ -63,7 +63,6 @@ public class JoinController {
         return "redirect:/joinWelcome";
     }
 
-
     @ResponseBody
     @PostMapping("/idCheck")
     public int idCheck(String email) throws Exception {
@@ -90,6 +89,11 @@ public class JoinController {
         return result;
     }
 
+    @GetMapping("/joinAgree")
+    public String joinAgree() {
+        return "/member/joinAgree";
+    }
+
     @GetMapping("/joinPage")
     public String joinPage(Model model) {
 
@@ -97,12 +101,7 @@ public class JoinController {
         return "/member/join";
     }
 
-    @GetMapping("/joinAgree")
-    public String joinAgree() {
-        return "/member/joinAgree";
-    }
-
-    @PostMapping(value = "/joinPage")
+    @PostMapping("/joinPage")
     public String join(MemberDTO memberDTO,
                        JobListDTO jobListDTO,
                        String username,
