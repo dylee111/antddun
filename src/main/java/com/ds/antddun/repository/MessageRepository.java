@@ -1,8 +1,10 @@
 package com.ds.antddun.repository;
 
+import com.ds.antddun.entity.GroupBySender;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -10,15 +12,20 @@ import java.util.List;
 
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
-//    @Query("SELECT msg, m.mno, m.firstName, m.lastName, m.username " +
-//            " FROM Message msg, Member m " +
-//            " WHERE msg.receiveMember.mno=:receiverMno " +
-//            " AND msg.sendMember.mno=:sendMno ")
+    // 1:1 메시지 리스트
     @Query(value = "SELECT * FROM message WHERE receive_member_mno=:mno OR send_member_mno=:mno ", nativeQuery = true)
     List<Message> getMsgListByMno(@Param("mno") Long receiverMno);
 
+    // 작성자 중복 제거
     @Query("SELECT DISTINCT(msg.sendMember) FROM Message msg WHERE msg.receiveMember.mno=:receiver ")
     List<Member> distinctSender(Long receiver);
+
+    @Query("SELECT msg.sendMember, msg.board, msg.trade " +
+            " FROM Message msg " +
+            " WHERE msg.receiveMember.mno=:receiveMember " +
+            " AND msg.receiveMember != msg.sendMember " +
+            " GROUP BY msg.sendMember, msg.board ")
+    List<GroupBySender> groupBySendMember(@Param("receiveMember")Long receiveMember);
 
     @Query("SELECT msg " +
             " FROM Message msg " +
@@ -26,4 +33,22 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
             " AND (msg.sendMember.mno=:secondMember OR msg.receiveMember.mno=:secondMember) ")
     List<Message> getList(@Param("firstMember") Long firstMember, @Param("secondMember") Long secondMember);
 
+    // 안읽은 메시지 개수 카운트
+    @Query("SELECT COUNT(msg.msgNo) FROM Message msg WHERE msg.msgRead = 0 ")
+    int unreadMsg();
+
+    // 읽은 메시지로 변환
+    @Modifying
+    @Query("UPDATE Message msg SET msg.msgRead = 1 WHERE msg.msgNo=:msgNo ")
+    void readMsgChange(@Param("msgNo") Long msgNo);
+
+    // 거래중 / 거래완료
+    @Modifying
+    @Query("UPDATE Message msg SET msg.trade=:tradeState WHERE msg.board=:sosoNo AND msg.sendMember=:sendMember ")
+    void changeTradeState(@Param("tradeState") boolean tradeState,
+                          @Param("sosoNo") Long sosoNo,
+                          @Param("sendMember") Long sendMember);
+
 }
+
+

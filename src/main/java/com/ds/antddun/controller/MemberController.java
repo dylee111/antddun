@@ -40,6 +40,9 @@ public class MemberController {
     private DdunService ddunService;
 
     @Autowired
+    private MessageService messageService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("")
@@ -50,6 +53,7 @@ public class MemberController {
 
             List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
 
+            model.addAttribute("unreadMsg", messageService.unreadMsg());
             model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
             model.addAttribute("member", principal.getMember());
 
@@ -138,6 +142,7 @@ public class MemberController {
     }
 
     /* 회원 정보 수정 */
+    // put은 데이터 전체를 덮어쓰기 때문에 부분 수정은 patch 또는 post를 활용할 것.
     @ResponseBody
     @PostMapping(value = "/member/mypage/info/modify/{mno}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MemberDTO> modifyMember(@RequestBody MemberDTO memberDTO, @AuthenticationPrincipal PrincipalDetails principalDetails) {
