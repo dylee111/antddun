@@ -100,10 +100,7 @@ public class QnaServiceImpl implements QnaService {
 
         QnaBoard qnaBoard = (QnaBoard) result.get(0)[0];
         Long likesCnt = (Long) result.get(0)[1];
-        log.info("첫 번째"+qnaBoard);
-        log.info("DDDD"+ likesCnt);
         Long replyCnt = (Long) result.get(0)[2];
-        log.info("두 번째"+qnaBoard);
 
         return entityToDTO(qnaBoard, likesCnt, replyCnt);
     }

@@ -47,18 +47,12 @@ public class JoinController {
     }
 
     @PostMapping("/member/socialJoinComplete")
-    public String socialjoinComplete(HttpServletRequest request, @AuthenticationPrincipal PrincipalDetails principal,
-                                      MemberDTO memberDTO, JobListDTO jobListDTO, Model model) {
+    public String socialjoinComplete(HttpServletRequest request, MemberDTO memberDTO, JobListDTO jobListDTO ) {
+        log.info("뭐지dd"+ memberDTO);
         memberService.socialJoin(memberDTO,jobListDTO);
-        model.addAttribute("member",principal.getMember());
-        model.addAttribute("firstName",principal.getMember().getFirstName());
-        model.addAttribute("lastName",principal.getMember().getLastName());
-
 
         HttpSession session = request.getSession();
-        System.out.println(session.getId());
-        session.invalidate();
-
+        session.invalidate(); //session 종료
 
         return "redirect:/joinWelcome";
     }

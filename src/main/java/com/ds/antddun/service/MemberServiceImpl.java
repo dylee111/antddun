@@ -14,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -152,10 +151,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Transactional
     @Override
-    public void socialJoin( MemberDTO memberDTO, JobListDTO jobListDTO) {
+    public void socialJoin(MemberDTO memberDTO, JobListDTO jobListDTO) {
 
         JobList jobList = jobListRepository.getById(jobListDTO.getJno());
-
         Member member = socialDtoToEntity(memberDTO);
         member.setMno(memberDTO.getMno()); //update되도록 mno알려주기
         member.setJob(jobList); //Member에 setter 추가해줌

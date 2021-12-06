@@ -199,3 +199,12 @@ textarea:focus {
     margin-bottom: 1.5rem;
 
 }
+
+/*댓글 선택 되었을 때 */
+.choose * {
+    filter: blur(1.5px) !important;
+    -webkit-user-select:none !important;
+    -moz-user-select:none !important;
+    -ms-user-select:none !important;
+    user-select:none !important;
+}
