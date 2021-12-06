@@ -2,6 +2,7 @@ package com.ds.antddun.controller;
 
 import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.MessageDTO;
+import com.ds.antddun.entity.GroupBySender;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.Message;
 import com.ds.antddun.service.MessageService;
@@ -33,12 +34,14 @@ public class MessageController {
     public String messenger(Model model, @AuthenticationPrincipal PrincipalDetails principal) {
 
 //        List<Member> senderList = messageService.distinctSender(principal.getMember().getMno());
-        Message senderList = messageService.groupBySendMember(principal.getMember().getMno());
+        List<GroupBySender> senderList = messageService.groupBySendMember(principal.getMember().getMno());
         if (principal != null) {
             model.addAttribute("member", principal.getMember());
             model.addAttribute("msgList", messageService.getMsgListByMno(principal.getMember().getMno()));
             model.addAttribute("senderList", senderList);
-            log.info("SENDER >>> " + senderList);
+            log.info("SENDER >>> " + senderList.get(0).getTrade());
+            log.info("SENDER >>> " + senderList.get(0).getSenderMno());
+            log.info("SENDER >>> " + senderList.get(0).getBoard());
         }
         return "member/messenger";
     }

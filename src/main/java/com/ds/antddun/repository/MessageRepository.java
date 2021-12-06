@@ -1,5 +1,6 @@
 package com.ds.antddun.repository;
 
+import com.ds.antddun.entity.GroupBySender;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,7 +25,7 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
             " WHERE msg.receiveMember.mno=:receiveMember " +
             " AND msg.receiveMember != msg.sendMember " +
             " GROUP BY msg.sendMember, msg.board ")
-    Object groupBySendMember(@Param("receiveMember")Long receiveMember);
+    List<GroupBySender> groupBySendMember(@Param("receiveMember")Long receiveMember);
 
     @Query("SELECT msg " +
             " FROM Message msg " +

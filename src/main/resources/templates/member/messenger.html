@@ -29,9 +29,9 @@
                 <table class="table" style="table-layout: fixed">
                     <tbody>
                         <tr th:each="senderList, idx : ${senderList}" >
-                            <td class="msg_sender" th:value="${senderList.sendMember.mno}">
-                                <input type="hidden" class="sender_mno" th:value="${senderList.sendMember.mno}">
-                                <strong class="sender" >[[${senderList.sendMember.lastName}]][[${senderList.sendMember.firstName}]]</strong>
+                            <td class="msg_sender" th:value="${senderList.senderMno}">
+                                <input type="hidden" class="sender_mno" th:value="${senderList.senderMno}">
+                                <strong class="sender" >[[${senderList.trade}]][[${senderList.board}]]</strong>
                                 <div>
                                     <button class="trade_btn" name="trade" >거래 중</button>
                                 </div>
