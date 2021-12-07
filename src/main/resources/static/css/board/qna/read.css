@@ -27,10 +27,6 @@
     text-align: center;
 }
 
-h1{
-    margin-top:15px;
-    font-weight:1000;
-}
 
 #likeBtn > img {
     width: 25px;
@@ -61,7 +57,8 @@ input:focus {
 .title {
     font-size: 2rem;
     font-weight: 900;
-    margin-top: 10px;
+    word-wrap: break-word;
+    margin-top:15px;
 }
 
 .leftSection{
@@ -112,9 +109,11 @@ input:focus {
     color: #858585;
 }
 
-.content_height {
+.boardContent {
+    width: 100% !important;
     min-height: 5rem;
     margin: 3rem 0;
+    word-wrap: break-word;
 }
 
 /* 댓글 */
@@ -174,6 +173,7 @@ input:focus {
     color:#3e3e3eed;
     font-weight:bold;
     font-size: 18px;
+    cursor: default;
     font-family:  'ELAND_Choice_M';
 }
 
@@ -189,7 +189,7 @@ textarea:focus {
     color: gray;
 }
 .replier{
-    font-family:'ELAND_Choice_M';
+    font-family:'ELAND_Choice_M';ㅅ
 }
 
 .replyList {

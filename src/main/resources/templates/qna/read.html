@@ -23,7 +23,7 @@
                         <span class="cate" th:text="${boardList.job}" ></span>
                     </div>
 
-                    <h1 th:text="${boardList.title}"></h1>
+                    <h1 class="title" th:text="${boardList.title}"></h1>
 
                     <div style="width:100%; height:70px">
                         <div class="leftSection">
@@ -49,7 +49,7 @@
 
                     <!-- 본문 -->
                     <hr>
-                    <div class="content_height" name="content" th:utext="${boardList.content}"></div>
+                    <div class="boardContent" name="content" th:utext="${boardList.content}"></div>
 
                 </div>
 
