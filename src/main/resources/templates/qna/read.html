@@ -134,6 +134,30 @@
             </div>
         </form>
 
+<!--   채택하기    -->
+        <div class="card-body bg-white mt-0 shadow buy_container" style="display: none;">
+            <div>
+                <img th:src="@{/assets/close.png}" class="btn_close"/>
+            </div>
+            <div>
+                <p class="btn">구매하기</p>
+            </div>
+            <div style="margin-top: 30px; text-align: center;">
+                <!--내용-->
+                <div class="form-group">
+                    <div>
+                                        <span class="buy_alert" >
+                                            <span class="buy_ddun">[[${boardList.ddun}]]뚠</span>으로<br>
+                                            채택하시겠습니까?
+                                        </span>
+                    </div>
+
+                    <button type="button" class="buy_btn" style="margin-bottom: 30px;">구매하기</button>
+                </div>
+            </div>
+        </div>
+        <div class="dim" style="display: none;"></div>
+
 
         <script th:inline="javascript">
 
