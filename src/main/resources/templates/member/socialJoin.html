@@ -3,7 +3,7 @@
 <th:block th:replace="~{/layout/basicB :: setContent(~{this::content})}">
     <th:block th:fragment="content">
         <link th:href="@{/css/join/join.css}" rel="stylesheet" />
-        <script th:src="@{/js/join/socialJoin.js}"></script>
+        <script th:src="@{/js/join/join.js}"></script>
 
         <section class="mg_bottom join_container">
             <div class="join_div">
@@ -17,10 +17,15 @@
                         <input th:value="${member.mno}" name="mno">
                         <input th:value="${member.username}" name="username" >
                         <input th:value="${member.password}" name="password" >
-                        <input th:value="${member.firstName}"name="firstName">
+                        <input th:value="${member.firstName}" name="firstName">
                         <input th:value="${member.lastName}" name="lastName">
-                        <input th:value="${member.phoneNum}" name="phoneNum" >
+
+                        <div th:if="${member.phoneNum}!=null">
+                             <input th:value="${member.phoneNum}" name="phoneNum">
+                        </div>
+
                     </div>
+
                     <div th:if="${member.phoneNum}==null">
                         <div class="reg_label">
                             <label for="phoneNum">전화번호</label>
@@ -29,8 +34,8 @@
                         <br>
                         <div id="phone-box">
                             <div class="phoneNum-box">
-                                <input type="text" name="phoneNum" id="phoneNum" placeholder="- 없이 입력" maxlength="11"
-                                       onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
+                                <input type="text" name="phoneNum" id="phoneNum" placeholder="- 없이 입력"
+                                       onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" >
                             </div>
                             <button type="button" id="btnPhone" class="phoneAuthBtn a_white">인증</button>
                         </div>
@@ -85,7 +90,7 @@
                         <input type="text" id="recommendUser" name="" placeholder="추천인">
                         <div class="alert_tip">ⓘ<span class="tooltiptext">추천인과 신규회원 모두</br>5,000뚠 지급</span></div>
                     </div>
-                    <button type="submit" class="button btnJoin">회원가입</button>
+                    <button type="submit" class="button btnSocialJoin">회원가입</button>
                 </form>
             </div>
         </section>

@@ -46,6 +46,10 @@ header{
   font-family: 'yg-jalnan', sans-serif;
 }
 
+.header > a {
+    text-decoration:none;
+}
+
 .input-box{
     position:relative;
     margin: 15px 20px;
@@ -59,6 +63,19 @@ header{
     font-size:12pt;
     width:70%;
 }
+
+/*비밀번호 보이기*/
+
+.outbox > i {
+    color: gray;
+    padding-right: 15px;
+    margin-left: -35px;
+}
+
+.fa-lgg {
+    font-size: 1em;
+}
+
 
 input::placeholder{
     color:transparent;
@@ -123,10 +140,6 @@ input:focus, input:not(:placeholder-shown){
 }
 
 
-a{
-  text-decoration: none;
-}
-
 li > a {
       color: grey;
 }
@@ -158,6 +171,11 @@ li > a {
 .find li:first-child::before{
   text-decoration:none;
   content: "";
+}
+
+.find > li > a:hover {
+    text-decoration: none;
+    color: black;
 }
 
 /* 소셜 로그인 */

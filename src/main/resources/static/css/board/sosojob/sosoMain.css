@@ -1,3 +1,56 @@
+/*=========== 추가 내용 */
+
+.title * {
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.content-container {
+    width: 100%;
+    /* border: 1px solid black; */
+    height: 100%;
+    word-wrap: break-word;
+}
+
+.boardContent{
+    width: 100% !important;
+    min-height: 5rem;
+    margin: 3rem 0;
+    font-family: 'ELAND_Choice_M';
+}
+
+.coinBox{
+    font-weight: bold;
+    text-align:end;
+}
+
+.coin{
+    width:20px;
+    text-align: end;
+}
+
+.dateTime {
+    display: inline-block;
+    font-size: 12px;
+    color: #858585;
+}
+
+.leftSection{
+    width:80%;
+    float:left;
+}
+
+.rightSection{
+    width:20%;
+    float:right;
+}
+
+/*============*/
+
+
 article {
     max-width: 235px;
     max-height: 280px;
@@ -5,23 +58,20 @@ article {
 
 .title {
     font-size: 1.2rem;
-    margin-left: 19px;
+    padding: 0 20px;
     margin-top: -10px;
     overflow-x: hidden;
     overflow-y: hidden;
 }
 
+
 .context {
     text-align: left;
-    margin-left: 19px;
+    padding: 0 20px;
     margin-top: -15px;
     font-size: 0.9rem;
 }
 
-.content-container {
-    width: 235px;
-    border: 1px solid black;
-}
 
 .img.coin {
     display: inline-block;
@@ -228,7 +278,7 @@ article {
 .sell_title{
     font-family: 'ELAND_Choice_M';
     font-size: 1.6rem;
-    display: inline-block;
+    word-wrap: break-word;
 }
 
 .cate {
@@ -239,11 +289,6 @@ article {
     text-align: center;
     border: 2px solid #e0e0e0;
     padding: 5px 10px;
-}
-
-.title_wrap {
-    width: 90%;
-    display: inline-block;
 }
 
 .ddun_wrap {
@@ -264,13 +309,13 @@ article {
     border: none;
 }
 
-.btn.btn-primary.btn-reply{
-    margin-top: -65px;
+
+.btn-reply{
+     margin-left: 88%;
+     width: 75px;
+     padding: 2px;
 }
 
-.form-control.reply{
-    width: 93%;
-}
 
 .smallText{
     color: gray;
