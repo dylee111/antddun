@@ -34,7 +34,7 @@ public class MessageController {
     public String messenger(Model model, @AuthenticationPrincipal PrincipalDetails principal) {
 
         List<GroupBySender> senderList = messageService.distinctSender(principal.getMember().getMno());
-//        List<GroupBySender> senderList = messageService.groupBySendMember(principal.getMember().getMno());
+
         if (principal != null) {
             model.addAttribute("member", principal.getMember());
             model.addAttribute("msgList", messageService.getMsgListByMno(principal.getMember().getMno()));
@@ -76,9 +76,11 @@ public class MessageController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @PostMapping("/messenger/tradeCheck")
-    public ResponseEntity<String> tradeCheck(@RequestParam("trade") int tradeCheck, MessageDTO messageDTO) {
-        messageService.tradeCheck(tradeCheck, messageDTO);
+    @PatchMapping("/messenger/changeTrade/{sosoNo}/{sendMember}")
+    public ResponseEntity<String> tradeCheck(@RequestParam("tradeState") boolean tradeCheck,
+                                             @PathVariable("sosoNo") Long sosoNo,
+                                             @PathVariable("sendMember")Long sendMember) {
+        messageService.changeTradeState(tradeCheck, sosoNo, sendMember);
 
         return new ResponseEntity<>("tradeChange", HttpStatus.OK);
     }

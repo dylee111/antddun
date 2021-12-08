@@ -84,8 +84,8 @@ public class MessageServiceImpl implements MessageService{
 
     /* 안읽은 메시지 */
     @Override
-    public int unreadMsg() {
-        return messageRepository.unreadMsg();
+    public int unreadMsg(Long loginMember) {
+        return messageRepository.unreadMsg(loginMember);
     }
 
     @Transactional
@@ -100,28 +100,4 @@ public class MessageServiceImpl implements MessageService{
         messageRepository.changeTradeState(tradeState, sosoNo, sendMember);
     }
 
-    @Override
-    public List<GroupBySender> groupBySendMember(Long receiveMember) {
-
-        QMessage qMessage = QMessage.message;
-
-        JPAQueryFactory qf = new JPAQueryFactory(entityManager);
-
-        JPAQuery<GroupBySender> query = qf.from(qMessage)
-                .groupBy(qMessage.sendMember).groupBy(qMessage.board)
-                .select(
-                        Projections.bean(
-                                GroupBySender.class,
-                                qMessage.sendMember.as("sendMno"),
-                                qMessage.board.as("board"),
-                                qMessage.trade.as("trade")
-                        )
-
-                )
-                .where(qMessage.sendMember.mno.eq(receiveMember)
-                        .and(qMessage.sendMember.mno.ne(qMessage.receiveMember.mno))
-                );
-
-        return query.fetch();
-    }
 }

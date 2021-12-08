@@ -17,11 +17,10 @@ public interface MessageService {
     List<Message> getMsgListByMno(Long mno);
 
     List<GroupBySender> distinctSender(Long sender);
-    List<GroupBySender> groupBySendMember(Long receiveMember);
 
     Long tradeCheck(int tradeCheck, MessageDTO messageDTO);
 
-    int unreadMsg();
+    int unreadMsg(Long loginMember);
 
     void readMsgChange(Long msgNo);
 

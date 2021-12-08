@@ -31,11 +31,9 @@
                         <tr th:each="senderList, idx : ${senderList}" >
                             <td class="msg_sender" th:value="${senderList.sendMno}">
                                 <input type="hidden" class="sender_mno" th:value="${senderList.sendMno}">
-                                <input type="hidden" class="trade_state" th:value="${senderList.trade}">
+                                <input type="hidden" class="sender_sosoNo" th:value="${senderList.board}">
                                 <strong class="sender" >[[${senderList.lastName}]][[${senderList.firstName}]]</strong>
-                                <div>
-                                    <button class="trade_btn" name="trade" >거래 중</button>
-                                </div>
+                                <button class="trade_btn" name="trade" th:value="${senderList.trade}">거래 중</button>
                             </td>
                         </tr>
                     </tbody>
