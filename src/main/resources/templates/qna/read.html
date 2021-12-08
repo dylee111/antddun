@@ -23,9 +23,9 @@
                         <span class="cate" th:text="${boardList.job}" ></span>
                     </div>
 
-                    <h1 th:text="${boardList.title}"></h1>
+                    <h1 class="title" th:text="${boardList.title}"></h1>
 
-                    <div style="width:100%;height:70px">
+                    <div style="width:100%; height:70px">
                         <div class="leftSection">
                             <!-- 작성자 -->
                             <div class="writer" name="writer" th:text="${boardList.writer}"></div>
@@ -49,7 +49,7 @@
 
                     <!-- 본문 -->
                     <hr>
-                    <div class="content_height" name="content" th:utext="${boardList.content}"></div>
+                    <div class="boardContent" name="content" th:utext="${boardList.content}"></div>
 
                 </div>
 
@@ -61,64 +61,104 @@
                         <span id="likesCnt" class="smallText">[[${boardList.likesCnt}]]</span>
                         <span id="viewCnt" class="smallText">&nbsp조회수&nbsp[[${boardList.ViewCnt}]]</span>
                     </div>
-                    <div class="rightSection smallText pointer" th:if="${checkUser} == true" >
-                        <span class="removeBtn">삭제 | </span>
-                        <span class="modifyBtn" >수정</span>
+                    <div class="rightSection smallText pointer end"
+                         th:if="${checkUser} == true" >
+                        <span class="modifyBtn">수정 | </span>
+                        <span class="removeBtn">삭제</span>
                     </div>
                 </div>
 
                 <!-- Comments section-->
+
+                <div class="replyCnt">댓글 [[${boardList.replyCnt}]]개 </div>
+                <hr>
+
                 <section class="replySection">
 
-                            <!-- Comment form-->
-                            <form class="mb-4" method="post" >
-                                <div style="width: 100%; margin-bottom: 40px !important;">
-                                    <textarea class="form-control replyTA" rows="3" required name="replyText"
-                                              placeholder="댓글을 작성하여 지식과 경험을 나눠보세요."></textarea>
-                                    <input type="button" class="btn btn-primary rightSection btn-reply" id="btn_reply" value="등록">
-                                </div>
-                            </form>
-                            <br>
-                            <!-- Comment with nested comments-->
-                            <div th:each="replyList : ${replyList}">
-                                <div class="replyList">
-                                    <!-- Parent comment-->
-                                    <div class="flex-shrink-0">
-                                        <img class="rounded-circle" height="30px" width="30px"
-                                             th:src="@{'/assets/user_img/'+${replyList.member.experience}+'.png'}"
-                                             alt="..."/>
-                                    </div>
-                                    <div class="innerText">
-                                        <div class="ms-3" >
-                                            <input type="hidden" class="reply-no" name="qnaRno" th:value="${replyList.qnaRno}">
-                                            <input type="hidden" class="replier" name="member" th:value="${replyList.member.mno}">
-                                            <div class="replier leftSection" >[[${replyList.member.job.job}]] [[${replyList.member.experience}]]년차 [[${replyList.member.lastName}]]개미</div>
-                                            <div class="rightSection smallText pointer" th:if="${preMem} == ${replyList.member.mno}">
-                                                <span class="reply-modify">수정 |</span>
-                                                <span class="reply-delete" >삭제</span>
-                                            </div>
-                                            <textarea onkeyup="this.style.height = this.scrollHeight + 'px';"
-                                                      class="reply-text-box" name="replyText" readonly>[[${replyList.replyText}]]</textarea>
-                                        </div>
-                                        <div>
-                                            <span class="date" th:text="${#temporals.format(boardList.modDate,'yyyy.MM.dd HH:mm')}"></span>
-                                        </div>
+                    <!-- Comment form-->
+                    <form class="mb-4" method="post" >
+                        <div style="width: 100%; margin-bottom: 60px !important;">
+                            <textarea class="form-control replyTA" rows="3" required name="replyText"
+                                      placeholder="댓글을 작성하여 지식과 경험을 나눠보세요."></textarea>
+                            <input type="button" class="btn btn-primary rightSection btn-reply" id="btn_reply" value="등록">
+                        </div>
+                    </form>
 
-                                    </div>
-                                </div>
+                    <!-- if comments none -->
+                    <div th:if="${boardList.replyCnt} == 0" class="noneReply">
+                        <img th:src="@{/assets/messenger.png}" >
+                        <div class="smallText">
+                            아직 댓글이 없습니다.<br>
+                            첫 번째 댓글을 남겨보세요!  •' - '•)و ✧</div>
+                    </div>
+
+                    <!-- Comment with nested comments-->
+                    <div th:each="replyList : ${replyList}">
+                        <div class="replyList">
+                            <!-- Parent comment-->
+                            <div class="flex-shrink-0">
+                                <img class="rounded-circle" height="30px" width="30px"
+                                     th:src="@{'/assets/user_img/'+${replyList.member.experience}+'.png'}"
+                                     alt="..."/>
                             </div>
+                            <div class="innerText">
+
+                                <div class="ms-3" >
+                                    <input type="hidden" class="reply-no" name="qnaRno" th:value="${replyList.qnaRno}">
+                                    <input type="hidden" class="replier" name="member" th:value="${replyList.member.mno}">
+                                    <div class="replier leftSection" >[[${replyList.member.job.job}]] [[${replyList.member.experience}]]년차 [[${replyList.member.lastName}]]개미</div>
+                                    <div class="rightSection smallText pointer end"  th:if="${preMem} == ${replyList.member.mno}">
+                                        <span class="reply-modify">수정 |</span>
+                                        <span class="reply-delete" >삭제</span>
+                                    </div>
+                                    <textarea onkeyup="this.style.height = this.scrollHeight + 'px';"
+                                              class="reply-text-box" name="replyText" readonly>[[${replyList.replyText}]]</textarea>
+                                </div>
+                                <div>
+                                    <span class="date" th:text="${#temporals.format(boardList.modDate,'yyyy.MM.dd HH:mm')}"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
 
                 </section>
                 <!--comment end -->
 
                 <hr>
 
-                <div class="listGo">
+<!--                <div class="listGo">
                     <a class="btn btn-primary" onclick='javascript:window.history.back();'>뒤로가기</a>
-                </div>
+                </div>-->
 
             </div>
         </form>
+
+<!--   채택하기    -->
+        <div class="card-body bg-white mt-0 shadow buy_container" style="display: none;">
+            <div>
+                <img th:src="@{/assets/close.png}" class="btn_close"/>
+            </div>
+            <div>
+                <p class="btn">구매하기</p>
+            </div>
+            <div style="margin-top: 30px; text-align: center;">
+                <!--내용-->
+                <div class="form-group">
+                    <div>
+                                        <span class="buy_alert" >
+                                            <span class="buy_ddun">[[${boardList.ddun}]]뚠</span>으로<br>
+                                            채택하시겠습니까?
+                                        </span>
+                    </div>
+
+                    <button type="button" class="buy_btn" style="margin-bottom: 30px;">구매하기</button>
+                </div>
+            </div>
+        </div>
+        <div class="dim" style="display: none;"></div>
+
+
         <script th:inline="javascript">
 
          $(document).ready(function() {
@@ -150,9 +190,6 @@
                 location.href=readurl;
         });
         </script>
-
-
-
         <!-- 본문 끝 -->
         <!--페이지 수정 부분 끝-->
     </th:block>

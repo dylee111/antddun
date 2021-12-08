@@ -181,6 +181,8 @@
                         alert("전화번호 중복");
                     } else if(data == 0) {
                         alert("전화번호 사용 가능");
+                        console.log(data);
+                        console.log($('#phoneNum').val());
                     }
                 }
             }) // ajax end.
@@ -239,5 +241,16 @@
 //            alert($('.startTime').val());
             $("#frm").submit();
         });
+
+        $(".btnSocialJoin").click(function() {
+            if(phoneNum.val() == "") {
+                mobileResult.html("연락처를 입력해주세요.")
+                phoneNum.focus();
+                return false;
+            }
+
+            $("form").submit();
+        });
+
 
     }); // join

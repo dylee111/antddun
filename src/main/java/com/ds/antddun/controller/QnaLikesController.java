@@ -29,18 +29,13 @@ public class QnaLikesController {
     public JSONObject addLikes(@PathVariable Long qnaNo, @AuthenticationPrincipal PrincipalDetails principal)  {
 
         Long mno = principal.getMember().getMno();
-        log.info("mnodddddddddd"+mno);
-
-        int likesCnt = qnaLikesRepository.countLikes(qnaNo);
-        log.info("likesCnt>>>>>>>>>>>>"+ likesCnt);
-
         JSONObject result = new JSONObject();
 
         QnaLikes target = qnaLikeService.checkLikes(qnaNo, mno);
         if(target != null){ //있으면!!
             qnaLikeService.deleteLikes(qnaNo, mno); //좋아요 해제 (row 삭제)
             result.put("response", null);
-            result.put("likesCnt", qnaLikesRepository.countLikes(qnaNo));
+            result.put("likesCnt", qnaLikesRepository.countLikes(qnaNo)); //그때 그때 불러서 보여줘야함 (변수 사용 x)
             return result;
         } else {
             qnaLikeService.addLikes(qnaNo, mno);  //좋아요 (row 추가)

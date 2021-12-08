@@ -5,7 +5,6 @@ import com.ds.antddun.dto.PageRequestDTO;
 import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.dto.QnaBoardDTO;
 import com.ds.antddun.entity.JobList;
-import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.MemberWishList;
 import com.ds.antddun.repository.QnaBoardRepository;
 import com.ds.antddun.service.*;
@@ -186,11 +185,12 @@ public class QnaBoardController {
 
     //게시물 삭제
     @GetMapping("/member/qna/remove")
-    public String removeBoard(QnaBoardDTO qnaBoardDTO, RedirectAttributes redirectAttributes,@AuthenticationPrincipal PrincipalDetails principal) {
+    public String removeBoard(QnaBoardDTO qnaBoardDTO, @AuthenticationPrincipal PrincipalDetails principal){
         Long qnaNo = qnaBoardDTO.getQnaNo();
         Long mno = principal.getMember().getMno();
-        log.info("ddddddddd"+ qnaNo + "mnoooo" + mno);
-        qnaService.delete(qnaNo, mno);
+
+        qnaService.deleteAll(qnaNo, mno);
+
         return "redirect:/qna/list/all";
     }
 

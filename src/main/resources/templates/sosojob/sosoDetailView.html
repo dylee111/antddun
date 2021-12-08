@@ -92,16 +92,26 @@
                                 <div class="title_wrap">
                                     <h1 class="fw-bolder mb-1 sell_title" name="title">[[${read.title}]]</h1>
                                 </div>
-                                <div class="ddun_wrap">
-                                    <img th:src="@{/assets/coins.png}" width="19">
-                                    <span id="ddun">[[${read.ddun}]]</span>
+
+                                <!-- 날짜 -->
+                                <div class="leftSection">
+                                <div class="dateTime">
+                                    <span>등록일:
+                                        <span th:text="${#temporals.format(read.regDate,'yyyy/MM/dd HH:mm:ss')}"
+                                              style="margin-right: 15px;"></span>
+                                    </span>
+                                    <span>수정일:
+                                        <span th:text="${#temporals.format(read.modDate,'yyyy/MM/dd HH:mm:ss')}"></span>
+                                    </span>
+                                        </div>
+                                </div>
+
+                                <div class="rightSection coinBox">
+                                    <img class="coin" th:src="@{/assets/coins.png}"><span id="ddun">[[${read.ddun}]]</span>
                                 </div>
                             </div>
-                            <!-- Post meta content-->
-                            <div class="text-muted mb-2 sell_date">
-                                [[${#temporals.format(read.regDate, 'yyyy-MM-dd HH:mm:ss')}]]
-                            </div>
                         </header>
+                        <hr>
                         <!-- Preview image figure-->
                         <div>
                             <figure class="mb-4"><img class="img-fluid rounded"
@@ -110,7 +120,7 @@
                             <!-- Post content-->
                             <section class="mb-5">
                                 <!-- Comment form-->
-                                <p>[[${read.content}]]</p>
+                                <div class="content" th:utext="${read.content}"></div>
                             </section >
                         </div>
                         <button id="board-delete" th:if="${writer} == ${read.mno}" ><a th:href="@{'/member/sosojob/delete/'+ ${read.sosoNo}}">삭제</a></button>
