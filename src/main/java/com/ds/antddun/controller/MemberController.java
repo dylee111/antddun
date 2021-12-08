@@ -53,7 +53,7 @@ public class MemberController {
 
             List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
 
-            model.addAttribute("unreadMsg", messageService.unreadMsg());
+            model.addAttribute("unreadMsg", messageService.unreadMsg(principal.getMember().getMno()));
             model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
             model.addAttribute("member", principal.getMember());
 

@@ -2,8 +2,6 @@ $(document).ready(function() {
 
     var replyMno = 0;
     var sosoNo = 0;
-    var trade = false;
-
 
     //Messeage Show/Hide
     $('.send_msg').last().css("display", "block");
@@ -48,11 +46,35 @@ $(document).ready(function() {
 
     //거래중/거래완료 버튼
     $('.trade_btn').click(function(){
+        replyMno = $(this).parent().children(".sender_mno").val();
+        sosoNo = $(this).parent().children(".sender_sosoNo").val();
+        tradeState = $(this).val();
+        console.log("before "+tradeState);
+        if(tradeState == "true") { tradeState = "false"; }
+        else if(tradeState == "false") { tradeState = "true"; }
 
-        if(trade == true) {
+        console.log("A " + replyMno);
+        console.log("B " + sosoNo);
+        console.log("C " + tradeState);
+
+        $.ajax({
+            url: '/antddun/member/messenger/changeTrade/' + sosoNo +"/" + replyMno,
+            method: 'patch',
+            data: {
+                tradeState: tradeState,
+                sosoNo: sosoNo,
+                sendMember: replyMno
+            },
+            success: function(result) {
+                if(result === "tradeChange") {console.log("성공");}
+            }
+
+        });
+
+        if(tradeState == "true") {
             $(this).css("background", "lightgray");
             $(this).text('완료');
-        } else if(trade == false){
+        } else if(tradeState == "false"){
             $(this).css("background", "rgb(255, 214, 51)");
             $(this).text('거래 중');
 
