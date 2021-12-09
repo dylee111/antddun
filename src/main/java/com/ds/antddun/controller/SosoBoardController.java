@@ -7,6 +7,7 @@ import com.ds.antddun.dto.SosoCategoryDTO;
 import com.ds.antddun.dto.SosoPageRequestDTO;
 import com.ds.antddun.entity.SosoCategory;
 import com.ds.antddun.entity.SosoJobBoard;
+import com.ds.antddun.service.DdunService;
 import com.ds.antddun.service.SosoCateService;
 import com.ds.antddun.service.SosoJobService;
 import com.ds.antddun.service.SosoReplyService;
@@ -15,9 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,6 +39,9 @@ public class SosoBoardController {
 
     @Autowired
     private SosoReplyService sosoReplyService;
+
+    @Autowired
+    private DdunService ddunService;
 
     /*메인 페이지*/
     @GetMapping("/sosojob/main")
@@ -169,6 +174,9 @@ public class SosoBoardController {
         log.info("SOSODTO>>>" + sosoReplyService.getListBySosoNo(sosoNo));
         log.info("member>>>" + principalDetails.getMember().getMno());
         log.info("read>>>" + sosoBoardDTO.getMno());
+
+        Long totalDdun = ddunService.totalAmountByMno(principalDetails.getMember().getMno());
+        model.addAttribute("totalDdun", totalDdun);
 
         sosoJobService.updateCnt(sosoNo);
         model.addAttribute("read", sosoBoardDTO);

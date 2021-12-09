@@ -215,3 +215,8 @@ option{
     min-height: 5rem;
     margin: 3rem 0;
 }
+
+#total_ddun {
+    color: #ffb400;
+    font-size:15px;
+}

@@ -47,7 +47,7 @@
           <img th:src="@{/assets/coins.png}" width="25rem">
           <input type="text" id="ddun" class="ddun" name="ddun"
                  onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-                 placeholder="" required > <label class="ddun"> 뚠</label>
+                 placeholder="" required > <label class="ddun"> 뚠</label><span id="total_ddun" th:value="${totalDdun}">보유 뚠 [[${totalDdun}]]</span>
         </div>
 
         <!--작성완료 버튼-->

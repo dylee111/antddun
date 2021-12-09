@@ -3,7 +3,7 @@ $(document).ready(function() {
     var mno = $("#mno").val();
 
     var ddun = parseInt($("#ddun").text());
-    var buyerDdun = parseInt($("#total_ddun").val);
+    var total_ddun = parseInt($("#total_ddun").val);
     var count = 0;
 
 
