@@ -2,10 +2,7 @@ $(document).ready(function() {
     var qnaNo = $("#qnaNo").val();
     var mno = $("#mno").val();
 
-    var ddun = parseInt($("#ddun").text());
-    var total_ddun = parseInt($("#total_ddun").val);
     var count = 0;
-
 
     $('textarea').each(function () {
       this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
@@ -14,38 +11,66 @@ $(document).ready(function() {
       this.style.height = (this.scrollHeight) + 'px';
     });
 
-    // 구매 버튼
-    $(".buy_btn").click(function() {
-        console.log(ddun);
-        console.log(buyerDdun);
-        $.ajax({
-            url: "/antddun/member/qna/buy/" + qnaNo + "/" + mno,
-            type: "GET",
-            data: {
-                "amount": ddun
-            },
-            success: function(data) {
-                if(data === "구매 성공") {
-                    alert("구매완료");
-                } else if(data === "뚠 충전 필요"){
-                    alert("뚠이 부족합니다.")
-                }
 
-            }
-        }); // ajax end.
+
+
+/*---------------- 뚠 설정 레이어 -----------------*/
+
+    var info_helper = $('.info_helper');
+
+    $('.btn_helper').click(function(){
+       count++;
+
+        if(count == 1){
+              info_helper.css('display','block');
+              console.log(count);
+        } else if(count == 2) {
+              info_helper.css('display','none');
+              console.log(count);
+              count = 0;
+        }
+    })
+
+    $('.button_close').click(function(){
+        info_helper.css('display','none');
+        count = 0;
+    })
+
+
+
+/*---------------- 뚠 거래 ----------------*/
+
+    //뚠 거래 버튼
+    $("#btn-register").click(function() {
+        var input_ddun = parseInt($("#input_ddun").val());
+        var total_ddun = parseInt($("#total_ddun").text());
+
+        if(input_ddun > total_ddun){
+        alert("뚠이 부족합니다.");
+            return false;
+        }
+
+        $("form").submit();
+
     });
 
 
-    <!-- 구매하기 -->
-    $("#button-buy").click(function(){
-        $('.buy_container').show();
-        $('.dim').show();
-    });
-
-    $('.btn_close').click(function(){
-        $('.buy_container').hide();
-        $('.dim').hide();
-    });
+//        $.ajax({
+//            url: "/antddun/member/qna/buy/" + qnaNo + "/" + mno,
+//            type: "GET",
+//            data: {
+//                "amount": ddun
+//            },
+//            success: function(data) {
+//                if(data === "구매 성공") {
+//                    alert("구매완료");
+//                } else if(data === "뚠 충전 필요"){
+//                    alert("뚠이 부족합니다.")
+//                }
+//
+//            }
+//        }); // ajax end.
+//    });
 
 
  /*--------------------------댓글--------------------------*/
@@ -65,7 +90,6 @@ $(document).ready(function() {
             data: JSON.stringify(replyData),
             contentType: 'application/json; charset=utf-8',
             success: function() {
-                alert("댓글 등록 성공");
                 self.location.reload();
             }
 
