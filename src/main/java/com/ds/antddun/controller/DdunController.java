@@ -2,6 +2,7 @@ package com.ds.antddun.controller;
 
 import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.DdunDTO;
+import com.ds.antddun.dto.QnaBoardDTO;
 import com.ds.antddun.entity.SosoJobBoard;
 import com.ds.antddun.service.DdunService;
 import com.ds.antddun.service.QnaService;
@@ -64,25 +65,14 @@ public class DdunController {
 
     /* QnA 뚠 거래 */
     @ResponseBody
-    @GetMapping("/qna/buy/{qnaNo}/{mno}")
-    public ResponseEntity<String> qnaBuy(@PathVariable("qnaNo") Long qnaNo,
-                                          @PathVariable("mno") Long mno,
-                                          @AuthenticationPrincipal PrincipalDetails principalDetails,
-                                          @RequestParam("amount") Long amount,
-                                          DdunDTO ddunDTO) {
-
-        String boardContent = qnaService.getBoard(qnaNo).getContent();
-        Long buyer = ddunService.totalAmountByMno(principalDetails.getMember().getMno());
-
-        if (buyer >= amount) {
-            ddunDTO.setContent(boardContent);
-            ddunService.sosoBuy(principalDetails.getMember(), amount, ddunDTO);
-            ddunService.sosoSell(mno, amount, ddunDTO);
-
-            return new ResponseEntity<>("구매 성공", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("뚠 충전 필요", HttpStatus.OK);
-        }
+    @GetMapping("/qna/betDdun")
+    public ResponseEntity<String> qnaBetDdun(@AuthenticationPrincipal PrincipalDetails principalDetails,
+                                             @RequestParam("title") String title,
+                                             @RequestParam("amount") Long amount,
+                                             DdunDTO ddunDTO) {
+        ddunDTO.setContent(title);
+        ddunService.sosoBuy(principalDetails.getMember(), amount, ddunDTO);
+        return new ResponseEntity<>("구매 성공", HttpStatus.OK);
     }
 
 }

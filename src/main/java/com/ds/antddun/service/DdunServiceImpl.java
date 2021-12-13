@@ -41,7 +41,6 @@ public class DdunServiceImpl implements DdunService{
     /* 구매하기 */
     @Override
     public Long sosoBuy(Member member, Long amount, DdunDTO ddunDTO) {
-
         Long mno = member.getMno();
 
         Long total = ddunRepository.totalAmount(mno);
@@ -49,12 +48,12 @@ public class DdunServiceImpl implements DdunService{
         log.info("AMOUNT222>>>>" + amount);
         log.info("TOTAL - AMOUNT>>>>" + (total-amount) );
 
-        if (total > amount) {
+        if (total >= amount) {
             ddunDTO.setOutputAmount(amount);
             ddunDTO.setInputAmount(0L);
             ddunDTO.setMember(mno);
             Ddun ddun = dtoToEntity(ddunDTO);
-
+            log.info("whyyy"+ddun);
             return ddunRepository.save(ddun).getDdunId();
         } else {
             return null;

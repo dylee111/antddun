@@ -105,9 +105,11 @@
                                     <input type="hidden" class="reply-no" name="qnaRno" th:value="${replyList.qnaRno}">
                                     <input type="hidden" class="replier" name="member" th:value="${replyList.member.mno}">
                                     <div class="replier leftSection" >[[${replyList.member.job.job}]] [[${replyList.member.experience}]]년차 [[${replyList.member.lastName}]]개미</div>
-                                    <div class="rightSection smallText pointer end"  th:if="${preMem} == ${replyList.member.mno}">
-                                        <span class="reply-modify">수정 |</span>
-                                        <span class="reply-delete" >삭제</span>
+                                    <div class="rightSection smallText pointer end">
+                                        <span class="reply-modify" th:if="${preMem} == ${replyList.member.mno}">수정 |</span>
+                                        <span class="reply-delete" th:if="${preMem} == ${replyList.member.mno}">삭제</span>
+                                        <span th:if="${preMem} == ${boardList.mno} and ${preMem} != ${replyList.member.mno}"
+                                              class="pickAnswer">채택 ✔</span>
                                     </div>
                                     <textarea onkeyup="this.style.height = this.scrollHeight + 'px';"
                                               class="reply-text-box" name="replyText" readonly>[[${replyList.replyText}]]</textarea>

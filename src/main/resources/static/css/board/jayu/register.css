@@ -226,11 +226,11 @@ option{
 }
 
 .info_helper{
-    position: absolute;
-    margin-top: 0;
-    width: 255px;
-    left: 176px;
-    bottom: 57px;
+    position: relative;
+    margin-top: -15px;
+    width: 244px;
+    left: -4px;
+    bottom: 34px;
     border: 1px solid #888;
     background-color: #fff;
 }
@@ -252,11 +252,13 @@ option{
 }
 
 .input_ddun{
-    display: inline-block;
-    background-clip: padding-box;
+    display: block;
     border: 1px solid #ced4da;
     border-radius: 5px;
     height: 35px;
+    width: 200px;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .my_ddun {
