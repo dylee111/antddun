@@ -21,15 +21,6 @@
      font-size: 16px;
 }
 
-input#ddun {
-    display: inline-block;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    width: 80px;
-    height: 35px;
-}
-
 input:focus {
     outline:none;
 }
@@ -214,4 +205,63 @@ option{
 .content_height {
     min-height: 5rem;
     margin: 3rem 0;
+}
+
+/* 뚠 걸기 */
+.ddun * {
+    font-family:'ELAND_Choice_M';
+}
+
+.layer_base{
+    position: absolute;
+    border: 1px solid #888;
+    background: #fff;
+    z-index: 1000;
+    padding: 17px 20px 0;
+}
+.betDdunTitle{
+    height: 40px;
+    line-height: 40px;
+    font-size: 17px;
+}
+
+.info_helper{
+    position: relative;
+    margin-top: -15px;
+    width: 244px;
+    left: -4px;
+    bottom: 34px;
+    border: 1px solid #888;
+    background-color: #fff;
+}
+
+.info_helper > p {
+    padding: 10px 12px;
+    line-height: 18px;
+    font-size: 12px;
+    color: #8c8c8c;
+    font-weight: 400;
+    margin: 0px !important;
+    }
+
+.button_close {
+    position: absolute;
+    top: 0px;
+    right: 4px;
+    cursor: pointer;
+}
+
+.input_ddun{
+    display: block;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    height: 35px;
+    width: 200px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.my_ddun {
+    color: #ffb400;
+    font-size:15px;
 }

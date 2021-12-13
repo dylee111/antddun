@@ -42,6 +42,9 @@ public class QnaBoardController {
     @Autowired
     private QnaReplyService qnaReplyService;
 
+    @Autowired
+    private DdunService ddunService;
+
     //리스트 출력
     @GetMapping("/qna/list/all")
     public String allList(Model model, PageRequestDTO requestDTO, @AuthenticationPrincipal PrincipalDetails principal) {
@@ -50,7 +53,7 @@ public class QnaBoardController {
         //위시리스트
         if (principal != null) {
             List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
-            model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
+            model.addAttribute("wishList", wishLists);
             if (wishLists.size() != 0) {
                 model.addAttribute("wishListIndex", wishLists.get(0));
             }
@@ -74,7 +77,7 @@ public class QnaBoardController {
         //위시리스트
         if (principal != null) {
             List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
-            model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
+            model.addAttribute("wishList", wishLists);
             if (wishLists.size() != 0) {
                 model.addAttribute("wishListIndex", wishLists.get(0));
             }
@@ -101,13 +104,15 @@ public class QnaBoardController {
         }
 
         List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
-        model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
+        model.addAttribute("wishList", wishLists);
         if (wishLists.size() != 0) {
             model.addAttribute("wishListIndex", wishLists.get(0));
         }
 
         //카테고리
         model.addAttribute("jobList", jobListService.getList());
+        //총 뚠
+        model.addAttribute("totalDdun", ddunService.totalAmountByMno(principal.getMember().getMno()));
 
         return "/qna/registerForm";
     }
@@ -135,7 +140,7 @@ public class QnaBoardController {
 
         //게시판 정보
         model.addAttribute("replyList", qnaReplyService.getListByQnaNo(qnaNo));
-        model.addAttribute("preMem", principal.getMember().getMno());
+        model.addAttribute("preMem", principal.getMember().getMno()); //현재 멤버의 번호
         model.addAttribute("boardList", qnaService.getBoard(qnaNo));
 
         //수정 삭제 버튼 보이기
@@ -149,8 +154,7 @@ public class QnaBoardController {
 
         //위시리스트
         List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
-
-        model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
+        model.addAttribute("wishList", wishLists);
         if (wishLists.size() != 0) {
             model.addAttribute("wishListIndex", wishLists.get(0));
         }

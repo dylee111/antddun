@@ -106,7 +106,7 @@ $(document).ready(function() {
                 $("#dDay2").val(parseInt(wishDay2));
         }
     });
-});
+//});
 
     //위시리스트 수정 & 삭제
 

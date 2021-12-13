@@ -1,3 +1,4 @@
+
   ul, li {
     list-style: none;
     padding: 0px;
@@ -313,6 +314,7 @@
     border: none;
     border-radius: 5px;
     color: white;
+    cursor: pointer;
   }
 
    .alert_tip {

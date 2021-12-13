@@ -1,9 +1,6 @@
 @charset "UTF-8";
 
 /* list css */
-.container-main{
-    margin-bottom: 100vh !important;
-}
 
 .card.qnaCardList {
     margin-bottom: 1rem;
@@ -209,6 +206,7 @@ boardInfo{
 }
 
 /* 페이징 */
+/*
 .pagination {
   display: flex;
   padding-left: 0;
@@ -275,7 +273,7 @@ boardInfo{
 .pagination-sm .page-item:last-child .page-link {
   border-top-right-radius: 0.2rem;
   border-bottom-right-radius: 0.2rem;
-}
+}*/
 
 /* content 출력 수정 */
 .content-text>p>br{
