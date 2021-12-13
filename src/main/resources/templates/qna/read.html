@@ -39,8 +39,11 @@
                             </span>
                             </div>
                         </div>
-                        <div class="rightSection coinBox">
-                            <img class="coin" th:src="@{/assets/coins.png}">[[${boardList.ddun}]]
+                        <div class="rightSection coinBox" th:if="${boardList.ddun}!=0">
+                            <img class="coin" th:src="@{/assets/coins.png}">&nbsp;[[${boardList.ddun}]]
+                        </div>
+                        <div class="rightSection coinBox" th:if="${boardList.ddun}==0">
+                            <img class="coin" th:src="@{/assets/coins.png}">&nbsp;뚠 없음
                         </div>
                     </div>
 

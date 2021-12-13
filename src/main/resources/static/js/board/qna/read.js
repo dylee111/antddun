@@ -43,20 +43,23 @@ $(document).ready(function() {
         var input_ddun = parseInt($("#input_ddun").val());
         var total_ddun = parseInt($("#total_ddun").text());
 
+        console.log("input_ddun: "+input_ddun);
+        console.log("typeof input_ddun: "+typeof(input_ddun));
+
         if(input_ddun > total_ddun){
             alert("뚠이 부족합니다.");
             input_box.focus();
             return false;
 
-        } else if(input_ddun == 0 || input_ddun == ""){
+        } else if(input_ddun == 0 || isNaN(input_ddun)){
            var confirmNoDdun = confirm("뚠 없이 질문하시겠습니까?");
            if(confirmNoDdun){
-                input_ddun = 0;
+               $('#input_ddun').val(0);
            } else {
            input_box.focus();
            return false;
            }
-        } else if((input_ddun % 10) != 0 || input_ddun != 0 || input_ddun != "") {
+        } else if((input_ddun % 10) != 0) {
             alert("뚠은 10단위로 적어주세요.");
             input_box.focus();
             return false;
