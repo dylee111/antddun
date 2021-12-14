@@ -22,11 +22,11 @@ live demo는 깃헙페이지가 있다면 넣어둘 것.
 ​
 
 ## Technologies used (libraries & versions)
+Programming Language : Java(11), JS, HTML, CSS3
 
-어떤 프로그래밍 언어, 어떤 라이브러리를 써서 만들었는지 적어두기
+Framework / Library : Spring Boot, JQuery, Bootstrap
 
-​
-
+Server : H2 Database(Oracle)
 ​
 
 ## Project setup
