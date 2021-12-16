@@ -212,13 +212,6 @@ option{
     font-family:'ELAND_Choice_M';
 }
 
-.layer_base{
-    position: absolute;
-    border: 1px solid #888;
-    background: #fff;
-    z-index: 1000;
-    padding: 17px 20px 0;
-}
 .betDdunTitle{
     height: 40px;
     line-height: 40px;

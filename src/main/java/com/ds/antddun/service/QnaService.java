@@ -2,14 +2,25 @@ package com.ds.antddun.service;
 
 import com.ds.antddun.dto.*;
 import com.ds.antddun.entity.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public interface QnaService {
 
-    //목록 조회
+    //목록 카테고리별 조회
     PageResultDTO<QnaBoardDTO, Object[]> getListByCate(int jno, PageRequestDTO requestDTO);
 
     //목록 전체 조회
     PageResultDTO<QnaBoardDTO, Object[]> getListAll(PageRequestDTO requestDTO);
+
+    //목록 최신 순으로 5개까지만
+    PageResultDTO<QnaBoardDTO, Object[]> getFiveList(PageRequestDTO requestDTO);
 
     //게시물 등록
     Long register(QnaBoardDTO qnaBoardDTO, Member member);

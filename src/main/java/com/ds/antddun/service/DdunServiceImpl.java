@@ -1,7 +1,6 @@
 package com.ds.antddun.service;
 
 import com.ds.antddun.dto.DdunDTO;
-import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.entity.Ddun;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.repository.DdunRepository;
@@ -9,9 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Log4j2
@@ -53,7 +50,6 @@ public class DdunServiceImpl implements DdunService{
             ddunDTO.setInputAmount(0L);
             ddunDTO.setMember(mno);
             Ddun ddun = dtoToEntity(ddunDTO);
-            log.info("whyyy"+ddun);
             return ddunRepository.save(ddun).getDdunId();
         } else {
             return null;

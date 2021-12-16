@@ -72,7 +72,7 @@ public class QnaBoardController {
 
     //카테고리 별 리스트 출력
     @GetMapping("/qna/list")
-    public String cateList(Model model, PageRequestDTO requestDTO, Long qnaNo, @AuthenticationPrincipal PrincipalDetails principal) {
+    public String cateList(Model model, PageRequestDTO requestDTO, @AuthenticationPrincipal PrincipalDetails principal) {
 
         //위시리스트
         if (principal != null) {

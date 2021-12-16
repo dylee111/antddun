@@ -3,6 +3,7 @@ package com.ds.antddun.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Setter;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Sort;
 @Builder
 @AllArgsConstructor
 @Data
+@Setter
 public class PageRequestDTO {
 
     private int page;
