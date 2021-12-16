@@ -19,14 +19,6 @@
         const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
         const pwdReg = /^(?=.*[a-zA-Z])(?=.*[~!@#$%^&*=-])(?=.*[0-9]).{8,15}$/;
 
-/*     엔터누르면 로그인   */
-        $(document).keydown(function(objEvent){
-            if (objEvent.keyCode == 13 ){
-                $("#btnSubmit").click();
-            }
-        });
-
-
         $("#btnSubmit").click(function() {
 
             if(username.val() == "") {
@@ -52,6 +44,13 @@
                 return false;
             }
             $("#frm").submit();
+        });
+
+        /*     엔터누르면 로그인   */
+        $(document).keydown(function(objEvent){
+            if (objEvent.keyCode == 13 ){
+                $("#btnSubmit").click();
+            }
         });
 
   });

@@ -27,7 +27,6 @@ public class LoginController {
     @Autowired
     private MemberService memberService;
 
-
     @Autowired
     private PrincipalDetailsService principalDetailsService;
 

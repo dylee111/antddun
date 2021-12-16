@@ -3,7 +3,9 @@ package com.ds.antddun.controller;
 import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.dto.MemberWishListDTO;
+import com.ds.antddun.dto.PageRequestDTO;
 import com.ds.antddun.entity.Ddun;
+import com.ds.antddun.entity.JobList;
 import com.ds.antddun.entity.MemberWishList;
 import com.ds.antddun.service.*;
 import lombok.extern.log4j.Log4j2;
@@ -40,15 +42,26 @@ public class MemberController {
     private DdunService ddunService;
 
     @Autowired
+    private QnaService qnaService;
+
+    @Autowired
     private MessageService messageService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("")
-    public String main(Model model, @AuthenticationPrincipal PrincipalDetails principal) {
-            // index sosojob slick
-            model.addAttribute("sosoCateList", sosoCateService.getCateList());
+    public String main(Model model, @AuthenticationPrincipal PrincipalDetails principal, PageRequestDTO requestDTO){
+
+        // index sosojob slick
+        model.addAttribute("sosoCateList", sosoCateService.getCateList());
+
+        List<JobList> list = jobListService.getList();
+        model.addAttribute("jobList", list);
+        model.addAttribute("getSmallList", qnaService.getFiveList(requestDTO));
+
+
+
         if (principal != null) {
 
             List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
