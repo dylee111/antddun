@@ -26,6 +26,7 @@ public interface QnaReplyService {
                 .replyText(qnaReplyDTO.getReplyText())
                 .member(Member.builder().mno(qnaReplyDTO.getMno()).build())
                 .qnaBoard(QnaBoard.builder().qnaNo(qnaReplyDTO.getQnaNo()).build())
+                .isSelected(false)
                 .build();
         return qnaReply;
     }

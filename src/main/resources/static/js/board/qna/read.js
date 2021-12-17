@@ -94,7 +94,6 @@ $(document).ready(function() {
 
 
 /*---------------- read.js -----------------*/
-
 // 댓글 등록
     $("#btn_reply").click(function() {
         console.log($(".form-control").val());
@@ -181,6 +180,14 @@ $(document).ready(function() {
             }
         }) // ajax end.
     }); // reply-modify click event
+
+/*---------------- modifyForm.js -----------------*/
+    $('#btn-modifyCancel').click(function(){
+         var confirmCancel = confirm("수정을 취소하시겠습니까?");
+         if(confirmCancel){
+            history.go(-1);
+         }
+    })
 
 
 }); // end.

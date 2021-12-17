@@ -274,7 +274,8 @@
                         <div class="card-body">
                             <table class="table" style="table-layout: fixed">
                                 <tbody>
-                                <tr th:each="boardList : ${getSmallList.dtoList} " th:onclick="|javascript:read('${boardList.qnaNo}')|">
+                                <tr class="pointer hoverGray qnaBoardRow" th:each="boardList : ${getSmallList.dtoList} "
+                                                                        th:onclick="|javascript:qnaRead('${boardList.qnaNo}')|">
                                     <td class="category"><span class="tag_b">[[${boardList.job}]]</span></td>
                                     <span id="qnaNo" hidden th:text="${boardList.qnaNo}"></span>
                                     <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
@@ -477,16 +478,16 @@
 </body>
 
 <script th:inline="javascript">
-        var contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
+var contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
 
-           //게시물 조회
-           function read(qnaNo){
-                /*[+
-                var readurl = contextPath + [[@{/member/qna/read}]] +
-                    "?qnaNo=" +qnaNo ;
-                +]*/
+   //게시물 조회
+   function qnaRead(qnaNo){
+        /*[+
+        var readurl = contextPath + [[@{/member/qna/read}]] +
+            "?qnaNo=" +qnaNo ;
+        +]*/
 
-                location.href=readurl;
-            }
-        </script>
+        location.href=readurl;
+    }
+</script>
 </html>

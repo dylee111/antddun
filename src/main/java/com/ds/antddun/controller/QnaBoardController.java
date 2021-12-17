@@ -165,11 +165,13 @@ public class QnaBoardController {
 
     //게시물 수정 폼
     @GetMapping("/qna/modifyForm" )
-    public void modifyForm(Long qnaNo, Model model ){
+    public void modifyForm(QnaBoardDTO qnaBoardDTO, Model model){
         //카테고리
         model.addAttribute("jobList", jobListService.getList());
         //게시판 정보
-        model.addAttribute("boardList", qnaService.getBoard(qnaNo));
+        model.addAttribute("boardList", qnaService.getBoard(qnaBoardDTO.getQnaNo()));
+        //총 뚠
+        model.addAttribute("totalDdun", ddunService.totalAmountByMno(qnaBoardDTO.getMno()));
     }
 
     //게시물 수정

@@ -174,10 +174,10 @@
 
             $(".removeBtn").click(function(){
                 if(!confirm("삭제하시겠습니까?")){
-                  return;
+                    return;
+                } else {
+                    actionForm.attr("action", contextPath + "/member/qna/remove").attr("method","get").submit();
                 }
-
-                actionForm.attr("action", contextPath + "/member/qna/remove").attr("method","get").submit();
             });
 
             $(".modifyBtn").click(function(){

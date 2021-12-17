@@ -9,6 +9,10 @@
     cursor: pointer;
 }
 
+.qnaCardList:hover {
+    background: #f2f2f26b;
+}
+
 .cate {
     padding: 0 7px;
     color: #919191;

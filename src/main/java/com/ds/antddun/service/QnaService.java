@@ -41,6 +41,7 @@ public interface QnaService {
                 .title(qnaBoardDTO.getTitle())
                 .content(qnaBoardDTO.getContent())
                 .ddun(qnaBoardDTO.getDdun())
+                .isSolved(false)
                 .viewCnt(qnaBoardDTO.getViewCnt())
                 .build();
         System.out.println("dtoToEntity>>"+qnaBoardDTO);
@@ -62,6 +63,7 @@ public interface QnaService {
                 .regDate(qnaBoard.getRegDate())
                 .viewCnt(qnaBoard.getViewCnt())
                 .modDate(qnaBoard.getModDate())
+                .isSolved(qnaBoard.isSolved())
                 .ddun(qnaBoard.getDdun())
                 .build();
         dto.setLikesCnt(likesCnt.intValue());

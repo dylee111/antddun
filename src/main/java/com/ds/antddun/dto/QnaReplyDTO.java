@@ -13,5 +13,6 @@ QnaReplyDTO {
     private String replyText;
     private Long mno;
     private Long qnaNo;
+    private boolean isSelected;
     private LocalDateTime regDate, modDate;
 }
