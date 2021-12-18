@@ -181,6 +181,7 @@ $(document).ready(function() {
 
 
     $('.selectAnswer').click(function(){
+
         var parent = $(this).parent().parent(); //ms-3
         var replyNo = parent.children(".reply-no").val();
         var replyText = parent.children(".reply-text-box");
@@ -189,32 +190,40 @@ $(document).ready(function() {
         var cancel_btn = $('.cancel_btn');
         var buy_container = $('.buy_container');
 
-        console.log("replyNo:" + replyNo + "replier:" + replier)
+        console.log("replyNo:" + replyNo + "replier:" + replier);
 
-        buy_container.css('display','block');
+        $('.buy_container').show();
+        $('.dim').show();
 
        $('.buy_btn').click(function(){
-        console.log("buy_btn");
-        
-//        $.ajax({
-//            url: "/antddun/member/qna/selected/" + replyNo,
-//            method: "post",
-//            success: function(result) {
-//                if(result === "delete"){
-//                console.log(replyNo); //잘나옴
-//                    alert("댓글이 삭제되었습니다.");
-//                    self.location.reload();
-//                }
-//            }
-//        }) // ajax end.
 
-        alert("채택하였습니다.");
-        self.location.reload();
-       })
+        var ddun = parseInt($("#ddun").val());
+        var title = $('.title').text();
 
-       $('.btn_close').click(function(){
-        console.log("btn_close");
-       })
+               $.ajax({
+                      url: "/antddun/member/qna/selected/",
+                      type: "GET",
+                      data: {
+                          "amount": ddun,
+                          "title": title,
+                          "qnaNo": qnaNo,
+                          "replyNo": replyNo,
+                          "replier": replier
+                      },
+                      success: function(data) {
+                        if(data == "selected"){
+                            alert("채택하였습니다.");
+                            self.location.reload();
+                        }
+                    }
+               }); // ajax end.
+
+       }) //btn_buy end.
+
+        $('.btn_close').click(function(){
+            $('.buy_container').hide();
+            $('.dim').hide();
+        });
 
 
     })

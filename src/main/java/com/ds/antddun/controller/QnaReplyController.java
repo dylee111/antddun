@@ -42,4 +42,16 @@ public class QnaReplyController {
         qnaReplyService.deleteByQnaRno(qnaRno);
         return new ResponseEntity<>("delete", HttpStatus.OK);
     }
+
+/*    //뚠 채택
+    @PostMapping("/qna/selected/{replyNo}")
+    public ResponseEntity<String> selectAnswer(@PathVariable("replyNo") Long replyNo,
+                                               @PathVariable("replier") Long replier) {
+        log.info("replyNo>>" + replyNo);
+        log.info("replier>>" + replier);
+        return new ResponseEntity<>("selected", HttpStatus.OK);
+    }*/
+
+
+
 }

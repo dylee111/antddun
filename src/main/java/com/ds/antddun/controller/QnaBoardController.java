@@ -200,13 +200,6 @@ public class QnaBoardController {
         return "redirect:/qna/list/all";
     }
 
-/*    //뚠 채택
-    @PostMapping("/member/qna/selected/" {qnaRno}")
-    public ResponseEntity<String> selectAnswer(@PathVariable("qnaRno") Long qnaRno,
-                                              @RequestBody QnaReplyDTO qnaReplyDTO) {
-
-        return new ResponseEntity<>("replyModify", HttpStatus.OK);
-    }*/
 
 
 }
