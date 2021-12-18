@@ -95,4 +95,4 @@ insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_M
 insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 22', 1, 2, 100, FALSE);
 insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 23', 2,	1, 100, FALSE);
 insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 24', 2,	2, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 25', 2,	1, 100, FALSE);
+
