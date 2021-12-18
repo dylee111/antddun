@@ -44,7 +44,10 @@
                 </div>
 
                 <!-- 뚠 거래 하기 -->
-                <div class="ddun">
+                <div th:if="${boardList.replyCnt} != 0" class="disableDdunTitle">*뚠 수정 불가
+                    <input type="text" readonly name="ddun" class="input_ddun disabledDdun" th:value="${boardList.ddun}">
+                </div>
+                <div class="ddun" th:unless="${boardList.replyCnt} != 0">
                     <img th:src="@{/assets/coins.png}" width="25rem"><span class="betDdunTitle">&nbsp뚠 설정&nbsp</span>
                     <a class="btn_helper" role="button">
                         <img src="https://ssl.pstatic.net/static/kin/09renewal/ico_help.gif" width="17" height="17" alt="도움말">

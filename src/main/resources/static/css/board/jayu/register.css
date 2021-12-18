@@ -259,7 +259,7 @@ option{
     font-size:15px;
 }
 
-.btn-modifyCancel {
+#btn-modifyCancel {
     background: #cf995f;
     border-color: #cf995f;
     margin-right: 5px;
@@ -271,4 +271,22 @@ a.charge {
     border-radius: 5px;
     padding: 3px 4px;
     margin-left: 36px;
+}
+
+.disabledDdun {
+    background: #d3d3d34f;
+    width: 100px;
+    font-family: 'ELAND_Choice_M';
+}
+
+.disableDdunTitle {
+    font-family: 'ELAND_Choice_M';
+    font-weight: bold;
+    color: #eb0000;
+    line-height: 40px;
+    font-size: 17px;
+}
+#btn-modifyCancel:hover {
+    background: #644444;
+    border-color: #644444;
 }

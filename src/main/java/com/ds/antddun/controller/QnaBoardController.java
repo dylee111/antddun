@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -164,22 +165,22 @@ public class QnaBoardController {
 
 
     //게시물 수정 폼
-    @GetMapping("/qna/modifyForm" )
-    public void modifyForm(QnaBoardDTO qnaBoardDTO, Model model){
+    @GetMapping("/member/qna/modifyForm")
+    public String modifyForm(QnaBoardDTO qnaBoardDTO, Model model){
         //카테고리
         model.addAttribute("jobList", jobListService.getList());
         //게시판 정보
-        model.addAttribute("boardList", qnaService.getBoard(qnaBoardDTO.getQnaNo()));
+        QnaBoardDTO boardList = qnaService.getBoard(qnaBoardDTO.getQnaNo());
+        model.addAttribute("boardList", boardList);
         //총 뚠
         model.addAttribute("totalDdun", ddunService.totalAmountByMno(qnaBoardDTO.getMno()));
+        return "/qna/modifyForm";
     }
 
     //게시물 수정
     @PostMapping("/member/qna/modify")
     public String modifyBoard(QnaBoardDTO qnaBoardDTO, @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
                               @AuthenticationPrincipal PrincipalDetails principal) {
-        log.info("postmodify................");
-        log.info("dto:::"+ qnaBoardDTO);
         qnaService.modify(qnaBoardDTO, principal.getMember());
 
         Long qnaNo = qnaBoardDTO.getQnaNo();

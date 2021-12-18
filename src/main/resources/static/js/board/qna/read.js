@@ -64,8 +64,7 @@ $(document).ready(function() {
             input_box.focus();
             return false;
         } else if (input_ddun > 0) {
-            var confirmRegi = confirm(input_ddun + "뚠으로 질문하시겠습니까?");
-            if(!confirmRegi){
+            if(!confirm(input_ddun + "뚠으로 질문하시겠습니까?")){
               event.preventDefault();
               input_box.focus();
               return false;

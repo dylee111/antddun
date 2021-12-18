@@ -70,7 +70,7 @@
                 </div>
 
                 <!-- Comments section-->
-
+                <button type="button" class="checkBtn">checkbtn</button>
                 <div class="replyCnt">댓글 [[${boardList.replyCnt}]]개 </div>
                 <hr>
 
@@ -105,6 +105,7 @@
                             <div class="innerText">
 
                                 <div class="ms-3" >
+<!--                                    <div th:id="qnaRno + ${replyList.qnaRno}" name="qnaRno">qnaRno[[${replyList.qnaRno}]]</div>-->
                                     <input type="hidden" class="reply-no" name="qnaRno" th:value="${replyList.qnaRno}">
                                     <input type="hidden" class="replier" name="member" th:value="${replyList.member.mno}">
                                     <div class="replier leftSection" >[[${replyList.member.job.job}]] [[${replyList.member.experience}]]년차 [[${replyList.member.lastName}]]개미</div>
@@ -171,8 +172,22 @@
             var actionForm = $("form");
             var contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
 
+            var qnaNo = $("#qnaNo").val();
+
+            var bmno = $("#mno").val();
+            var rno = $(".reply-no").val(); //type-> string
+            var rmno = $(".replier").val();
+            var pickAnswer = $(".pickAnswer").val();
+
+            var qnaRno = "qnaRno" + rno;
+<!--        var certainQnaRno = $("."+ qnaRno).val(); -->
 
             $(".removeBtn").click(function(){
+                if(pickAnswer != null){
+                    alert("댓글이 달렸을 시 삭제 불가능합니다.");
+                    return false;
+                }
+
                 if(!confirm("삭제하시겠습니까?")){
                     return;
                 } else {
@@ -184,16 +199,18 @@
                 if(!confirm("수정하시겠습니까?")){
                   return;
                 }
-               actionForm.attr("action", contextPath + "/qna/modifyForm").attr("method","get").submit();
-
-            });
+                if(pickAnswer != null){
+                    alert("댓글이 달렸을 시 뚠 수정은 불가능합니다.");
+                }
 
                 /*[+
-                var readurl = contextPath + [[@{/member/qna/read}]] +
-                    "?qnaNo=" +qnaNo + "&page=" + page + "&keyword=" + keyword;
+                var readurl = [[@{/member/qna/modifyForm}]] +
+                    "?qnaNo=" +qnaNo;
                 +]*/
 
                 location.href=readurl;
+            });
+
         });
         </script>
         <!-- 본문 끝 -->
