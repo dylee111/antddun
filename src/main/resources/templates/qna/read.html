@@ -70,7 +70,6 @@
                 </div>
 
                 <!-- Comments section-->
-                <button type="button" class="checkBtn">checkbtn</button>
                 <div class="replyCnt">댓글 [[${boardList.replyCnt}]]개 </div>
                 <hr>
 
@@ -105,7 +104,6 @@
                             <div class="innerText">
 
                                 <div class="ms-3" >
-<!--                                    <div th:id="qnaRno + ${replyList.qnaRno}" name="qnaRno">qnaRno[[${replyList.qnaRno}]]</div>-->
                                     <input type="hidden" class="reply-no" name="qnaRno" th:value="${replyList.qnaRno}">
                                     <input type="hidden" class="replier" name="member" th:value="${replyList.member.mno}">
                                     <div class="replier leftSection" >[[${replyList.member.job.job}]] [[${replyList.member.experience}]]년차 [[${replyList.member.lastName}]]개미</div>
@@ -113,7 +111,7 @@
                                         <span class="reply-modify" th:if="${preMem} == ${replyList.member.mno}">수정 |</span>
                                         <span class="reply-delete" th:if="${preMem} == ${replyList.member.mno}">삭제</span>
                                         <span th:if="${preMem} == ${boardList.mno} and ${preMem} != ${replyList.member.mno}"
-                                              class="pickAnswer">채택 ✔</span>
+                                              class="selectAnswer">채택 ✔</span>
                                     </div>
                                     <textarea onkeyup="this.style.height = this.scrollHeight + 'px';"
                                               class="reply-text-box" name="replyText" readonly>[[${replyList.replyText}]]</textarea>
@@ -143,11 +141,8 @@
 
 <!--   채택하기    -->
         <div class="card-body bg-white mt-0 shadow buy_container" style="display: none;">
-            <div>
-                <img th:src="@{/assets/close.png}" class="btn_close"/>
-            </div>
-            <div>
-                <p class="btn">구매하기</p>
+            <div style="text-align:end">
+                <img th:src="@{/assets/close.png}" class="btn_close" width="20px"/>
             </div>
             <div style="margin-top: 30px; text-align: center;">
                 <!--내용-->
@@ -159,28 +154,17 @@
                         </span>
                     </div>
 
-                    <button type="button" class="buy_btn" style="margin-bottom: 30px;">구매하기</button>
+                    <button type="button" class="btn buy_btn" style="margin-bottom: 30px;">구매하기</button>
                 </div>
             </div>
         </div>
-        <div class="dim" style="display: none;"></div>
 
 
         <script th:inline="javascript">
 
          $(document).ready(function() {
-            var actionForm = $("form");
-            var contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
-
             var qnaNo = $("#qnaNo").val();
-
-            var bmno = $("#mno").val();
-            var rno = $(".reply-no").val(); //type-> string
-            var rmno = $(".replier").val();
-            var pickAnswer = $(".pickAnswer").val();
-
-            var qnaRno = "qnaRno" + rno;
-<!--        var certainQnaRno = $("."+ qnaRno).val(); -->
+            var pickAnswer = $(".pickAnswer").val(); //채택을 할 수 있는 댓글 여부
 
             $(".removeBtn").click(function(){
                 if(pickAnswer != null){
@@ -191,7 +175,13 @@
                 if(!confirm("삭제하시겠습니까?")){
                     return;
                 } else {
-                    actionForm.attr("action", contextPath + "/member/qna/remove").attr("method","get").submit();
+
+                    /*[+
+                    var readurl = [[@{/member/qna/remove}]] +
+                        "?qnaNo=" +qnaNo;
+                    +]*/
+
+                    location.href=readurl;
                 }
             });
 

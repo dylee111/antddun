@@ -36,7 +36,7 @@ $(document).ready(function() {
         count = 0;
     });
 
-//뚠 거래 버튼
+//게시물 등록 시 ! 뚠 거래 버튼
     $("#btn-register").click(function(event) {
         var title = $('#title').val();
         var input_box = $(".input_ddun");
@@ -88,7 +88,6 @@ $(document).ready(function() {
         $("form").submit();
 
     }); //#btn-register".click end
-
 
 
 
@@ -179,6 +178,48 @@ $(document).ready(function() {
             }
         }) // ajax end.
     }); // reply-modify click event
+
+
+    $('.selectAnswer').click(function(){
+        var parent = $(this).parent().parent(); //ms-3
+        var replyNo = parent.children(".reply-no").val();
+        var replyText = parent.children(".reply-text-box");
+        var replier = parent.children(".replier").val();
+
+        var cancel_btn = $('.cancel_btn');
+        var buy_container = $('.buy_container');
+
+        console.log("replyNo:" + replyNo + "replier:" + replier)
+
+        buy_container.css('display','block');
+
+       $('.buy_btn').click(function(){
+        console.log("buy_btn");
+        
+//        $.ajax({
+//            url: "/antddun/member/qna/selected/" + replyNo,
+//            method: "post",
+//            success: function(result) {
+//                if(result === "delete"){
+//                console.log(replyNo); //잘나옴
+//                    alert("댓글이 삭제되었습니다.");
+//                    self.location.reload();
+//                }
+//            }
+//        }) // ajax end.
+
+        alert("채택하였습니다.");
+        self.location.reload();
+       })
+
+       $('.btn_close').click(function(){
+        console.log("btn_close");
+       })
+
+
+    })
+
+
 
 /*---------------- modifyForm.js -----------------*/
     $('#btn-modifyCancel').click(function(){
