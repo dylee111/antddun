@@ -24,6 +24,8 @@ public class QnaReply extends BaseEntity{
 
     private String replyText;
 
+    private boolean isSelected;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private Member member;
 

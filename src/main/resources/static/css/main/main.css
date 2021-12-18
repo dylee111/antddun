@@ -412,10 +412,27 @@ strong.impact {
 }
 
 .data {
-    font-size:13px;
+    font-size: 13px;
     width: 55px;
     text-align: center;
     line-height: 1.9;
+    white-space: nowrap;
+}
+
+td.data:nth-child(3) {
+    text-align: left;
+}
+
+.qnaBoardRow td:not(:nth-of-type(2)) {
+    font-family: 'ELAND_Choice_M';
+}
+
+.hoverGray:hover {
+    background: rgb(247 247 247);
+}
+
+.pointer {
+    cursor: pointer;
 }
 
 .more{

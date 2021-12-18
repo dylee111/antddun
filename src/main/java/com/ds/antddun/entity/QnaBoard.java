@@ -33,6 +33,8 @@ public class QnaBoard extends BaseEntity {
     private int viewCnt;
     private int ddun;
 
+    private boolean isSolved;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "jobList_jno")
     private JobList jobList;

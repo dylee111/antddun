@@ -6,6 +6,7 @@
         <link th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
         <!-- 페이지 css/ js 추가 -->
         <link rel="stylesheet" th:href="@{/css/board/jayu/register.css}">
+        <script th:src="@{/js/board/qna/read.js}"></script>
 
         <!-- summernote css/ js -->
         <link rel="stylesheet" th:href="@{/css/board/summernote/summernote-lite.css}">
@@ -42,18 +43,37 @@
                               class="content" name="content" required></textarea>
                 </div>
 
-                <!--뚠-->
-                <div class="form-group">
-                    <img th:src="@{/assets/coins.png}" width="25rem">
-                    <input id="ddun" name="ddun" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" required
-                           type="text" th:value="${boardList.ddun}"> 뚠</input>
+                <!-- 뚠 거래 하기 -->
+                <div th:if="${boardList.replyCnt} != 0" class="disableDdunTitle">*뚠 수정 불가
+                    <input type="text" readonly name="ddun" class="input_ddun disabledDdun" th:value="${boardList.ddun}">
+                </div>
+                <div class="ddun" th:unless="${boardList.replyCnt} != 0">
+                    <img th:src="@{/assets/coins.png}" width="25rem"><span class="betDdunTitle">&nbsp뚠 설정&nbsp</span>
+                    <a class="btn_helper" role="button">
+                        <img src="https://ssl.pstatic.net/static/kin/09renewal/ico_help.gif" width="17" height="17" alt="도움말">
+                    </a>
+
+                    <div class="info_helper" style="display:none;">
+                        <p>게시물에 답변이 달리면 <br> 게시물 삭제 및 뚠 수정은 불가능 합니다.</p>
+                        <a class="button_close" role="button">
+                            <img src="https://ssl.pstatic.net/static/kin/09renewal/btn_close_layer.gif" width="19" height="19" alt="도움창 닫기">
+                        </a>
+                    </div>
+
+                    <input type="text" id="input_ddun" class="input_ddun" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+                           name="ddun" required>
+                    <div class="my_ddun" th:if="${totalDdun} != null">보유 뚠 : <span id="total_ddun">[[${totalDdun}]]</span></div>
+                    <div class="my_ddun" th:unless=" ${totalDdun} != null ">보유 뚠 : 0 <a class="charge" th:href="@{/member/mypage/wallet}">충전하러가기</a></div>
                 </div>
 
+                <hr>
                 <!--작성완료 버튼-->
                 <button type="submit" class="btn btn-save btn-primary" >수정</button>
+                <button type="button" id="btn-modifyCancel" class="btn btn-primary" >취소</button>
             </form>
 
         </div>
+
     </th:block>
 </th:block>
 

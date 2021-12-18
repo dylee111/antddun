@@ -45,7 +45,6 @@ public class QnaReplyServiceImpl implements QnaReplyService{
 
         if (result.isPresent()) {
             QnaReply qnaReply = result.get();
-            log.info("wondering"+qnaReply);
             qnaReply.setReplyText(qnaReplyDTO.getReplyText());
             qnaReplyRepository.save(qnaReply);
         }

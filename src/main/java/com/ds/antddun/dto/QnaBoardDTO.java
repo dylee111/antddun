@@ -30,6 +30,7 @@ public class QnaBoardDTO {
     private int viewCnt;
     private int likesCnt;
     private int replyCnt;
+    private boolean isSolved;
 
     private LocalDateTime regDate;
     private LocalDateTime modDate;
