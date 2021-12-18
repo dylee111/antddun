@@ -39,6 +39,7 @@
                             </span>
                             </div>
                         </div>
+                        <input id="ddun" type="hidden" th:value="${boardList.ddun}">
                         <div class="rightSection coinBox" th:if="${boardList.ddun}!=0">
                             <img class="coin" th:src="@{/assets/coins.png}">&nbsp;[[${boardList.ddun}]]
                         </div>
@@ -144,20 +145,20 @@
             <div style="text-align:end">
                 <img th:src="@{/assets/close.png}" class="btn_close" width="20px"/>
             </div>
-            <div style="margin-top: 30px; text-align: center;">
-                <!--내용-->
-                <div class="form-group">
-                    <div>
-                        <span class="buy_alert" >
-                            <span class="buy_ddun">[[${boardList.ddun}]]뚠</span>으로<br>
-                            채택하시겠습니까?
-                        </span>
-                    </div>
-
-                    <button type="button" class="btn buy_btn" style="margin-bottom: 30px;">구매하기</button>
-                </div>
+            <!-- 제목 -->
+            <div>
+                <p class="qna_buy_title">채택하기</p>
+            </div>
+            <!--내용-->
+            <div class="buy-content-box">
+                <span class="buy_alert" >
+                    <span class="buy_ddun">[[${boardList.ddun}]]뚠</span>으로<br>채택하시겠습니까?
+                </span>
+                <br>
+                <button type="button" class="btn buy_btn" style="margin-bottom: 30px;">확인</button>
             </div>
         </div>
+        <div class="dim" style="display: none;"></div>
 
 
         <script th:inline="javascript">

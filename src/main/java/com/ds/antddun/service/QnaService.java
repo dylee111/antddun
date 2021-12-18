@@ -32,6 +32,8 @@ public interface QnaService {
     void modify(QnaBoardDTO qnaBoardDTO, Member mno);
     void deleteAll(Long qnaNo, Long mno);
 
+    //뚠 채택 후 세팅
+    void setSolvedSelected(Long qnaNo, Long replyNo);
 
     default QnaBoard dtoToEntity(QnaBoardDTO qnaBoardDTO) {
 
@@ -72,5 +74,6 @@ public interface QnaService {
 
         return dto;
     }
+
 
 }

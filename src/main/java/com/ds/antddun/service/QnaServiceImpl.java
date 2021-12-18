@@ -4,6 +4,7 @@ import com.ds.antddun.dto.*;
 import com.ds.antddun.entity.JobList;
 import com.ds.antddun.entity.Member;
 import com.ds.antddun.entity.QnaBoard;
+import com.ds.antddun.entity.QnaReply;
 import com.ds.antddun.repository.JobListRepository;
 import com.ds.antddun.repository.QnaBoardRepository;
 import com.ds.antddun.repository.QnaReplyRepository;
@@ -148,5 +149,22 @@ public class QnaServiceImpl implements QnaService {
         qnaBoardRepository.deleteById(qnaNo);
     }
 
+    @Transactional
+    @Override
+    public void setSolvedSelected(Long qnaNo, Long replyNo) {
+        Optional<QnaBoard> result = qnaBoardRepository.findById(qnaNo);
+        if (result.isPresent()) {
+            QnaBoard qnaBoard = result.get();
+            qnaBoard.setSolved(true);
+            qnaBoardRepository.save(qnaBoard);
+        }
+
+        Optional<QnaReply> result2 = qnaReplyRepository.findById(replyNo);
+        if (result.isPresent()) {
+            QnaReply qnaReply = result2.get();
+            qnaReply.setSelected(true);
+            qnaReplyRepository.save(qnaReply);
+        }
+    }
 
 }

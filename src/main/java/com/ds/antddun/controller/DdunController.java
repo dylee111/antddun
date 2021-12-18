@@ -2,8 +2,6 @@ package com.ds.antddun.controller;
 
 import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.DdunDTO;
-import com.ds.antddun.dto.QnaBoardDTO;
-import com.ds.antddun.entity.SosoJobBoard;
 import com.ds.antddun.service.DdunService;
 import com.ds.antddun.service.QnaService;
 import com.ds.antddun.service.SosoJobService;
@@ -13,10 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @Controller
 @Log4j2
@@ -74,5 +69,33 @@ public class DdunController {
         ddunService.sosoBuy(principalDetails.getMember(), amount, ddunDTO);
         return new ResponseEntity<>("구매 성공", HttpStatus.OK);
     }
+
+
+    @ResponseBody
+    @GetMapping("/qna/selected")
+    public ResponseEntity<String> selectAnswer(@RequestParam("title") String title,
+                                             @RequestParam("amount") Long amount,
+                                             @RequestParam("qnaNo") Long qnaNo,
+                                             @RequestParam("replyNo") Long replyNo,
+                                             @RequestParam("replier") Long replier,
+                                             DdunDTO ddunDTO) {
+        ddunDTO.setContent(title);
+        ddunService.sosoSell(replier, amount, ddunDTO);
+        qnaService.setSolvedSelected(qnaNo, replyNo);
+
+        return new ResponseEntity<>("selected", HttpStatus.OK);
+    }
+
+/*    @ResponseBody
+    @GetMapping("/qna/selected/{replyNo}")
+    public String selectAnswer(Long replyNo, Long replier, DdunDTO ddunDTO){
+        log.info("replyNo>>" + replyNo);
+        log.info("replier>>" + replier);
+
+        ddunDTO.setContent(title);
+        ddunService.sosoBuy(principalDetails.getMember(), amount, ddunDTO);
+
+        return "selected";
+    }*/
 
 }

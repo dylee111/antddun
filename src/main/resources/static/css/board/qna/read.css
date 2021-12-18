@@ -233,3 +233,50 @@ textarea:focus {
     font-family: 'ELAND_Choice_M';
     margin-top: 10px;
 }
+
+.buy_container {
+    margin: 0 auto;
+    width: 343px;
+    height: 291px;
+    border-radius: 15px;
+    position: fixed;
+    left: 45%;
+    top: 60%;
+    z-index: 100;
+    transform: translate(-50%, -50%);
+}
+
+.dim {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 99;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+}
+
+.qna_buy_title {
+    text-align: center;
+    font-family: 'ELAND_Choice_M';
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 20px 0 15px 0;
+    border-bottom: 2px solid #dfdfdf;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.buy-content-box{
+    margin-top: 30px;
+    text-align: center;
+    font-family: 'ELAND_Choice_M';
+}
+
+.buy_ddun {
+    font-weight: bold;
+}
+
+.buy_alert {
+    font-size: 17px;
+}
