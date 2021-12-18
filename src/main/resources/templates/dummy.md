@@ -1,3 +1,5 @@
+
+<h2>카테고리</h2>
 insert into job_list(jno, job) values(1,'경영지원');
 insert into job_list(jno, job) values(2,'마케팅');
 insert into job_list(jno, job) values(3,'IT');
@@ -32,6 +34,8 @@ insert into soso_category(cate_no, soso_cate_name) values(CATEGORY_SEQ.NEXTVAL,'
 insert into soso_category(cate_no, soso_cate_name) values(CATEGORY_SEQ.NEXTVAL,'실무교육');
 
 
+
+<h2>게시물 더미 (소소, 자유, 정보)</h2>
 insert into soso_job_board(SOSO_NO,MODDATE,REGDATE,CNT,CONTENT,DDUN,TITLE,CATEGORY_CATE_NO,MEMBER_MNO) values(SOSOJOB_SEQ.NEXTVAL, sysdate, sysdate,0,'내용입니다 1',	10000,	'제목입니다 1',	1,	1);
 insert into soso_job_board(SOSO_NO,MODDATE,REGDATE,CNT,CONTENT,DDUN,TITLE,CATEGORY_CATE_NO,MEMBER_MNO) values(SOSOJOB_SEQ.NEXTVAL, sysdate, sysdate,0,'내용입니다 2',	10001,	'제목입니다 2',	1,	1);
 insert into soso_job_board(SOSO_NO,MODDATE,REGDATE,CNT,CONTENT,DDUN,TITLE,CATEGORY_CATE_NO,MEMBER_MNO) values(SOSOJOB_SEQ.NEXTVAL, sysdate, sysdate,0,'내용입니다 3',	10002,	'제목입니다 3',	1,	1);
@@ -47,93 +51,48 @@ insert into soso_job_board(SOSO_NO,MODDATE,REGDATE,CNT,CONTENT,DDUN,TITLE,CATEGO
 insert into soso_job_board(SOSO_NO,MODDATE,REGDATE,CNT,CONTENT,DDUN,TITLE,CATEGORY_CATE_NO,MEMBER_MNO) values(SOSOJOB_SEQ.NEXTVAL, sysdate, sysdate,0,'내용입니다 13',10012,	'제목입니다 13',	1,	1);
 insert into soso_job_board(SOSO_NO,MODDATE,REGDATE,CNT,CONTENT,DDUN,TITLE,CATEGORY_CATE_NO,MEMBER_MNO) values(SOSOJOB_SEQ.NEXTVAL, sysdate, sysdate,0,'내용입니다 14',10013,	'제목입니다 14',	1,	1);
 
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 4',
-1, 	2);
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 4',
-1, 	1);
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 6',
-1, 	2);
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 7',
-1, 	1);
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 8',
-1, 	2);
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 9',
-1, 	1);
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 9',
-1, 	2);
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 11',
-1, 	1);
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 12',
-1, 	2);
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 13',
-1, 	1);
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 14',
-1, 	2);
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 15',
-1, 	1);
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 16',
-1, 	2);
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 17',
-1, 	1);
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 18',
-1, 	2);
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 19',
-1, 	1);
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 20',
-1, 	2);
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 21',
-1, 	1);
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 22',
-1, 	2);
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 23',
-2,	1);
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 24',
-2,	2);
-insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 25',
-2,	1);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 4', 1, 	2);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 4', 1, 	1);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 6', 1, 	2);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 7', 1, 	1);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 8', 1, 	2);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 9', 1, 	1);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 9', 1, 	2);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 11', 1, 1);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 12', 1, 2);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 13', 1, 1);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 14', 1, 2);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 15', 1, 1);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 16', 1, 2);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 17', 1, 1);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 18', 1, 2);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 19', 1, 1);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 20', 1, 2);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 21', 1, 1);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 22', 1, 2);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 23', 2,	1);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 24', 2,	2);
+insert into jayu_board(JAYU_NO,MODDATE,REGDATE,CONTENT,TITLE,JAYU_CATEGORY_JAYU_CATE_NO,MEMBER_MNO) values(JAYU_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 25', 2,	1);
 
-
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 4',
-1, 	2, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 4',
-1, 	1, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 6',
-1, 	2, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 7',
-1, 	1, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 8',
-1, 	2, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 9',
-1, 	1, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 9',
-1, 	2, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 11',
-1, 	1, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 12',
-1, 	2, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 13',
-1, 	1, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 14',
-1, 	2, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 15',
-1, 	1, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 16',
-1, 	2, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 17',
-1, 	1, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 18',
-1, 	2, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 19',
-1, 	1, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 20',
-1, 	2, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 21',
-1, 	1, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 22',
-1, 	2, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 23',
-2,	1, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 24',
-2,	2, 100, FALSE);
-insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 25',
-2,	1, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 4', 1, 	2, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 4', 1, 	1, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 6', 1, 	2, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 7', 1, 	1, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 8', 1, 	2, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 9', 1, 	1, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 9', 1, 	2, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 11', 1, 1, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 12', 1, 2, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 13', 1, 1, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 14', 1, 2, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 15', 1, 1, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 16', 1, 2, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 17', 1, 1, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 18', 1, 2, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 19', 1, 1, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 20', 1, 2, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 21', 1, 1, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 22', 1, 2, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 23', 2,	1, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 24', 2,	2, 100, FALSE);
+insert into qna_board(qna_no,MODDATE,REGDATE,CONTENT,TITLE,job_list_jno,MEMBER_MNO, DDUN, IS_SOLVED) values(QNA_SEQ.NEXTVAL, sysdate, sysdate,'내용입니다', '제목입니다 25', 2,	1, 100, FALSE);
