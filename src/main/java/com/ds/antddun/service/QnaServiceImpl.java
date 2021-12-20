@@ -143,8 +143,8 @@ public class QnaServiceImpl implements QnaService {
     @Override
     public void deleteAll(Long qnaNo, Long mno)  {
 
-        qnaReplyService.deleteByQnaNo(qnaNo); //해당 게시물의 댓글 삭제
-        qnaLikesService.deleteLikes(qnaNo, mno); //해당 게시물의 좋아요 삭제
+        qnaReplyService.deleteByQnaNo(qnaNo);
+        qnaLikesService.deleteLikes(qnaNo, mno);
 
         qnaBoardRepository.deleteById(qnaNo);
     }
@@ -152,19 +152,13 @@ public class QnaServiceImpl implements QnaService {
     @Transactional
     @Override
     public void setSolvedSelected(Long qnaNo, Long replyNo) {
+
         Optional<QnaBoard> result = qnaBoardRepository.findById(qnaNo);
-        if (result.isPresent()) {
-            QnaBoard qnaBoard = result.get();
-            qnaBoard.setSolved(true);
-            qnaBoardRepository.save(qnaBoard);
-        }
+        result.get().setSolved(true);
 
         Optional<QnaReply> result2 = qnaReplyRepository.findById(replyNo);
-        if (result.isPresent()) {
-            QnaReply qnaReply = result2.get();
-            qnaReply.setSelected(true);
-            qnaReplyRepository.save(qnaReply);
-        }
+        result2.get().setSelected(true);
+
     }
 
 }

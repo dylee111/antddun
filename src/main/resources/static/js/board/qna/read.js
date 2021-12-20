@@ -190,6 +190,8 @@ $(document).ready(function() {
         var cancel_btn = $('.cancel_btn');
         var buy_container = $('.buy_container');
 
+                var title = $('.title').text();
+
         console.log("replyNo:" + replyNo + "replier:" + replier);
 
         $('.buy_container').show();
@@ -200,23 +202,27 @@ $(document).ready(function() {
         var ddun = parseInt($("#ddun").val());
         var title = $('.title').text();
 
-               $.ajax({
-                      url: "/antddun/member/qna/selected/",
-                      type: "GET",
-                      data: {
-                          "amount": ddun,
-                          "title": title,
-                          "qnaNo": qnaNo,
-                          "replyNo": replyNo,
-                          "replier": replier
-                      },
-                      success: function(data) {
-                        if(data == "selected"){
-                            alert("채택하였습니다.");
-                            self.location.reload();
-                        }
+        if(title.length > 20){
+            title = title.substr(0, 20) + "...";
+        }
+
+           $.ajax({
+                  url: "/antddun/member/qna/selected/",
+                  type: "GET",
+                  data: {
+                      "amount": ddun,
+                      "title": title,
+                      "qnaNo": qnaNo,
+                      "replyNo": replyNo,
+                      "replier": replier
+                  },
+                  success: function(data) {
+                    if(data == "selected"){
+                        alert("채택하였습니다.");
+                        self.location.reload();
                     }
-               }); // ajax end.
+                }
+           }); // ajax end.
 
        }) //btn_buy end.
 

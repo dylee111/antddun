@@ -79,23 +79,12 @@ public class DdunController {
                                              @RequestParam("replyNo") Long replyNo,
                                              @RequestParam("replier") Long replier,
                                              DdunDTO ddunDTO) {
-        ddunDTO.setContent(title);
+        ddunDTO.setContent("["+ title + "]" + "글에서 채택되었습니다.");
+        log.info("반복?"+replier);
         ddunService.sosoSell(replier, amount, ddunDTO);
         qnaService.setSolvedSelected(qnaNo, replyNo);
 
         return new ResponseEntity<>("selected", HttpStatus.OK);
     }
-
-/*    @ResponseBody
-    @GetMapping("/qna/selected/{replyNo}")
-    public String selectAnswer(Long replyNo, Long replier, DdunDTO ddunDTO){
-        log.info("replyNo>>" + replyNo);
-        log.info("replier>>" + replier);
-
-        ddunDTO.setContent(title);
-        ddunService.sosoBuy(principalDetails.getMember(), amount, ddunDTO);
-
-        return "selected";
-    }*/
 
 }
