@@ -79,8 +79,7 @@ public class DdunController {
                                              @RequestParam("replyNo") Long replyNo,
                                              @RequestParam("replier") Long replier,
                                              DdunDTO ddunDTO) {
-        ddunDTO.setContent("["+ title + "]" + "글에서 채택되었습니다.");
-        log.info("반복?"+replier);
+        ddunDTO.setContent(title);
         ddunService.sosoSell(replier, amount, ddunDTO);
         qnaService.setSolvedSelected(qnaNo, replyNo);
 

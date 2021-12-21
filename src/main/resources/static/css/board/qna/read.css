@@ -141,10 +141,17 @@ input:focus {
 }
 
 .btn-reply{
-     margin-left: 88%;
-     margin-top: 15px;
-     width: 75px;
-     padding: 2px;
+    margin-left: 88%;
+    margin-top: 15px;
+    width: 75px;
+    background: #b0b3be;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    border: #b0b3be 1px solid;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: 'ELAND_Choice_M';
 }
 
 .replyCnt{
@@ -189,44 +196,59 @@ textarea:focus {
     color: gray;
 }
 .replier{
-    font-family:'ELAND_Choice_M';ㅅ
+    font-family:'ELAND_Choice_M';
 }
 
 .replyList {
     width: 100%;
     display: flex !important;
     align-items: flex-start;
-    margin-bottom: 1.5rem;
-
+    margin-bottom: 2rem;
+    border-bottom: #E8E8E8 1px solid;
+    padding-bottom: 2rem;
 }
 
 .selectAnswer{
     position: relative;
     color: #198754;
-    background: #e9ef94;
-    border-radius: 1rem;
-    padding: 3px 5px;
-    border: 2px dashed #198754;
     top: 40px;
-    transition: color 0.15s ease-in-out,
-              background-color 0.15s ease-in-out,
-              border-color 0.15s ease-in-out,
-              box-shadow 0.15s ease-in-out;
+    padding: 2px 3px;
+    z-index: 1;
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -ms-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
 }
 
-.selectAnswer:hover{
-    background: #cfd940;
-    border: 2px solid #198754;
+.selectAnswer:after {
+    content:'';
+    width: 0%;
+    height: 100%;
+    top: 0;
+    position: absolute;
+    left: 0;
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -ms-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+
+    border-radius: 5px;
+    background: #cfd94091;
+    z-index: -1;
 }
 
-/*댓글 선택 되었을 때 */
-.choose {
-    filter: blur(1.5px) !important;
-/*    -webkit-user-select:none !important;
-    -moz-user-select:none !important;
-    -ms-user-select:none !important;
-    user-select:none !important;*/
+.selectAnswer:hover {
+    color: #198754;
 }
+
+.selectAnswer:hover:after {
+    width: 100%;
+    z-index: -1;
+}
+
+
 .buy_btn {
     background: #ffbf25;
     color: white;
@@ -240,8 +262,8 @@ textarea:focus {
     height: 291px;
     border-radius: 15px;
     position: fixed;
-    left: 45%;
-    top: 60%;
+    left: 50%;
+    top: 50%;
     z-index: 100;
     transform: translate(-50%, -50%);
 }
@@ -279,4 +301,35 @@ textarea:focus {
 
 .buy_alert {
     font-size: 17px;
+}
+
+.isSelectedAnswer {
+    border: none;
+    padding: 1rem 1rem;
+    background: #f0f0f0;
+    border-radius: 0.7rem;
+}
+
+.isSelectedAnswer textarea{
+    background: #f0f0f0;
+}
+
+.selectedinfo {
+    font-family: 'ELAND_Choice_M';
+    font-weight: bold;
+    color: #198754;
+}
+
+.isSolved{
+    color: #198754;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.isSelected {
+    margin: 3rem 0rem;
+    text-align: center;
+    background: #f0f0f0;
+    padding: 44px;
+    border-radius: 5px;
 }
