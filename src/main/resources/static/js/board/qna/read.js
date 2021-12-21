@@ -80,7 +80,7 @@ $(document).ready(function() {
            },
            success: function(data) {
                if(data === "구매 성공") {
-                   alert("거래가 완료되었습니다.");
+//                   alert("거래가 완료되었습니다.");
                }
            }
         }); // ajax end.
@@ -94,10 +94,15 @@ $(document).ready(function() {
 /*---------------- read.js -----------------*/
 // 댓글 등록
     $("#btn_reply").click(function() {
-        console.log($(".form-control").val());
+        var replyText = $(".form-control").val();
+
+        if(replyText == ""){
+            alert("내용을 입력해주세요!");
+            return false;
+        }
         var replyData = {
-            qnaNo: qnaNo,
-            replyText: $(".form-control").val()
+            "qnaNo": qnaNo,
+            "replyText": replyText
         }
 
         $.ajax({
@@ -147,7 +152,6 @@ $(document).ready(function() {
                 contentType: "application/json; charset=utf-8",
                 success: function(result) {
                     if(result === "replyModify") {
-                        alert("댓글 수정");
                         self.location.reload();
                     }
                 }
@@ -171,8 +175,6 @@ $(document).ready(function() {
             method: "post",
             success: function(result) {
                 if(result === "delete"){
-                console.log(replyNo); //잘나옴
-                    alert("댓글이 삭제되었습니다.");
                     self.location.reload();
                 }
             }
@@ -180,7 +182,7 @@ $(document).ready(function() {
     }); // reply-modify click event
 
 
-    $('.selectAnswer').click(function(){
+    $('#selectAnswer').click(function(){
 
         var parent = $(this).parent().parent(); //ms-3
         var replyNo = parent.children(".reply-no").val();
@@ -190,7 +192,6 @@ $(document).ready(function() {
         var cancel_btn = $('.cancel_btn');
         var buy_container = $('.buy_container');
 
-                var title = $('.title').text();
 
         console.log("replyNo:" + replyNo + "replier:" + replier);
 
@@ -205,6 +206,7 @@ $(document).ready(function() {
         if(title.length > 20){
             title = title.substr(0, 20) + "...";
         }
+        title = "\"" + title + "\" 에서 채택되었습니다.";
 
            $.ajax({
                   url: "/antddun/member/qna/selected/",
@@ -229,7 +231,7 @@ $(document).ready(function() {
         $('.btn_close').click(function(){
             $('.buy_container').hide();
             $('.dim').hide();
-        });
+        })
 
 
     })

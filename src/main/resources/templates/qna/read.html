@@ -18,7 +18,9 @@
                     <div>
                         <input id="qnaNo" name="qnaNo" type="hidden" th:value="${boardList.qnaNo}">
                         <input id="mno" name="mno" type="hidden" th:value="${boardList.mno}">
-                        <span class="cate" th:text="${boardList.job}" ></span>
+                        <span class="cate" th:text="${boardList.job}"></span>
+                        <span class="isSolved" th:if="${boardList.isSolved}==true">채택완료 <img width="20px" th:src="@{/assets/select.png}">
+                        </span>
                     </div>
 
                     <h1 class="title" th:text="${boardList.title}"></h1>
@@ -78,10 +80,10 @@
 
                     <!-- Comment form-->
                     <form class="mb-4" method="post" >
-                        <div style="width: 100%; margin-bottom: 60px !important;">
+                        <div style="width: 100%; margin-bottom: 100px !important;">
                             <textarea class="form-control replyTA" rows="3" required name="replyText"
                                       placeholder="댓글을 작성하여 지식과 경험을 나눠보세요."></textarea>
-                            <input type="button" class="btn btn-primary rightSection btn-reply" id="btn_reply" value="등록">
+                            <input type="button" class="rightSection btn-reply" id="btn_reply" value="등록">
                         </div>
                     </form>
 
@@ -93,42 +95,87 @@
                             첫 번째 댓글을 남겨보세요!  •' - '•)و ✧</div>
                     </div>
 
+
+
                     <!-- Comment with nested comments-->
                     <div th:each="replyList : ${replyList}">
-                        <div class="replyList">
-                            <!-- Parent comment-->
-                            <div class="flex-shrink-0">
-                                <img class="rounded-circle" height="30px" width="30px"
-                                     th:src="@{'/assets/user_img/'+${replyList.member.experience}+'.png'}"
-                                     alt="..."/>
-                            </div>
-                            <div class="innerText">
-
-                                <div class="ms-3" >
-                                    <input type="hidden" class="reply-no" name="qnaRno" th:value="${replyList.qnaRno}">
-                                    <input type="hidden" class="replier" name="member" th:value="${replyList.member.mno}">
-                                    <div class="replier leftSection" >[[${replyList.member.job.job}]] [[${replyList.member.experience}]]년차 [[${replyList.member.lastName}]]개미</div>
-                                    <div class="rightSection smallText pointer end">
-                                        <span class="reply-modify" th:if="${preMem} == ${replyList.member.mno}">수정 |</span>
-                                        <span class="reply-delete" th:if="${preMem} == ${replyList.member.mno}">삭제</span>
-                                        <span th:if="${preMem} == ${boardList.mno} and ${preMem} != ${replyList.member.mno}"
-                                              class="selectAnswer">채택 ✔</span>
+<!--                     댓글이 채택되기 전 모두가 볼 수 있음  -->
+                        <div th:if="${replyList.isSelected} == false">
+                            <div class="replyList">
+                                <!-- Parent comment-->
+                                <div class="flex-shrink-0">
+                                    <img class="rounded-circle" height="30px" width="30px"
+                                         th:src="@{'/assets/user_img/'+${replyList.member.experience}+'.png'}"
+                                         alt="..."/>
+                                </div>
+                                <div class="innerText">
+                                    <div class="ms-3" >
+                                        <input type="hidden" class="reply-no" name="qnaRno" th:value="${replyList.qnaRno}">
+                                        <input type="hidden" class="replier" name="member" th:value="${replyList.member.mno}">
+                                        <div class="replier leftSection" >[[${replyList.member.job.job}]] [[${replyList.member.experience}]]년차 [[${replyList.member.lastName}]]개미</div>
+                                        <div class="rightSection smallText pointer end">
+                                            <span class="reply-modify" th:if="${preMem} == ${replyList.member.mno}">수정 |</span>
+                                            <span class="reply-delete" th:if="${preMem} == ${replyList.member.mno}">삭제</span>
+                                            <span th:if="${preMem} == ${boardList.mno} and ${preMem} != ${replyList.member.mno} and ${replyList.isSelected} == false"
+                                                  id="selectAnswer" class="selectAnswer">채택하기 <img width="20px" th:src="@{/assets/select.png}"></span>
+                                        </div>
+                                        <textarea onkeyup="this.style.height = this.scrollHeight + 'px';"
+                                                  class="reply-text-box" name="replyText" readonly>[[${replyList.replyText}]]</textarea>
                                     </div>
-                                    <textarea onkeyup="this.style.height = this.scrollHeight + 'px';"
-                                              class="reply-text-box" name="replyText" readonly>[[${replyList.replyText}]]</textarea>
+                                    <div>
+                                        <span class="date" th:text="${#temporals.format(boardList.modDate,'yyyy.MM.dd HH:mm')}"></span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <span class="date" th:text="${#temporals.format(boardList.modDate,'yyyy.MM.dd HH:mm')}"></span>
+                            </div>
+
+                        </div>
+
+<!--                     댓글이 채택되고 난 후 -> if문 두갈래로 나뉨 1.댓글작성자와 게시물 작성자 2.제 3자   -->
+                        <div th:if="${replyList.isSelected} != false">
+                            <div th:if="${preMem} == ${boardList.mno} or ${preMem} == ${replyList.member.mno}">
+                                <div class="replyList isSelectedAnswer">
+                                    <!-- Parent comment-->
+                                    <div class="flex-shrink-0">
+                                        <img class="rounded-circle" height="30px" width="30px"
+                                             th:src="@{'/assets/user_img/'+${replyList.member.experience}+'.png'}"
+                                             alt="..."/>
+                                    </div>
+                                    <div class="innerText">
+
+                                        <div class="ms-3" >
+                                            <input type="hidden" class="reply-no" name="qnaRno" th:value="${replyList.qnaRno}">
+                                            <input type="hidden" class="replier" name="member" th:value="${replyList.member.mno}">
+                                            <div class="replier leftSection" >[[${replyList.member.job.job}]] [[${replyList.member.experience}]]년차 [[${replyList.member.lastName}]]개미</div>
+                                            <div class="rightSection end selectedinfo">
+                                                채택된 댓글 <img th:src="@{/assets/select.png}" width="20px">
+                                            </div>
+                                            <textarea onkeyup="this.style.height = this.scrollHeight + 'px';"
+                                                      class="reply-text-box" name="replyText" readonly>[[${replyList.replyText}]]</textarea>
+                                        </div>
+                                        <div>
+                                            <span class="date" th:text="${#temporals.format(boardList.modDate,'yyyy.MM.dd HH:mm')}"></span>
+                                        </div>
+                                    </div>
                                 </div>
 
+                            </div>
+
+                            <div th:unless="${preMem} == ${boardList.mno} or ${preMem} == ${replyList.member.mno}" class="isSelected">
+                                <div class="replier">
+                                    [[${replyList.member.job.job}]] [[${replyList.member.experience}]]년차 [[${replyList.member.lastName}]]개미님이 채택되었습니다.<img width="20px" th:src="@{/assets/select.png}">
+                                </div>
                             </div>
                         </div>
+
+
+
                     </div>
+
+
+
 
                 </section>
                 <!--comment end -->
-
-                <hr>
 
 <!--
                 <div class="listGo">
@@ -143,7 +190,7 @@
 <!--   채택하기    -->
         <div class="card-body bg-white mt-0 shadow buy_container" style="display: none;">
             <div style="text-align:end">
-                <img th:src="@{/assets/close.png}" class="btn_close" width="20px"/>
+                <img th:src="@{/assets/close.png}" class="btn_close pointer" width="20px"/>
             </div>
             <!-- 제목 -->
             <div>
