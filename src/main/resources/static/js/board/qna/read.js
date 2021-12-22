@@ -182,6 +182,14 @@ $(document).ready(function() {
     }); // reply-modify click event
 
 
+//댓글 채택
+
+    var isSolvedValue = $('#isSolvedValue').val();
+
+    if(isSolvedValue == "true"){
+        $('#selectAnswer').hide();
+    }
+
     $('#selectAnswer').click(function(){
 
         var parent = $(this).parent().parent(); //ms-3
@@ -192,13 +200,10 @@ $(document).ready(function() {
         var cancel_btn = $('.cancel_btn');
         var buy_container = $('.buy_container');
 
-
-        console.log("replyNo:" + replyNo + "replier:" + replier);
-
         $('.buy_container').show();
         $('.dim').show();
 
-       $('.buy_btn').click(function(){
+        $('.buy_btn').click(function(){
 
         var ddun = parseInt($("#ddun").val());
         var title = $('.title').text();
@@ -233,9 +238,7 @@ $(document).ready(function() {
             $('.dim').hide();
         })
 
-
     })
-
 
 
 /*---------------- modifyForm.js -----------------*/

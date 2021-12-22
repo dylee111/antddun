@@ -37,6 +37,7 @@
                     <!-- 카테고리, 뚠 -->
                     <span class="cate" th:text="${boardList.job}"></span>
                     <span class="smallDdun" th:if="${boardList.ddun} != 0">[[${boardList.ddun}]]</span>
+                    <span class="isSolved" th:if="${boardList.isSolved}==true">채택완료 <img width="20px" th:src="@{/assets/select.png}"></span>
                     <!-- 제목 + 글 -->
                     <div class="post-content">
                         <h3><a th:text="${boardList.title}"></a></h3>

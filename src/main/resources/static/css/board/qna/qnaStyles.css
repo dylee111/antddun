@@ -291,3 +291,10 @@ boardInfo{
 .summerContent{
     list-style:none;
 }
+
+.isSolved{
+    color: #198754;
+    font-weight: bold;
+    margin-left: 5px;
+    font-family: 'ELAND_Choice_M';
+}
