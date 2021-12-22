@@ -19,6 +19,7 @@
                         <input id="qnaNo" name="qnaNo" type="hidden" th:value="${boardList.qnaNo}">
                         <input id="mno" name="mno" type="hidden" th:value="${boardList.mno}">
                         <span class="cate" th:text="${boardList.job}"></span>
+                        <input type="hidden" id="isSolvedValue" th:value="${boardList.isSolved}">
                         <span class="isSolved" th:if="${boardList.isSolved}==true">채택완료 <img width="20px" th:src="@{/assets/select.png}">
                         </span>
                     </div>
@@ -110,6 +111,7 @@
                                 </div>
                                 <div class="innerText">
                                     <div class="ms-3" >
+                                        <input type="hidden" class="isSelectedValue" th:value="${replyList.isSelected}" >
                                         <input type="hidden" class="reply-no" name="qnaRno" th:value="${replyList.qnaRno}">
                                         <input type="hidden" class="replier" name="member" th:value="${replyList.member.mno}">
                                         <div class="replier leftSection" >[[${replyList.member.job.job}]] [[${replyList.member.experience}]]년차 [[${replyList.member.lastName}]]개미</div>
@@ -170,8 +172,6 @@
 
 
                     </div>
-
-
 
 
                 </section>
