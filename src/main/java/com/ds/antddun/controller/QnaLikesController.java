@@ -31,14 +31,14 @@ public class QnaLikesController {
         Long mno = principal.getMember().getMno();
         JSONObject result = new JSONObject();
 
-        QnaLikes target = qnaLikeService.checkLikes(qnaNo, mno);
-        if(target != null){ //있으면!!
-            qnaLikeService.deleteLikes(qnaNo, mno); //좋아요 해제 (row 삭제)
+        QnaLikes checkLikes = qnaLikeService.checkLikes(qnaNo, mno);
+        if(checkLikes != null){
+            qnaLikeService.deleteLikes(qnaNo, mno);
             result.put("response", null);
-            result.put("likesCnt", qnaLikesRepository.countLikes(qnaNo)); //그때 그때 불러서 보여줘야함 (변수 사용 x)
+            result.put("likesCnt", qnaLikesRepository.countLikes(qnaNo));
             return result;
         } else {
-            qnaLikeService.addLikes(qnaNo, mno);  //좋아요 (row 추가)
+            qnaLikeService.addLikes(qnaNo, mno);
             result.put("likesCnt", qnaLikesRepository.countLikes(qnaNo));
             return result;
         }
