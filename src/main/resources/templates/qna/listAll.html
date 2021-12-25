@@ -6,6 +6,7 @@
 
         <!-- 페이지 css/ js 추가 -->
         <link th:href="@{/css/board/qna/qnaStyles.css}" rel="stylesheet" />
+        <script th:src="@{/js/board/qna/listLikes.js}"></script>
 
         <!-- 본문 시작 -->
         <a th:href="@{/member/qna/registerForm}">
@@ -29,7 +30,7 @@
 
                 <div class="leftSection">
 
-                    <span id="qnaNo" hidden th:text="${boardList.qnaNo}"></span> <!--qnaNo 넘겨줄 때 필요-->
+                    <span id="qnaNo" hidden th:text="${boardList.qnaNo}"></span>
 
                     <!-- 카테고리, 뚠 -->
                     <span class="cate" th:text="${boardList.job}"></span>
@@ -169,6 +170,12 @@
             $('.btn-clear').click(function(e){
                 searchForm.empty().submit();
             });
+
+           //검색
+           var searchForm = $("#searchForm");
+           $('.searchButton').click(function(e){
+                searchForm.submit();
+           });
 
         </script>
 

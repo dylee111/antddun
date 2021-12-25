@@ -140,6 +140,12 @@
                 location.href=readurl;
             }
 
+           //검색
+           var searchForm = $("#searchForm");
+           $('.searchButton').click(function(e){
+                searchForm.submit();
+           });
+
         </script>
     </th:block>
 </th:block>
