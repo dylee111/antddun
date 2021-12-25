@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -47,16 +48,10 @@ public class QnaBoardController {
 
     //리스트 출력
     @GetMapping("/qna/list/all")
-    public String allList(Model model, PageRequestDTO requestDTO, QnaBoardDTO qnaBoardDTO,
-                          @AuthenticationPrincipal PrincipalDetails principal) {
-
+    public String allList(Model model, PageRequestDTO requestDTO, @AuthenticationPrincipal PrincipalDetails principal) {
 
         //위시리스트
         if (principal != null) {
-            //좋아요 체크 유무
-            log.info("나오낭"+qnaBoardDTO.getQnaNo());
-            model.addAttribute("qnaCheck", qnaLikeService.checkLikes(qnaBoardDTO.getQnaNo(), principal.getMember().getMno()));
-
             List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
             model.addAttribute("wishList", wishLists);
             if (wishLists.size() != 0) {
@@ -71,7 +66,6 @@ public class QnaBoardController {
         model.addAttribute("boardList", getListAll);
 
         return "/qna/listAll";
-
     }
 
 
