@@ -9,9 +9,22 @@
         <link th:href="@{/css/board/jayu/register.css}" rel="stylesheet" />
 
         <!-- 본문 시작 -->
-        <a th:href="@{/member/qna/registerForm}">
-            <button class="btn btn-primary" style="float: right; margin-top: -60px;">글 쓰기</button>
-        </a>
+        <div id="search-wrap" style="margin-bottom: 20px;">
+            <form th:action="@{/qna/list/all}" method="get" id="searchForm">
+                <div style="display: flex; margin-right: 90px;">
+                    <input type="hidden" name="page" value="1">
+                    <input type="text" id="search-bar" name="keyword" th:value="${pageRequestDTO.keyword}"/>
+                    <button type="button" class="searchButton">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    </input>
+                </div>
+            </form>
+            <a th:href="@{/member/qna/registerForm}">
+                <button class="btn btn-primary" style="float: right;">글 쓰기</button>
+            </a>
+        </div>
+
 
         <div class="subNav-body">
             <nav class="nav nav-underline" aria-label="Secondary navigation">

@@ -9,8 +9,20 @@
         <script th:src="@{/js/board/qna/listLikes.js}"></script>
 
         <!-- 본문 시작 -->
+        <div id="search-wrap" style="margin-bottom: 20px;">
+            <form th:action="@{/qna/list/all}" method="get" id="qnaSearchForm">
+                <div style="display: flex; margin-right: 90px;">
+                    <input type="hidden" name="page" value="1">
+                    <input type="text" id="search-bar" name="keyword" th:value="${pageRequestDTO.keyword}"/>
+                    <button type="button" class="searchButton">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    </input>
+                </div>
+            </form>
+        </div>
         <a th:href="@{/member/qna/registerForm}">
-            <button class="btn btn-primary" style="float: right; margin-top: -60px;">글 쓰기</button>
+            <button class="btn btn-primary" style="margin-top: -58px;float: right;">글 쓰기</button>
         </a>
 
         <div class="subNav-body">
@@ -24,7 +36,7 @@
 
 
         <!-- 게시물 -->
-        <div class="card qnaCardList" th:each="boardList : ${boardList.dtoList}" th:data-keyword="${pageRequestDTO.keyword}"
+        <div class="card qnaCardList" th:each="boardList : ${boardList.dtoList}" th:attr="data-keyword=${pageRequestDTO.keyword}"
              th:onclick="|javascript:read('${boardList.qnaNo}','${pageRequestDTO.page}', this.getAttribute('data-keyword'))|">
             <div class="post-body attach-img-pre">
 
@@ -159,22 +171,10 @@
                 location.href=readurl;
             }
 
-
-            var msg = [[${msg}]];
-            console.log(msg);
-            if(msg){
-                $('#modalMsg').prepend(msg);
-                $('.modal-title').prepend([[${noti}]]);
-                $(".modal").modal();
-            }
-            $('.btn-clear').click(function(e){
-                searchForm.empty().submit();
-            });
-
            //검색
-           var searchForm = $("#searchForm");
+           var qnaSearchForm = $("#qnaSearchForm");
            $('.searchButton').click(function(e){
-                searchForm.submit();
+                qnaSearchForm.submit();
            });
 
         </script>

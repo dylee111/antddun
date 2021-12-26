@@ -1,14 +1,13 @@
 package com.ds.antddun.service;
 
 import com.ds.antddun.dto.*;
-import com.ds.antddun.entity.JobList;
-import com.ds.antddun.entity.Member;
-import com.ds.antddun.entity.QnaBoard;
-import com.ds.antddun.entity.QnaReply;
+import com.ds.antddun.entity.*;
 import com.ds.antddun.repository.JobListRepository;
 import com.ds.antddun.repository.QnaBoardRepository;
 import com.ds.antddun.repository.QnaReplyRepository;
 import com.ds.antddun.repository.UploadImageRepository;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.engine.jdbc.Size;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,7 @@ public class QnaServiceImpl implements QnaService {
     private QnaBoardRepository qnaBoardRepository;
 
     @Autowired
-    private QnaReplyRepository qnaReplyRepository; //xs
+    private QnaReplyRepository qnaReplyRepository;
 
     @Autowired
     private QnaLikesService qnaLikesService;
@@ -47,21 +46,24 @@ public class QnaServiceImpl implements QnaService {
     @Autowired
     private  QnaReplyService qnaReplyService;
 
-    //게시물 등록
-    @Transactional
+
+//======게시물 리스트 관련======
     @Override
-    public Long register(QnaBoardDTO qnaBoardDTO, Member member) {
+    public PageResultDTO<QnaBoardDTO, Object[]> getFiveList(PageRequestDTO requestDTO) {
+        requestDTO.setSize(5); //메인페이지에 노출될 5개의 게시물
+        Pageable pageable = requestDTO.getPageable(Sort.by("regDate").descending());
 
-        QnaBoard qnaBoard = dtoToEntity(qnaBoardDTO);
-        qnaBoard.setMember(member);
-        qnaBoardRepository.save(qnaBoard);
+        Page<Object[]> result = qnaBoardRepository.getFive(pageable);
 
-        return qnaBoard.getQnaNo();
-
+        Function<Object[], QnaBoardDTO> fn = (arr -> entityToDTO(
+                (QnaBoard) arr[0],
+                (Long) arr[1],
+                (Long) arr[2]
+        ));
+        return new PageResultDTO<>(result, fn);
     }
 
-
-    //게시물 전체 목록
+    //전체 목록
     @Override
     public PageResultDTO<QnaBoardDTO, Object[]> getListAll(PageRequestDTO requestDTO){
         Pageable pageable = requestDTO.getPageable(Sort.by("regDate").descending());
@@ -75,24 +77,7 @@ public class QnaServiceImpl implements QnaService {
         return new PageResultDTO<>(result, fn);
     }
 
-    @Override
-    public PageResultDTO<QnaBoardDTO, Object[]> getFiveList(PageRequestDTO requestDTO) {
-        requestDTO.setSize(5);
-        Pageable pageable = requestDTO.getPageable(Sort.by("regDate").descending());
-
-        Page<Object[]> result = qnaBoardRepository.getListPage(pageable);
-
-        Function<Object[], QnaBoardDTO> fn = (arr -> entityToDTO(
-                (QnaBoard) arr[0],
-                (Long) arr[1],
-                (Long) arr[2]
-        ));
-
-        return new PageResultDTO<>(result, fn);
-    }
-
-
-    //카테고리 별 게시물 목록
+    //카테고리 별
     @Override
     public PageResultDTO<QnaBoardDTO, Object[]> getListByCate(int jno, PageRequestDTO requestDTO){
         Pageable pageable = requestDTO.getPageable(Sort.by("regDate").descending());
@@ -110,6 +95,17 @@ public class QnaServiceImpl implements QnaService {
 
 
 
+//======게시물 관련======
+    @Transactional
+    @Override
+    public Long register(QnaBoardDTO qnaBoardDTO, Member member) {
+        QnaBoard qnaBoard = dtoToEntity(qnaBoardDTO);
+        qnaBoard.setMember(member);
+        qnaBoardRepository.save(qnaBoard);
+
+        return qnaBoard.getQnaNo();
+    }
+
     @Override
     public QnaBoardDTO getBoard(Long qnaNo) {
         List<Object[]> result = qnaBoardRepository.getBoardWithAllByQnaNo(qnaNo);
@@ -124,7 +120,6 @@ public class QnaServiceImpl implements QnaService {
     @Transactional
     @Override
     public void modify(QnaBoardDTO qnaBoardDTO, Member member) {
-
         JobList jobList = jobListRepository.findById(qnaBoardDTO.getJno()).get();
         Optional<QnaBoard> result = qnaBoardRepository.findById(qnaBoardDTO.getQnaNo());
 
@@ -142,7 +137,6 @@ public class QnaServiceImpl implements QnaService {
     @Transactional
     @Override
     public void deleteAll(Long qnaNo, Long mno)  {
-
         qnaReplyService.deleteByQnaNo(qnaNo);
         qnaLikesService.deleteLikes(qnaNo, mno);
 
@@ -152,13 +146,11 @@ public class QnaServiceImpl implements QnaService {
     @Transactional
     @Override
     public void setSolvedSelected(Long qnaNo, Long replyNo) {
-
         Optional<QnaBoard> result = qnaBoardRepository.findById(qnaNo);
         result.get().setSolved(true);
 
         Optional<QnaReply> result2 = qnaReplyRepository.findById(replyNo);
         result2.get().setSelected(true);
-
     }
 
 }
