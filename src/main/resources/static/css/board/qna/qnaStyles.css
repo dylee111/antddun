@@ -299,6 +299,13 @@ boardInfo{
     font-family: 'ELAND_Choice_M';
 }
 
+#search-bar {
+    width: 200px;
+    height: 40px;
+    border: 3px solid #ffc107;
+    padding: 0 20px;
+}
+
 .custom-select{
     width: 83px;
     height: 40px;

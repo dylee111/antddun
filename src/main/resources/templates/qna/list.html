@@ -10,19 +10,26 @@
 
         <!-- 본문 시작 -->
         <div id="search-wrap" style="margin-bottom: 20px;">
-            <form th:action="@{/qna/list/all}" method="get" id="searchForm">
+            <form th:action="@{/qna/list/all}" method="get" id="qnaSearchForm">
                 <div style="display: flex; margin-right: 90px;">
                     <input type="hidden" name="page" value="1">
-                    <input type="text" id="search-bar" name="keyword" th:value="${pageRequestDTO.keyword}"/>
+                    <div class="input-group-prepend">
+                        <select class="custom-select" name="type">
+                            <!--                            <option th:selected="${pageRequestDTO.type == null}">&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</option>-->
+                            <option value="t" th:selected="${pageRequestDTO.type == 't'}">제목</option>
+                            <option value="c" th:selected="${pageRequestDTO.type == 'c'}">내용</option>
+                            <!--                            <option value="w" th:selected="${pageRequestDTO.type == 'w'}">작성자</option>-->
+                            <option value="tc" th:selected="${pageRequestDTO.type == 'tc'}">제목 + 내용</option>
+                            <!--                            <option value="tcw" th:selected="${pageRequestDTO.type == 'tcw'}">제목 + 내용 + 작성자</option>-->
+                        </select>
+                    </div>
+                    <input id="search-bar" name="keyword" th:value="${pageRequestDTO.keyword}">
+                    <!--                    <img th:src="@{/assets/close.png}" class="btn_close pointer" width="20px"/>-->
                     <button type="button" class="searchButton">
                         <i class="fa fa-search"></i>
                     </button>
-                    </input>
                 </div>
             </form>
-            <a th:href="@{/member/qna/registerForm}">
-                <button class="btn btn-primary" style="float: right;">글 쓰기</button>
-            </a>
         </div>
 
 
