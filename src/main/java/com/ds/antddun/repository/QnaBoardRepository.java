@@ -1,6 +1,7 @@
 package com.ds.antddun.repository;
 
-import com.ds.antddun.entity .QnaBoard;
+import com.ds.antddun.entity.QnaBoard;
+import com.ds.antddun.repository.search.SearchQnaBoardRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,7 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface QnaBoardRepository extends JpaRepository<QnaBoard, Long> {
+public interface QnaBoardRepository extends JpaRepository<QnaBoard, Long>,
+        SearchQnaBoardRepository {
 
     @Query("SELECT qna, COUNT(distinct likes.lno), COUNT(distinct reply.qnaRno) " +
             "FROM QnaBoard qna " +
@@ -20,6 +22,15 @@ public interface QnaBoardRepository extends JpaRepository<QnaBoard, Long> {
             "ON reply.qnaBoard.qnaNo = qna.qnaNo " +
             "group by qna.qnaNo " )
     Page<Object[]> getListPage(Pageable pageable);
+
+    @Query("SELECT qna, COUNT(distinct likes.lno), COUNT(distinct reply.qnaRno) " +
+            "FROM QnaBoard qna " +
+            "LEFT OUTER JOIN QnaLikes likes " +
+            "ON likes.qnaBoard.qnaNo = qna.qnaNo " +
+            "LEFT OUTER JOIN QnaReply reply " +
+            "ON reply.qnaBoard.qnaNo = qna.qnaNo " +
+            "group by qna.qnaNo " )
+    Page<Object[]> getFive(Pageable pageable);
 
 
     @Query("SELECT qna, COUNT(distinct likes.lno), COUNT(distinct reply.qnaRno) " +

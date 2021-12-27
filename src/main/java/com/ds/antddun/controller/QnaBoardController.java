@@ -15,10 +15,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -48,7 +48,14 @@ public class QnaBoardController {
 
     //리스트 출력
     @GetMapping("/qna/list/all")
-    public String allList(Model model, PageRequestDTO requestDTO, @AuthenticationPrincipal PrincipalDetails principal) {
+    public String allList(Model model, PageRequestDTO requestDTO, HttpServletRequest http,
+                          @AuthenticationPrincipal PrincipalDetails principal) {
+
+        PageResultDTO<QnaBoardDTO, Object[]> getListAll = qnaService.getListAll(requestDTO);
+        model.addAttribute("boardList",getListAll);
+
+        List<JobList> list = jobListService.getList();
+        model.addAttribute("jobList", list);
 
         //위시리스트
         if (principal != null) {
@@ -58,12 +65,6 @@ public class QnaBoardController {
                 model.addAttribute("wishListIndex", wishLists.get(0));
             }
         }
-
-        List<JobList> list = jobListService.getList();
-        model.addAttribute("jobList", list);
-
-        PageResultDTO<QnaBoardDTO, Object[]> getListAll = qnaService.getListAll(requestDTO);
-        model.addAttribute("boardList", getListAll);
 
         return "/qna/listAll";
     }
