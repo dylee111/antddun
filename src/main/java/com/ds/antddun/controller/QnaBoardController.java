@@ -51,9 +51,6 @@ public class QnaBoardController {
     public String allList(Model model, PageRequestDTO requestDTO, HttpServletRequest http,
                           @AuthenticationPrincipal PrincipalDetails principal) {
 
-        log.info("pageRequestDOT"+requestDTO);
-        log.info("KEYYYYY"+http.getParameter("keyword"));
-
         PageResultDTO<QnaBoardDTO, Object[]> getListAll = qnaService.getListAll(requestDTO);
         model.addAttribute("boardList",getListAll);
 

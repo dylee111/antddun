@@ -21,7 +21,8 @@ class SearchQnaBoardRepositoryTests {
     }
     @Test
     void searchPage(){
-        Pageable pageable = PageRequest.of(0, 10, Sort.by("qnaNo").descending());
-        Page<Object[]> result = qnaBoardRepository.searchPage("w","개미",pageable);
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("qnaNo").descending()
+                .and(Sort.by("title").ascending()));
+        Page<Object[]> result = qnaBoardRepository.searchPage("t","하이",pageable);
     }
 }

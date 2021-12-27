@@ -298,3 +298,12 @@ boardInfo{
     margin-left: 5px;
     font-family: 'ELAND_Choice_M';
 }
+
+.custom-select{
+    width: 83px;
+    height: 40px;
+    border: lightgray 1px solid;
+    font-family: 'ELAND_Choice_M';
+    color: #575757;
+    border-radius: 7px 0px 0px 7px;
+    }
