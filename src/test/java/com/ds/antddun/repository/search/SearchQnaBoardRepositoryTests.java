@@ -23,6 +23,6 @@ class SearchQnaBoardRepositoryTests {
     void searchPage(){
         Pageable pageable = PageRequest.of(0, 10, Sort.by("qnaNo").descending()
                 .and(Sort.by("title").ascending()));
-        Page<Object[]> result = qnaBoardRepository.searchPage("t","하이",pageable);
+        Page<Object[]> result = qnaBoardRepository.searchPage(1,"jt","asd",pageable);
     }
 }

@@ -68,6 +68,7 @@ public class QnaServiceImpl implements QnaService {
     public PageResultDTO<QnaBoardDTO, Object[]> getListAll(PageRequestDTO requestDTO){
 
         Page<Object[]> result = qnaBoardRepository.searchPage(
+                requestDTO.getCate(),
                 requestDTO.getType(),
                 requestDTO.getKeyword(),
                 requestDTO.getPageable(Sort.by("regDate").descending())

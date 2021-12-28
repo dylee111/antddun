@@ -8,5 +8,5 @@ public interface SearchQnaBoardRepository {
 
     QnaBoard search1();
 
-    Page<Object[]> searchPage(String type, String keyword, Pageable pageable);
+    Page<Object[]> searchPage(int cate, String type, String keyword, Pageable pageable);
 }
