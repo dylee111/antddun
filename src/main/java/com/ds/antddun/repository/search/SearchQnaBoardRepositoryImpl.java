@@ -55,42 +55,43 @@ public class SearchQnaBoardRepositoryImpl extends QuerydslRepositorySupport impl
 
 
     @Override
-    public Page<Object[]> searchPage(String type, String keyword, Pageable pageable) {
+    public Page<Object[]> searchPage(int cate, String type, String keyword, Pageable pageable) {
         log.info("searchPage...");
+        log.info("cate"+ cate);
         log.info("type"+type);
         log.info("keyword"+keyword);
         log.info("pageable"+pageable);
 
         QQnaBoard qQnaBoard = QQnaBoard.qnaBoard;
         QQnaReply qQnaReply = QQnaReply.qnaReply;
-        QMember qMember = QMember.member;
         QQnaLikes qQnaLikes = QQnaLikes.qnaLikes;
-//        QJobList qJobList = QJobList.jobList;
 
         JPQLQuery<QnaBoard> jpqlQuery = from(qQnaBoard);
-        jpqlQuery.leftJoin(qMember).on(qQnaBoard.member.eq(qMember));
         jpqlQuery.leftJoin(qQnaReply).on(qQnaReply.qnaBoard.qnaNo.eq(qQnaBoard.qnaNo));
         jpqlQuery.leftJoin(qQnaLikes).on(qQnaLikes.qnaBoard.qnaNo.eq(qQnaBoard.qnaNo));
-//        jpqlQuery.leftJoin(qJobList).on(qJobList.jno.eq(qQnaBoard.jobList.jno));
 
-//        JPQLQuery<Tuple> tuple = jpqlQuery.select(qQnaBoard, qMember.username, qJobList.job ,qQnaReply.countDistinct(), qQnaLikes.countDistinct());
-        JPQLQuery<Tuple> tuple = jpqlQuery.select(qQnaBoard, qMember.mno, qQnaReply.countDistinct(), qQnaLikes.countDistinct());
+        JPQLQuery<Tuple> tuple = jpqlQuery.select(qQnaBoard, qQnaReply.countDistinct(), qQnaLikes.countDistinct());
 
         BooleanBuilder booleanBuilder = new BooleanBuilder(); //검색을 실행하는 객체
         BooleanExpression expression = qQnaBoard.qnaNo.gt(0L); //검색의 조건을 처리하는 객체
 
         booleanBuilder.and(expression);
 
+        if(cate != 0){
+            BooleanBuilder conditionBuilder = new BooleanBuilder();
+            conditionBuilder.or(qQnaBoard.jobList.jno.eq(cate));
+            booleanBuilder.and(conditionBuilder);
+        }
+
         if(type != null){
             String[] typeArr = type.split("");
             //검색 조건 작성
             BooleanBuilder conditionBuilder = new BooleanBuilder();
+
             for (String t:typeArr){
                 switch (t) {
                     case "t": conditionBuilder.or(qQnaBoard.title.contains(keyword));
                         break;
-//                    case "w": conditionBuilder.or(qMember.username.contains(keyword));
-//                        break;
                     case "c": conditionBuilder.or(qQnaBoard.content.contains(keyword));
                         break;
                 }

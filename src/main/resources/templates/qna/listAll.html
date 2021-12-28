@@ -14,6 +14,12 @@
                 <div style="display: flex; margin-right: 90px;">
                     <input type="hidden" name="page" value="1">
                     <div class="input-group-prepend">
+                        <select class="category" name="cate">
+                            <option value="0">전체</option>
+                            <option th:each="jobList : ${jobList}"
+                                    th:value="${jobList.jno}">
+                                [[${jobList.job}]]</option>
+                        </select>
                         <select class="custom-select" name="type">
 <!--                            <option th:selected="${pageRequestDTO.type == null}">&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</option>-->
                             <option value="t" th:selected="${pageRequestDTO.type == 't'}">제목</option>
@@ -158,6 +164,7 @@
                 integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
                 crossorigin="anonymous"></script>
         <script th:inline="javascript">
+
         var contextPath = $('#contextPathHolder').attr('data-contextPath') ? $('#contextPathHolder').attr('data-contextPath') : '';
 
             //카데고리별 출력
@@ -166,7 +173,7 @@
                 /*[+
                 var urlword = contextPath + [[@{/qna/list}]] +
                     "?cate=" +jno
-                     + "&page=" + page + "&keyword=" + keyword;
+                     + "&page=" + page ;
                 +]*/
 
                 location.href=urlword;
