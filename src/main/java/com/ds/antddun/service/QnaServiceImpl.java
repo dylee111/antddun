@@ -48,21 +48,6 @@ public class QnaServiceImpl implements QnaService {
 
 
 //======게시물 리스트 관련======
-    @Override
-    public PageResultDTO<QnaBoardDTO, Object[]> getFiveList(PageRequestDTO requestDTO) {
-        requestDTO.setSize(5); //메인페이지에 노출될 5개의 게시물
-        Pageable pageable = requestDTO.getPageable(Sort.by("regDate").descending());
-
-        Page<Object[]> result = qnaBoardRepository.getFive(pageable);
-
-        Function<Object[], QnaBoardDTO> fn = (arr -> entityToDTO(
-                (QnaBoard) arr[0],
-                (Long) arr[1],
-                (Long) arr[2]
-        ));
-        return new PageResultDTO<>(result, fn);
-    }
-
     //전체 목록
     @Override
     public PageResultDTO<QnaBoardDTO, Object[]> getListAll(PageRequestDTO requestDTO){
@@ -94,7 +79,6 @@ public class QnaServiceImpl implements QnaService {
                 (Long) arr[1],
                 (Long) arr[2]
         ));
-        log.info("arr>>"+ fn);
 
         return new PageResultDTO<>(result, fn);
     }

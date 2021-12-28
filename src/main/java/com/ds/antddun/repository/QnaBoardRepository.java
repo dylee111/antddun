@@ -29,20 +29,9 @@ public interface QnaBoardRepository extends JpaRepository<QnaBoard, Long>,
             "ON likes.qnaBoard.qnaNo = qna.qnaNo " +
             "LEFT OUTER JOIN QnaReply reply " +
             "ON reply.qnaBoard.qnaNo = qna.qnaNo " +
-            "group by qna.qnaNo " )
-    Page<Object[]> getFive(Pageable pageable);
-
-
-    @Query("SELECT qna, COUNT(distinct likes.lno), COUNT(distinct reply.qnaRno) " +
-            "FROM QnaBoard qna " +
-            "LEFT OUTER JOIN QnaLikes likes " +
-            "ON likes.qnaBoard.qnaNo = qna.qnaNo " +
-            "LEFT OUTER JOIN QnaReply reply " +
-            "ON reply.qnaBoard.qnaNo = qna.qnaNo " +
             "WHERE job_list_jno=:jno "+
             "group by qna.qnaNo " )
     Page<Object[]> getListByCate(int jno, Pageable pageable);
-
 
     @Query("SELECT qna, COUNT(distinct likes.lno), COUNT(distinct reply.qnaRno) " +
             "FROM QnaBoard qna " +

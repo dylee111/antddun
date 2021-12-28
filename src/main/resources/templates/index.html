@@ -274,7 +274,7 @@
                         <div class="card-body">
                             <table class="table" style="table-layout: fixed">
                                 <tbody>
-                                <tr class="pointer hoverGray qnaBoardRow" th:each="boardList : ${getSmallList.dtoList} "
+                                <tr class="pointer hoverGray qnaBoardRow" th:each="boardList : ${getQnaFive.dtoList} "
                                                                         th:onclick="|javascript:qnaRead('${boardList.qnaNo}')|">
                                     <td class="category"><span class="tag_b">[[${boardList.job}]]</span></td>
                                     <span id="qnaNo" hidden th:text="${boardList.qnaNo}"></span>

@@ -19,9 +19,6 @@ public interface QnaService {
     //목록 전체 조회
     PageResultDTO<QnaBoardDTO, Object[]> getListAll(PageRequestDTO requestDTO);
 
-    //목록 최신 순으로 5개까지만
-    PageResultDTO<QnaBoardDTO, Object[]> getFiveList(PageRequestDTO requestDTO);
-
     //게시물 등록
     Long register(QnaBoardDTO qnaBoardDTO, Member member);
 

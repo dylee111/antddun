@@ -57,10 +57,6 @@ public class SearchQnaBoardRepositoryImpl extends QuerydslRepositorySupport impl
     @Override
     public Page<Object[]> searchPage(int cate, String type, String keyword, Pageable pageable) {
         log.info("searchPage...");
-        log.info("cate"+ cate);
-        log.info("type"+type);
-        log.info("keyword"+keyword);
-        log.info("pageable"+pageable);
 
         QQnaBoard qQnaBoard = QQnaBoard.qnaBoard;
         QQnaReply qQnaReply = QQnaReply.qnaReply;
