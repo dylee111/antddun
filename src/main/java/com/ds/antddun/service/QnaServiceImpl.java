@@ -51,19 +51,12 @@ public class QnaServiceImpl implements QnaService {
     //전체 목록
     @Override
     public PageResultDTO<QnaBoardDTO, Object[]> getListAll(PageRequestDTO requestDTO){
-        int jno = requestDTO.getJno();
-        Page<Object[]> result;
-        if (jno != 0){
-            Pageable pageable = requestDTO.getPageable(Sort.by("regDate").descending());
-            result = qnaBoardRepository.getListByCate(jno, pageable);
-        } else {
-            result = qnaBoardRepository.searchPage(
-                    requestDTO.getCate(),
-                    requestDTO.getType(),
-                    requestDTO.getKeyword(),
-                    requestDTO.getPageable(Sort.by("regDate").descending())
-            );
-        }
+        Page<Object[]> result = qnaBoardRepository.searchPage(
+                requestDTO.getCate(),
+                requestDTO.getType(),
+                requestDTO.getKeyword(),
+                requestDTO.getPageable(Sort.by("regDate").descending())
+        );
 
         Function<Object[], QnaBoardDTO> fn = (arr -> entityToDTO(
                 (QnaBoard) arr[0],
@@ -73,23 +66,6 @@ public class QnaServiceImpl implements QnaService {
 
         return new PageResultDTO<>(result, fn);
     }
-
-    //카테고리 별
-    @Override
-    public PageResultDTO<QnaBoardDTO, Object[]> getListByCate(int jno, PageRequestDTO requestDTO){
-        Pageable pageable = requestDTO.getPageable(Sort.by("regDate").descending());
-        Page<Object[]> result = qnaBoardRepository.getListByCate(jno, pageable);
-
-        Function<Object[], QnaBoardDTO> fn = (arr -> entityToDTO(
-                (QnaBoard) arr[0],
-                (Long) arr[1],
-                (Long) arr[2]
-        ));
-
-        return new PageResultDTO<>(result, fn);
-    }
-
-
 
 //======게시물 관련======
     @Transactional

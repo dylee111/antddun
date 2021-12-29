@@ -47,7 +47,7 @@ public class QnaBoardController {
     private DdunService ddunService;
 
     //리스트 출력
-    @GetMapping("/qna/list/all")
+    @GetMapping("/qna/list")
     public String allList(Model model, PageRequestDTO requestDTO,
                           @AuthenticationPrincipal PrincipalDetails principal) {
 
@@ -66,33 +66,8 @@ public class QnaBoardController {
             }
         }
 
-        return "/qna/listAll";
-    }
-
-
-    //카테고리 별 리스트 출력
-    @GetMapping("/qna/list")
-    public String cateList(Model model, PageRequestDTO requestDTO, @AuthenticationPrincipal PrincipalDetails principal) {
-
-        //위시리스트
-        if (principal != null) {
-            List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
-            model.addAttribute("wishList", wishLists);
-            if (wishLists.size() != 0) {
-                model.addAttribute("wishListIndex", wishLists.get(0));
-            }
-        }
-
-        PageResultDTO<QnaBoardDTO, Object[]> boardList = qnaService.getListByCate(requestDTO.getCate(), requestDTO);
-        model.addAttribute("boardList", boardList);
-
-        //카테고리
-        List<JobList> list = jobListService.getList();
-        model.addAttribute("jobList", list);
-
         return "/qna/list";
     }
-
 
     //게시물 작성 양식
     @GetMapping("/member/qna/registerForm")

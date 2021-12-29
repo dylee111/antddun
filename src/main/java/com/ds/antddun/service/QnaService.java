@@ -13,9 +13,6 @@ import java.util.stream.Collectors;
 
 public interface QnaService {
 
-    //목록 카테고리별 조회
-    PageResultDTO<QnaBoardDTO, Object[]> getListByCate(int jno, PageRequestDTO requestDTO);
-
     //목록 전체 조회
     PageResultDTO<QnaBoardDTO, Object[]> getListAll(PageRequestDTO requestDTO);
 
