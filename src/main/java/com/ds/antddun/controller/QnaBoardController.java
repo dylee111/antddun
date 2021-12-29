@@ -48,7 +48,7 @@ public class QnaBoardController {
 
     //리스트 출력
     @GetMapping("/qna/list/all")
-    public String allList(Model model, PageRequestDTO requestDTO, HttpServletRequest http,
+    public String allList(Model model, PageRequestDTO requestDTO,
                           @AuthenticationPrincipal PrincipalDetails principal) {
 
         PageResultDTO<QnaBoardDTO, Object[]> getListAll = qnaService.getListAll(requestDTO);
@@ -140,17 +140,17 @@ public class QnaBoardController {
 
         //게시판 정보
         model.addAttribute("replyList", qnaReplyService.getListByQnaNo(qnaNo));
-        model.addAttribute("preMem", principal.getMember().getMno()); //현재 멤버의 번호
+        model.addAttribute("preMem", principal.getMember().getMno()); //현재 멤버의 ㅡㅜㅐ
         model.addAttribute("boardList", qnaService.getBoard(qnaNo));
 
-        //수정 삭제 버튼 보이기
+        //권한 따라 수정 삭제 버튼 보이기
         Long actualWriter = qnaBoardRepository.getById(qnaNo).getMember().getMno();
         if (principal.getMember().getMno() == actualWriter) {
             model.addAttribute("checkUser", true);
         }
 
         //좋아요 체크 유무
-        model.addAttribute("qnaCheck", qnaLikeService.checkLikes(qnaNo, principal.getMember().getMno())); //null 또는 qnalikes
+        model.addAttribute("qnaCheck", qnaLikeService.checkLikes(qnaNo, principal.getMember().getMno()));
 
         //위시리스트
         List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());

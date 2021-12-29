@@ -14,17 +14,20 @@
                 <div style="display: flex; margin-right: 90px;">
                     <input type="hidden" name="page" value="1">
                     <div class="input-group-prepend">
+                        <select class="category" name="cate">
+                            <option value="0">전체</option>
+                            <option th:each="jobList : ${jobList}"
+                                    th:value="${jobList.jno}" th:selected="${pageRequestDTO.cate == jobList.jno}">
+                                [[${jobList.job}]]</option>
+                        </select>
                         <select class="custom-select" name="type">
-                            <!--                            <option th:selected="${pageRequestDTO.type == null}">&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</option>-->
                             <option value="t" th:selected="${pageRequestDTO.type == 't'}">제목</option>
                             <option value="c" th:selected="${pageRequestDTO.type == 'c'}">내용</option>
-                            <!--                            <option value="w" th:selected="${pageRequestDTO.type == 'w'}">작성자</option>-->
                             <option value="tc" th:selected="${pageRequestDTO.type == 'tc'}">제목 + 내용</option>
-                            <!--                            <option value="tcw" th:selected="${pageRequestDTO.type == 'tcw'}">제목 + 내용 + 작성자</option>-->
                         </select>
                     </div>
                     <input id="search-bar" name="keyword" th:value="${pageRequestDTO.keyword}">
-                    <!--                    <img th:src="@{/assets/close.png}" class="btn_close pointer" width="20px"/>-->
+                    <img th:src="@{/assets/close.png}" class="btn_close pointer" width="20px"/>
                     <button type="button" class="searchButton">
                         <i class="fa fa-search"></i>
                     </button>

@@ -307,10 +307,13 @@ boardInfo{
     border-left: 0px;
     border-right: 0px;
     border-radius: 0px;
+    position: relative;
+    right: -13px;
 }
 
 .custom-select{
-    width: 83px;
+    box-shadow: none;
+    width: 108px;
     height: 40px;
     border: lightgray 1px solid;
     border-top: 2px solid #ffc107;
@@ -320,11 +323,26 @@ boardInfo{
     color: #575757;
     padding-left: 6px;
     border-radius: 20px 0px 0px 20px;
+    position: relative;
+    right: -13px;
 }
 
 .category {
-    border: 2px solid gray;
-    height: 33px;
+position: relative;
+    right: -6px;
+    width: 90px;
+    border: 2px solid #bebebe;
+    height: 35px;
     font-family: 'ELAND_Choice_M';
     border-radius: 6px 6px;
+    box-shadow: none;
+}
+
+.btn_close {
+    height: 12px;
+    position: relative;
+    top: 14px;
+    display: inline-block;
+    left: -10px;
+    opacity: 0.6;
 }
