@@ -74,9 +74,7 @@ public class SearchQnaBoardRepositoryImpl extends QuerydslRepositorySupport impl
         booleanBuilder.and(expression);
 
         if(cate != 0){
-            BooleanBuilder conditionBuilder = new BooleanBuilder();
-            conditionBuilder.or(qQnaBoard.jobList.jno.eq(cate));
-            booleanBuilder.and(conditionBuilder);
+            booleanBuilder.and(qQnaBoard.jobList.jno.eq(cate));
         }
 
         if(type != null){

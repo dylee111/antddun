@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 @Setter
 public class PageRequestDTO {
 
+    private int jno;
     private int page;
     private int size;
     private int cate;

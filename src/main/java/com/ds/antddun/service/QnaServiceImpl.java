@@ -51,13 +51,19 @@ public class QnaServiceImpl implements QnaService {
     //전체 목록
     @Override
     public PageResultDTO<QnaBoardDTO, Object[]> getListAll(PageRequestDTO requestDTO){
-
-        Page<Object[]> result = qnaBoardRepository.searchPage(
-                requestDTO.getCate(),
-                requestDTO.getType(),
-                requestDTO.getKeyword(),
-                requestDTO.getPageable(Sort.by("regDate").descending())
-        );
+        int jno = requestDTO.getJno();
+        Page<Object[]> result;
+        if (jno != 0){
+            Pageable pageable = requestDTO.getPageable(Sort.by("regDate").descending());
+            result = qnaBoardRepository.getListByCate(jno, pageable);
+        } else {
+            result = qnaBoardRepository.searchPage(
+                    requestDTO.getCate(),
+                    requestDTO.getType(),
+                    requestDTO.getKeyword(),
+                    requestDTO.getPageable(Sort.by("regDate").descending())
+            );
+        }
 
         Function<Object[], QnaBoardDTO> fn = (arr -> entityToDTO(
                 (QnaBoard) arr[0],

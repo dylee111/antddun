@@ -4,6 +4,7 @@ import com.ds.antddun.config.auth.PrincipalDetails;
 import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.dto.MemberWishListDTO;
 import com.ds.antddun.dto.PageRequestDTO;
+import com.ds.antddun.dto.QnaBoardDTO;
 import com.ds.antddun.entity.Ddun;
 import com.ds.antddun.entity.JobList;
 import com.ds.antddun.entity.MemberWishList;

@@ -48,7 +48,7 @@ public class QnaBoardController {
 
     //리스트 출력
     @GetMapping("/qna/list/all")
-    public String allList(Model model, PageRequestDTO requestDTO, HttpServletRequest http,
+    public String allList(Model model, PageRequestDTO requestDTO,
                           @AuthenticationPrincipal PrincipalDetails principal) {
 
         PageResultDTO<QnaBoardDTO, Object[]> getListAll = qnaService.getListAll(requestDTO);
