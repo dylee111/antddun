@@ -5,7 +5,6 @@ import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.entity.AntMemberRoleSet;
 import com.ds.antddun.entity.Member;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 public interface MemberService {
@@ -77,8 +76,6 @@ public interface MemberService {
                 .build();
         return member;
     }
-
-
 
 }
 

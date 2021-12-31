@@ -18,11 +18,11 @@ public class QnaLikes {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long lno;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "qnaNo")
     private QnaBoard qnaBoard;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mno")
     private Member member;
 

@@ -35,11 +35,10 @@ public class SearchQnaBoardRepositoryImpl extends QuerydslRepositorySupport impl
         QQnaLikes qQnaLikes = QQnaLikes.qnaLikes;
 
         JPQLQuery<QnaBoard> jpqlQuery = from(qQnaBoard);
-        jpqlQuery.leftJoin(qMember).on(qQnaBoard.member.eq(qMember));
         jpqlQuery.leftJoin(qQnaReply).on(qQnaReply.qnaBoard.qnaNo.eq(qQnaBoard.qnaNo));
         jpqlQuery.leftJoin(qQnaLikes).on(qQnaLikes.qnaBoard.qnaNo.eq(qQnaBoard.qnaNo));
 
-        JPQLQuery<Tuple> tuple = jpqlQuery.select(qQnaBoard, qMember.username, qQnaReply.countDistinct(), qQnaLikes.countDistinct());
+        JPQLQuery<Tuple> tuple = jpqlQuery.select(qQnaBoard, qQnaReply.countDistinct(), qQnaLikes.countDistinct());
         tuple.groupBy(qQnaBoard.qnaNo);
 
         log.info("--------------");
