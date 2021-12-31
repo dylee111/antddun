@@ -88,8 +88,8 @@
 <!--                    </a>-->
 
                     <a class="like">
-                        <span th:if="${boardList.qnaNo} == null "><img th:src="@{/assets/heart_0.png}" width="20px;"th:id="likeBtn"></span>
-                        <span th:if="${boardList.qnaNo} != null"><img th:src="@{/assets/heart_1.png}" width="20px;"th:id="likeBtn"></span>
+                        <span th:if="${boardList.qnaNo} == null "><img th:src="@{/assets/heart_0.png}" width="20px;"th:id="likeBtn"></span>[[${boardList.likesCnt}]]
+                        <span th:if="${boardList.qnaNo} != null"><img th:src="@{/assets/heart_1.png}" width="20px;"th:id="likeBtn"></span>[[${boardList.likesCnt}]]
                     </a>
 
                     <div class="wrapInfo">

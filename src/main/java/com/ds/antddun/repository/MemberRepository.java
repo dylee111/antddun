@@ -1,6 +1,5 @@
 package com.ds.antddun.repository;
 
-import com.ds.antddun.entity.JobList;
 import com.ds.antddun.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -38,4 +37,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query("select m.username from Member m where m.phoneNum=:phoneNum ")
     String findByPhoneNum(String phoneNum);
 
+//        select m.*, j.* from member m left join job_list j on m.job_jno = j.jno where m.mno = 1;
+//    @Query("select m, j from Member m left join JobList j on m.job.jno=j.jno where m.mno =:mno ")
+//    List<Object[]> getMember(Long mno);
 }

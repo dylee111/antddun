@@ -1,28 +1,26 @@
 package com.ds.antddun.service;
 
-import com.ds.antddun.dto.*;
-import com.ds.antddun.entity.*;
+import com.ds.antddun.dto.PageRequestDTO;
+import com.ds.antddun.dto.PageResultDTO;
+import com.ds.antddun.dto.QnaBoardDTO;
+import com.ds.antddun.entity.JobList;
+import com.ds.antddun.entity.Member;
+import com.ds.antddun.entity.QnaBoard;
+import com.ds.antddun.entity.QnaReply;
 import com.ds.antddun.repository.JobListRepository;
 import com.ds.antddun.repository.QnaBoardRepository;
 import com.ds.antddun.repository.QnaReplyRepository;
 import com.ds.antddun.repository.UploadImageRepository;
-import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.extern.log4j.Log4j2;
-import org.hibernate.engine.jdbc.Size;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Service
 @Log4j2
@@ -47,8 +45,7 @@ public class QnaServiceImpl implements QnaService {
     private  QnaReplyService qnaReplyService;
 
 
-//======게시물 리스트 관련======
-    //전체 목록
+    @Transactional
     @Override
     public PageResultDTO<QnaBoardDTO, Object[]> getListAll(PageRequestDTO requestDTO){
         Page<Object[]> result = qnaBoardRepository.searchPage(
@@ -67,7 +64,6 @@ public class QnaServiceImpl implements QnaService {
         return new PageResultDTO<>(result, fn);
     }
 
-//======게시물 관련======
     @Transactional
     @Override
     public Long register(QnaBoardDTO qnaBoardDTO, Member member) {

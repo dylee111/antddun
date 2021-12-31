@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(exclude = "job")
 @Getter
 @Setter
 @SequenceGenerator(name="MEMBER_SEQ_GEN",sequenceName = "MEMBER_SEQ", initialValue = 1, allocationSize = 1)
@@ -44,7 +44,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private AntMemberRoleSet role;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER) //요기 때문에 ㅠㅠㅠ
     private JobList job;
     private int experience;
 
