@@ -6,9 +6,12 @@ import com.ds.antddun.entity.AntMemberRoleSet;
 import com.ds.antddun.entity.Member;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MemberService {
     public List<Member> getList();
+
+//    Optional<Object[]> getMember(Long mno);
 
     String findByPhoneNum(String phoneNum);
 

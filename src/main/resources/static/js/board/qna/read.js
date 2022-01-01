@@ -13,7 +13,7 @@ $(document).ready(function() {
     });
 
 
-/*---------------- registerForm.js -----------------*/
+/*---------------- registerForm.html -----------------*/
 
 //뚠 도움말 토글
     var info_helper = $('.info_helper');
@@ -91,7 +91,7 @@ $(document).ready(function() {
 
 
 
-/*---------------- read.js -----------------*/
+/*---------------- read.html -----------------*/
 // 댓글 등록
     $("#btn_reply").click(function() {
         var replyText = $(".form-control").val();

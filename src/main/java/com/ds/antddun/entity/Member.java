@@ -15,6 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = "job")
+//@NamedEntityGraph(name = "JobList.job", attributeNodes = @NamedAttributeNode("job"))
 @Getter
 @Setter
 @SequenceGenerator(name="MEMBER_SEQ_GEN",sequenceName = "MEMBER_SEQ", initialValue = 1, allocationSize = 1)

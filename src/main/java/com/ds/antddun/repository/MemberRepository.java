@@ -37,7 +37,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query("select m.username from Member m where m.phoneNum=:phoneNum ")
     String findByPhoneNum(String phoneNum);
 
-//        select m.*, j.* from member m left join job_list j on m.job_jno = j.jno where m.mno = 1;
+////        select m.*, j.* from member m left join job_list j on m.job_jno = j.jno where m.mno = 1;
+//    @EntityGraph(value = "JobList.job")
 //    @Query("select m, j from Member m left join JobList j on m.job.jno=j.jno where m.mno =:mno ")
 //    List<Object[]> getMember(Long mno);
 }
