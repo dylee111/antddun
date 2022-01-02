@@ -51,8 +51,6 @@
         <div class="card qnaCardList" th:each="boardList : ${boardList.dtoList}" th:attr="data-keyword=${pageRequestDTO.keyword}"
              th:onclick="|javascript:read('${boardList.qnaNo}','${pageRequestDTO.page}', this.getAttribute('data-keyword'))|">
 
-            <div th:if="${boardList.count} != null">[[${boardList.count}]]</div>
-
             <div class="post-body attach-img-pre">
                 <div class="leftSection">
                     <span id="qnaNo" name="qnaNo" hidden th:text="${boardList.qnaNo}"></span>
@@ -81,7 +79,7 @@
                     <div class="" ><a class="nickName" href="#post">[[${boardList.writer}]]</a></div>
 
                     <a class="like">
-                        <img th:src="@{/assets/heart_0.png}" width="25px;">&nbsp;[[${boardList.LikesCnt}]]&nbsp
+                        <img th:src="@{/assets/heart_0.png}" width="25px;"> [[${boardList.LikesCnt}]]&nbsp
                     </a>
 
 <!--                    <a class="like">-->

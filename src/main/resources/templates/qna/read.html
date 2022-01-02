@@ -67,7 +67,7 @@
                         <span id="viewCnt" class="smallText">&nbsp조회수&nbsp[[${boardList.ViewCnt}]]</span>
                     </div>
                     <div class="rightSection smallText pointer end"
-                         th:if="${checkUser} == true" >
+                         th:if="${preMem} == ${boardList.mno}" >
                         <span class="modifyBtn">수정 | </span>
                         <span class="removeBtn">삭제</span>
                     </div>
@@ -167,6 +167,7 @@
                                     [[${replyList.member.job.job}]] [[${replyList.member.experience}]]년차 [[${replyList.member.lastName}]]개미님이 채택되었습니다.<img width="20px" th:src="@{/assets/select.png}">
                                 </div>
                             </div>
+
                         </div>
 
 
