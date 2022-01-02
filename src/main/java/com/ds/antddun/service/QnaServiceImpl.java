@@ -54,7 +54,6 @@ public class QnaServiceImpl implements QnaService {
                 requestDTO.getKeyword(),
                 requestDTO.getPageable(Sort.by("regDate").descending())
         );
-        log.info("카카카운트"+result.get().count());
 
         Function<Object[], QnaBoardDTO> fn = (arr -> entityToDTO(
                 (QnaBoard) arr[0],

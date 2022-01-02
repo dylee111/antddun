@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -50,7 +49,6 @@ public class QnaBoardController {
     @GetMapping("/qna/list")
     public String allList(Model model, PageRequestDTO requestDTO,
                           @AuthenticationPrincipal PrincipalDetails principal) {
-
         PageResultDTO<QnaBoardDTO, Object[]> getListAll = qnaService.getListAll(requestDTO);
         model.addAttribute("boardList",getListAll);
 
@@ -73,7 +71,6 @@ public class QnaBoardController {
     @GetMapping("/member/qna/registerForm")
     public String register(@AuthenticationPrincipal PrincipalDetails principal, Model model) {
 
-        //로그인 후 이용가능
         if (principal == null) {
             return "redirect:/login";
         }
@@ -83,10 +80,7 @@ public class QnaBoardController {
         if (wishLists.size() != 0) {
             model.addAttribute("wishListIndex", wishLists.get(0));
         }
-
-        //카테고리
         model.addAttribute("jobList", jobListService.getList());
-        //총 뚠
         model.addAttribute("totalDdun", ddunService.totalAmountByMno(principal.getMember().getMno()));
 
         return "/qna/registerForm";
@@ -106,17 +100,13 @@ public class QnaBoardController {
     //게시판 조회
     @GetMapping("/member/qna/read")
     public String read(Long qnaNo, @AuthenticationPrincipal PrincipalDetails principal, Model model) {
-
-        //로그인 후 이용가능
         if (principal == null) { return "redirect:/login";}
-
-        //조회수 추가
         qnaBoardRepository.updateViewCnt(qnaNo);
 
         //게시판 정보
-        model.addAttribute("replyList", qnaReplyService.getListByQnaNo(qnaNo));
-        model.addAttribute("preMem", principal.getMember().getMno()); //현재 멤버의 ㅡㅜㅐ
         model.addAttribute("boardList", qnaService.getBoard(qnaNo));
+        model.addAttribute("replyList", qnaReplyService.getListByQnaNo(qnaNo));
+        model.addAttribute("preMem", principal.getMember().getMno()); //현재 멤버의 mno
 
         //권한 따라 수정 삭제 버튼 보이기
         Long actualWriter = qnaBoardRepository.getById(qnaNo).getMember().getMno();
@@ -141,12 +131,11 @@ public class QnaBoardController {
     //게시물 수정 폼
     @GetMapping("/member/qna/modifyForm")
     public String modifyForm(QnaBoardDTO qnaBoardDTO, Model model){
-        //카테고리
         model.addAttribute("jobList", jobListService.getList());
-        //게시판 정보
+
         QnaBoardDTO boardList = qnaService.getBoard(qnaBoardDTO.getQnaNo());
         model.addAttribute("boardList", boardList);
-        //총 뚠
+
         model.addAttribute("totalDdun", ddunService.totalAmountByMno(qnaBoardDTO.getMno()));
         return "/qna/modifyForm";
     }
