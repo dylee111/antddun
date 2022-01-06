@@ -183,19 +183,24 @@ $(document).ready(function() {
 
 
 //댓글 채택
-
     var isSolvedValue = $('#isSolvedValue').val();
 
     if(isSolvedValue == "true"){
         $('#selectAnswer').hide();
     }
 
-    $('#selectAnswer').click(function(){
+     $('.btn_close').click(function(){
+        $('.buy_container').hide();
+        $('.dim').hide();
+     })
 
+    $('#selectAnswer').click(function(){
         var parent = $(this).parent().parent(); //ms-3
         var replyNo = parent.children(".reply-no").val();
         var replyText = parent.children(".reply-text-box");
         var replier = parent.children(".replier").val();
+        var isSelectedValue = parent.children(".isSelectedValue").val();
+        console.log("isSelected: "+isSelectedValue);
 
         var cancel_btn = $('.cancel_btn');
         var buy_container = $('.buy_container');
@@ -203,42 +208,44 @@ $(document).ready(function() {
         $('.buy_container').show();
         $('.dim').show();
 
-        $('.buy_btn').click(function(){
+        if(isSelectedValue == "false"){
+            $('.buy_btn').click(function(){
+                var ddun = parseInt($("#ddun").val());
+                var title = $('.title').text();
 
-        var ddun = parseInt($("#ddun").val());
-        var title = $('.title').text();
+                if(title.length > 20){
+                    title = title.substr(0, 20) + "...";
+                }
+                title = "\"" + title + "\" 에서 채택되었습니다.";
 
-        if(title.length > 20){
-            title = title.substr(0, 20) + "...";
-        }
-        title = "\"" + title + "\" 에서 채택되었습니다.";
-
-           $.ajax({
-                  url: "/antddun/member/qna/selected/",
-                  type: "GET",
-                  data: {
+                var selectedData = {
                       "amount": ddun,
                       "title": title,
                       "qnaNo": qnaNo,
                       "replyNo": replyNo,
                       "replier": replier
-                  },
-                  success: function(data) {
-                    if(data == "selected"){
-                        alert("채택하였습니다.");
-                        self.location.reload();
-                    }
                 }
-           }); // ajax end.
-
-       }) //btn_buy end.
-
-        $('.btn_close').click(function(){
-            $('.buy_container').hide();
-            $('.dim').hide();
-        })
+                $.ajax({
+                      url: "/antddun/member/qna/selected/",
+                      type: "POST",
+                      data: JSON.stringify(selectedData),
+                      dataType : 'JSON',
+                      contentType : 'application/json; charset=UTF-8',
+                      success: function(response) {
+//                        self.location.reload();
+                          location.href = response;
+                      },
+                      error: function(response) {
+                         console.log(response);
+                      }
+                }); // ajax end.
+           }) //btn_buy end.
+        } else if(isSelectedValue == "true") {
+            alert("이미 채택하였습니다.")
+        }
 
     })
+
 
 
 /*---------------- modifyForm.js -----------------*/
