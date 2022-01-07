@@ -75,8 +75,7 @@ public class DdunController {
     @ResponseBody
     @PostMapping("/qna/selected")
     public ResponseEntity<String> selectAnswer(@RequestBody JSONObject param,
-                               DdunDTO ddunDTO) {
-        log.info(param);
+                                               DdunDTO ddunDTO) {
         String title = param.getAsString("title");
         Long amount = Long.parseLong(param.getAsString("amount"));
         Long qnaNo = Long.parseLong(param.getAsString("qnaNo"));
@@ -87,6 +86,7 @@ public class DdunController {
         ddunService.sosoSell(replier, amount, ddunDTO);
         qnaService.setSolvedSelected(qnaNo, replyNo);
 
-        return new ResponseEntity<>("/antddun/member/qna/read?qnaNo=" + qnaNo, HttpStatus.OK);
+        return new ResponseEntity<>("success", HttpStatus.OK);
     }
+
 }

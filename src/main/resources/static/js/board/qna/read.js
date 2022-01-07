@@ -43,9 +43,6 @@ $(document).ready(function() {
         var input_ddun = parseInt($("#input_ddun").val());
         var total_ddun = parseInt($("#total_ddun").text());
 
-        console.log("input_ddun: "+input_ddun);
-        console.log("typeof input_ddun: "+typeof(input_ddun));
-
         if(input_ddun > total_ddun){
             alert("뚠이 부족합니다.");
             input_box.focus();
@@ -229,14 +226,16 @@ $(document).ready(function() {
                       url: "/antddun/member/qna/selected/",
                       type: "POST",
                       data: JSON.stringify(selectedData),
-                      dataType : 'JSON',
+                      dataType : 'text', //controller에서 받아오는 객체의 타입
                       contentType : 'application/json; charset=UTF-8',
                       success: function(response) {
-//                        self.location.reload();
-                          location.href = response;
+                            alert("채택 성공");
+//                            self.location.reload();
+                            location.href = "/antddun/member/qna/read?qnaNo=" + qnaNo;
+//                            location.href = response;
                       },
-                      error: function(response) {
-                         console.log(response);
+                      error:function(request, status, error){
+                      alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                       }
                 }); // ajax end.
            }) //btn_buy end.
