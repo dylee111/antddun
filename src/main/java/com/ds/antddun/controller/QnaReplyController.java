@@ -22,7 +22,6 @@ public class QnaReplyController {
     public ResponseEntity<Long> replyRegister(@RequestBody QnaReplyDTO qnaReplyDTO, @AuthenticationPrincipal PrincipalDetails principal) {
 
         qnaReplyDTO.setMno(principal.getMember().getMno());
-        log.info("whyyyyy"+ qnaReplyDTO);
 
         Long qnaRno = qnaReplyService.register(qnaReplyDTO);
         return new ResponseEntity<>(qnaRno, HttpStatus.OK);

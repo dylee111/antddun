@@ -7,11 +7,13 @@ import com.ds.antddun.service.QnaService;
 import com.ds.antddun.service.SosoJobService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import net.minidev.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 
 @Controller
 @Log4j2
@@ -70,20 +72,21 @@ public class DdunController {
         return new ResponseEntity<>("구매 성공", HttpStatus.OK);
     }
 
-
     @ResponseBody
-    @GetMapping("/qna/selected")
-    public ResponseEntity<String> selectAnswer(@RequestParam("title") String title,
-                                             @RequestParam("amount") Long amount,
-                                             @RequestParam("qnaNo") Long qnaNo,
-                                             @RequestParam("replyNo") Long replyNo,
-                                             @RequestParam("replier") Long replier,
-                                             DdunDTO ddunDTO) {
+    @PostMapping("/qna/selected")
+    public ResponseEntity<String> selectAnswer(@RequestBody JSONObject param,
+                                               DdunDTO ddunDTO) {
+        String title = param.getAsString("title");
+        Long amount = Long.parseLong(param.getAsString("amount"));
+        Long qnaNo = Long.parseLong(param.getAsString("qnaNo"));
+        Long replyNo = Long.parseLong(param.getAsString("replyNo"));
+        Long replier = Long.parseLong(param.getAsString("replier"));
+
         ddunDTO.setContent(title);
         ddunService.sosoSell(replier, amount, ddunDTO);
         qnaService.setSolvedSelected(qnaNo, replyNo);
 
-        return new ResponseEntity<>("selected", HttpStatus.OK);
+        return new ResponseEntity<>("success", HttpStatus.OK);
     }
 
 }

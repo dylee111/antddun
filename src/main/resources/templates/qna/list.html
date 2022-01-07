@@ -56,21 +56,12 @@
                     <span id="qnaNo" name="qnaNo" hidden th:text="${boardList.qnaNo}"></span>
                     <span class="cate" th:text="${boardList.job}"></span>
                     <span class="smallDdun" th:if="${boardList.ddun} != 0">[[${boardList.ddun}]]</span>
+                    <span class="isSolved" th:if="${boardList.isSolved}==true">채택완료 <img width="20px" th:src="@{/assets/select.png}"></span>
                     <div class="post-content">
-                        <h3><a  th:text="${boardList.title}"></a></h3>
-                        <a class="content-text" th:utext="${boardList.content}"></a>
+                        <h3><span th:text="${boardList.title}"></span></h3>
+                        <span class="content-text" th:utext="${boardList.content}"></span>
                     </div>
                 </div>
-                <!--
-                                <div class="rightSection">
-                                   <a th:href="@{'/member/qna/read/' + ${boardList.qnaNo}}">
-                                       <img class="imgTest" style="display:inline-block; background:lightgray; width:8rem; height:8rem;" src="" alt="">
-                                       &lt;!&ndash;
-                                       <img th:if="${dto.imageDTOList.size() > 0 && dto.imageDTOList[0].path != null}"
-                                                       th:src="|/display?fileName=${dto.imageDTOList[0].getThumbnailURL()}|">&ndash;&gt;
-                                   </a>
-                                </div>
-                -->
             </div>
 
             <!-- 사용자 정보   -->
@@ -131,27 +122,6 @@
             </ul>
         </nav>
 
-
-        <!--    모달 창     -->
-        <div class="modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">되었습니다.</h5>
-                        <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close"/>
-                    </div>
-                    <div class="modal-body">
-                        <p id="modalMsg"> 번 글이 <span class="modal-title"></span>되었습니다.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
         <!--   스크립트    -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script th:inline="javascript">
@@ -161,12 +131,12 @@
             function getJobList(jno, page){
 
                 /*[+
-                var urlword = contextPath + [[@{/qna/list}]] +
+                var url = contextPath + [[@{/qna/list}]] +
                     "?cate=" +jno
                      + "&page=" + page ;
                 +]*/
 
-                location.href=urlword;
+                location.href = url;
             }
 
            //게시물 조회
