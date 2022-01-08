@@ -232,7 +232,6 @@ $(document).ready(function() {
                             alert("채택 성공");
 //                            self.location.reload();
                             location.href = "/antddun/member/qna/read?qnaNo=" + qnaNo;
-//                            location.href = response;
                       },
                       error:function(request, status, error){
                       alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
