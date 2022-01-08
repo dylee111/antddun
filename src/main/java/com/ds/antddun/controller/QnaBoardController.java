@@ -68,7 +68,7 @@ public class QnaBoardController {
     }
 
     //게시물 작성 양식
-    @GetMapping("/member/qna/registerForm")
+    @GetMapping("/member/qna/register")
     public String register(@AuthenticationPrincipal PrincipalDetails principal, Model model) {
 
         if (principal == null) {
@@ -83,7 +83,7 @@ public class QnaBoardController {
         model.addAttribute("jobList", jobListService.getList());
         model.addAttribute("totalDdun", ddunService.totalAmountByMno(principal.getMember().getMno()));
 
-        return "/qna/registerForm";
+        return "/qna/register";
     }
 
 
@@ -129,7 +129,7 @@ public class QnaBoardController {
 
 
     //게시물 수정 폼
-    @GetMapping("/member/qna/modifyForm")
+    @GetMapping("/member/qna/modify")
     public String modifyForm(QnaBoardDTO qnaBoardDTO, Model model){
         model.addAttribute("jobList", jobListService.getList());
 
@@ -137,7 +137,7 @@ public class QnaBoardController {
         model.addAttribute("boardList", boardList);
 
         model.addAttribute("totalDdun", ddunService.totalAmountByMno(qnaBoardDTO.getMno()));
-        return "/qna/modifyForm";
+        return "/qna/modify";
     }
 
     //게시물 수정
