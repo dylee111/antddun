@@ -3,6 +3,24 @@
 
 > 일상이 무기력하고 지루한 직장인들을 대상으로 건강한 직장문화 형성을 위한 커뮤니티 플랫폼 서비스 
 
+<br>
+
+**프로토타입** : [카카오 오븐 이동](https://ovenapp.io/view/NKAy5eNMdLwLmpZ5BZ8s01KNhjtVcovU/)
+
+## UML 다이어그램
+<details>
+<summary>Use Case Diagram</summary>
+<div markdown="1">       
+<img width="900" alt="image" src="https://user-images.githubusercontent.com/86641773/148582686-7a7b830d-a50b-4a3c-9b99-747c0c015283.png">
+</div>
+</details>
+
+<details>
+<summary>Class Diagram</summary>
+<div markdown="1">       
+</div>
+</details>
+
 
 <br>
 
