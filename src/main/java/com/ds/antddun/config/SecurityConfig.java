@@ -26,14 +26,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private PrincipalDetailsService principalDetailsService;
 
-    @Bean // 스프링 빈을 생성
+    @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.headers().frameOptions().sameOrigin(); // H2 DB 접근 권한 설정
+        http.headers().frameOptions().sameOrigin();
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/member/**").authenticated()

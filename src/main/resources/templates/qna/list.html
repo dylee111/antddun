@@ -6,6 +6,7 @@
         <!-- 페이지 css/ js 추가 -->
         <link th:href="@{/css/board/qna/qnaStyles.css}" rel="stylesheet" />
         <script th:src="@{/js/board/qna/read.js}"></script>
+        <script th:src="@{/js/board/qna/listLikes.js}"></script>
 
         <!-- 본문 시작 -->
         <div id="search-wrap" style="margin-bottom: 20px;">
@@ -50,10 +51,10 @@
         <!-- 게시물 -->
         <div class="card qnaCardList" th:each="boardList : ${boardList.dtoList}" th:attr="data-keyword=${pageRequestDTO.keyword}"
              th:onclick="|javascript:read('${boardList.qnaNo}','${pageRequestDTO.page}', this.getAttribute('data-keyword'))|">
+            <span id="qnaNo" name="qnaNo" hidden th:text="${boardList.qnaNo}"></span>
 
             <div class="post-body attach-img-pre">
                 <div class="leftSection">
-                    <span id="qnaNo" name="qnaNo" hidden th:text="${boardList.qnaNo}"></span>
                     <span class="cate" th:text="${boardList.job}"></span>
                     <span class="smallDdun" th:if="${boardList.ddun} != 0">[[${boardList.ddun}]]</span>
                     <span class="isSolved" th:if="${boardList.isSolved}==true">채택완료 <img width="20px" th:src="@{/assets/select.png}"></span>
@@ -72,7 +73,7 @@
                     <a class="like">
                         <img th:src="@{/assets/heart_0.png}" width="25px;"> [[${boardList.LikesCnt}]]&nbsp
                     </a>
-
+                    <span>likesCheck : [[${checkLikes}]]</span>
 <!--                    <a class="like">-->
 <!--                        <span th:if="${boardList.qnaNo} == null "><img th:src="@{/assets/heart_0.png}" width="20px;"th:id="likeBtn"></span>[[${boardList.likesCnt}]]-->
 <!--                        <span th:if="${boardList.qnaNo} != null"><img th:src="@{/assets/heart_1.png}" width="20px;"th:id="likeBtn"></span>[[${boardList.likesCnt}]]-->

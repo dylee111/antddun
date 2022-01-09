@@ -30,7 +30,7 @@ public class FacebookUserInfo implements OAuth2UserInfo{
     }
 
 
-    //이름/ given_name
+    //이름 given_name
     @Override
     public String getFirstName() {
         String str = (String) attributes.get("name");
@@ -43,7 +43,7 @@ public class FacebookUserInfo implements OAuth2UserInfo{
         return firstName;
     }
 
-    // 성/family_name
+    // 성 family_name
     @Override
     public String getLastName() {
         String str = (String) attributes.get("name");

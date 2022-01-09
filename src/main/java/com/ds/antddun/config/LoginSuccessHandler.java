@@ -36,9 +36,9 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
                 System.out.println(grantedAuthority.getAuthority()); //user
             }
         });
-        log.info("getAuthorities: " + roleList);
 
         HttpSession session = request.getSession();
+
         if (session != null) {
             String redirectUrl = (String) session.getAttribute("redirectURI");
             if (roleList.contains("SOCIAL") && fromSocial ) redirectUrl = "/member/socialJoin";
@@ -49,7 +49,6 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
             } else {
                 super.onAuthenticationSuccess(request, response, authentication);
             }
-
             getRedirectStrategy().sendRedirect(request, response, redirectUrl);
         }
 
