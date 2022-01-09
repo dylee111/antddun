@@ -10,7 +10,6 @@ import com.ds.antddun.entity.QnaReply;
 import com.ds.antddun.repository.JobListRepository;
 import com.ds.antddun.repository.QnaBoardRepository;
 import com.ds.antddun.repository.QnaReplyRepository;
-import com.ds.antddun.repository.UploadImageRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,9 +27,6 @@ public class QnaServiceImpl implements QnaService {
 
     @Autowired
     private JobListRepository jobListRepository;
-
-    @Autowired
-    private UploadImageRepository imageRepository;
 
     @Autowired
     private QnaBoardRepository qnaBoardRepository;
