@@ -254,5 +254,16 @@ $(document).ready(function() {
          }
     })
 
+   //검색
+   var qnaSearchForm = $("#qnaSearchForm");
+   $('.searchButton').click(function(e){
+        qnaSearchForm.submit();
+   });
+
+   //검색어 비우기
+   $('.btn_truncate').click(function(){
+    $('#search-bar').val('');
+   });
+
 
 }); // end.

@@ -45,7 +45,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private AntMemberRoleSet role;
 
-    @ManyToOne(fetch = FetchType.EAGER) //요기 때문에 ㅠㅠㅠ
+    @ManyToOne(fetch = FetchType.EAGER)
     private JobList job;
     private int experience;
 
