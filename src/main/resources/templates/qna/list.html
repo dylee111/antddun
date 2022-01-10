@@ -6,7 +6,6 @@
         <!-- 페이지 css/ js 추가 -->
         <link th:href="@{/css/board/qna/qnaStyles.css}" rel="stylesheet" />
         <script th:src="@{/js/board/qna/read.js}"></script>
-        <script th:src="@{/js/board/qna/listLikes.js}"></script>
 
         <!-- 본문 시작 -->
         <div id="search-wrap" style="margin-bottom: 20px;">
@@ -39,7 +38,6 @@
             <button class="btn btn-primary" style="margin-top: -58px;float: right;">글 쓰기</button>
         </a>
 
-
         <div class="subNav-body">
             <nav class="nav nav-underline" aria-label="Secondary navigation">
                 <a class="subNav" th:href="@{/qna/list/}">전체</a>
@@ -51,6 +49,7 @@
         <!-- 게시물 -->
         <div class="card qnaCardList" th:each="boardList : ${boardList.dtoList}" th:attr="data-keyword=${pageRequestDTO.keyword}"
              th:onclick="|javascript:read('${boardList.qnaNo}','${pageRequestDTO.page}', this.getAttribute('data-keyword'))|">
+            <span th:id="qnaNo+${boardList.qnaNo}" name="qnaNo" hidden th:text="${boardList.qnaNo}"></span>
             <span id="qnaNo" name="qnaNo" hidden th:text="${boardList.qnaNo}"></span>
 
             <div class="post-body attach-img-pre">
@@ -73,11 +72,6 @@
                     <a class="like">
                         <img th:src="@{/assets/heart_0.png}" width="25px;"> [[${boardList.LikesCnt}]]&nbsp
                     </a>
-                    <span>likesCheck : [[${checkLikes}]]</span>
-<!--                    <a class="like">-->
-<!--                        <span th:if="${boardList.qnaNo} == null "><img th:src="@{/assets/heart_0.png}" width="20px;"th:id="likeBtn"></span>[[${boardList.likesCnt}]]-->
-<!--                        <span th:if="${boardList.qnaNo} != null"><img th:src="@{/assets/heart_1.png}" width="20px;"th:id="likeBtn"></span>[[${boardList.likesCnt}]]-->
-<!--                    </a>-->
 
                     <div class="wrapInfo">
                         <a class="views">
@@ -96,7 +90,6 @@
                        th:text="${#temporals.format(boardList.regDate, 'yy-MM-dd')}">
                     </a>
                 </div>
-
             </div>
 
         </div>
@@ -149,17 +142,6 @@
 
                 location.href=readurl;
             }
-
-           //검색
-           var qnaSearchForm = $("#qnaSearchForm");
-           $('.searchButton').click(function(e){
-                qnaSearchForm.submit();
-           });
-
-           //검색어 비우기
-           $('.btn_truncate').click(function(){
-            $('#search-bar').val('');
-           });
 
         </script>
 

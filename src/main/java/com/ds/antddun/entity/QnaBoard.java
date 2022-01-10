@@ -39,7 +39,7 @@ public class QnaBoard extends BaseEntity {
     @JoinColumn(name = "jobList_jno")
     private JobList jobList;
 
-    @ManyToOne(fetch = FetchType.LAZY) // 영속성 (CasacadeType.ALL 제거 : 영속성을 제거하여 Member 엔티티가 중복으로 저장되는 현상 X)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
 }

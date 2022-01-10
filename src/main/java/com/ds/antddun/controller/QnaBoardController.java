@@ -13,9 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -55,15 +53,6 @@ public class QnaBoardController {
         List<JobList> list = jobListService.getList();
         model.addAttribute("jobList", list);
 
-        //위시리스트
-        if (principal != null) {
-            List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
-            model.addAttribute("wishList", wishLists);
-            if (wishLists.size() != 0) {
-                model.addAttribute("wishListIndex", wishLists.get(0));
-            }
-        }
-
         return "/qna/list";
     }
 
@@ -75,11 +64,6 @@ public class QnaBoardController {
             return "redirect:/login";
         }
 
-        List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
-        model.addAttribute("wishList", wishLists);
-        if (wishLists.size() != 0) {
-            model.addAttribute("wishListIndex", wishLists.get(0));
-        }
         model.addAttribute("jobList", jobListService.getList());
         model.addAttribute("totalDdun", ddunService.totalAmountByMno(principal.getMember().getMno()));
 
@@ -116,13 +100,6 @@ public class QnaBoardController {
 
         //좋아요 체크 유무
         model.addAttribute("qnaCheck", qnaLikeService.checkLikes(qnaNo, principal.getMember().getMno()));
-
-        //위시리스트
-        List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
-        model.addAttribute("wishList", wishLists);
-        if (wishLists.size() != 0) {
-            model.addAttribute("wishListIndex", wishLists.get(0));
-        }
 
         return "/qna/read";
     }
