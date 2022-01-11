@@ -232,7 +232,6 @@ $(document).ready(function() {
                             alert("채택 성공");
 //                            self.location.reload();
                             location.href = "/antddun/member/qna/read?qnaNo=" + qnaNo;
-//                            location.href = response;
                       },
                       error:function(request, status, error){
                       alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -254,6 +253,17 @@ $(document).ready(function() {
             history.go(-1);
          }
     })
+
+   //검색
+   var qnaSearchForm = $("#qnaSearchForm");
+   $('.searchButton').click(function(e){
+        qnaSearchForm.submit();
+   });
+
+   //검색어 비우기
+   $('.btn_truncate').click(function(){
+    $('#search-bar').val('');
+   });
 
 
 }); // end.

@@ -7,5 +7,4 @@ public interface OAuth2UserInfo {
     String getFirstName();
     String getLastName();
     String getMobile();
-
 }

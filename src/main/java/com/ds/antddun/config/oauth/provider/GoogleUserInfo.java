@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class GoogleUserInfo implements OAuth2UserInfo{
 
-    private Map<String, Object> attributes; // getAttributes()
+    private Map<String, Object> attributes;
 
     //여기서 받음
     public GoogleUserInfo(Map<String, Object> attributes) {
@@ -25,7 +25,6 @@ public class GoogleUserInfo implements OAuth2UserInfo{
     public String getEmail() {
         return (String) attributes.get("email");
     }
-
 
     @Override
     public String getFirstName() {

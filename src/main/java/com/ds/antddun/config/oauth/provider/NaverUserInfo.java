@@ -10,7 +10,6 @@ public class NaverUserInfo implements OAuth2UserInfo{
 
     private Map<String, Object> attributes; // getAttributes()
 
-
     //{id=1234, email=danbi@com, mobile=1234, name=박단비}
     public NaverUserInfo(Map<String, Object> attributes) {
         this.attributes = attributes;
@@ -31,8 +30,7 @@ public class NaverUserInfo implements OAuth2UserInfo{
         return (String) attributes.get("email");
     }
 
-
-    //이름/ given_name
+    //이름 추출
     @Override
     public String getFirstName() {
         String str = (String) attributes.get("name");
@@ -42,11 +40,10 @@ public class NaverUserInfo implements OAuth2UserInfo{
         }  else {
             firstName = str.substring(2);
         }
-        log.info(">>>>>>>>",firstName);
         return firstName;
     }
 
-    // 성/family_name
+    //성 추출
     @Override
     public String getLastName() {
         String str = (String) attributes.get("name");
@@ -56,11 +53,10 @@ public class NaverUserInfo implements OAuth2UserInfo{
         }  else {
             lastName = str.substring(0,2);
         }
-        log.info(">>>>>>>>",lastName);
         return lastName;
     }
 
-
+    //폰번호만 추출(특수문자 제외)
     @Override
     public String getMobile() {
         String mobile = (String) attributes.get("mobile");

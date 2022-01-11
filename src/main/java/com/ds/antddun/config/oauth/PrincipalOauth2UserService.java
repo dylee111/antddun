@@ -55,7 +55,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             log.info("구글, 네이버, 페이스북만 로그인 가능!");
         }
 
-// =================== 강제 회원가입 ===================
+// =================== 강제 회원가입 과정 ===================
         //email(username)
         String username = oAuth2UserInfo.getEmail();
 
@@ -63,7 +63,6 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         String providerId = oAuth2UserInfo.getProviderId();
         String uuid = oAuth2UserInfo.getProvider() + "_" + providerId; // google_112343454352
         String password = bCryptPasswordEncoder.encode(uuid); // -> 고유
-
 
         //이름
         String firstname = oAuth2UserInfo.getFirstName();
