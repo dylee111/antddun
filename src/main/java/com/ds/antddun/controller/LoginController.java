@@ -92,7 +92,7 @@ public class LoginController {
 
     @ResponseBody
     @GetMapping("/check/sendSMS")
-    public String sendSMS(String phoneNum) {
+    public String sendSMS(@RequestParam("phoneNumber") String phoneNum) {
 
         Random rand  = new Random();
         String numStr = "";
@@ -103,7 +103,7 @@ public class LoginController {
 
         System.out.println("수신자 번호 : " + phoneNum);
         System.out.println("인증번호 : " + numStr);
-//        memberService.certifiedPhoneNumber(phoneNum,numStr);
+        memberService.certifiedPhoneNumber(phoneNum,numStr);
         return numStr;
     }
 

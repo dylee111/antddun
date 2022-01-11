@@ -27,13 +27,13 @@ $(document).ready(function() {
                             }
                         })
                         //비밀번호 변경 칸 만들기
-                        document.location.href="/antddun/changePw";
+                        //document.location.href="/antddun/changePw";
                     }else{
                         Swal.fire({
                             icon: 'error',
                             title: '인증오류',
                             text: '인증번호가 올바르지 않습니다!',
-                            footer: '<a href="/home">다음에 인증하기</a>'
+                            footer: '<a href="/antddun">다음에 인증하기</a>'
                         })
                     }
                 })
