@@ -5,13 +5,7 @@
 
 <br>
 
-## UML 다이어그램
-<details>
-<summary>Use Case Diagram</summary>
-<div markdown="1">       
-<img width="900" alt="image" src="https://user-images.githubusercontent.com/86641773/148582686-7a7b830d-a50b-4a3c-9b99-747c0c015283.png">
-</div>
-</details>
+
 
 <details>
 <summary>Class Diagram</summary>
