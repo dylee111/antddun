@@ -5,7 +5,7 @@
 
 일상이 무기력하고 지루한 직장인들을 대상으로 건강한 직장문화 형성을 위한 커뮤니티 플랫폼 서비스 
 
-​
+**프로토타입** : [카카오 오븐 이동](https://ovenapp.io/view/NKAy5eNMdLwLmpZ5BZ8s01KNhjtVcovU/)
 
 ​
 
