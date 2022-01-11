@@ -5,8 +5,6 @@
 
 <br>
 
-**프로토타입** : [카카오 오븐 이동](https://ovenapp.io/view/NKAy5eNMdLwLmpZ5BZ8s01KNhjtVcovU/)
-
 ## UML 다이어그램
 <details>
 <summary>Use Case Diagram</summary>
