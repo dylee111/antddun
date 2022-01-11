@@ -9,15 +9,13 @@ import com.ds.antddun.repository.JobListRepository;
 import com.ds.antddun.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import net.nurigo.java_sdk.api.Message;
-import net.nurigo.java_sdk.exceptions.CoolsmsException;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +27,19 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Override
+    public List<Member> getList() {
+        return null;
+    }
+
+//    @Override
+//    public Optional<Object[]> getMember(Long mno) {
+//        Optional<Object[]> result = memberRepository.getMember(mno);
+//        log.info(">>>>>>>>>>>>>>>>"+result);
+//        return result;
+//    }
+
 
     @Override
     public String findByPhoneNum(String phoneNum) {
@@ -155,31 +166,6 @@ public class MemberServiceImpl implements MemberService {
         member.setMno(memberDTO.getMno()); //update되도록 mno알려주기
         member.setJob(jobList); //Member에 setter 추가해줌
         memberRepository.save(member);
-    }
-
-    @Override
-    public void certifiedPhoneNumber(String phoneNum, String cerNum) {
-
-        String api_key = "임시 삭제";
-        String api_secret = "임시 삭제";
-        Message coolsms = new Message(api_key, api_secret);
-
-        // 4 params(to, from, type, text) are mandatory. must be filled
-        HashMap<String, String> params = new HashMap<>();
-        params.put("to", phoneNum);    // 수신전화번호
-        params.put("from", "임시 삭제");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
-        params.put("type", "SMS");
-        params.put("text", "개미는 뚠뚠의 휴대폰인증 테스트 메시지 : 인증번호는" + "["+cerNum+"]" + "입니다.");
-        params.put("app_version", "test app 1.2"); // application name and version
-
-        try {
-            JSONObject obj = coolsms.send(params);
-            System.out.println(obj.toString());
-        } catch (CoolsmsException e) {
-            System.out.println(e.getMessage());
-            System.out.println(e.getCode());
-        }
-
     }
 
 

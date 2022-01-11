@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MemberService {
+    public List<Member> getList();
+
+//    Optional<Object[]> getMember(Long mno);
 
     String findByPhoneNum(String phoneNum);
 
@@ -26,8 +29,6 @@ public interface MemberService {
     Member welcomeMsg(Long mno);
 
     void modifyMember(MemberDTO memberDTO);
-
-    void certifiedPhoneNumber(String phoneNum, String numStr);
 
     default Member dtoToEntity(MemberDTO memberDTO) {
         Member member = Member.builder()
@@ -78,5 +79,6 @@ public interface MemberService {
                 .build();
         return member;
     }
+
 }
 
