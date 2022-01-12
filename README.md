@@ -3,7 +3,15 @@
 
 <br>
 
-## Technologies used (libraries & versions)
+## Table of Contents
+
+- [Technologies](##Technologies)
+- [Description](##Description)
+- [Usage](##담당업무)
+
+<br> 
+
+## Technologies
 
 | Field | Techs |
 | ------ | ------ |
@@ -21,7 +29,9 @@
 </div>
 </details>
 
-## 주서비스
+<br>
+
+## Description
 > 뚠이라는 가상화폐를 충전하여 소소한 잡, 정보게시판(이하 QnA)에서 사용이 가능합니다. <br>
 > kakopay 결제 API를 이용하여 간단하게 QR코드와 전화번호로 결제 둘 다 가능합니다. (테스트용으로 실제 결제는 되지 않습니다.)
 
@@ -73,14 +83,7 @@
 | 박단비 | - 소셜 로그인 <br> - 아이디/비밀번호 찾기 <br> - QnA 게시판 전체  |
 
 
-
-### 박단비
-<details>
-<summary>Use Case Diagram</summary>
-<div markdown="1">       
-<img width="900" alt="image" src="https://user-images.githubusercontent.com/86641773/148582686-7a7b830d-a50b-4a3c-9b99-747c0c015283.png">
-</div>
-</details>
+### 🙋🏻‍♀️박단비
 
 #### 소셜로그인
 > OAuth를 기반으로 네이버, 페이스북, 구글의 API를 호출하여 로그인시 강제 회원가입을 진행한 후, 추가 필수 기입란으로 이동합니다.
@@ -108,7 +111,7 @@
 ​
 
 
-## Unique elements
+<!-- ## Unique elements
 
 <!-- 내가 이걸 이렇게 써봤더니 이렇게 되더라 -->
 ​
@@ -131,5 +134,5 @@
 
 ## Known issues
 
-<!-- problems의 연장선상이겠지만, 만들면서 못 고쳐서 아직 문제인 부분을 나열. -->
+<!-- problems의 연장선상이겠지만, 만들면서 못 고쳐서 아직 문제인 부분을 나열. --> -->
 
