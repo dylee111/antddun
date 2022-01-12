@@ -7,10 +7,11 @@
 
 - [Technologies](##Technologies)
 - [Description](##Description)
-- [Usage](##담당업무)
+- [Usage](##담당역할)
 
 <br> 
 
+<a name="Technologies"></a>
 ## Technologies
 
 | Field | Techs |
@@ -30,6 +31,8 @@
 </details>
 
 <br>
+
+<a name="Description"></a>
 
 ## Description
 > 뚠이라는 가상화폐를 충전하여 소소한 잡, 정보게시판(이하 QnA)에서 사용이 가능합니다. <br>
@@ -73,6 +76,7 @@
 
 앱에 따라 뭘 설치하고 어떻게 해야 작동되는지 설명해야 할 땐 순서를 알기 쉽게 설명해주기. -->
 
+<a name="담당역할"></a>
 
 ## 담당 역할
 | 이름 | 담당 업무 | 
