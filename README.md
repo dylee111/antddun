@@ -44,13 +44,22 @@
 | ------ | ------ | ------ | 
 |<img src="https://user-images.githubusercontent.com/86641773/149483986-005ac42a-30bb-443d-82e6-d18df98fc7d6.gif" width="350"/> | <img src="https://user-images.githubusercontent.com/86641773/149075887-9c678785-91aa-402f-a21d-278714095d6b.gif" width="350"/> | <img src="https://user-images.githubusercontent.com/86641773/149527495-2d94a22c-2679-43ee-b175-9ac45bf63c7e.gif" width="350"/> |
 
+| 뚠 충전하기 |
+| ------ | 
+| |
 
 - **소셜 로그인**
 
 | 로그인 페이지 | 필수 기입란 이동 | 로그인 성공 | 
 | ------ | ------ | ------ | 
 | <img src="https://user-images.githubusercontent.com/86641773/149493247-df7ffe4d-1e11-4b7a-8429-bca6ea3e8080.gif" width="300"/> |<img src="https://user-images.githubusercontent.com/86641773/149493252-70b0d315-8cbc-4868-913c-380fb56c444b.gif" width="300"/> | <img src="https://user-images.githubusercontent.com/86641773/149502096-d1d3093e-8333-4fe2-8848-802acabed9f2.gif" width="300"/> | 
-| 메인페이지에서 로그인 페이지로 이동 <br> 게시물 조회 클릭 시 로그인 페이지로 이동 | 구글 로그인시 자동 회원가입되며 이후 <br> 필수기입란으로 이동 | 직무 + 연차 + 성 + "개미"로 조합된 닉네임 생성 |
+| - 메인페이지에서 로그인 페이지로 이동 <br> - 게시물 조회 클릭 시 로그인 페이지로 이동 | 구글 로그인시 자동 회원가입되며 이후 <br> 필수기입란으로 이동 | 직무 + 연차 + 성 + "개미"로 조합된 닉네임 생성 |
+
+- **정보 게시판(QnA)**
+
+| 리스트 페이징 | 카테고리 | 검색 기능 |
+| ------ | ------ | ------ | 
+| <img src="https://user-images.githubusercontent.com/86641773/149569502-ef605d64-4b8d-4842-9344-f2fd2bd8f916.gif" width="350"/> | <img src="https://user-images.githubusercontent.com/86641773/149569517-4f3cb951-6a0b-48c9-9cc8-c46b2534ca36.gif" width="350"/>  | <img src="https://userimages.githubusercontent.com/86641773/149502096-d1d3093e-8333-4fe2-8848-802acabed9f2.gif" width="300"/> | 
 
 <br><br>
 
