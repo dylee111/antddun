@@ -1,5 +1,6 @@
-# 개미는 뚠뚠
-일상이 무기력하고 지루한 직장인들을 대상으로 건강한 직장문화 형성을 위한 커뮤니티 플랫폼 서비스 입니다 ☺️
+
+
+![wave](https://capsule-render.vercel.app/api?type=slice&color=f9c74f&height=150&text=개미는%20뚠뚠&fontSize=45&fontAlign=15&desc=일상이%20무기력하고%20지루한%20직장인들을%20대상으로%20건강한%20직장문화%20형성을%20위한%20커뮤니티%20플랫폼%20서비스%20입니다.%20&descSize=14&descAlign=41&descAlignY=80)
 
 <br>
 
