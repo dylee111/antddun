@@ -19,9 +19,6 @@ public interface JayuBoardService {
     //목록 조회
     PageResultDTO<JayuBoardDTO,Object[]> getList(PageRequestDTO pageRequestDTO);
 
-    //카테고리 목록 조회
-    PageResultDTO<JayuBoardDTO, Object[]> getListByCate(int jayuCateNo,PageRequestDTO pageRequestDTO);
-
     default JayuBoardDTO entityToDTO(JayuBoard jayuBoard, Long likesCnt, Long replyCnt) {
         JayuBoardDTO jayuBoardDTO = JayuBoardDTO.builder()
                 .jayuNo(jayuBoard.getJayuNo())
