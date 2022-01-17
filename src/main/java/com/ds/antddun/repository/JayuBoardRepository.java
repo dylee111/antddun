@@ -2,6 +2,7 @@ package com.ds.antddun.repository;
 
 
 import com.ds.antddun.entity.JayuBoard;
+import com.ds.antddun.repository.search.SearchJayuBoardRepository;
 import com.querydsl.core.BooleanBuilder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,17 +12,25 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.transaction.annotation.Transactional;
 
-public interface JayuBoardRepository extends JpaRepository<JayuBoard, Long>,
-        QuerydslPredicateExecutor<JayuBoard> {
+import java.util.List;
 
-    //카테고리 목록 출력
-    @Query(value = "select * from jayu_board where jayu_category_jayu_cate_no=:jayuCateNo ", nativeQuery = true)
-    Page<JayuBoard> getListByCate(int jayuCateNo, Pageable pageable);
+public interface JayuBoardRepository extends JpaRepository<JayuBoard, Long>,
+        SearchJayuBoardRepository {
+
+    //게시글 내용 출력
+    @Query("SELECT jayu, COUNT(distinct likes.jayuLno), COUNT(distinct reply.jayuRno) " +
+            "FROM JayuBoard jayu " +
+            "LEFT OUTER JOIN JayuLikes likes " +
+            "ON likes.jayuBoard.jayuNo = jayu.jayuNo " +
+            "LEFT OUTER JOIN JayuReply reply " +
+            "ON reply.jayuBoard.jayuNo = jayu.jayuNo " +
+            "WHERE jayu.jayuNo=:jayuNo "+
+            "group by jayu.jayuNo " )
+    List<Object[]> getBoard(Long jayuNo);
 
     //조회수
     @Transactional
     @Modifying
     @Query("update JayuBoard set viewCnt = viewCnt + 1 where jayuNo=:jayuNo")
     void updateViewCnt(Long jayuNo);
-
 }

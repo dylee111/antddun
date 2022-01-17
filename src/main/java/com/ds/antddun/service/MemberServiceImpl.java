@@ -135,8 +135,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     /*
-    * 시간 변환
-    * */
+     * 시간 변환
+     * */
 
     @Override
     public Member welcomeMsg(Long mno) {

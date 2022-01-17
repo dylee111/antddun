@@ -6694,6 +6694,7 @@ textarea.form-control-lg {
 
 .d-flex {
   display: flex !important;
+  width: 100%;
 }
 
 .d-inline-flex {
@@ -7353,6 +7354,7 @@ textarea.form-control-lg {
 
 .ms-3 {
   margin-left: 1rem !important;
+  width: 100%;
 }
 
 .ms-4 {

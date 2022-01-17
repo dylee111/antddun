@@ -5,7 +5,6 @@ import com.ds.antddun.dto.PageRequestDTO;
 import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.dto.QnaBoardDTO;
 import com.ds.antddun.entity.JobList;
-import com.ds.antddun.entity.MemberWishList;
 import com.ds.antddun.repository.QnaBoardRepository;
 import com.ds.antddun.service.*;
 import lombok.extern.log4j.Log4j2;
@@ -107,13 +106,13 @@ public class QnaBoardController {
 
     //게시물 수정 폼
     @GetMapping("/member/qna/modify")
-    public String modifyForm(QnaBoardDTO qnaBoardDTO, Model model){
+    public String modifyForm(@RequestParam("qnaNo") Long qnaNo, Model model){
         model.addAttribute("jobList", jobListService.getList());
 
-        QnaBoardDTO boardList = qnaService.getBoard(qnaBoardDTO.getQnaNo());
+        QnaBoardDTO boardList = qnaService.getBoard(qnaNo);
         model.addAttribute("boardList", boardList);
 
-        model.addAttribute("totalDdun", ddunService.totalAmountByMno(qnaBoardDTO.getMno()));
+        model.addAttribute("totalDdun", ddunService.totalAmountByMno(boardList.getMno()));
         return "/qna/modify";
     }
 
@@ -138,7 +137,7 @@ public class QnaBoardController {
 
         qnaService.deleteAll(qnaNo, mno);
 
-        return "redirect:/qna/list/all";
+        return "redirect:/qna/list";
     }
 
 
