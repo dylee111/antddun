@@ -44,9 +44,13 @@
 | ------ | ------ | ------ | 
 |<img src="https://user-images.githubusercontent.com/86641773/149483986-005ac42a-30bb-443d-82e6-d18df98fc7d6.gif" width="350"/> | <img src="https://user-images.githubusercontent.com/86641773/149075887-9c678785-91aa-402f-a21d-278714095d6b.gif" width="350"/> | <img src="https://user-images.githubusercontent.com/86641773/149527495-2d94a22c-2679-43ee-b175-9ac45bf63c7e.gif" width="350"/> |
 
-| 뚠 충전하기 |
-| ------ | 
-| |
+- **뚠 충전**
+
+| 뚠 충전하기 | 결제 요청 카톡 |
+| ------ | ------ | 
+| <img src="https://user-images.githubusercontent.com/86641773/149622516-04ddb61a-b905-4416-be3b-d6448f7d1f23.gif" width="500"/> | <img src="https://user-images.githubusercontent.com/86641773/149622461-72dc638c-f448-48e3-8622-2c2128b6895f.png" width="500"/> |
+
+-----------------
 
 - **소셜 로그인**
 
@@ -65,7 +69,7 @@
 | 좋아요 | 채택하기 | 댓글 블라인드 |
 | ------ | ------ | ------ | 
 | <img src="https://user-images.githubusercontent.com/86641773/149619202-b1bef410-00c1-4c8f-8c54-739f5b612432.gif" width="350"/> | <img src="https://user-images.githubusercontent.com/86641773/149619207-ee5992d9-3fe5-49ee-9968-2c5d8da380e0.gif" width="350"/>  | <img src="https://user-images.githubusercontent.com/86641773/149619211-60807b45-ac2d-4c8d-8f18-52755182839a.gif" width="300"/> | 
-
+| - UI는 토글 방식으로 구현 <br> - 좋아요을 누를때 마다 Ajax로 게시물 번호를 보내 처리 후 좋아요의 총 개수를 가져와 표시한다. <br> - Model로 좋아요 체크 유무를 받아오고 Thymeleaf의 th:if를 이용해 좋아요 표시  | - Ajax로 버튼 이벤트 시 POST방식으로 멤버 번호, 게시글 번호의 정보와 선택한 댓글의 댓글번호를 전달해 처리한다. | - Thymeleaf의 th:if문을 이용해 제 3자는 채택된 댓글을 볼 수 없다. |
 
 
 <br><br>
@@ -105,7 +109,7 @@
 | 김란 | 이동영 | 김근혜 | 박단비 | 
 | -- | -- | -- | -- |
 | [![김란](https://avatars.githubusercontent.com/u/86641847?v=4)](https://github.com/aibeam) | [![이동영](https://avatars.githubusercontent.com/u/76557211?v=4)](https://github.com/dylee111) | [![김근혜](https://avatars.githubusercontent.com/u/85294826?v=4)](https://github.com/kimgeunhye) | [![박단비](https://avatars.githubusercontent.com/u/86641773?v=4")](https://github.com/danbi-park) |
-|  - 전체적인 UI 담당<br> - 점심메뉴 슬롯, 위시리스트 | - 회원가입 / 일반 로그인 <br> - 소소한 잡 전체<br> - 쪽지 페이지 | - 자유게시판 전체 <br> - 웹 에디터 적용 (summernote) | - 소셜 로그인 <br> - 아이디/비밀번호 찾기 <br> - QnA 게시판 전체 |
+|  - 전체적인 UI 담당<br> - 점심메뉴 슬롯, 위시리스트 | - 회원가입 / 일반 로그인 <br> - 소소한 잡 전체<br> - 쪽지 페이지<br> - API로 뚠 충전 구현 | - 자유게시판 전체 <br> - 웹 에디터 적용 (summernote) | - 소셜 로그인 <br> - 아이디/비밀번호 찾기 <br> - QnA 게시판 전체 <br> - 좋아요 / 카테고리 별 검색 기능 |
 
  
 <br><br>
@@ -116,33 +120,48 @@
 ### 🙋🏻‍♀️박단비
 
 <details>
-<summary>소셜 로그인</summary>
+<summary>1. 소셜 로그인</summary>
 <div markdown="1">       
- 
+
  - OAuth를 기반으로 네이버, 페이스북, 구글의 API를 호출하여 로그인시 강제 회원가입을 진행한 후, 추가 필수 기입란으로 이동합니다.
  - 필수 기입란에 이름, 직무, 연차를 조합해 예)IT 1년차 박개미 로 사이트에서 활동할 닉네임이 자동으로 만들어집니다. 
+ - 아이디 찾기 : 전화번호를 Ajax로 보내 처리하여 아이디를 찾을 수 있습니다.
+ - 비밀번호 찾기 : coolSMS API를 이용해서 인증 문자로 비밀번호를 찾을 수 있습니다.
  
 </div>
 </details>
 
 <details>
-<summary>정보 게시판(QnA)</summary>
+<summary>2. 정보 게시판(QnA)</summary>
 <div markdown="2">       
 
-**1. 게시글**
  
-- 게시글을 보려면 로그인이 필요합니다. 컨트롤러에서 이를 판별하고 로그인 상태가 아닐 시 로그인 화면으로 이동합니다.
-- 게시판 CRUD가 가능하고, 게시물 등록 시 뚠(가상화폐)을 걸 수 있습니다. 뚠은 게시물 테이블에 pending 되어 있습니다.
-- 댓글이 하나라도 달렸을 시 게시물은 삭제이 불가능합니다. 수정은 할 수 있으니 뚠은 수정할 수 없습니다.
-- 뚠 없이 게시물을 올리면 “뚠 없음”이 표시됩니다.
-- 답변자를 채택하여 뚠을 보낼 수 있습니다. 
-- 채택된 글의 제목과 뚠이 개인 뚠 정보 내역에 표시됩니다.
-- 채택되고 난 후 게시글은 채택완료로 표시되고 채택을 더 이상 할 수 없습니다.
-- 게시글 작성자, 채택된 답변자이외에는 채택된 답변을 볼 수 없습니다. 
+- 게시글
+  - 게시글을 보려면 로그인이 필요합니다. config에서 ```.antMatchers("/member/**").authenticated()``` 설정.  만약 회원이 아니라면 로그인 화면으로 이동합니다.
+  - 게시판 CRUD가 가능하고, 게시물 등록 시 뚠(가상화폐)을 걸 수 있습니다. 뚠은 게시물 테이블에 pending 되어 있습니다.
+  - Ajax를 활용하여 좋아요 및 댓글 구현을 했습니다.
  
-**2. 리스트**
+- 리스트
+  - 게시판 리스트는 카테고리 별로 볼 수 있습니다. 
+  - 좋아요, 댓글, 조회수가 리스트와 조회 페이지에 표시됩니다.
+  - JPQL을 활용하여 검색 기능 구현, 검색조건은 카테고리, 제목, 내용, 제목+내용이 있습니다.
  
-- 게시판 리스트는 카테고리 별로 볼 수 있습니다. 
-- 좋아요, 댓글, 조회수가 리스트와 조회 페이지에 표시됩니다.
-- 카테고리, 제목과 내용에 따라 검색하여 궁금한 질문을 더 빠르게 찾을 수 있습니다. 
+</div>
+</details>
 
+
+<details>
+<summary>💡 채택 과정 상세 설명</summary>
+<div markdown="2">      
+ 
+ <br>
+ 
+  - 댓글이 하나라도 달렸을 시 게시물은 삭제이 불가능합니다. 수정은 할 수 있으니 뚠은 수정할 수 없습니다.
+  - 뚠 없이 게시물을 올리면 “뚠 없음”이 표시됩니다.
+  - 답변자를 채택하여 뚠을 보낼 수 있습니다. 
+  - 채택된 글의 제목과 뚠이 개인 뚠 정보 내역에 표시됩니다.
+  - 채택되고 난 후 게시글은 채택완료로 표시되고 채택을 더 이상 할 수 없습니다.
+  - 게시글 작성자, 채택된 답변자이외에는 채택된 답변을 볼 수 없습니다. 
+ 
+ </div>
+ </details>
