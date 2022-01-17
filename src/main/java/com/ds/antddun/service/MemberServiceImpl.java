@@ -62,6 +62,18 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
+
+    @Override
+    public int checkNumAndUserMatch(String username, String phoneNum) throws Exception {
+        log.info("check username : "+ username + "mobile : " +  phoneNum);
+        int result = 0;
+        result = memberRepository.checkNumAndUserMatch(username, phoneNum);
+        log.info("so what: "+result);
+
+        return result;
+    }
+
+
     /* 회원정보 수정 */
     @Transactional
     @Override
@@ -115,9 +127,7 @@ public class MemberServiceImpl implements MemberService {
         return result;
     }
 
-    /*
-     * 추천인 확인
-     * */
+    /* 추천인 확인 */
     @Override
     public boolean recommendUserCheck(String recommendUser) {
 

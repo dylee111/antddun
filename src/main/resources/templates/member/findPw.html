@@ -33,6 +33,12 @@
             </header>
 
             <div class="input-box">
+                <input id="inputUsername" type="text" maxlength="50"
+                       placeholder="이메일" >
+                <label for="inputUsername" style="margin-left: 60px;">이메일</label>
+            </div>
+
+            <div class="input-box">
                 <input id="inputPhoneNumber" type="text" maxlength="11" oninput="this.value = this.value.replaceAll(/\D/g, '')"
                        placeholder="전화번호" >
                 <label for="inputPhoneNumber" style="margin-left: 60px;">전화번호</label>

@@ -91,6 +91,20 @@ public class LoginController {
     }
 
     @ResponseBody
+    @PostMapping("/findPw/checkUser")
+    public String join(String username, String phoneNum) throws Exception {
+        int check = memberService.checkNumAndUserMatch(username, phoneNum);
+
+        String result = "";
+        if (check == 0 ) {
+            result = "fail";
+        } else {
+            result = "success";
+        }
+        return result;
+    }
+
+    @ResponseBody
     @GetMapping("/check/sendSMS")
     public String sendSMS(@RequestParam("phoneNumber") String phoneNum) {
 
@@ -112,5 +126,10 @@ public class LoginController {
         return "/member/changePw";
     }
 
+    @PostMapping("/changePw")
+    public String changePw(@PathVariable("pw") String pw){
+
+        return "/member/changePw";
+    }
 
 }

@@ -4,6 +4,7 @@ import com.ds.antddun.dto.JobListDTO;
 import com.ds.antddun.dto.MemberDTO;
 import com.ds.antddun.entity.AntMemberRoleSet;
 import com.ds.antddun.entity.Member;
+import com.nimbusds.jose.crypto.utils.ECChecks;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,8 @@ public interface MemberService {
     int idCheck(String username) throws Exception;
 
     int mobileCheck(String mobile) throws Exception;
+
+    int checkNumAndUserMatch(String username, String phoneNum) throws Exception;
 
     boolean recommendUserCheck(String recommendUser);
 
