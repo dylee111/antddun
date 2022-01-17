@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -45,7 +44,6 @@ public class JayuBoardController {
 
     @Autowired
     private JayuLikesService jayuLikesService;
-
 
     //게시글 작성
     @GetMapping("/member/jayu/register")
@@ -77,8 +75,7 @@ public class JayuBoardController {
 
     //게시글 조회
     @GetMapping("/member/jayu/read")
-    public String read(Long jayuNo, Model model, @AuthenticationPrincipal PrincipalDetails principal,
-                       @ModelAttribute("pageRequestDTO") PageRequestDTO pageRequestDTO) {
+    public String read(Long jayuNo, Model model, @AuthenticationPrincipal PrincipalDetails principal) {
         if (principal == null) {return "redirect:/login";}
 
         //조회수 추가
@@ -112,7 +109,7 @@ public class JayuBoardController {
 
     //게시글 목록
     @GetMapping("/jayu/list")
-    public String list(Model model, PageRequestDTO pageRequestDTO, HttpServletRequest http, @AuthenticationPrincipal PrincipalDetails principal) {
+    public String list(Model model, PageRequestDTO pageRequestDTO, @AuthenticationPrincipal PrincipalDetails principal) {
         //summernote 태그 제거, 게시판 정보
         PageResultDTO<JayuBoardDTO, Object[]> jayuList = jayuBoardService.getList(pageRequestDTO);
         List<JayuBoardDTO> list = jayuList.getDtoList();
@@ -127,9 +124,6 @@ public class JayuBoardController {
 
         //카테고리
         model.addAttribute("cateList",jayuCateService.getCateList());
-
-        //좋아요 체크 유무
-//        model.addAttribute("lieksCheck", principal.getMember().getMno());
 
         //위시리스트
         if (principal != null) {
