@@ -79,8 +79,7 @@ public class SearchJayuBoardRepositoryImpl extends QuerydslRepositorySupport imp
         Long count = tuple.fetchCount();
 
         return new PageImpl<Object[]>(result.stream().map(t -> t.toArray()).collect(Collectors.toList()),
-                pageable,
-                count);
+                pageable, count);
 
     }
 
