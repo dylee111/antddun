@@ -13,7 +13,6 @@
         <div id="search-wrap" style="margin-bottom: 20px;">
             <form th:action="@{/jayu/list}" method="get" id="jayuSearchForm">
                 <div style="display: flex; margin-right: 90px;">
-                    <input type="hidden" name="page" value="1">
                     <div class="input-group-prepend">
                         <select class="category" name="cate">
                             <option value="0">전체</option>
@@ -21,6 +20,7 @@
                                     th:value="${cateList.jayuCateNo}" th:selected="${pageRequestDTO.cate == cateList.jayuCateNo}">
                                 [[${cateList.jayuCateName}]]</option>
                         </select>
+                        <input type="hidden" name="page" value="1">
                         <select class="custom-select" name="type">
                             <option value="t" th:selected="${pageRequestDTO.type == 't'}">제목</option>
                             <option value="c" th:selected="${pageRequestDTO.type == 'c'}">내용</option>
@@ -45,9 +45,7 @@
         <div class="subNav-body">
             <nav class="nav nav-underline" aria-label="Secondary navigation">
                 <a class="subNav" th:href="@{/jayu/list}">전체</a>
-                <a class="subNav" th:onclick="|javascript:getPeongList(true,'1')|">
-                    💣펑예
-                </a>
+                <a class="subNav">💣펑예</a>
                 <a th:each="cateList : ${cateList}" class="subNav"
                    th:onclick="|javascript:getCateList(${cateList.jayuCateNo},'1')|">
                     [[${cateList.jayuCateName}]]
@@ -112,20 +110,20 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination h-100 justify-content-center align-items-center">
                 <li class="page-item" th:if="${jayuList.prev}">
-                    <a class="page-link" th:href="@{/jayu/list/(page=${jayuList.start - 1},
-                keyword = ${pageRequestDTO.keyword})}" tabindex="-1">이전</a>
+                    <a class="page-link" th:href="@{/jayu/list/(cate=${pageRequestDTO.cate}, page=${jayuList.start - 1},
+                type= ${pageRequestDTO.type}, keyword = ${pageRequestDTO.keyword})}" tabindex="-1">이전</a>
                 </li>
 
                 <li th:class=" 'page-item '+ ${jayuList.page == page?'active':''} "
                     th:each="page: ${jayuList.pageList}">
-                    <a class="page-link" th:href="@{/jayu/list/(page = ${page}, keyword = ${pageRequestDTO.keyword})}">
+                    <a class="page-link" th:href="@{/jayu/list/(cate=${pageRequestDTO.cate}, page = ${page}, type= ${pageRequestDTO.type}, keyword = ${pageRequestDTO.keyword})}">
                         [[${page}]]
                     </a>
                 </li>
 
                 <li class="page-item" th:if="${jayuList.next}">
-                    <a class="page-link" th:href="@{/jayu/list/(page= ${jayuList.end + 1},
-                    keyword = ${pageRequestDTO.keyword})}">다음</a>
+                    <a class="page-link" th:href="@{/jayu/list/(cate=${pageRequestDTO.cate}, page= ${jayuList.end + 1},
+                    type= ${pageRequestDTO.type}, keyword = ${pageRequestDTO.keyword})}">다음</a>
                 </li>
             </ul>
         </nav>
@@ -144,17 +142,6 @@
 
                 location.href=url;
             }
-
-           //펑예 페이지 이동
-           function getPeongList(peong, page){
-                /*[+
-                var peongurl = contextPath + [[@{/jayu/list}]] +
-                    "?peong=" +true + "&page=" + page;
-                +]*/
-
-                location.href=peongurl;
-            }
-
 
            //게시물 조회
            function read(jayuNo, page, keyword){
