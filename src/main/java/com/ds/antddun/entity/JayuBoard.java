@@ -25,6 +25,9 @@ public class JayuBoard extends BaseEntity{
     @ColumnDefault("0")
     private int viewCnt;
 
+    @ColumnDefault("false")
+    private boolean peong;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 

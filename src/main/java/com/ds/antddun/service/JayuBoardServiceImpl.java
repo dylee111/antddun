@@ -61,6 +61,7 @@ public class JayuBoardServiceImpl implements JayuBoardService{
         Optional<JayuBoard> result = jayuBoardRepository.findById(jayuBoardDTO.getJayuNo());
         if (result.isPresent()) {
             JayuBoard jayuboard = result.get();
+            jayuboard.setPeong(jayuBoardDTO.isPeong());
             jayuboard.setTitle(jayuBoardDTO.getTitle());
             jayuboard.setContent(jayuBoardDTO.getContent());
             jayuboard.setJayuCategory(jayuCategory);
