@@ -11,6 +11,7 @@ import com.ds.antddun.repository.JayuCateRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -95,6 +96,22 @@ public class JayuBoardServiceImpl implements JayuBoardService{
                 pageRequestDTO.getKeyword(),
                 pageRequestDTO.getPageable(Sort.by("regDate").descending())
         );
+
+        Function<Object[], JayuBoardDTO> fn = (arr -> entityToDTO(
+                (JayuBoard) arr[0],
+                (Long) arr[1],
+                (Long) arr[2]
+        ));
+
+        return new PageResultDTO<>(result, fn);
+    }
+
+    //펑예 목록
+    @Override
+    public PageResultDTO<JayuBoardDTO, Object[]> getPeongList(PageRequestDTO pageRequestDTO) {
+
+        Pageable pageable = pageRequestDTO.getPageable(Sort.by("regDate").descending());
+        Page<Object[]> result = jayuBoardRepository.getPeongList(pageable);
 
         Function<Object[], JayuBoardDTO> fn = (arr -> entityToDTO(
                 (JayuBoard) arr[0],
