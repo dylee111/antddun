@@ -6,6 +6,7 @@ import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.entity.JayuBoard;
 import com.ds.antddun.entity.JayuCategory;
 import com.ds.antddun.entity.Member;
+
 public interface JayuBoardService {
 
     Long register(JayuBoardDTO jayuBoardDTO, Member member);
@@ -18,6 +19,9 @@ public interface JayuBoardService {
 
     //목록 조회
     PageResultDTO<JayuBoardDTO,Object[]> getList(PageRequestDTO pageRequestDTO);
+
+    //펑예 목록 조회
+    PageResultDTO<JayuBoardDTO,Object[]> getPeongList(PageRequestDTO pageRequestDTO);
 
     default JayuBoardDTO entityToDTO(JayuBoard jayuBoard, Long likesCnt, Long replyCnt) {
         JayuBoardDTO jayuBoardDTO = JayuBoardDTO.builder()
@@ -38,6 +42,7 @@ public interface JayuBoardService {
 
         return jayuBoardDTO;
     }
+
     default JayuBoard dtoToEntity(JayuBoardDTO jayuBoardDTO) {
         JayuCategory jayuCategory = JayuCategory.builder().jayuCateNo(jayuBoardDTO.getJayuCateNo()).build();
 

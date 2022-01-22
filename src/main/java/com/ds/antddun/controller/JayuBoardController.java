@@ -6,7 +6,6 @@ import com.ds.antddun.dto.PageRequestDTO;
 import com.ds.antddun.dto.PageResultDTO;
 import com.ds.antddun.entity.MemberWishList;
 import com.ds.antddun.repository.JayuBoardRepository;
-import com.ds.antddun.repository.JayuReplyRepository;
 import com.ds.antddun.service.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +34,6 @@ public class JayuBoardController {
 
     @Autowired
     private JayuCateService jayuCateService;
-
-    @Autowired
-    private JayuReplyRepository jayuReplyRepository;
 
     @Autowired
     private JayuReplyService jayuReplyService;
@@ -135,6 +131,36 @@ public class JayuBoardController {
         }
 
         return "/jayu/list";
+    }
+
+    //펑예 목록
+    @GetMapping("/jayu/peong")
+    public String peong(Model model, PageRequestDTO pageRequestDTO, @AuthenticationPrincipal PrincipalDetails principal) {
+        //summernote 태그 제거, 게시판 정보
+        PageResultDTO<JayuBoardDTO, Object[]> jayuList = jayuBoardService.getPeongList(pageRequestDTO);
+        List<JayuBoardDTO> list = jayuList.getDtoList();
+        for (int i = 0; i < list.size(); i++) {
+            JayuBoardDTO tmp = (JayuBoardDTO) list.get(i);
+            tmp.setContent(tmp.getContent().replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", ""));
+            list.set(i, tmp);
+        }
+        jayuList.setDtoList((List<JayuBoardDTO>) list);
+
+        model.addAttribute("jayuList",jayuList);
+
+        //카테고리
+        model.addAttribute("cateList",jayuCateService.getCateList());
+
+        //위시리스트
+        if (principal != null) {
+            List<MemberWishList> wishLists = wishListService.getListByMno(principal.getMember().getMno());
+            model.addAttribute("wishList", wishListService.getListByMno(principal.getMember().getMno()));
+            if (wishLists.size() != 0) {
+                model.addAttribute("wishListIndex", wishLists.get(0));
+            }
+        }
+
+        return "/jayu/peong";
     }
 
     //게시글 수정 페이지
