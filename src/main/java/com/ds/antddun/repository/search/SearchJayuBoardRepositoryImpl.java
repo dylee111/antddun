@@ -29,7 +29,7 @@ public class SearchJayuBoardRepositoryImpl extends QuerydslRepositorySupport imp
         QJayuReply qJayuReply = QJayuReply.jayuReply;
         QJayuLikes qJayuLikes = QJayuLikes.jayuLikes;
 
-        JPQLQuery<JayuBoard> jpqlQuery = from(qJayuBoard);
+        JPQLQuery<JayuBoard> jpqlQuery = from(qJayuBoard).where(qJayuBoard.peong.eq(false));
         jpqlQuery.leftJoin(qJayuReply).on(qJayuReply.jayuBoard.jayuNo.eq(qJayuBoard.jayuNo));
         jpqlQuery.leftJoin(qJayuLikes).on(qJayuLikes.jayuBoard.jayuNo.eq(qJayuBoard.jayuNo));
 
@@ -80,7 +80,8 @@ public class SearchJayuBoardRepositoryImpl extends QuerydslRepositorySupport imp
 
         return new PageImpl<Object[]>(result.stream().map(t -> t.toArray()).collect(Collectors.toList()),
                 pageable, count);
-
+//
+//        return null;
     }
 
 }
