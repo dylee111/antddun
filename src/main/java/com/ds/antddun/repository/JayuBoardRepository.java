@@ -39,7 +39,8 @@ public interface JayuBoardRepository extends JpaRepository<JayuBoard, Long>,
             "ON likes.jayuBoard.jayuNo = jayu.jayuNo " +
             "LEFT OUTER JOIN JayuReply reply " +
             "ON reply.jayuBoard.jayuNo = jayu.jayuNo " +
-            "WHERE jayu.peong=true "+
+            "WHERE jayu.peong=true " +
+            "AND FUNCTION('DATEDIFF', 'HOUR', jayu.regDate, current_date) < 1 "+
             "group by jayu.jayuNo " )
     Page<Object[]> getPeongList(Pageable pageable);
 }
