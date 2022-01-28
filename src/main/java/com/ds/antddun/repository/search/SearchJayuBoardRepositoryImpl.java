@@ -24,6 +24,7 @@ public class SearchJayuBoardRepositoryImpl extends QuerydslRepositorySupport imp
 
     public SearchJayuBoardRepositoryImpl(){super((JayuBoard.class));}
 
+    @Override
     public Page<Object[]> search(int cate, String type, String keyword, Pageable pageable) {
         QJayuBoard qJayuBoard = QJayuBoard.jayuBoard;
         QJayuReply qJayuReply = QJayuReply.jayuReply;
@@ -80,8 +81,6 @@ public class SearchJayuBoardRepositoryImpl extends QuerydslRepositorySupport imp
 
         return new PageImpl<Object[]>(result.stream().map(t -> t.toArray()).collect(Collectors.toList()),
                 pageable, count);
-//
-//        return null;
     }
 
 }
