@@ -109,7 +109,7 @@
 | 김란 | 이동영 | 김근혜 | 박단비 | 
 | -- | -- | -- | -- |
 | [![김란](https://avatars.githubusercontent.com/u/86641847?v=4)](https://github.com/aibeam) | [![이동영](https://avatars.githubusercontent.com/u/76557211?v=4)](https://github.com/dylee111) | [![김근혜](https://avatars.githubusercontent.com/u/85294826?v=4)](https://github.com/kimgeunhye) | [![박단비](https://avatars.githubusercontent.com/u/86641773?v=4")](https://github.com/danbi-park) |
-|  - 전체적인 UI 담당<br> - 점심메뉴 슬롯, 위시리스트 | - 회원가입 / 일반 로그인 <br> - 소소한 잡 전체<br> - 쪽지 페이지<br> - API로 뚠 충전 구현 | - 자유게시판 전체 <br> - 웹 에디터 적용 (summernote) | - 소셜 로그인 <br> - 아이디/비밀번호 찾기 <br> - QnA 게시판 전체 <br> - 좋아요 / 카테고리 별 검색 기능 |
+|  - 전체적인 UI 담당<br> - 점심메뉴 슬롯, 위시리스트 | - 회원가입 / 일반 로그인 <br> - 소소한 잡 전체<br> - 쪽지 페이지<br> - API로 뚠 충전 구현, 위시리스트 백엔드 | - 자유게시판 전체 <br> - 웹 에디터 적용 (summernote) | - 소셜 로그인 <br> - 아이디/비밀번호 찾기 <br> - QnA 게시판 전체 <br> - 좋아요 / 카테고리 별 검색 기능 |
 
  
 <br><br>
