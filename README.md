@@ -166,18 +166,25 @@
  </div>
  </details>
  
- <br><br>
-  ### 이동영
+ ### 이동영
  <details>
  <summary>1. 회원가입</summary>
  <div markdown="1">
-  [회원가입](https://dongdong-zzangzzang.tistory.com/entry/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85?category=1039713)
+ [회원가입](https://dongdong-zzangzzang.tistory.com/entry/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85)
  </div>
  </details>
+ 
  <details>
  <summary>2. 뚠 충전 및 거래</summary>
  <div markdown="2">
-  [뚠 충전 및 거래 구현](https://dongdong-zzangzzang.tistory.com/entry/%EA%B0%80%EC%83%81%EB%A8%B8%EB%8B%88%EB%9A%A0-%EC%B6%A9%EC%A0%84-%EB%B0%8F-%EA%B1%B0%EB%9E%98-%EA%B5%AC%ED%98%84)
+ [뚠 충전 및 거래 구현](https://dongdong-zzangzzang.tistory.com/entry/%EA%B0%80%EC%83%81%EB%A8%B8%EB%8B%88%EB%9A%A0-%EC%B6%A9%EC%A0%84-%EB%B0%8F-%EA%B1%B0%EB%9E%98-%EA%B5%AC%ED%98%84)
+ </div>
+ </details>
+ 
+  <details>
+ <summary>2. 위시리스트</summary>
+ <div markdown="2">
+ [위시리스트](https://dongdong-zzangzzang.tistory.com/entry/%EC%9C%84%EC%8B%9C-%EB%A6%AC%EC%8A%A4%ED%8A%B8)
  </div>
  </details>
  
