@@ -182,7 +182,7 @@
  </details>
  
   <details>
- <summary>2. 위시리스트</summary>
+ <summary>3. 위시리스트</summary>
  <div markdown="2">
  <small><a href='https://dongdong-zzangzzang.tistory.com/entry/%EC%9C%84%EC%8B%9C-%EB%A6%AC%EC%8A%A4%ED%8A%B8/'>위시리스트</a></small>
  </div>
