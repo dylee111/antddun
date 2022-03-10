@@ -188,4 +188,33 @@
  </div>
  </details>
  
+ 
+ ###김란
+ <details>
+  <summary>1. 반응형 웹 구현</summary>
+  <div markdown="2">
+   - 부트스트랩 사용 및 추가적으로 @media를 사용하여 전체 페이지를 반응형 웹으로 구현하였습니다.
+  </div>
+ </details>
+ <details>
+  <summary>2. 실시간 급여 누적기</summary>
+  <div markdown="2">
+   -
+  </div>
+ </details>
+ <details>
+  <summary>3. 뚠 충전 화면 구현</summary>
+  <div markdown="2">
+   -
+   - 페이지내 모든 모달 창을 직접 html, css, jQuery로 작업하였습니다.
+  </div>
+ </details>
+ <details>
+  <summary>4. 채팅 화면 구현</summary>
+  <div markdown="2">
+   -
+  </div>
+ </details>
+ 
+ 
 
