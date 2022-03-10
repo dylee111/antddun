@@ -189,7 +189,7 @@
  </details>
  
  
- ###김란
+ ### 김란
  <details>
   <summary>1. 반응형 웹 구현</summary>
   <div markdown="2">
