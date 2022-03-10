@@ -215,6 +215,12 @@
    -
   </div>
  </details>
+ <details>
+  <summary>5. 위시리스트</summary>
+  <div markdown="2">
+   - 
+  </div>
+ </details>
  
  
 
