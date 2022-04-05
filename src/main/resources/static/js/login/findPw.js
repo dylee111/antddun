@@ -2,7 +2,30 @@ $(document).ready(function() {
 
     $('#sendPhoneNumber').click(function(){
         let phoneNumber = $('#inputPhoneNumber').val();
+        let username = $('#inputUsername').val();
+
         console.log("phoneNumber"+phoneNumber);
+
+         $.ajax({
+                url: "/antddun/findPw/checkUser",
+                type: "POST",
+                data: {
+                       "phoneNum" : phoneNumber,
+                       "username" : username
+                       },
+                dataType: "text",
+                success: function(data) {
+                    if(data == "실패") {
+                        alert("아이디와 번호가 일치하지 않습니다.");
+                    } else if(data == "성공") {
+                        console.log(data);
+                    }
+                },
+                error:function(request, status, error){
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                    }
+         }) // ajax end.
+
         Swal.fire('인증번호 발송 완료!');
 
         $.ajax({
@@ -81,6 +104,45 @@ $(document).ready(function() {
     });
 
     $('#changePw').click(function(){
+        if(!pwdReg.test(pwd.val())) {
+            pwdResult.html("영문, 숫자, 특수문자 조합 8~15자");
+            pwd.focus();
+            return false;
+        }
+
+        if(rePwd.val() == "") {
+            rePwdCheck.html("비밀번호를 재확인해주세요.")
+            rePwd.focus();
+            return false;
+        }
+
+        if(pwd.val() != rePwd.val()) {
+            rePwdCheck.html("비밀번호를 재확인해주세요.")
+
+            pwd.val() = "";
+            rePwd.val() = "";
+            pwd.focus();
+            return false;
+        }
+
+         $.ajax({
+                url: "/antddun/phoneNumCheck",
+                type: "POST",
+                dataType: "JSON",
+                data: {
+                       "phoneNum" : $("#phoneNum").val()+"",
+                       "email" : $("#username").val()
+                       },
+                success: function(data) {
+                    if(data == 1) {
+                        alert("전화번호 중복");
+                    } else if(data == 0) {
+                        alert("전화번호 사용 가능");
+                        console.log(data);
+                        console.log($('#phoneNum').val());
+                    }
+                }
+         }) // ajax end.
 
     })
 

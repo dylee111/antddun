@@ -48,7 +48,6 @@ public class JoinController {
 
     @PostMapping("/member/socialJoinComplete")
     public String socialjoinComplete(HttpServletRequest request, MemberDTO memberDTO, JobListDTO jobListDTO ) {
-        log.info("뭐지dd"+ memberDTO);
         memberService.socialJoin(memberDTO,jobListDTO);
 
         HttpSession session = request.getSession();

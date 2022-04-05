@@ -21,6 +21,12 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query("SELECT count(m) FROM Member m WHERE m.phoneNum=:phoneNum ")
     int phoneNumCheck(String phoneNum) throws Exception;
 
+    @Query("select count(m) " +
+            "from Member m " +
+            "where(m.username, m.phoneNum ) in (select m.username, m.phoneNum from Member where m.username=:username) " +
+            "and m.phoneNum =:phoneNum ")
+    int checkNumAndUserMatch(String username, String phoneNum);
+
     @Query("SELECT count(m) FROM Member m WHERE m.username=:username ")
     int recommendUserCheck(String username);
 
@@ -36,6 +42,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     @Query("select m.username from Member m where m.phoneNum=:phoneNum ")
     String findByPhoneNum(String phoneNum);
+
 
 ////        select m.*, j.* from member m left join job_list j on m.job_jno = j.jno where m.mno = 1;
 //    @EntityGraph(value = "JobList.job")
