@@ -160,14 +160,14 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void certifiedPhoneNumber(String phoneNum, String cerNum) {
 
-        String api_key = "NCSG3RPOMGHEDQIL";
-        String api_secret = "YHQLZ2W26BAMRUYGFVLULFGI08HJTT6K";
+        String api_key = "";
+        String api_secret = "";
         Message coolsms = new Message(api_key, api_secret);
 
         // 4 params(to, from, type, text) are mandatory. must be filled
         HashMap<String, String> params = new HashMap<>();
         params.put("to", phoneNum);    // 수신전화번호
-        params.put("from", "01071570271");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
+        params.put("from", "");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
         params.put("type", "SMS");
         params.put("text", "개미는 뚠뚠의 휴대폰인증 테스트 메시지 : 인증번호는" + "["+cerNum+"]" + "입니다.");
         params.put("app_version", "test app 1.2"); // application name and version
